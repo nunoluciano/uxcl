@@ -6,7 +6,11 @@ bin-release/
 .actionScriptProperties
 .flexProperties
 .settings/
+<<<<<<< HEAD
 .project
 .DS_Store
 dwsync.xml
 _notes
+=======
+.project
+>>>>>>> eacc17e4b5e1b959125e451e4066a7cbc4628683
