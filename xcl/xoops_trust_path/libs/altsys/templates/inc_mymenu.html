@@ -1,0 +1,9 @@
+<div id="moduletabs"><ul class="modulenav">
+    <{foreach from=$adminmenu item="menuitem"}>
+        <li <{if $menuitem.selected}>class="current"><{else}>><{/if}>
+        <a href="<{$menuitem.link|escape}>"><span><{$menuitem.title|escape}></span></a>
+        </li>
+    <{/foreach}>
+</ul>
+</div>
+<br style="clear:both;" />

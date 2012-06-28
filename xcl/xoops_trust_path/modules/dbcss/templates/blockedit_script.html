@@ -1,0 +1,17 @@
+<input type="hidden" name="options[0]" value="<{$mydirname}>" />
+
+<p>
+	<label for="lid"><{$smarty.const._MB_DBCSS_THISSCRIPT}></label>:
+	<select name="options[1]" id="lid"><br>
+		<{html_options options=$script selected=$lid}><br>
+	</select>
+	<a href="<{$xoops_url}>/modules/<{$mydirname}>/admin/index.php?page=scriptedit&amp;lid=<{$lid}>"><{$smarty.const._EDIT}></a>
+</p>
+<br />
+<p>
+	<label for="useblock_header"><{$smarty.const._MB_DBCSS_USEBLOCKHEADER}></label>:
+	<input type='radio' name='options[2]' id='o21' value='1' <{$block_header_yes}> /><label for='o21'><{$smarty.const._YES}></label>
+	<input type='radio' name='options[2]' id='o20' value='0'  <{$block_header_no}> /><label for='o20'><{$smarty.const._NO}></label>
+	<br />
+	<{$smarty.const._MB_DBCSS_USEBLOCKHEADERDSC}>
+</p>

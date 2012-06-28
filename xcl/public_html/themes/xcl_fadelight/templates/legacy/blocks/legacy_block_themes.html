@@ -1,0 +1,30 @@
+<{if $block.isEnableChanger == false}>
+  <{$smarty.const._MB_LEGACY_MESSAGE_CAN_NOT_THEME_CHANGE}>
+<{else}>
+
+  <form action="#" method="post">
+  <{if $block.mode==1}>
+    <p><img vspace="2" id="xoops_theme_img" src="<{$xoops_imageurl}><{$block.theme_selected_screenshot}>" alt="screenshot" title="screenshot" width="<{$block.width}>" />
+    </p>
+   
+   <div>
+   <select id="xoops_theme_select" name="xoops_theme_select" onchange="showThemeScreenshot('xoops_theme_img','xoops_theme_select', '<{$xoops_url}>');">
+  <{else}>
+    <select id="xoops_theme_select" name="xoops_theme_select" onchange="submit();" size="3">
+  <{/if}>
+  <{foreach item=theme_option from=$block.theme_options}>
+      <option value="<{$theme_option.name}>!-!<{$theme_option.screenshot}>" <{$theme_option.selected}> ><{$theme_option.name}></option>
+  <{/foreach}>
+    </select>
+  </div>
+  
+  <{if $block.mode==1}>
+    <div>
+    <input type="submit" value="<{$smarty.const._GO}>" />
+  </div>
+  <{/if}>
+  
+  <p style="clear:both">(<{"<strong>"|cat:$block.count|cat:"</strong>"|string_format:$smarty.const._MB_LEGACY_LANG_NUMTHEME}>)</p>
+  </form>
+
+<{/if}>

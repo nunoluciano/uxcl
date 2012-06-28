@@ -1,0 +1,281 @@
+/*  
+
+	XOOPS Cube Legacy 
+    http://xoopscube.org  */
+
+/*------------------------------------------------------- COMMON */
+
+
+
+a, a:link, a:visited  
+	{
+	color:#E4EFFF;
+	}
+	
+a:hover, a:active
+	{
+	color:#FFFFFF;
+	}
+
+/* Remove system borders generated for A tags */
+a:active 
+	{
+	outline:none;
+	}
+	
+:focus
+	{
+	-moz-outline-style:none;
+	}
+
+
+area, base, basefont, head, meta, script, style, title,
+noembed, noscript, param 
+	{
+   display: none;
+	}
+
+h1, h2, h3, h4, h5 
+	{
+	margin:8px 0px;	
+	}
+
+img 
+	{
+	border:0;
+	}
+
+table 
+	{
+	width: 100%;
+	}
+
+td 
+	{
+	margin : 0;
+	padding: 0;
+	vertical-align: top;
+	border: 0;
+	}
+
+th 
+	{ 
+	padding: 4px;
+	vertical-align: middle;
+	font-weight:bold;
+	}
+
+p 
+	{
+	padding: 4px;
+	line-height: 140%;
+	}
+
+ul 
+	{
+	margin: 2px 2px 2px 10px;
+	padding: 2px;
+	text-align: left;
+	list-style: square outside;
+	}
+
+img 
+	{
+	border:0;
+	}
+
+
+/*------------------------------------------------------- Table Data */
+
+.outer 
+	{
+	background-color:#42454D;
+	border:#565A65 1px solid;
+	margin:0;
+	padding:0;
+	}
+
+.head 
+	{
+	background-color:#515660;
+	border-bottom:#565A65 1px solid;
+	font-weight: bold;
+	padding: 4px;
+	}
+
+.even, .odd, .foot 
+	{
+	border-bottom:#565A65 1px solid;
+	padding: 4px;
+	}
+
+.foot 
+	{	
+	background-color:#565A65;
+	}
+
+table.outer th 
+	{
+	margin: 0;
+	padding: 4px;
+	border-bottom:#565A65 1px solid;
+	font-weight: bold;
+	}
+
+.foot td 
+	{
+	background-color:#FAFAFF;
+	}
+
+.even td 
+	{
+	border-bottom:#565A65 1px solid;
+	padding: 4px 0px;
+	}
+
+.odd td 
+	{
+	border-bottom:#565A65 1px solid;
+	padding: 4px 0px;
+	background-color:#5C616C;
+	}
+
+/*------------------------------------------------------- Messages */
+
+div.errorMsg 
+	{
+	background-color:#A23335;
+	border-top:#565A65 1px solid;
+	border-bottom:#565A65 1px solid;
+	font-weight: bold;
+	text-align: center;
+	margin: 0;
+	padding: 10px;
+	}
+
+div.confirmMsg 
+	{
+	background-color:#D2A905;
+	border-top:#565A65 1px solid;
+	border-bottom:#565A65 1px solid;
+	color: White;
+	font-weight: bold;
+	text-align: center;
+	margin: 10px;
+	padding: 10px;
+	}
+
+div.resultMsg 
+	{
+	background-color:#55863F;
+	border-top:#565A65 1px solid;
+	border-bottom:#565A65 1px solid;
+	color: White;
+	font-weight: bold;
+	text-align: center;
+	margin: 10px;
+	padding: 10px;
+	}
+
+/*---------------------------------------------------- Preformatted Text Wrap */
+
+/* Browser specific (not w3c valid) styles to make preformatted text wrap */
+
+div.xoopsCode 
+	{ 
+	/*background:url(images/bg_code.jpg) top right no-repeat;*/
+	padding:10px 30px;
+	}
+
+div.xoopsQuote 
+	{
+	/*background:url(images/bg_quote.jpg) top right no-repeat;*/
+	padding:10px 30px;
+	}
+
+/* Browser specific (not valid) styles to make preformatted text wrap */
+
+div.xoopsCode pre, div.xoopsQuote blockquote 
+	{    
+	margin:0;
+	padding:0;
+	height:auto;
+	min-height:4em;
+	overflow:auto;
+	overflow-y:hidden; /* Hidden Vertical Scrollbar */
+	white-space: pre-wrap; /* css-3 */
+	white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+	white-space: -o-pre-wrap; /* Opera 7 */
+	white-space: -pre-wrap; /* Opera 4-6 */
+	word-wrap: break-word; /* Internet Explorer 5.5+ */
+	}
+
+div.xoopsCode pre, div.xoopsQuote blockquote 
+	{
+	padding: 1.5em 1.5em 0.5em;
+	border-left:3px solid #E4E4FC;
+	}
+
+/*---------------------------------------------------- Comments and Forum Post */
+
+.comTitle 
+	{
+	font-weight: bold;
+	margin-bottom: 2px;
+	}
+
+.comText 
+	{
+	margin: 0;
+	padding: 2px;
+	line-height: 140%;
+	}
+
+.comUserStat 
+	{
+	background: #f5f5f5;
+	color: #2f5376;
+	font-size: 0.8em;
+	font-weight:bold;
+	margin: 2px;
+	padding: 4px 2px 1px 4px;
+	border: solid 1px #c0c0c0;
+	}
+
+.comUserStatCaption 
+	{
+	font-weight: normal;
+	}
+
+.comUserRank 
+	{
+	margin: 2px;
+	}
+
+.comUserRankText 
+	{
+	font-size: 0.8em;
+	}
+
+.comUserRankImg 
+	{
+	border: 0;
+	}
+
+.comUserName {}
+
+.comUserImg 
+	{
+	margin: 2px;
+	}
+
+.comDate 
+	{
+	font-size: smaller;
+	font-weight: normal;
+	}
+
+.comDateCaption 
+	{
+	font-weight: normal;
+	}

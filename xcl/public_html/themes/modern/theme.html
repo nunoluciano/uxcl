@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="<{$xoops_langcode}>">
+<head>
+<meta charset="<{$xoops_charset}>">
+<meta name="robots" content="<{$xoops_meta_robots}>" />
+<meta name="keywords" content="<{$xoops_meta_keywords}>" />
+<meta name="description" content="<{$xoops_meta_description}>" />
+<meta name="rating" content="<{$xoops_meta_rating}>" />
+<meta name="author" content="<{$xoops_meta_author}>" />
+<meta name="copyright" content="<{$xoops_meta_copyright}>" />
+<meta name="generator" content="XOOPS Cube" />
+<{if $xoops_dirname}>
+  <title><{$xoops_sitename}> - <{$xoops_pagetitle}></title>
+<{else}>
+  <title><{$xoops_pagetitle}> - <{$xoops_sitename}></title>
+<{/if}>
+<link href="<{$xoops_url}>/favicon.ico" rel="SHORTCUT ICON" />
+<link rel="stylesheet" type="text/css" media="screen" href="<{$xoops_themecss}>" />
+<link rel="stylesheet" type="text/css" media="screen" href="<{$xoops_url}>/themes/<{$xoops_theme}>/css/bootstrap.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="<{$xoops_url}>/themes/<{$xoops_theme}>/color.css" />
+<script type="text/javascript" src="<{$xoops_url}>/themes/<{$xoops_theme}>/js/bootstrap.min.js"></script>
+<{$xoops_module_header}>
+</head>
+<body>
+
+<div id="PrimaryMenu" class="navbar"><div class="navbar-inner"><div class="container">
+    <ul class="nav">
+        <a class="brand" href="<{$xoops_url}>/"><{$xoops_sitename}></a>
+        <li<{if $xoops_dirname=="module1"}> class="active"<{/if}>><a href="#">menu1</a></li>
+        <li<{if $xoops_dirname=="module2"}> class="active"<{/if}>><a href="#">menu2</a></li>
+        <li<{if $xoops_dirname=="module3"}> class="active"<{/if}>><a href="#">menu3</a></li>
+        <li class="<{if $xoops_dirname=="module4"}>active <{/if}>dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">menu4<b class="caret"></b></a>
+        <ul class="dropdown-menu">
+            <li><a href="#">sub-menu1</a></li>
+        </ul>
+        </li>
+        <form class="navbar-search pull-left"><input type="text" class="search-query" palceholder="Search"></form>
+    </ul>
+</div></div></div><!-- PrimaryMenu -->
+
+<header class="container">
+    <div class="slogan"><{$xoops_slogan}></div>
+    <div id="GlobalNav">
+        <ul class="nav nav-pills">
+            <li<{if $xoops_dirname=="module1"}> class="active"<{/if}>><a href="#">menu1</a></li>
+            <li<{if $xoops_dirname=="module2"}> class="active"<{/if}>><a href="#">menu2</a></li>
+            <li<{if $xoops_dirname=="module3"}> class="active"<{/if}>><a href="#">menu3</a></li>
+            <li class="<{if $xoops_dirname=="module4"}>active<{/if}> dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">menu4<b class="caret"></b></b></a>
+            <ul class="dropdown-menu">
+                <li><a href="#">sub menu1</a></li>
+            </ul>
+            </li>
+        </ul>
+    </div>
+</header>
+
+<div id="Container" class="container">
+<{if ! $xoops_dirname}>
+<{include file="`$smarty.const.XOOPS_THEME_PATH`/`$xoops_theme`/body_top.html"}>
+<{else}>
+<{include file="`$smarty.const.XOOPS_THEME_PATH`/`$xoops_theme`/body_sub.html"}>
+<{/if}>
+</div><!-- Container -->
+
+<footer class="container">
+
+  <div id="FooterText">
+  <{$xoops_footer}> - <a href="http://xacro.jp/" target="_blank">xacro</a>
+  </div>
+</footer>
+
+</body>
+</html>

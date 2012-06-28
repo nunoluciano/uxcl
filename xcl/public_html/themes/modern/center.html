@@ -1,0 +1,43 @@
+  <div id="CenterColumn" class="row">
+
+    <{if $xoops_showcblock == 1}>
+    <div class="row">
+      <div id="CenterCColumn" class="span<{$mainGrid}>">
+        <{foreach item=block from=$xoops_ccblocks}>
+        <dl>
+          <{if substr($block.title,-4) != "none"}>
+          <dt class="blockTitle"><{$block.title}></dt>
+          <{/if}>
+          <dd class="blockContent"><{$block.content}></dd>
+        </dl>
+        <{/foreach}>
+      </div><!-- CenterCColumn -->
+    </div><!-- row -->
+    <{/if}>
+
+    <{if $xoops_clblocks || $xoops_crblocks}>
+      <div class="row">
+      <div id="CenterLColumn" class="span<{math equation=round($mainGrid/2)}>">
+        <{foreach item=block from=$xoops_clblocks}>
+        <dl>
+          <{if substr($block.title,-4) != "none"}>
+          <dt class="blockTitle"><{$block.title}></dt>
+          <{/if}>
+          <dd class="blockContent"><{$block.content}></dd>
+        </dl>
+        <{/foreach}>
+      </div><!-- CenterLColumn -->
+      <div id="CenterRColumn" class="span<{math equation=round($mainGrid/2,0,2)}>">
+        <{foreach item=block from=$xoops_crblocks}>
+        <dl>
+          <{if substr($block.title,-4) != "none"}>
+          <dt class="blockTitle"><{$block.title}></dt>
+          <{/if}>
+          <dd class="blockContent"><{$block.content}></dd>
+        </dl>
+        <{/foreach}>
+      </div><!-- CenterRColumn -->
+      </div><!-- row -->
+    <{/if}>
+
+  </div><!-- CenterColumn -->

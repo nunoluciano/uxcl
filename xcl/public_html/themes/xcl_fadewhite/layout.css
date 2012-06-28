@@ -1,0 +1,402 @@
+/*  
+
+	XOOPS Cube Legacy 
+    http://xoopscube.org  */
+
+
+/*------------------------------------------------------- BODY LAYOUT */
+
+
+* {	margin: 0; padding: 0;}
+
+body 
+	{
+	background: #fff;
+	color: #555C6B;
+	font-size: 13px;
+	font-family:Trebuchet MS, Helvetia, Tahoma, Verdana, Arial, sans-serif;
+	}
+
+#layout 
+	{
+	width: 970px;
+	margin: 0px auto;
+	padding-top:30px;
+	text-align: left;
+	display:block;
+	}
+
+
+/*------------------------------------------------------- HEADER */
+
+#header
+	{
+	width: 100%;
+	height:150px;
+	background:transparent url(images/xcl-header.jpg) top left no-repeat;
+	
+	}
+
+.headerbar 
+	{
+	position:relative;
+	margin: 0px;
+	padding: 0px;
+	line-height:28px;
+	text-align: left;
+	padding:40px 20px 0px 0px;
+	}
+
+
+/*------------------------------------------------------- Navigation TABS */
+
+#navigation 
+	{ 
+	position:relative;
+	float:right;
+	}
+
+#navigation a 
+	{
+	float: left;
+	display: block;
+	width:110px;
+	text-decoration: none;
+	text-align:center;
+	}
+
+/* Hide from IE5-Mac \*/
+#navigation a 
+	{
+	color:#DADFEC;
+	float: none;
+	background:transparent url(images/xcl-tabs.png) 0 0 no-repeat;
+	}
+/* End hide */
+
+#navigation a:hover 
+	{
+	color: #fff;
+	background:transparent url(images/xcl-tabs.png) 0 -28px no-repeat;
+	}
+
+#navigation ul, #navigation li 
+	{
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	}
+
+#navigation li 
+	{
+	float: left;
+	margin: 0;
+	}
+
+
+/*------------------------------------------------------- SEARCH */
+
+.headersearch 
+	{
+	float:right;
+	height:33px;
+	width:350px;
+	margin: 10px 20px 0px 0px;
+	background:url(images/xcl-search.png) no-repeat;
+	text-align:center;
+	}
+
+.headersearch form 
+	{
+	padding:0px;
+	margin: 0px;
+	}
+input#headerSearchField 
+	{
+	width:220px;
+	border:none;
+	background: none;
+	font-size:1.2em;
+	color: #DADFEC;
+	}
+
+.headersearch button 
+	{
+	width:80px;
+	height:30px;
+	margin:5px 5px;
+	padding-bottom:5px;
+	font-size:0.9em;
+	text-align:center;
+	border: none;
+	background:url(images/xcl-search-btn.gif) no-repeat;
+	color: #DADFEC;
+	}
+	
+	
+/*------------------------------------------------------- headerBlock */
+
+#headerBlock
+	{ 
+	background:transparent url(images/xcl-block-top.jpg) top left no-repeat;
+	display:block;
+	height:250px;
+	padding-top:5px;
+	}
+	
+/* container for slides */
+.images 
+	{
+	background:none;
+	position:relative;
+	height:210px;
+	width:910px;
+	margin:5px auto 0px;
+	cursor:pointer;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	-moz-box-shadow:0 0 25px #666;
+	-webkit-box-shadow:0 0 25px #666;
+	}
+
+/* image slide control */
+.imageslide
+	{
+	clear:both;
+	display:block;
+	width:200px;
+	margin:10px auto;
+	text-align:center;
+	}
+	
+/* single slide */
+.images div 
+	{
+	display:none;
+	position:absolute;
+	top:0px;
+	left:0;		
+	margin:10px 10px 0px 10px;
+	padding:10px 10px 0px 10px;
+	height:170px;
+	}
+
+/* header */
+.images h3 
+	{
+	font-size:21px;
+	font-weight:normal;
+	margin:5px 0 15px 0;
+	color: #f1f1ff;
+	}
+
+.images p 
+	{
+	color: #DADFEC;
+	}
+	
+	
+/* prev */
+.backward a
+	{
+	background: url(images/left.png) no-repeat;
+	display:block;
+	width:18px;
+	height:18px;
+	cursor:pointer;
+	font-size:1px;
+	text-indent:-9999em;
+	}
+
+/* prev */
+.backward 
+	{ 
+	float:left;
+	}
+.backward a:hover, .backward a:active   		
+	{ 
+	background-position:0 -18px
+	}
+
+/* next */
+.forward a
+	{
+	background: url(images/right.png) no-repeat;
+	display:block;
+	width:18px;
+	height:18px;
+	cursor:pointer;
+	font-size:1px;
+	text-indent:-9999em;	
+	}
+.forward
+	{ 
+	float:right;
+	}
+.forward a:hover, .forward a:active
+	{
+	background-position: 0px -18px;
+	}
+
+/* tabs (those little circles below slides) */
+.tabs 
+	{
+	display:block;
+	margin:0px 70px;
+	text-align:center;
+	}
+
+/* single tab */
+.tabs a 
+	{
+	float:left;
+	width:8px;
+	height:8px;
+	float:left;
+	margin:3px 3px;
+	background:url(images/navigator.png) 0 0 no-repeat;
+	display:block;
+	font-size:1px;		
+	}
+
+/* mouseover state */
+.tabs a:hover
+	{
+	background-position:0 -8px;      
+	}
+
+/* active state */
+.tabs a.current 
+	{
+	background-position:0 -16px;     
+	}
+
+/* disabled navigational button. is not needed when tabs are configured with rotate: true */
+.disabled 
+	{
+	visibility:hidden !important;		
+	}
+
+
+/*------------------------------------------------------- CONTAINER */
+
+#container 
+	{
+	margin-top:15px;
+	padding:10px;
+	display:block;
+	}
+
+#side 
+	{
+	float:right; 
+	position:relative; 
+	width: 220px;
+	padding:0px;
+	text-align:left;
+	}
+	
+.sidecolumn
+	{
+	width:220px;
+	}
+
+#main2columns 
+	{
+	width:700px;
+	float: left;
+	display:inline;
+	position: relative;
+	padding:10px 0px 0px 10px;
+	background-color:#f5f5f5;
+	border:1px solid #f3f3f3;
+	}  
+
+#content 
+	{
+	float:left;
+	margin:0px auto;
+	padding:0px;
+	width:690px;
+	}
+	
+
+/*------------------------------------------------------- FLOAT */
+
+.floatRight 
+	{ 
+	float: right;
+	margin-left: 8px;
+	}
+
+.floatLeft 
+	{ 
+	float: left;
+	margin-right: 8px;
+	}
+.floatClear 
+	{ 
+	clear:both;
+    height:0;    
+	line-height: 0px;
+    font-size: 1px;
+	}
+	
+	
+/*------------------------------------------------------- FOOTER CREDITS */
+
+#footerbar 
+	{
+	clear:both;
+	margin: 0;
+	padding: 8px 200px;
+	line-height:2em;
+	font-size:0.9em;
+	text-align: center;
+	}
+
+#footerbar span 
+	{ 
+	float:right;
+	}
+	
+	
+.clearfix:after
+	{
+	content: "."; 
+	display: block; 
+	height: 0; 
+	clear: both; 
+	visibility: hidden;
+	}
+ 
+.clearfix
+	{
+	display: inline-block;
+	}
+
+/* Hides from IE-mac \*/
+* html .clearfix
+	{
+	height: 1%;
+	}
+.clearfix
+	{
+	display: block;
+	}
+/* End hide from IE-mac */ 
+
+
+/*------------------------------------------------------- PRELOAD OVERLAY CSS */
+
+.QOverlay 
+	{
+	background-color: #f7f7f7;
+	z-index: 9999;
+	}
+
+.QLoader 
+	{
+	background-color: #666F80;;
+	height: 1px;
+	}

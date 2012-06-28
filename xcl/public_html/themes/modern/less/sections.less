@@ -1,0 +1,173 @@
+/* Articles.less
+ * Sections, Articles, headers and footers elements 
+ * ---------------------------------------------------------------------------- */
+
+// ARTICLE DETAIL
+// --------------
+
+// ARTICLE-ONE-COL AND ARTICLE-TWO-COL
+
+.MX-article() {
+	header {
+		margin-bottom: 20px;
+		h1 {
+			font-size: 24pt;
+		}
+	}
+	.attribution {
+		font-size: 90%;
+		background-color: @grayLighter;
+		.border-radius();
+		.list-horizontal;
+		padding: 0 15px;
+	}
+	.pillar {
+		width: @gridColumnWidth*2 + @gridGutterWidth;
+		float: left
+	}
+	.body {
+	}
+	footer {
+		margin-top: 20px;
+		.border-radius();
+		background-color: @grayLighter;
+	}
+}
+
+// Article One Col
+
+.article-one-col {
+	.MX-article;
+	header {
+		.clearfix();
+	}
+}
+
+// Article Two Col
+
+.article-two-cols {
+	.MX-article;
+	.clearfix();
+}
+
+
+// ARTICLE LIST
+// ------------
+
+// Headline and Timeline Mixin
+
+.MX-article-list {
+	.body {
+
+	}
+	footer {
+
+	}
+}
+
+//Headline
+
+.headline {
+	h2 {
+		border-botton: 1px solid #999999;
+	}
+	.list-headline {
+		li {
+			.title {
+				font-size: @baseFontSize;
+				font-weight: bold;
+			}
+			time {
+			}
+		}
+	}
+}
+
+// Timeline
+
+.timeline {
+	padding: 10px 0;
+	article {
+		header {
+			attribution {
+				.border-radius();
+				.list-horizontal;
+				background-color: @grayLighter;
+			}
+		}
+		footer {
+			.border-radius();
+			background-color: @grayLighter;
+		}
+	}
+}
+
+// COMMON LIST
+// -----------
+
+.list-horizontal {
+	margin: 10px 0;
+	list-style-type: none;
+	.clearfix();
+	li {
+		float: left;
+		margin-right: 10px;
+		.label-attribution {
+			margin-right:5px;
+		}
+	}
+}
+
+.list-attribution(@width: 9, @labelWidth: 3) {
+	.clearfix();
+	dt {
+		float: left;
+		width: @gridColumnWidth*@labelWidth + @gridGutterWidth*(@labelWidth - 1);
+	}
+	dd {
+		float: left;
+		width: @gridColumnWidth*(@width - @labelWidth) + @gridGutterWidth*(@width - @labelWidth - 1);
+	}
+}
+
+.list-attribution-span12 {
+	.list-attribution(12);
+}
+.list-attribution-span11 {
+	.list-attribution(11);
+}
+.list-attribution-span10 {
+	.list-attribution(10);
+}
+.list-attribution-span9 {
+	.list-attribution(9);
+}
+.list-attribution-span8 {
+	.list-attribution(8);
+}
+.list-attribution-span7 {
+	.list-attribution(7);
+}
+.list-attribution-span6 {
+	.list-attribution(6);
+}
+
+// TITLE
+// -----
+
+.page-title {
+	font-size: 24pt;
+}
+
+.category-title {
+	font-size: 16pt;
+}
+
+.article-title {
+	font-size: 14pt;
+}
+
+.title {
+	font-weight: bold;
+}
+
