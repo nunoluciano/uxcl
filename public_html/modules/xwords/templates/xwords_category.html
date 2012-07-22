@@ -1,0 +1,156 @@
+<{* Title *}>
+<{if $titleblockuse && $h1id}>
+  <h1 style="clear:both;width:100%;background:transparent url(<{$smarty.const.XOOPS_URL}>/modules/<{$lang_moduledirname}>/images/<{$h1id}>) no-repeat center;font-size: 100%; overflow: hidden; margin: 0px; padding: 50px 0 0 0; height: 0px !important; height /**/:50px;"><{$lang_modulename}></h1>
+<{elseif $titleblockuse}>
+  <h1 style="clear:both;width:100%;margin: 0 0 10px 0; padding: 0.2em 0em; text-align: center; font-size: 1.4em;"><{$lang_modulename}></h1>
+<{/if}>
+
+<{* pankuzu *}>
+<div class="itemPermaLink" style="clear:both;width:100%;margin:1em 0em;padding:0em;text-align:left;">
+  <a href="<{$xoops_url}>/"><{$lang_home}></a>&nbsp;&raquo;&nbsp;<a href="<{$xoops_url}>/modules/<{$lang_moduledirname}>/index.php"><{$lang_modulename}></a>&nbsp;&raquo;&nbsp;<{if $pagetype == '0'}><{$lang_allcats}><{elseif $pagetype == '1'}><{$singlecat.name}><{/if}>
+</div>
+
+<{* Category block *}>
+<{if $multicats && !$catsarrayuse}>
+  <div style="clear:both;width:100%;margin:0.1em 0em;padding:0em;">
+    <fieldset class="item" style="border:1px solid #778;margin:1em 0em;text-align:left;background-color:transparent;">
+      <legend class="itemHead"><{$lang_browsecat}></legend>
+      <div style="margin:1em;padding:0em;text-align:center;line-height:1.3em;">
+        <{foreach item=catlinks from=$block0.categories}>
+          <{if $catlinks.total > 0}><a href="<{$xoops_url}>/modules/<{$lang_moduledirname}>/category.php?categoryID=<{$catlinks.id}>" title="[<{$catlinks.total}>]"><{/if}><{$catlinks.linktext}><{if $catlinks.total > 0}></a><{/if}><{cycle values="..,..,..,..,..,..,<br />"}>
+        <{/foreach}>
+        <{if $publishedwords}><a href="<{$xoops_url}>/modules/<{$lang_moduledirname}>/category.php" title="[<{$publishedwords}>]"><{/if}><{$lang_allcats}><{if $publishedwords}></a><{/if}>
+      </div>
+    </fieldset>
+  </div>
+<{/if}>
+
+<{* Letterlink block *}>
+<div style="clear:both;margin:0.1em 0em;padding:0em;">
+  <fieldset class="item" style="border:1px solid #778;margin:1em 0em;background-color:transparent;">
+    <legend class="itemHead"><{$lang_browseletter}></legend>
+    <div style="margin:1em;padding:0em;text-align:center;line-height:1.4em;">
+      <{foreach item=letterlinks from=$alpha.initial}>
+        <{$letterlinks.separator}><{if $letterlinks.total}><a href="<{$xoops_url}>/modules/<{$lang_moduledirname}>/letter.php?init=<{$letterlinks.id}><{if $singlecat.id}>&amp;categoryID=<{$singlecat.id}><{/if}>" title="[<{$letterlinks.total}>]"><{/if}><{$letterlinks.linktext}><{if $letterlinks.total}></a><{/if}>
+      <{/foreach}>
+    </div>
+  </fieldset>
+</div>
+
+<{if $pagetype == '0'}>
+  <h2 style="margin:2em 0em 1em 0em;font-size:1.4em;text-align:center;"><{$lang_allcats}></h2>
+
+  <{* page navbar *}>
+  <{if $catsarray.navbar}>
+    <div style='margin: 0.5em 0em; text-align: right; font-size: 75%;'><{$catsarray.navbar}></div>
+  <{/if}>
+
+  <{* List block *}>
+  <{foreach item=eachcat from=$catsarray.single}>
+    <h3 style="clear:both;margin:0px;padding:0px;font-size:1.3em;background-color:transparent;text-align:left;"><span class="head" style="margin:0px;padding:0px;font-size:1.1em;"><a href="<{$xoops_url}>/modules/<{$eachcat.dir}>/category.php?categoryID=<{$eachcat.id}>"><{$eachcat.name}></a></span>&nbsp;&nbsp;<span style="font-weight:normal;font-size:0.6em;color:#cd5c5c;">[<{$lang_wehave}>&nbsp;<{$eachcat.total}>&nbsp;<{$lang_entcat}>]</span></h3>
+    <div class="comText" style="clear:both;margin:0.5em 1em 2em 1em;padding:0em;line-height:1.1em;"><{$eachcat.description}></div>
+    <{* <div class="itemPermaLink" style='text-align:center;margin: 1em 0em;'><{$lang_wehave}>&nbsp;<{$eachcat.total}>&nbsp;<{$lang_entcat}></div> *}>
+  <{/foreach}>
+  <br />
+  <br />
+
+  <{* page navbar *}>
+  <{if $catsarray.navbar}>
+    <div style='clear:both;margin: 0.5em 0em; text-align: right; font-size: 75%;'>
+      <{$catsarray.navbar}>
+    </div>
+  <{/if}>
+
+  <{* return nav *}>
+  <div class="itemPermaLink" style="clear:both;text-align:center;margin: 2em 0em;">
+    [&nbsp;<a href='javascript:history.go(-1)'><{$lang_return}></a>&nbsp;|&nbsp;<a href='<{$xoops_url}>/'><{$lang_index}></a>&nbsp;]
+  </div>
+
+<{elseif $pagetype == '1'}>
+  <{if $blocksperpage}>
+  <div style="clear:both;width:100%;margin:0.1em 0em 2em 0em;padding:0em;">
+  <{* NewEntries block *}>
+    <div style="float:left;width:47%;margin:0em;padding:0em;overflow:hidden;">
+      <{if $block1.newstuff}>
+        <fieldset class="item" style="border:1px solid #778;margin:1em 0em;text-align:left;background-color:transparent;">
+          <legend class="itemHead"><{$lang_recentent}></legend>
+          <div style="font-size:1em;margin:1em;padding:0em;text-align:left;line-height:120%;">
+            <{foreach item=newentries from=$block1.newstuff}>
+              <div style="font-size:1em;margin:0em;padding:0em;text-align:left;line-height:120%;"><a href="<{$xoops_url}>/modules/<{$lang_moduledirname}>/entry.php?entryID=<{$newentries.id}><{if $newentries.categoryID &&  $multicats == 1}>&amp;categoryID=<{$newentries.categoryID}><{/if}>" title="[<{$newentries.date}>]"><{$newentries.linktext}></a>&nbsp;&nbsp;<span style="font-size:xx-small;">[<{$newentries.date}>]</span></div>
+            <{/foreach}>
+          </div>
+        </fieldset>
+      <{/if}>
+    </div>
+
+    <{* PopEntries block *}>
+    <div style="float:right;width:47%;margin:0em;padding:0em;overflow:hidden;">
+      <{if $block2.popstuff}>
+        <fieldset class="item" style="border:1px solid #778;margin:1em 0em;text-align:left;background-color: transparent;">
+          <legend class="itemHead"><{$lang_popular}></legend>
+          <div style="font-size:1em;margin:1em;padding:0em;text-align:left;line-height:120%;">
+            <{foreach item=popentries from=$block2.popstuff}>
+              <div style="font-size:1em;margin:0em;padding:0em;text-align:left;line-height:120%;"><a href="<{$xoops_url}>/modules/<{$lang_moduledirname}>/entry.php?entryID=<{$popentries.id}><{if $popentries.categoryID &&  $multicats == 1}>&amp;categoryID=<{$popentries.categoryID}><{/if}>" title="[<{$popentries.counter}>hit]"><{$popentries.linktext}></a>&nbsp;&nbsp;<span style="font-size:xx-small;">[<{$popentries.counter}>hit]</span></div>
+            <{/foreach}>
+          </div>
+        </fieldset>
+      <{/if}>
+    </div>
+  </div>
+  <{/if}>
+
+  <h2 style="clear:both;margin:2em 0em;padding:0.3em;font-size:1.3em;text-align:center;" title="[<{$lang_wehave}><{$singlecat.total}><{$lang_entcat}>]">
+    <{$singlecat.name}>
+  </h2>
+  <div class="itemPermaLink" style="clear:both;margin:1em;padding:0em;text-align:left;">
+    <{$singlecat.description}>
+  </div>
+
+  <{* page navbar *}>
+  <{if $entriesarray.navbar}>
+    <div style='margin: 0.5em 0em; text-align: right; font-size: 75%;'>
+      <{$entriesarray.navbar}>
+    </div>
+  <{/if}>
+
+  <{* List block *}>
+  <{* ruby tag sample start *}>
+  <{* 
+  <{foreach item=eachentry from=$entriesarray.single}>
+    <h3 style="margin: 0px; padding: 2px 0px; font-size: 1.1em; background-color: transparent;text-align:left;">
+      <ruby><rb><a href="<{$xoops_url}>/modules/<{$eachentry.dir}>/entry.php?entryID=<{$eachentry.id}><{if $singlecat.id}>&amp;categoryID=<{$singlecat.id}><{/if}>"><{$eachentry.term}></a></rb><rp><{$lang_rubyl}></rp><rt><{$eachentry.proc}></rt><rp><{$lang_rubyr}></rp></ruby>
+    </h3>
+    <div class="comText" style="margin: 2px 0px;padding: 0em 1em;line-height: 1.3em;">
+      <{$eachentry.microlinks}><{$lang_letterdef}><{$eachentry.definition}>
+    </div>
+  <{/foreach}>
+  *}>
+  <{* ruby tag sample end *}>
+
+  <{foreach item=eachentry from=$entriesarray.single}>
+    <h3 class="head" style="clear:both;margin:2em 0em 0em 0em;padding:0em;font-size:1.1em;background-color:transparent;text-align:left;">
+      <a href="<{$xoops_url}>/modules/<{$eachentry.dir}>/entry.php?entryID=<{$eachentry.id}><{if $singlecat.id}>&amp;categoryID=<{$singlecat.id}><{/if}>"><{$eachentry.term}></a>
+    </h3>
+    <div class="comText" style="clear:both;margin:0.5em 1em 2em 1em;padding:0em;line-height: 1.3em;">
+      <{$eachentry.microlinks}><{$lang_entryyomi}><{$eachentry.proc}>&nbsp;&nbsp;<{$lang_letterdef}><{$eachentry.definition}>
+    </div>
+  <{/foreach}>
+  <br /><br />
+
+  <{* page navbar *}>
+  <{if $entriesarray.navbar}>
+    <div style='clear:both;margin: 0.5em 0em; text-align: right; font-size: 75%;'>
+      <{$entriesarray.navbar}>
+    </div>
+  <{/if}>
+
+  <{* return nav *}>
+  <div class="itemPermaLink" style="clear:both;text-align:center;margin: 2em 0em;">
+    [&nbsp;<a href='javascript:history.go(-1)'><{$lang_return}></a>&nbsp;|&nbsp;<a href='<{$xoops_url}>/modules/<{$lang_moduledirname}>/'><{$lang_index}></a>&nbsp;]
+  </div>
+<{/if}>
+
+<{* Footer block *}>
+<div class="foot" style="clear:both;text-align:center;margin: 2em 0em;padding:0em;">
+  Powered&nbsp;by&nbsp;<a href="http://www.kanpyo.net/" title="kanpyo"><strong>Xwords</strong></a>&nbsp;based&nbsp;on&nbsp;<a href="http://dev.xoops.org/modules/xfmod/project/showfiles.php?group_id=1019" title="Official XOOPS Development Site"><strong>Wordbook</strong></a>
+</div>

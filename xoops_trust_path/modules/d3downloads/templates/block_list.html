@@ -1,0 +1,10 @@
+<ul class="d3downloads__block_ul">
+	<{foreach  from=$block.download item=down}>
+		<li><a href="<{$block.mod_url}>/index.php?page=singlefile&amp;cid=<{$down.cid}>&amp;lid=<{$down.lid}>"><{$down.title}></a> (<{$down.updated}>)
+		<{if $block.show_body}>
+			<br />
+			<{$down.description|strip_tags|truncate:"100"}>
+		<{/if}>
+		</li>
+	<{/foreach}>
+</ul>

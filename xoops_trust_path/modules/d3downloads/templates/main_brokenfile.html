@@ -1,0 +1,43 @@
+<{if $mod_config.show_breadcrumbs}>
+	<{include file="db:`$mydirname`_inc_breadcrumbs.html"}>
+<{/if}>
+<div class="d3downloads_brokenlink_frame">
+	<div align="center"><h4><{$down.title}></h4></div>
+	<ul>
+		<{$lang_thanksforhelp}>
+		<{$lang_forsecurity}>
+	</ul>
+
+	<form name="brokenreport" id="brokenreport" action="<{$mod_url}>/index.php?page=<{$page}>&amp;lid=<{$down.lid}>" method="POST">
+		<{if $error_message}>
+			<div class="d3downloads_error_message">
+				<{$error_message}>
+			</div>
+		<{/if}>
+		<input type="hidden" name="auth" id="auth" value="enable" />
+		<input type="hidden" name="lid" id="lid" value="<{$down.lid}>" />
+		<input type="hidden" name="cid" id="cid" value="<{$down.cid}>" />
+		<input type="hidden" name="url" id="url" value="<{$mod_url}>/index.php?page=ajax_load" />
+		<{if $message_option}>
+			<div class="d3downloads_brokenlink_textarea">
+				<{$smarty.const._MD_D3DOWNLOADS_BROKEN_MESSAGE}><br />
+				<textarea name="message" id="message" cols="40" rows="4"><{$report.message}></textarea><br />
+				<{$smarty.const._MD_D3DOWNLOADS_BROKEN_NAME}><br />
+				<input type="text" name="name" id="name" size="30" maxlength="55" value="<{$report.name}>" /><br />
+				<{$smarty.const._MD_D3DOWNLOADS_BROKEN_EMAIL}><br />
+				<input type="text" name="email" id="email" size="30" maxlength="65" value="<{$report.email}>" /><br />
+			</div>
+		<{/if}>
+		<div class="d3downloads_brokenlink_form">
+			<input type="submit" name="report_submit" id="report_submit" value="<{$lang_reportbroken}>" />
+			<input type=button name="report_cancel" id="report_cancel" value="<{$lang_cancel}>" />
+		</div>
+	</form>
+</div>
+<{if $message_option}>
+<!-- LiveValidator START -->
+<script>
+<{$liveValidator}>
+</script>
+<!-- LiveValidator END -->
+<{/if}>

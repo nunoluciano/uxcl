@@ -1,0 +1,43 @@
+<div id="mainFrame">
+<{if $mydirname}><{include file="db:`$mydirname`_inc_breadcrumbs.html"}><{/if}>
+
+<table class="outer memberReq">
+
+<tr><th colspan="3"><{$lang.title}></th></tr>
+
+<tr class="head">
+<td colspan="3"><div class="msgFrame"><{$lang.desc}></div></td>
+</tr>
+
+<tr class="even">
+<td class="avatar" rowspan="2">
+<a href="<{$member.page_url}>"><img src="<{$member.avatar_url}>" width="<{$member.avatar_width}>" height="<{$member.avatar_height}>" alt="<{$member.name}>"></a>
+</td>
+<td class="itemTitle"><{$smarty.const._MD_XSNS_USER_NAME}></td>
+<td class="itemValue"><a href="<{$member.page_url}>"><{$member.name}></a></td>
+</tr>
+
+<tr class="even">
+<td class="itemTitle"><{$smarty.const._MD_XSNS_MEMBER_LAST_LOGIN}></td>
+<td class="itemValue"><{$member.last_login|date_format:"%Y-%m-%d %H:%M:%S"}></td>
+</tr>
+
+<{$form_request_submit}>
+<tr class="foot">
+<td colspan="3" class="centerH" style="padding-top:15px; padding-bottom:15px;">
+<{if $mode > 0}>
+<p>
+<{$smarty.const._MD_XSNS_MEMBER_REQUEST_MESSAGE}> :<br>
+<textarea name="message" cols="40" rows="5"></textarea>
+</p>
+<{/if}>
+<p>
+<input type="submit" class="submit" value="<{$smarty.const._MD_XSNS_BTN_SEND}>">&nbsp;&nbsp;
+<input type="button" class="submit" value="<{$smarty.const._MD_XSNS_BTN_CANCEL}>" onclick="javascript:history.go(-1);">
+</p>
+</td>
+</tr>
+</form>
+
+</table>
+</div>

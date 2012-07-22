@@ -1,0 +1,149 @@
+<div id="mainFrame">
+<{if $mydirname}><{include file="db:`$mydirname`_inc_breadcrumbs.html"}><{/if}>
+
+<table class="outer topic">
+
+<!-- Edit Form -->
+<{$form_topic_edit}>
+
+<tr><th colspan="2"><{$topic.lang_page_title}></th></tr>
+
+<{if $errors|@count > 0}>
+<tr class="head"><td colspan="2" class="centerH">
+<ul>
+<{foreach item=error_message from=$errors}>
+<li><span class="red"><{$error_message}></span></li>
+<{/foreach}>
+</ul>
+</td></tr>
+<{/if}>
+
+<{if $comment.number == 0}>
+
+<!-- Name -->
+<tr class="even">
+<td class="itemTitle bg0"><{$smarty.const._MD_XSNS_TOPIC_TITLE}><{$smarty.const._MD_XSNS_REQUIRED_ITEM}></td>
+<td class="itemValue"><input type="text" name="name" value="<{$topic.name}>" size="50"></td>
+</tr>
+
+<{else}>
+
+<!-- Name -->
+<tr class="even">
+<td class="itemTitle bg0"><{$smarty.const._MD_XSNS_TOPIC}></td>
+<td class="itemValue"><{$topic.name}></td>
+</tr>
+
+<!-- Comment No. -->
+<tr class="even">
+<td class="itemTitle bg0"><{$smarty.const._MD_XSNS_TOPIC_RESPONSE_ID}></td>
+<td class="itemValue"><{$comment.number}></td>
+</tr>
+
+<{/if}>
+
+<!-- Body -->
+<tr class="even">
+<td class="itemTitle bg0"><{$smarty.const._MD_XSNS_TOPIC_BODY}><{$smarty.const._MD_XSNS_REQUIRED_ITEM}></td>
+<td class="itemValue"><{$xoops_codes}><{$xoops_smilies}></td>
+</tr>
+
+<{if $mod_config.image_form_limit > 0}>
+<!-- Images : Start -->
+<tr class="even">
+<td class="itemTitle bg0"><{$smarty.const._MD_XSNS_IMAGE}></td>
+<td class="itemValue">
+<{if $comment.images|@count > 0}>
+<p>
+<{foreach item=image from=$comment.images}>
+<a href="<{$image.url}>" target="_blank"><img src="<{$image.url_src}>" alt=""></a>
+[<a href="<{$image.url_del}>"><{$smarty.const._MD_XSNS_DELETE}></a>]&nbsp;&nbsp;
+<{/foreach}>
+</p>
+<div id="image1" style="display:none;">
+<{else}>
+<div id="image1" style="display:block;">
+<{/if}>
+<input type="file" name="images[]" size="40">
+</div>
+
+<{section name=cnt start=0 loop=$mod_config.image_form_limit-1}>
+<div id="image<{$smarty.section.cnt.iteration+1}>" style="display:none;">
+<input type="file" name="images[]" size="40">
+</div>
+<{/section}>
+
+<div id="image_add">
+[<a href="javascript:void(0);" onclick="Xsns_addUploadForm(0, 3);"><{$smarty.const._MD_XSNS_IMAGE_ADD}></a>]
+</div>
+
+</td>
+</tr>
+<!-- Images : End -->
+<{/if}>
+
+<{if $mod_config.file_form_limit > 0}>
+<!-- Files : Start -->
+<tr class="even">
+<td class="itemTitle bg0"><{$smarty.const._MD_XSNS_FILE}></td>
+<td class="itemValue">
+
+<{if $comment.files|@count > 0}>
+<p>
+<ul>
+<{foreach item=file from=$comment.files}>
+<li><a href="<{$file.url}>"><{$file.caption|mb_truncate:50:"...":1:1}></a>
+&nbsp;&nbsp;[<a href="<{$file.url_del}>"><{$smarty.const._MD_XSNS_DELETE}></a>]</li>
+<{/foreach}>
+</ul>
+</p>
+<div id="file1" style="display:none;">
+<{else}>
+<div id="file1" style="display:block;">
+<{/if}>
+<input type="file" name="files[]" size="40">
+</div>
+
+<{section name=cnt loop=$mod_config.file_form_limit-count($comment.files)-1}>
+<div id="file<{$smarty.section.cnt.iteration+1}>" style="display:none;">
+<input type="file" name="files[]" size="40">
+</div>
+<{/section}>
+
+<div id="file_add">
+[<a href="javascript:void(0);" onclick="Xsns_addUploadForm(1);"><{$smarty.const._MD_XSNS_FILE_ADD}></a>]
+</div>
+
+</td>
+</tr>
+<!-- Files : End -->
+<{/if}>
+
+<tr class="foot">
+<td colspan="2" class="submitFrame">
+<input type="submit" class="submit" value="<{$smarty.const._MD_XSNS_BTN_EDIT}>">
+</td>
+</tr>
+
+</form>
+
+</table>
+
+<br>
+
+<{if $comment.number==0}>
+
+<!-- Delete Form : Start -->
+<table class="outer topic">
+<{$form_topic_del}>
+<tr><th><{$smarty.const._MD_XSNS_TOPIC_DEL_DESC}></th></tr>
+<tr class="foot"><td class="submitFrame">
+<input type="submit" class="submit" value="<{$smarty.const._MD_XSNS_BTN_DEL}>">
+</td></tr>
+</form>
+</table>
+<!-- Delete Form : Start -->
+
+<{/if}>
+
+</div>

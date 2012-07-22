@@ -1,0 +1,30 @@
+<div id="mainFrame">
+
+<!-- User Menu -->
+<{if $mydirname}><{include file="db:`$mydirname`_inc_mypage_menu.html"}><{/if}>
+
+<table class="outer">
+<th><{$smarty.const._MD_XSNS_TITLE_MYPAGE_FOOTPRINT}></th>
+<tr>
+<td class="head" style="padding:10px 0 10px 10px;">
+<{$smarty.const._MD_XSNS_MYPAGE_FOOTPRINT_DESC|sprintf:"`$user_name`"}>
+</td>
+</tr>
+
+<{if $footprint_count > 0}>
+<tr>
+<td class="even" style="padding:10px 100px 10px 180px;">
+
+<div style="padding:0 0 20px;"><{$smarty.const._MD_XSNS_MYPAGE_FOOTPRINT_COUNT}> <b><{$footprint_count|number_format}></b></div>
+
+<{foreach item=footprint from=$footprint_list}>
+<{$footprint.time|date_format:"%Y-%m-%d %H:%M:%S"}>&nbsp;&nbsp;<a href="<{$footprint.url}>"><{$footprint.uname}></a><br>
+<{/foreach}>
+
+</td>
+</tr>
+<{/if}>
+
+</table>
+
+</div>

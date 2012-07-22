@@ -1,0 +1,23 @@
+<h3><{$mod_name}></h3>
+<h2 class="head"><{$smarty.const._MD_D3DOWNLOADS_H2_IMPORTFROM}></h2>
+<form name="importfrom" action="<{$mod_url}>/admin/index.php?page=import" method="post">
+	<{$gticket_hidden}>
+	<label for="import_mid"><{$smarty.const._MD_D3DOWNLOADS_LABEL_SELECTMODULE}></label>
+	<select name="import_mid" id="import_mid"><{html_options options=$import_from_options}></select>
+	<br />
+	<input type="submit" name="do_import" value="<{$smarty.const._MD_D3DOWNLOADS_BTN_DOIMPORT}>" onclick="return confirm('<{$smarty.const._MD_D3DOWNLOADS_CONFIRM_DOIMPORT}>')" />
+	<div style="color:inherit;border: 1px inset #CCC;padding: 6px;with: 80%;font-size: small;">
+		<{$smarty.const._MD_D3DOWNLOADS_HELP_IMPORTFROM}>
+		<br />
+		<{$uploadfile_info}>
+	</div>
+</form>
+<br />
+<h2 class="head"><{$smarty.const._MD_D3DOWNLOADS_H2_UPDATEFROM}></h2>
+<form name="importfrom" action="<{$mod_url}>/admin/index.php?page=update" method="post">
+	<{$gticket_hidden}>
+	<input type="submit" name="update" value="<{$smarty.const._MD_D3DOWNLOADS_BTN_UPDATE}>" />
+	<div style="color:inherit;border: 1px inset #CCC;padding: 6px;with: 80%;font-size: small;">
+		<{$smarty.const._MD_D3DOWNLOADS_HELP_UPDATEFROM}>
+	</div>
+</form>

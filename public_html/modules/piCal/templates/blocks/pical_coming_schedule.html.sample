@@ -1,0 +1,40 @@
+<{if $block.num_rows == 0}>
+  <{$block.lang_PICAL_MB_NOEVENT}>
+<{/if}>
+
+<{foreach item=event from=$block.events}>
+
+    <dl>
+      <dt>
+        <{if $event.distance == 0}>
+          <font size='2'><img border='0' src='<{$block.images_url}>/dot_started.gif' />&nbsp;&nbsp;<{$block.lang_PICAL_MB_CONTINUING}> - <{$event.end_desc}></font>
+        <{elseif $event.distance == 1 && date('j',$event.start) == date('j') }>
+          <font size='2'><img border='0' src='<{$block.images_url}>/dot_today.gif' />&nbsp;&nbsp;<{$event.start_desc}> - <{$event.end_desc}></font>
+        <{elseif $event.distance == 2 && date('j',$event.start) == date('j') }>
+          <font size='2'><img border='0' src='<{$block.images_url}>/dot_today.gif' />&nbsp;&nbsp;<{$event.start_desc}></font>
+        <{else}>
+          <font size='2'><img border='0' src='<{$block.images_url}>/dot_future.gif' />&nbsp;&nbsp;<{$event.start_desc}></font>
+        <{/if}>
+      </dt>
+      <dd style='margin-left:20px;'>
+        <font size='2'><a href='<{$block.get_target}>?smode=Daily&amp;action=View&amp;event_id=<{$event.id}>&amp;caldate=<{$block.caldate}>' class='calsummary'><{$event.summary}></a></font>
+      </dd>
+    </dl>
+
+<{/foreach}>
+
+  <{if $block.num_rows_rest > 0}>
+    <table border='0' cellspacing='0' cellpadding='0' width='100%'>
+      <tr>
+        <td align='right'><small><{$block.lang_PICAL_MB_RESTEVENT_PRE}> <{$block.num_rows_rest}> <{$block.lang_PICAL_MB_RESTEVENT_SUF}></small></td>
+      </tr>
+    </table>
+  <{/if}>
+
+  <{if $block.insertable <> false}>
+    <dl>
+      <dt>
+        &nbsp; <font size='2'><a href='<{$block.get_target}>?smode=Daily&amp;action=Edit&amp;caldate=<{$block.caldate}>'><img src='<{$block.images_url}>/addevent.gif' border='0' width='14' height='12' /><{$block.lang_PICAL_MB_ADDEVENT}></a></font>
+      </dt>
+    </dl>
+  <{/if}>

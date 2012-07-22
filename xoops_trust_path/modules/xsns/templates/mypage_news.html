@@ -1,0 +1,44 @@
+<div id="mainFrame">
+
+<!-- User Menu -->
+<{if $mydirname}><{include file="db:`$mydirname`_inc_mypage_menu.html"}><{/if}>
+
+<table style="width:100%;">
+
+<{if $is_own_page==1}>
+<tr>
+<td style="padding-bottom:5px; text-align:right;"><a href="<{$url.module_config}>"><{$smarty.const._MD_XSNS_TITLE_MYPAGE_CONFIG}></a></td>
+</tr>
+<{/if}>
+
+<tr><td>
+
+	<!-- start module search results loop -->
+	<{foreach item=module from=$module_list}>
+
+	<table class="outer" cellpadding="4">
+	<tr class="head"><td style="padding:3px 0 3px 3px;"><a href="<{$module.url}>"><{$module.name}></a></td></tr>
+	<tr class="even"><td>
+
+	<!-- start results item loop -->
+	<{foreach item=result from=$module.results}>
+
+	<img src="<{$result.image}>" style="vertical-align:middle;" alt="<{$module.name}>" />
+	<b><a href="<{$result.link}>"><{$result.title}></a></b><br>
+	<div style="text-align:right;"><small><{$result.time}></small></div>
+
+	<{/foreach}>
+	<!-- end results item loop -->
+
+	<!-- <{$module.showall_link}> -->
+	</td></tr>
+	</table>
+	<br>
+	
+	<{/foreach}>
+	<!-- end module search results loop -->
+
+</td></tr>
+</table>
+
+</div>

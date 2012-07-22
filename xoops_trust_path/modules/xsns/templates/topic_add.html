@@ -1,0 +1,93 @@
+<div id="mainFrame">
+<{if $mydirname}><{include file="db:`$mydirname`_inc_breadcrumbs.html"}><{/if}>
+
+<table class="outer topic">
+
+<{$form_topic_add}>
+
+<tr class="even"><th colspan="2">[<{$commu.name}>] <{$smarty.const._MD_XSNS_TITLE_TOPIC_ADD}></th></tr>
+<tr class="head"><td colspan="2" style="text-align:right;"><{$smarty.const._MD_XSNS_REQUIRED_ITEM_DESC}></td></tr>
+
+<{if $errors|@count > 0}>
+<tr class="head"><td colspan="2" class="centerH">
+<ul>
+<{foreach item=error_message from=$errors}>
+<li><span class="red"><{$error_message}></span></li>
+<{/foreach}>
+</ul>
+</td></tr>
+<{/if}>
+
+<!-- Name -->
+<tr class="even">
+<td class="itemTitle bg0"><{$smarty.const._MD_XSNS_TOPIC_TITLE}><{$smarty.const._MD_XSNS_REQUIRED_ITEM}></td>
+<td class="itemValue"><input type="text" name="name" size="50" value="<{$default.name}>"></td>
+</tr>
+
+<!-- Body -->
+<tr class="even">
+<td class="itemTitle bg0"><{$smarty.const._MD_XSNS_TOPIC_BODY}><{$smarty.const._MD_XSNS_REQUIRED_ITEM}></td>
+<td class="itemValue"><{$xoops_codes}><{$xoops_smilies}></td>
+</tr>
+
+<{if $mod_config.image_form_limit > 0}>
+<!-- Images : Start -->
+<tr class="even">
+<td class="itemTitle bg0"><{$smarty.const._MD_XSNS_IMAGE}></td>
+<td class="itemValue">
+
+<div id="image1" style="display:block;">
+<input type="file" name="images[]" size="40">
+</div>
+<{section name=cnt start=0 loop=$mod_config.image_form_limit-1}>
+<div id="image<{$smarty.section.cnt.iteration+1}>" style="display:none;">
+<input type="file" name="images[]" size="40">
+</div>
+<{/section}>
+
+<div id="image_add">
+<a href="javascript:void(0);" onclick="Xsns_addUploadForm(0);">[<{$smarty.const._MD_XSNS_IMAGE_ADD}>]</a>
+</div>
+
+</td>
+</tr>
+<!-- Images : End -->
+<{/if}>
+
+<{if $mod_config.file_form_limit > 0}>
+<!-- Files : Start -->
+<tr class="even">
+<td class="itemTitle bg0"><{$smarty.const._MD_XSNS_FILE}></td>
+<td class="itemValue">
+
+<div id="file1" style="display:block;">
+<input type="file" name="files[]" size="40">
+</div>
+<{section name=cnt start=0 loop=$mod_config.file_form_limit-1}>
+<div id="file<{$smarty.section.cnt.iteration+1}>" style="display:none;">
+<input type="file" name="files[]" size="40">
+</div>
+<{/section}>
+
+<div id="file_add">
+<a href="javascript:void(0);" onclick="Xsns_addUploadForm(1);">[<{$smarty.const._MD_XSNS_FILE_ADD}>]</a>
+</div>
+
+</td>
+</tr>
+<!-- Files : End -->
+<{/if}>
+
+<!-- Submit -->
+<tr class="foot">
+<td colspan="2" class="submitFrame">
+<div style="text-align:left; padding:10px 50px 10px 50px;"><{$smarty.const._MD_XSNS_TOPIC_ADD_NOTICE}></div>
+<div><input type="submit" class="submit" value="<{$smarty.const._MD_XSNS_BTN_ADD}>"></div>
+</td>
+</tr>
+
+</form>
+
+</table>
+
+</div>

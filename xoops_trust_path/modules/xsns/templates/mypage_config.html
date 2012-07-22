@@ -1,0 +1,40 @@
+<div id="mainFrame">
+
+<!-- User Menu -->
+<{if $mydirname}><{include file="db:`$mydirname`_inc_mypage_menu.html"}><{/if}>
+
+<!-- Config Table -->
+<table class="outer">
+
+<{if $module_list}>
+<{$form_config}>
+<{/if}>
+
+<tr><th colspan="4"><{$smarty.const._MD_XSNS_CONFIG_MODULE}></th></tr>
+
+<tr class="head">
+	<td class="centerHV"><{$smarty.const._MD_XSNS_CONFIG_MODULE_NAME}></td>
+	<td class="centerHV"><{$smarty.const._MD_XSNS_CONFIG_MODULE_ORDER}></td>
+	<td class="centerHV"><{$smarty.const._MD_XSNS_CONFIG_MODULE_COUNT}></td>
+</tr>
+
+<{foreach item=module from=$module_list}>
+<input type="hidden" name="mid[]" value="<{$module.id}>"></td>
+<tr class="even">
+	<td class="centerHV" style="width:60%;"><a href="<{$module.url}>"><{$module.name}></a></td>
+	<td class="centerHV"><input type="text" name="order[]" value="<{$module.order}>" size="5"></td>
+	<td class="centerHV"><input type="text" name="view[]" value="<{$module.view}>" size="5"></td>
+</tr>
+<{/foreach}>
+
+<{if $module_list}>
+<tr class="foot">
+<td colspan="4" class="submitFrame"><input type="submit" name="submit" value="<{$smarty.const._MD_XSNS_CONFIG_SUBMIT}>"></td>
+</tr>
+
+</form>
+<{/if}>
+
+</table>
+
+</div>

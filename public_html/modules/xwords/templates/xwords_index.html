@@ -1,0 +1,155 @@
+<{* Title *}>
+<{if $titleblockuse && $h1id}>
+  <h1 style="clear:both;width:100%;background:transparent url(<{$smarty.const.XOOPS_URL}>/modules/<{$lang_moduledirname}>/images/<{$h1id}>) no-repeat center;font-size: 100%; overflow: hidden; margin: 0px; padding: 50px 0 0 0; height: 0px !important; height /**/:50px;">
+    <{$lang_modulename}>
+  </h1>
+<{elseif $titleblockuse}>
+  <h1 style="clear:both;width:100%;margin: 0 0 10px 0; padding: 0.2em 0em; text-align: center; font-size: 1.4em;">
+    <{$lang_modulename}>
+  </h1>
+<{/if}>
+
+<{* pankuzu *}>
+<div class="itemPermaLink" style="clear:both;width:100%;margin:1em 0em;padding:0em;text-align:left;">
+  <a href="<{$xoops_url}>/"><{$lang_home}></a>&nbsp;&raquo;&nbsp;<{$lang_modulename}>
+</div>
+
+<{* Submitted and requested terms - admin only *}>
+<{if $xoops_isadmin && ($wehavesubs || $wehavereqs)}>
+  <div style="clear:both;width:100%;margin:0.1em 0em;padding:0em;">
+    <fieldset class="item" style="border:1px solid #778;margin:1em 0em;text-align:left;background-color:transparent;">
+      <legend class="itemHead"><{$lang_subandreq}></legend>
+      <div style="margin:1em;padding:0em;text-align:left;line-height:1.4em;">
+        <{$lang_sub}>
+        <{if $wehavesubs == '0'}><{$lang_nosub}><{/if}>
+        <{foreach item=subentries from=$blockS.substuff}>
+          <a href="<{$xoops_url}>/modules/<{$lang_moduledirname}>/admin/submissions.php?op=mod&amp;entryID=<{$subentries.id}>"><{$subentries.linktext}></a>&nbsp;
+        <{/foreach}>
+        <br />
+        <{$lang_req}>
+        <{if $wehavereqs == '0'}><{$lang_noreq}><{/if}>
+        <{foreach item=reqentries from=$blockR.reqstuff}>
+          <a href="<{$xoops_url}>/modules/<{$lang_moduledirname}>/admin/submissions.php?op=mod&amp;entryID=<{$reqentries.id}>"><{$reqentries.linktext}></a>&nbsp;
+        <{/foreach}>
+      </div>
+    </fieldset>
+  </div>
+<{/if}>
+
+<{* Readme 1st *}>
+<div style="clear:both;width:100%;margin:0.1em 0em;padding:0em;">
+  <fieldset class="item" style="border:1px solid #778;margin:1em 0em;text-align:left;background-color:transparent;">
+    <legend class="itemHead"><{$lang_first}></legend>
+    <div style="margin:1em;padding:0em;text-align:left;line-height:1.4em;">
+      <{if !$publishedwords}>
+        <{$lang_nothing}>
+      <{elseif $config_readme}>
+        <{$config_readme}><br />
+        <{$lang_now}>&nbsp;&nbsp;<{$lang_defs}><{$publishedwords}>
+        <{if $multicats == 1}><{$lang_cats}><{$totalcats}><{/if}>
+      <{/if}>
+    </div>
+  </fieldset>
+</div>
+
+<{* Category block *}>
+<{if $multicats == 1}>
+  <div style="clear:both;width:100%;margin:0.1em 0em;padding:0em;">
+    <fieldset class="item" style="border:1px solid #778;margin:1em 0em;text-align:left;background-color:transparent;">
+      <legend class="itemHead"><{$lang_browsecat}></legend>
+      <{if $catsarrayuse}>
+        <dl style="clear:both;line-height:1.3em;margin:1em 0em;">
+          <{foreach item=catlinks from=$block0.categories}>
+            <dt style="clear:both;margin:1em 1em 0.5em 1em;padding:0.3em 0em;border-top:1px dotted #cd5c5c;font-size:1.3em;">
+              <{if $catlinks.total > 0}><a href="<{$xoops_url}>/modules/<{$lang_moduledirname}>/category.php?categoryID=<{$catlinks.id}>"><{/if}><{$catlinks.linktext}><{if $catlinks.total > 0}></a>&nbsp;&nbsp;<span style="font-size:0.6em;color:#cd5c5c;">[<{$lang_defs}><{$catlinks.total}>]</span><{/if}>
+            </dt>
+            <dd style="clear:both;margin:0.5em 2em 1em 2em;padding:0em;">
+              <{$catlinks.desc}>
+            </dd>
+          <{/foreach}>
+        </dl>
+      <{else}>
+        <div style="margin:1em 0em;width:100%;padding:0em;text-align:center;line-height:1.3em;">
+          <{foreach item=catlinks from=$block0.categories}>
+            <{if $catlinks.total > 0}><a href="<{$xoops_url}>/modules/<{$lang_moduledirname}>/category.php?categoryID=<{$catlinks.id}>" title="[<{$catlinks.total}>]"><{/if}><{$catlinks.linktext}><{if $catlinks.total > 0}></a><{/if}><{cycle values="..,..,..,..,..,..,<br />"}><{/foreach}>
+            <{if $publishedwords}><a href="<{$xoops_url}>/modules/<{$lang_moduledirname}>/category.php" title="[<{$publishedwords}>]"><{/if}><{$lang_allcats}><{if $publishedwords}></a><{/if}>
+        </div>
+      <{/if}>
+    </fieldset>
+  </div>
+<{/if}>
+
+<{* Letterlink block *}>
+<{if !$catsarrayuse}>
+  <div style="clear:both;width:100%;margin:0.1em 0em;padding:0em;">
+    <fieldset class="item" style="border:1px solid #778;margin:1em 0em;background-color:transparent;">
+      <legend class="itemHead"><{$lang_browseletter}></legend>
+      <div style="margin:1em;padding:0em;text-align:center;line-height:1.4em;">
+        <{foreach item=letterlinks from=$alpha.initial}>
+          <{$letterlinks.separator}><{if $letterlinks.total}><a href="<{$xoops_url}>/modules/<{$lang_moduledirname}>/letter.php?init=<{$letterlinks.id}>" title="[ <{$letterlinks.total}> ]"><{/if}><{$letterlinks.linktext}><{if $letterlinks.total}></a><{/if}>
+        <{/foreach}>
+      </div>
+    </fieldset>
+  </div>
+<{/if}>
+
+<{if $blocksperpage}>
+<div style="clear:both;width:100%;margin:0.1em 0em;padding:0em;">
+<{* NewEntries block *}>
+  <div style="float:left;width:31.2%;margin:0% 2.5% 0% 0%;padding:0em;overflow:hidden;">
+    <{if $block1.newstuff}>
+      <fieldset class="item" style="border:1px solid #778;margin:1em 0em;text-align:left;background-color:transparent;">
+        <legend class="itemHead"><{$lang_recentent}></legend>
+        <div style="font-size:1em;margin:1em;padding:0em;text-align:left;line-height:120%;">
+          <{foreach item=newentries from=$block1.newstuff}>
+            <div style="font-size:1em;margin:0em;padding:0em;text-align:left;line-height:120%;"><a href="<{$xoops_url}>/modules/<{$lang_moduledirname}>/entry.php?entryID=<{$newentries.id}><{if $newentries.categoryID &&  $multicats == 1}>&amp;categoryID=<{$newentries.categoryID}><{/if}>" title="[<{$newentries.date}>]"><{$newentries.linktext}></a>&nbsp;&nbsp;<span style="font-size:xx-small;">[<{$newentries.date}>]</span></div>
+          <{/foreach}>
+        </div>
+      </fieldset>
+    <{/if}>
+  </div>
+
+<{* PopEntries block *}>
+  <div style="float:left;width:31.2%;margin:0em;padding:0em;overflow:hidden;">
+    <{if $block2.popstuff}>
+      <fieldset class="item" style="border:1px solid #778;margin:1em 0em;text-align:left;background-color: transparent;">
+        <legend class="itemHead"><{$lang_popular}></legend>
+        <div style="font-size:1em;margin:1em;padding:0em;text-align:left;line-height:120%;">
+          <{foreach item=popentries from=$block2.popstuff}>
+            <div style="font-size:1em;margin:0em;padding:0em;text-align:left;line-height:120%;"><a href="<{$xoops_url}>/modules/<{$lang_moduledirname}>/entry.php?entryID=<{$popentries.id}><{if $popentries.categoryID &&  $multicats == 1}>&amp;categoryID=<{$popentries.categoryID}><{/if}>" title="[<{$popentries.counter}>hit]"><{$popentries.linktext}></a>&nbsp;&nbsp;<span style="font-size:xx-small;">[<{$popentries.counter}>hit]</span></div>
+          <{/foreach}>
+        </div>
+      </fieldset>
+    <{/if}>
+  </div>
+
+<{* RandamTerm block *}>
+  <div style="float:right;width:31.2%;margin:0em;padding:0em;overflow:hidden;">
+    <{if $empty != 1 && $random.term}>
+      <fieldset class="item" style="border:1px solid #778;margin:1em 0em;text-align:left;background-color:transparent;">
+        <legend class="itemHead"><{$lang_randamterm}></legend>
+        <div style="font-size:1em;margin:1em;padding:0em;text-align:left;line-height:120%;">
+          <div class="odd" style="font-size:1em;margin:0em;padding:0em;text-align:left;"><a href="<{$xoops_url}>/modules/<{$lang_moduledirname}>/entry.php?entryID=<{$random.entryID}><{if $random.categoryID && $multicats == 1}>&amp;categoryID=<{$random.categoryID}><{/if}>"<{if $random.categoryID && $multicats == 1}> title="[<{$lang_entcat}><{$random.categoryname}>]"<{/if}>><{$random.term}></a><{if $random.categoryID && $multicats == 1}>&nbsp;<span style="font-size:xx-small;">[<{$lang_entcat}><a href="<{$xoops_url}>/modules/<{$lang_moduledirname}>/category.php?categoryID=<{$random.categoryID}>"><{$random.categoryname}></a>]</span><{/if}></div>
+          <div style="font-size:1em;margin:0em;padding:0em;text-align:left;line-height:1.4em;"><{$lang_letterdef}><{$random.definition}><{if $microlinks}>&nbsp;<{$microlinks}><{/if}></div>
+        </div>
+      </fieldset>
+    <{/if}>
+  </div>
+</div>
+<{/if}>
+
+<{* SearchForm block *}>
+<div style="clear:both;width:100%;margin:0.1em 0em;padding:0em;">
+  <fieldset class="item" style="border:1px solid #778;margin:1em 0em;background-color:transparent;">
+    <legend class="itemHead"><{$lang_seach}></legend>
+    <div style="margin:1em 0em;padding:0em;text-align:center;line-height:1.3em;">
+      <{$searchform}>
+    </div>
+  </fieldset>
+</div>
+
+<{* Footer block *}>
+<div class="foot" style="clear:both;width:100%;text-align:center;margin:2em 0em;padding:0em;">
+  Powered&nbsp;by&nbsp;<a href="http://www.kanpyo.net/" title="kanpyo"><strong>Xwords</strong></a>
+  &nbsp;based&nbsp;on&nbsp;<a href="http://dev.xoops.org/modules/xfmod/project/showfiles.php?group_id=1019" title="Official XOOPS Development Site"><strong>Wordbook</strong></a>
+</div>

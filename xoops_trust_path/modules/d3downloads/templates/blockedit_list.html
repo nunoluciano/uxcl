@@ -1,0 +1,54 @@
+<script type="text/javascript" src="<{$xoops_url}>/modules/<{$mydirname}>/index.php?page=module_header&src=jquery.js"></script>
+<script type="text/javascript" src="<{$xoops_url}>/modules/<{$mydirname}>/index.php?page=module_header&src=d3downloads.js"></script>
+<input type="hidden" name="options[0]" value="<{$mydirname}>" />
+
+<p>
+	<label for="categories"><{$smarty.const._MB_D3DOWNLOADS_CATLIMIT}></label>:
+	<input type="text" size="20" name="options[1]" id="categories" value="<{$categories}>" /><br />
+	<{$smarty.const._MB_D3DOWNLOADS_SELECT_CAT}>:
+	<select name="select_categorie" id="select_categorie">
+		<{html_options options=$categories_list}><br />
+	</select><br />
+	<{$smarty.const._MB_D3DOWNLOADS_CATLIMITDSC}>
+</p>
+
+<p>
+	<label for="select_order"><{$smarty.const._MB_D3DOWNLOADS_SELECTORDER}></label>:
+	<select name="options[2]" id="select_order">
+		<{html_options values=$order_options output=$order_options selected=$selected_order}>
+	</select>
+</p>
+
+<p>
+	<label for="max_entry"><{$smarty.const._MB_D3DOWNLOADS_MAX_ENTRY}></label>:
+	<input type="text" name="options[3]" id="max_entry" value="<{$max_entry}>" size="30" />
+</p>
+
+<p>
+	<label for="date_format"><{$smarty.const._MB_D3DOWNLOADS_DATE_FORMAT}></label>:
+	<input type="text" name="options[4]" id="date_format" value="<{$date_format}>" size="30" />
+</p>
+
+<p>
+	<{$smarty.const._MB_D3DOWNLOADS_SHOW_BODY}>:
+	<label for="show_body_yes"><{$smarty.const._YES}></label>
+	<input type="radio" name="options[5]" id="show_body_yes" value="1" <{if $show_body}>checked="checked"<{/if}> />
+	&nbsp;
+	<label for="show_body_no"><{$smarty.const._NO}></label>
+	<input type="radio" name="options[5]" id="show_body_no" value="0" <{if ! $show_body}>checked="checked"<{/if}> />
+</p>
+
+<p>
+	<label for="this_template"><{$smarty.const._MB_D3DOWNLOADS_THISTEMPLATE}></label>:
+	<input type="text" size="60" name="options[6]" id="this_template" value="<{$this_template|escape}>" />
+	<a href="<{$xoops_url}>/modules/<{$mydirname}>/admin/index.php?mode=admin&amp;lib=altsys&amp;page=mytplsform&amp;tpl_file=<{$this_template|escape}>"><{$smarty.const._EDIT}></a>
+</p>
+
+<p>
+	<label for="intree"><{$smarty.const._MB_D3DOWNLOADS_SEL_INTREE}></label>:
+	<label for="intree_yes"><{$smarty.const._YES}></label>
+	<input type="radio" name="options[7]" id="intree_yes" value="1" <{if $intree}>checked="checked"<{/if}> />
+	&nbsp;
+	<label for="intree_no"><{$smarty.const._NO}></label>
+	<input type="radio" name="options[7]" id="intree_no" value="0" <{if ! $intree}>checked="checked"<{/if}> />
+</p>

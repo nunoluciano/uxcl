@@ -1,0 +1,557 @@
+==============================================================================
+＠目次
+　・はじめに
+　・D3モジュールを設定する（既に設定してある場合は不要です）
+　・インストールする
+　・任意のモジュールにファイル添付機能を追加する
+　　・非D3モジュールでの設定について
+　　・d3forumでの設定例
+　　・picoでの設定例
+　　・noneでの設定例（非D3モジュール）
+　　・Bulletin2での設定例
+　　・piCalでの設定例（非D3モジュール）
+　　・d3blogでの設定例
+　　・XWORDSでの設定例（非D3モジュール）
+　・参考：添付した画像やファイルを添付先コンテンツの中で表示する場合のヒント
+　・参考：ファイルの管理方法
+　・TODO
+　・履歴
+==============================================================================
+＠はじめに
+
+attachfileは任意のモジュールにファイル添付機能を追加するモジュールです。
+
+　※バージョンアップに際しては当ドキュメント下部の履歴を参照してください。
+　　特定の環境では手動での作業が必要になります。
+
+GIJOEさん作のd3forum-0.49 (alpha)を参考にして作成したものであり、見よう見まね
+でDuplicatable V3（D3）技術に対応してみました。
+任意のモジュールに機能を追加する機構もd3forumのコメント統合を真似しています。
+ただ、XOOPSやPHP、D3への理解が不完全な状態で作成したため、一部不具合が含まれ
+るかもしれません。
+
+確認環境：
+　　サーバー：Ver1,00より前：XOOPS 2.0.16a JP
+　　　　　　　Ver1,00以降：XOOPS Cube Legacy 2.1
+　　クライアント：Windows XP SP3
+　　　　　　　　　Firefox 3.0.5 / Internet Explorer 7
+
+※ファイル添付機能を追加する対象モジュール毎の権限設定プラグインを
+　XOOPS_TRUST_PATH/modules/attachfile/plugins/モジュール名/permission.php
+　として追加する必要があります。
+　現バージョンではd3forum用のプラグインのみ存在します。
+
+　権限設定をせずにひとまず使いたいという場合は以下のディレクトリをコピーしてデ
+　ィレクトリ名をモジュール名に変更してください。
+　XOOPS_TRUST_PATH/modules/attachfile/plugins/_sample
+
+==============================================================================
+＠D3モジュールを設定する（既に設定してある場合は不要です）
+
+01．DocumentRootの外に専用のディレクトリを作ってください。
+　　（Web越しにユーザがアクセスできない場所に作ってください）
+　　例) /home/yourhome/xoops_trust_path/
+
+02．上記ディレクトリへのフルパスをmainfile.phpに設定してください。
+　　例) define('XOOPS_TRUST_PATH','/home/yourhome/xoops_trust_path');
+
+==============================================================================
+＠インストールする
+
+01．「D3モジュールを設定する」を実施してください。
+
+02．attachfileのアーカイブを展開してください。
+
+03．アーカイブ内のhtml/modules/attachfileをXOOPS_ROOT_PATH/modulesの下にコピー
+　　してください。
+　　このとき、ディレクトリ名はattachfile以外に変えても構いません。
+
+04．アーカイブ内のhtml/class/smarty/pluginsの中身を
+　　XOOPS_ROOT_PATH/class/smarty/pluginsにコピーしてください。
+
+05．アーカイブ内のxoops_trust_path/modules/attachfileを
+　　XOOPS_TRUST_PATH/modulesにコピーしてください。
+　　このとき、ディレクトリ名はattachfileのままにしてください。
+
+06．XOOPS_TRUST_PATH/uploads/attachfileを作成してください。
+　　このフォルダはWebサーバに書込み権限を設定する必要があります。
+　　手順03にてディレクトリ名をattachfile以外に変えた場合はこのフォルダも同じ名
+　　前にする必要があります。
+
+07．XOOPSモジュール管理画面でattachfileモジュールをインストールしてください。
+　　このとき、attachfileモジュールがメインメニューに表示されないように表示順を
+　　0に設定します。
+
+08．XOOPSグループ管理画面かaltsysモジュールで必要なグループに対してattachfile
+　　モジュールへのアクセス権限を付与してください。
+
+==============================================================================
+＠任意のモジュールにファイル添付機能を追加する
+
+01．対象のモジュールに対して以下のファイルが存在することを確認します。
+　　D3モジュールの場合、ここでいう「モジュール名」とはXOOPS_TRUST_PATH/modules
+　　内のディレクトリ名です（XOOPS_ROOT_PATHの方ではありません）。
+　　XOOPS_TRUST_PATH/modules/attachfile/plugins/モジュール名/permission.php
+
+　　存在しない場合は以下のフォルダをコピーして作成する必要があります。
+　　XOOPS_TRUST_PATH/modules/attachfile/plugins/_sample
+　　attachfile_check_upload_permission_plugin()は、対象のモジュールの対象コン
+　　テンツに対して編集権限が存在する場合にtrue、それ以外にfalseを返します。
+　　attachfile_check_download_permission_plugin()は、対象のモジュールの対象コ
+　　ンテンツに対して参照権限が存在する場合にtrue、それ以外にfalseを返します。
+
+　　ひとまずコンテンツに対する権限如何に関わらず使えるようにしたい場合は
+　　_sampleをそのままコピーして使ってください。
+
+　　※以下のページ（ひよこむ）でphotositeさんが「アップロードは管理者のみに制
+　　　限、ダウンロードは管理者と登録ユーザーのみ可」というプラグインを作って
+　　　くださっています。
+　　　http://hiyokosan.com/modules/hiyokobbs2/index.php?action=QuestionView&id=104
+
+02．XOOPSテンプレートマネージャ画面かaltsysモジュールで任意の場所にファイル添
+　　付機能へのリンクを埋め込みます。
+　　埋め込めるものは以下のものです（$post.idの箇所は対象モジュールによって異な
+　　ります）。
+
+アップロード用ウィンドウを開くためのリンクを表示（添付ファイル数つき）
+{attachfile_attach_upload dirname=attachfile target_id=$post.id}
+上記項目用のラベル（thとか）
+{attachfile_attach_upload dirname=attachfile label=1}
+ダウンロード用ウィンドウを開くためのリンクを表示（添付ファイル数つき）
+{attachfile_attach_download dirname=attachfile target_id=$post.id}
+上記項目用のラベル（thとか）
+{attachfile_attach_download dirname=attachfile label=1}
+添付ファイル数のみを表示
+{attachfile_attach_num dirname=attachfile target_id=$post.id}
+上記項目用のラベル（thとか）
+{attachfile_attach_num dirname=attachfile label=1}
+
+　　なお、dirnameはattachfileモジュールのXOOPS_ROOT_PATH側のディレクトリ名で
+　　す（XOOPS_TRUST_PATH側ではありません）。
+　　大抵の場合はattachfileになるかと思います。
+
+　　target_idは対象のモジュールのコンテンツを一意に特定するためのIDです。
+　　対象のモジュールに合わせて設定してください。
+
+　　labelは常に1です。1という値自体はダミーです。
+
+==============================================================================
+＠非D3モジュールでの設定について
+
+　attachfileはD3モジュールをメインターゲットにしているため、非D3モジュールに適
+　用する場合は以下の作業が必要です。
+　当文書に設定例が明記されていない非D3モジュールに適用する際にはこれを追加作業
+　として実施してください。
+
+01.「XOOPS_ROOT_PATH/modules/モジュール名」の下に「mytrustdirname.php」という
+　　ファイルを以下の内容で作成してください。
+---------------------------------------
+<?php
+$mytrustdirname = 'モジュール名' ;
+?>
+---------------------------------------
+
+==============================================================================
+＠d3forumでの設定例
+
+　以下にd3forum-0.81の個別投稿の表示／編集画面でファイル添付機能を追加する際の
+　テンプレートの改変箇所を示します。
+
+d3forum_inc_eachpost.html
+「<div class="d3f_info_ctrl">」の1行下あたり
+------------------------------------
+<{attachfile_attach_download dirname=attachfile target_id=$post.id}>
+------------------------------------
+
+d3forum_main_post_form.html
+「<th class="head"><{$smarty.const._MD_D3FORUM_OPTIONS}></th>」の2行上あたり
+------------------------------------
+<tr valign="top" align="left">
+	<th class="head">
+		<{attachfile_attach_upload dirname=attachfile label=1}>
+	</th>
+	<td class="even">
+		<{attachfile_attach_upload dirname=attachfile target_id=$post.id}>
+	</td>
+</tr>
+------------------------------------
+
+==============================================================================
+＠picoでの設定例
+
+　以下にpico-1.18にファイル添付機能を追加する際の手順を示します。
+
+01．XOOPS_TRUST_PATH/modules/attachfile/plugins/_sampleをコピーして
+　　XOOPS_TRUST_PATH/modules/attachfile/plugins/picoを作成してください。
+　　本来ならここでpicoの権限をチェックするロジックを入れますが、今回はひとまず
+　　このまま使います。
+
+02．picoのテンプレートに以下のコードを追加します。
+
+pico_main_content_form.html
+「<{$smarty.const._MD_PICO_TH_CONTENTOPTIONS}>」の3行上あたり
+------------------------------------
+	<tr valign="top" align="left">
+	<th class="head">
+	<{attachfile_attach_upload dirname=attachfile label=1}>
+	</th>
+	<td class="even">
+	<{if $content.id == "0"}>
+	<{assign var="content_id"}>
+	<{else}>
+	<{assign var="content_id" value=$content.id}>
+	<{/if}>
+	<{attachfile_attach_upload dirname=attachfile target_id=$content_id}>
+	</td>
+	</tr>
+------------------------------------
+
+pico_main_viewcontent.html
+「<!-- print icon -->」の1行上あたり
+------------------------------------
+<{attachfile_attach_download dirname=attachfile target_id=$content.id}>
+------------------------------------
+
+==============================================================================
+＠noneでの設定例（非D3モジュール）
+
+　以下にnone-1.0にファイル添付機能を追加する際の手順を示しています。
+　http://www.unknown-artifacts.info/cms/modules/d3forum/index.php?post_id=18
+
+==============================================================================
+＠Bulletin2での設定例
+
+　Bulletin2の投稿画面はSmartyではなくXoopsFormで実装しているようですので、
+　Bulletin2モジュールへのHackが必要になります。
+　参考：
+　http://suin.jp/modules/xhnewbb/viewtopic-topic_id-55-viewmode-flat.html
+
+　以下にBulletin-2.04にファイル添付機能を追加する際の手順を示します。
+　このケースではテンプレートの変更だけでなくBulletin2モジュールに対するHackを
+　行いますので、Bulletin2をアップデートする際に注意が必要になります。
+
+01．XOOPS_TRUST_PATH/modules/attachfile/plugins/_sampleをコピーして
+　　XOOPS_TRUST_PATH/modules/attachfile/plugins/bulletinを作成してください。
+　　本来ならここでbulletinの権限をチェックするロジックを入れますが、今回はひ
+　　とまずこのまま使います。
+
+02．通常、attachfileは対象モジュールのテンプレートに組み込みますが、Bulletin2
+　　の場合は投稿画面がXoopsFormであるため、
+　　XOOPS_TRUST_PATH/modules/bulletin/include/storyform.inc.php
+　　を直接Hackします。
+　　以下のコードを追加してください。
+
+storyform.inc.php
+71行目「// options」の1行上あたり
+------------------------------------
+// for attachfile
+require_once( XOOPS_ROOT_PATH.'/class/smarty/plugins/function.attachfile_attach_upload.php' );
+$att_title_params['dirname'] = 'attachfile';
+$att_title_params['label'] = '1';
+ob_start();
+smarty_function_attachfile_attach_upload( $att_title_params, $dummy );
+$att_title = ob_get_contents();
+ob_end_clean();
+$att_content_params['dirname'] = 'attachfile';
+if ( $storyid > 0 ) {
+$att_content_params['target_id'] = $storyid;
+}
+ob_start();
+smarty_function_attachfile_attach_upload( $att_content_params, $dummy );
+$att_content = ob_get_contents();
+ob_end_clean();
+$form->addElement( new XoopsFormLabel( $att_title, $att_content ) );
+------------------------------------
+
+03．Bulletin2のテンプレートに以下のコードを追加します。
+
+bulletin_item.html
+「<div class="itemFoot">」の1行下あたり
+------------------------------------
+<{attachfile_attach_download dirname=attachfile target_id=$story.id}>
+------------------------------------
+
+==============================================================================
+＠piCalでの設定例（非D3モジュール）
+
+　以下にpiCal-0.89にファイル添付機能を追加する際の手順を示します。
+
+01.「XOOPS_TRUST_PATH/modules/attachfile/plugins/_sample」をコピーして
+　　「XOOPS_TRUST_PATH/modules/attachfile/plugins/piCal」を作成してください。
+
+02.「XOOPS_ROOT_PATH/modules/piCal」（左記「piCal」の部分は実際のフォルダ名に
+　　あわせます。ただしその他の部分は全て「piCal」のまま変更しません）の下に
+　　「mytrustdirname.php」というファイルを以下の内容で作成してください。
+---------------------------------------
+<?php
+$mytrustdirname = 'piCal' ;
+?>
+---------------------------------------
+
+03．「XOOPS_ROOT_PATH/modules/piCal/class/piCal.php」の2161行目
+　　（「function get_schedule_edit_html( )」内の「if( $editable )」の前）に以
+　　下を追加。
+---------------------------------------
+if( $editable && ! empty( $_GET[ 'event_id' ] ) ) {
+include_once( XOOPS_ROOT_PATH . "/class/smarty/plugins/function.attachfile_attach_upload.php" ) ;
+$attach_dummy = "" ;
+$attach_label_params[ "dirname" ] = "attachfile" ;
+$attach_label_params[ "label" ] = "1" ;
+ob_start() ;
+smarty_function_attachfile_attach_upload( $attach_label_params, &$attach_dummy ) ;
+$attach_label = ob_get_contents();
+ob_end_clean() ;
+$attach_contents_params[ "dirname" ] = "attachfile" ;
+$attach_contents_params[ "target_id" ] = intval( $_GET[ 'event_id' ] ) ;
+ob_start() ;
+smarty_function_attachfile_attach_upload( $attach_contents_params, &$attach_dummy ) ;
+$attach_contents = ob_get_contents();
+ob_end_clean() ;
+$ret .= "
+<tr>
+<td class='head'>".$attach_label."</td>
+<td class='even'>".$attach_contents."</td>
+</tr>\n" ;
+}
+---------------------------------------
+
+04．「XOOPS_ROOT_PATH/modules/piCal/class/piCal.php」の1871行目
+　　（「function get_schedule_view_html( $for_print = false )」内の
+　　「_PICAL_TH_LASTMODIFIED」の3行下）に以下を追加。
+---------------------------------------
+<tr>
+<td class='head'>".$attach_label."</td>
+<td class='even'>".$attach_contents."</td>
+</tr>
+---------------------------------------
+
+05．「XOOPS_ROOT_PATH/modules/piCal/class/piCal.php」の1814行目
+　　（「function get_schedule_view_html( $for_print = false )」内の
+　　「$contact」の代入の下）に以下を追加。
+---------------------------------------
+include_once( XOOPS_ROOT_PATH . "/class/smarty/plugins/function.attachfile_attach_download.php" ) ;
+$attach_dummy = "" ;
+$attach_label_params[ "dirname" ] = "attachfile" ;
+$attach_label_params[ "label" ] = "1" ;
+ob_start() ;
+smarty_function_attachfile_attach_download( $attach_label_params, &$attach_dummy ) ;
+$attach_label = ob_get_contents();
+ob_end_clean() ;
+$attach_contents_params[ "dirname" ] = "attachfile" ;
+$attach_contents_params[ "target_id" ] = intval( $event->id ) ;
+ob_start() ;
+smarty_function_attachfile_attach_download( $attach_contents_params, &$attach_dummy ) ;
+$attach_contents = ob_get_contents();
+ob_end_clean() ;
+---------------------------------------
+
+==============================================================================
+＠d3blogでの設定例
+
+　以下にd3blog-1.02.5aの個別投稿の表示／編集画面でファイル添付機能を追加する際の
+　テンプレートの改変箇所を示します。
+
+d3blog_inc_entry.html
+「<ul class="d3blogFooter clearFix">」の下あたり
+------------------------------------
+<li><{attachfile_attach_download dirname=attachfile target_id=$entry.bid}></li>
+------------------------------------
+
+d3blog_main_submit.html
+「<legend><{$smarty.const._MD_D3BLOG_LANG_TRACKBACK}></legend>」の
+3行上あたり（</fieldset>の前）
+------------------------------------
+<{* attachfile *}>
+<div class="label"><{attachfile_attach_upload dirname=attachfile label=1}></div>
+<div class="control">
+<{if $entry.bid > 0}>
+<{attachfile_attach_upload dirname=attachfile target_id=$entry.bid}><br />
+<{else}>
+<{attachfile_attach_upload dirname=attachfile}><br />
+<{/if}>
+</div>
+------------------------------------
+
+==============================================================================
+＠XWORDSでの設定例（非D3モジュール）
+
+　以下のページでなーおさんがXWORDS-0.46にファイル添付機能を追加する際の手順を
+　示してくださっています。
+　http://www.mc8.jp/X/modules/d3forum/index.php?post_id=90
+
+==============================================================================
+＠参考：添付した画像やファイルを添付先コンテンツの中で表示する場合のヒント
+
+　添付したファイルは以下のようなリンクでダウンロードできます（添付対象となった
+　コンテンツ以外からもアクセスできます。ただし権限についてはattachfile/plugins
+　によって添付対象コンテンツを基にしてチェックされます）。
+　nnnの箇所が添付ファイルを特定するためのattach_idです。
+　http://example.com/xoops/modules/attachfile/index.php?mode=download&attach_id=nnn
+
+　そのため、コンテンツの中で<img>タグのsrc属性に上記URLを記せば画像が表示され
+　ますし、<a>タグのhref属性に上記URLを記せばファイルへのリンクが張られます。
+
+　基本的にはこういったものは個別のモジュールに対するハックではなく、XOOPS Code
+　を拡張する形で対応した方が無難と思われます。
+
+　以下に画像表示とリンクのサンプルを示します。
+　なお、この方法は特定のモジュールに関わらずXOOPS Codeが利用できる箇所すべてに
+　適用されますのでご注意ください。
+　また、画像表示については「画像を表示しない（$allowimage=0）」設定になってい
+　る場合はリンクで表示されます（この設定は通常、添付対象モジュールの管理画面で
+　設定します）。
+　　[attach_img=nnn]画像です[/attach_img]
+　　[attach=nnn]ファイルへのリンクです[/attach]
+
+　XOOPS 2.0.16a JPの場合：
+　　以下のファイルを更新します。
+　　ファイル：XOOPS_ROOT_PATH/class/module.textsanitizer.php
+　　関数：xoopsCodeDecode()
+------------------------------------
+// for attachfile image
+$patterns[] = "/\[attach_img=(['\"]?)([0-9]*)\\1](.*)\[\/attach_img\]/sU";
+if ($allowimage != 1) {
+	$replacements[] = '<a href="'.XOOPS_URL.'/modules/attachfile/index.php?mode=download&attach_id=\\2">\\3</a>';
+} else {
+	$replacements[] = '<img src="'.XOOPS_URL.'/modules/attachfile/index.php?mode=download&attach_id=\\2" alt="\\3" />';
+}
+// for attachfile
+$patterns[] = "/\[attach=(['\"]?)([0-9]*)\\1](.*)\[\/attach\]/sU";
+$replacements[] = '<a href="'.XOOPS_URL.'/modules/attachfile/index.php?mode=download&attach_id=\\2">\\3</a>';
+------------------------------------
+
+　XOOPS Cube Legacy 2.1の場合：
+　　以下のファイルをコピーしてください。
+　　コピー元：attachfileアーカイブのextras/preload/AttachFileCode.class.php
+　　コピー先：XOOPS_ROOT_PATH/preload/AttachFileCode.class.php
+
+==============================================================================
+＠参考：ファイルの管理方法
+
+　ファイルシステム上のファイル名：
+　　プレフィクス＋XOOPS_ROOT_PATH側ディレクトリ名＋コンテンツID（10桁）
+
+　プレフィクス：
+　　一般設定画面にて以下の3つから選択。
+　　　・なし（デフォルト）
+　　　・XOOPS_DB_PREFIXと同じ（末尾に"_"が付加される）
+　　　・XOOPS_DB_NAMEと同じ（末尾に"_"が付加される）
+
+　　　例）DB名が"MyCMS"、テーブルのプレフィクスが"XOOPS"、XOOPS_ROOT_PATH側デ
+　　　　　ィレクトリ名が"d3forum"、コンテンツIDが"0000000001"の場合
+　　　　　　「なし」→"d3forum0000000001"
+　　　　　　「XOOPS_DB_PREFIXと同じ」→"XOOPS_d3forum0000000001"
+　　　　　　「XOOPS_DB_NAMEと同じ」→"MyCMS_d3forum0000000001"
+
+　　　　　※いずれの場合もDB内のテーブル「attach」のカラム「saved_name」には
+　　　　　　"d3forum0000000001"として格納されている。
+
+==============================================================================
+＠TODO
+
+　・コンテンツ削除時にファイルも自動で削除するための機能
+　・ファイル管理画面
+　・チケットちゃんと対応
+　・添付ユーザとタイムスタンプの記録
+　・単一コンテンツに対する添付数制限機能
+　・メジャーモジュールのプラグイン対応
+　・メジャー言語対応
+　・JavaScriptのない環境への対応
+　・ファイルマネージャ機能（階層フォルダ、保存場所指定など）を実装する
+　・新規投稿時の添付機能
+　・IE7対応（http://d.hatena.ne.jp/cruel/20081129#p1）（要報告）。
+
+==============================================================================
+＠履歴
+
+1.02（2009/08/16）
+・READMEの「picoでの設定例」をpico-1.12用の記述からpico-1.18用の記述に変
+　更。（thx:hiro）
+・管理画面に添付ファイル一覧を追加。
+
+1.01（2009/01/12）
+・extras/preload/AttachFileCode.class.phpをXCLのpreloadサンプルに合わせて整
+　形。
+・READMEの「参考：添付した画像やファイルを添付先コンテンツの中で表示する場合の
+　ヒント」とextras/preload/AttachFileCode.class.phpの実装を画像表示なしに対
+　応。
+・一般設定によるMIME-Typeの制限機能を追加。（thx:mosluce）
+
+1.00（2009/01/10）
+・READMEを整備。
+・READMEにきちんと権限設定したプラグインを公開しているひよこむ掲示板のURLを記
+　載。（thx:photosite）
+・READMEに「非D3モジュールでの設定について」を追加。
+・piCalモジュールへの適用方法をREADMEに明記。（thx:taniken）
+・d3blogモジュールへの適用方法をREADMEに明記。（thx:mai）
+・READMEにXWORDSにattachfileを適用する方法を示したURLを記載（thx:なーお）
+・READMEに「参考：添付した画像やファイルを添付先コンテンツの中で表示する場合の
+　ヒント」を追加。
+・画像表示、添付リンク用のextras/preload/AttachFileCode.class.phpを追加。
+
+0.16（2008/04/19）
+・ja_utf8の言語ファイルmain.phpがBOM付UTF8になっていたのをBOM無UTF8に修
+　正。（thx:si-ra）
+
+0.15（2008/03/23）
+・ポップアップウィンドウ名を固定（attachfile_popup）に変更。
+・XOOPS Cube Legacyの場合に言語設定をXCube_LanguageManagerから読み取るように変
+　更。（thx:nobuo）
+・ポップアップウィンドウのタイトルの取得元を多言語対応。
+・ja_utf8の言語ファイルを追加。
+
+0.14（2007/12/23）
+・d3forumへの適用例のバージョン表記をd3forum-0.49 (alpha)から0.81に変更（適用
+　方法自体は変更なし）。
+・Bulletin2モジュールへの適用方法をREADMEに明記。（thx:naox）
+・実ファイル名にプレフィクスとしてXOOPS_DB_PREFIXやXOOPS_DB_NAMEを付加できる機
+　能を追加。（thx:naao）
+・READMEの「ファイルの管理方法」の記述を詳細化。
+
+　互換上の注意：
+　　既に添付ファイルが存在する状態で「実ファイル名プレフィクス」設定を変更する
+　　場合、既存のファイル名は自動で変換されません。
+　　既に添付ファイルが存在する状態で「実ファイル名プレフィクス」設定を変更する
+　　際には手でファイル名を変更してください。
+　　なお、「実ファイル名プレフィクス」設定はDBに格納されている実ファイル名
+　　（attach.saved_name）には影響しませんので、DB内のデータを変更する必要はあ
+　　りません。
+
+0.13（2007/07/07）
+・picoモジュールへの適用方法をREADMEに明記。（thx:tomo_chan）
+・noneモジュールへの適用方法をREADMEに明記。（thx:delphinus）
+・表示順を0にすることをREADMEに明記。
+・xoops_version.phpで存在しないcommon_functions.phpを参照していたのを修正。
+　（thx:crash119）
+
+0.12（2007/03/27）
+・一般設定でアップロード用フォルダ名を設定するようになっていたのを、
+　atttachfileのXOOPS_ROOT_PATH側のディレクトリ名を設定するように変更。
+
+　互換上の注意：
+　　バージョン0.11以前を使っており、かつ、一般設定のアップロードパスの指定と
+　　atttachfileのXOOPS_ROOT_PATH側のディレクトリ名が異なる設定をしていた場合は
+　　手動でアップロード用ディレクトリ名を変更する必要があります。
+　　該当する場合はXOOPS_TRUST_PATH/uploads直下のフォルダ名をatttachfileの
+　　XOOPS_ROOT_PATH側のディレクトリ名と同じものに変更してください。
+　　なお、通常のインストールではアップロードパスもatttachfileのXOOPS_ROOT_PATH
+　　内のディレクトリ名も「atttachfile」であるため、この作業は不要です。
+
+0.11（2007/03/26）
+・ダウンロード時に「"Cache-Control: private」ヘッダをつけてIE6使用時に直接開け
+　るように修正。
+・テンプレートのmetaタグをtitleよりも前に移動。
+・当ドキュメントをEUC-JPに変換。
+
+0.10（2007/03/26）
+・アーカイブ内のxoops_trust_path直下がmodulesになっていなかったのを修正。
+・一般設定用の定数がDB制限の30文字を超えていたため正しく表示されていなかったの
+　を修正。
+・当ドキュメントに「uploads」フォルダの書込み権限の記述を追加。
+
+0.01（2007/03/25）
+・新規公開。
+
+==============================================================================
+当モジュールの提供元：http://www.unknown-artifacts.info/cms/
+ライセンス：GPL

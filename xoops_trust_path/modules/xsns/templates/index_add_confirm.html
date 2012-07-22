@@ -1,0 +1,54 @@
+<div id="mainFrame">
+<{if $mydirname}><{include file="db:`$mydirname`_inc_breadcrumbs.html"}><{/if}>
+
+<table class="outer commuEdit">
+
+<tr><th colspan="2"><{$smarty.const._MD_XSNS_TITLE_INDEX_ADD}></th></tr>
+
+<tr class="head">
+<td colspan="2"><div class="msgFrame"><{$smarty.const._MD_XSNS_INDEX_ADD_CONFIRM}><div></td>
+</tr>
+
+<tr class="even">
+<td class="itemTitle bg0"><{$smarty.const._MD_XSNS_COMMU_NAME}></td>
+<td class="itemValue"><{$commu.name}></td>
+</tr>
+
+<tr class="even">
+<td class="itemTitle bg0"><{$smarty.const._MD_XSNS_CATEGORY}></td>
+<td class="itemValue"><{$commu.category}></td>
+</tr>
+
+<tr class="even">
+<td class="itemTitle bg0"><{$smarty.const._MD_XSNS_INDEX_PUBLIC}></td>
+<td class="itemValue"><{$commu.public}></td>
+</tr>
+
+<tr class="even">
+<td class="itemTitle bg0"><{$smarty.const._MD_XSNS_DESC}></td>
+<td class="itemValue"><{$commu.info}></td>
+</tr>
+
+<{if $commu.image|@count > 0}>
+<tr class="even">
+<td class="itemTitle bg0"><{$smarty.const._MD_XSNS_IMAGE}></td>
+<td class="itemValue">
+<{foreach item=image from=$commu.image}>
+<img src="<{$image.url_src}>" alt="">
+<{/foreach}>
+</td>
+</tr>
+<{/if}>
+
+<tr class="foot">
+<{$form_commu_add_submit}>
+<td colspan="2" class="submitFrame">
+<input type="submit" class="submit" value="<{$smarty.const._MD_XSNS_BTN_ADD}>">&nbsp;&nbsp;
+<input type="button" class="submit" value="<{$smarty.const._MD_XSNS_BTN_MODIFY}>" onclick="location.href='<{$url_modify}>'">
+</td>
+</form>
+</tr>
+
+</table>
+
+</div>

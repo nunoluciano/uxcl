@@ -1,0 +1,1010 @@
+------------------------------
+辞典モジュール Xwords 更新履歴
+------------------------------
+
+●2006/04/16 V0.46
+・むだな処理の見直し。
+・自動参照リンク（仮）機能で本文中にリンクを張る設定にした場合、改行を<br>タグに
+　変換しないにしても<br>タグに変換していたバグを修正。
+
+
+・修正ファイル
+　blocks/entries_new.php
+　blocks/entries_top.php
+　class/xwords.textsanitizer.php
+　include/functions.php
+　language/japanese/modinfo.php
+　xoops_version.php
+
+・追加ファイル
+　language/japanese/letter_format11.php
+
+
+●2006/03/08 V0.45
+・管理画面の一般設定が XoopsCube 2.1alpha で動作しなかったのを修正。
+・自動参照リンク（仮）機能用で使用する文字列を一般設定で変更できるようにした。
+・トップページのカテゴリー一覧表示の一部を修正。
+
+
+・修正ファイル
+　class/xwords.textsanitizer.php
+　include/preferences.inc.php
+　language/japanese/modinfo.php
+　templates/xwords_entry.html
+　templates/xwords_index.html
+　index.php
+　xoops_version.php
+
+
+●2006/02/20 V0.44
+・管理画面のメインと承認で表示するデータの一部変更。
+・トップページの新着、人気、ランダムのブロックと分類（カテゴリー）ごとの
+　新着、人気を表示、非表示の選択を一般設定に追加。
+・その他いろいろ
+
+
+・修正ファイル
+　admin/index.php
+　admin/submissions.php
+　include/functions.php
+　language/japanese/modinfo.php
+　templates/xwords_category.html
+　templates/xwords_index.html
+　entry.php
+　category.php
+　index.php
+　xoops_version.php
+
+
+●2005/12/25 V0.43
+・トップページとランダムブロックのテンプレートにあったアンカータグの閉じ忘れを修正。
+・管理画面の一部変更。
+
+
+・修正ファイル
+　admin/category.php
+　admin/entry.php
+　admin/myblocksadmin.php
+　admin/mygrouppermform.php
+　admin/mymenu.php
+　admin/index.php
+　admin/submissions.php
+　include/functions.php
+　include/preferences.inc.php
+　templates/blocks/entries_new.html
+　templates/blocks/entries_random.html
+　templates/blocks/entries_top.html
+　templates/xwords_index.html
+　xoops_version.php
+
+
+●2005/12/19 V0.42
+・管理者以外の入力を Javascript が off でもチェックできるようにした。
+・管理者の入力フォームオプションの表現を変更。
+・ユーザーの投稿時、HTMLタグを使えないように変更。
+　（使った場合はタグをそのまま表示）
+・トップページの新着、人気、ランダムのブロックを３列の段組み表示に戻した。
+・管理メニューの「承認など」で、未来日と書きかけのデータを抽出するように追加。
+・「サイトマップモジュール」のプラグイン同梱。
+・投稿数ランキングへの反映。
+・一般設定のアマゾンライブ（旧キーワード）リンクの記入項目を廃止。
+　（テンプレートに直接張りつけるように変更）
+・頭文字別ブロックの追加。
+・分類（カテゴリー）ごとに新着、人気を表示。
+・entry.php で参考文献や関連サイトに入力がなくても項目を表示するようにした。
+・アマゾン個別商品リンク用BBCODE [zon]商品コード[/zon] を追加。
+・オリジナルのファイルアッププログラムを初期値では使用しないように変更。
+・分類（カテゴリー）の説明文に BBCODE などを使えるようにした。
+
+
+◎自動参照リンク（仮）機能の充実。
+　複製した Xwords 同士はもちろんのこと、プラグインを作成することで他の
+　モジュールにもリンクさせることが可能。
+　※日本語は ｀ ´‘ ’“ ”〔 〕 ［ ］ ｛ ｝ 〈 〉 《 》「 」『 』 【 】
+　　英単語は ' （シングルクオート） " （ダブルクオート） ` （バッククオート）
+　　で囲む必要があります。
+　※これまで半角のスペースで区切ってもリンクしていましたが、今回からは上記文字で
+　　囲まれた語だけが検索対象となります。
+
+
+・検索のバグ修正。
+・データ更新のバグ修正。
+・「拡張承認待ちブロック」のプラグインが完全な Duplicatable ではなかったのを修正。
+・承認処理のバグ修正。
+・各ブロックにリクエストのデータが抽出されるバグ修正。
+・イニシャル抽出処理のバグ修正。
+・カテゴリーの表示順をデータ作成フォームのセレクタにも反映させた。
+・ユーザー情報の中で投稿履歴を表示するように変更。
+
+
+・修正ファイル
+　admin/admin_header.php
+　admin/category.php
+　admin/entry.php
+　admin/myblocksadmin.php
+　admin/index.php
+　admin/submissions.php
+　admin/update.php
+　admin/upload.php
+　admin/wb2xw.php
+　blocks/entries_new.php
+　blocks/entries_top.php
+　blocks/random_term.php
+　class/xwords.textsanitizer.php
+　include/functions.php
+　include/oninstall.inc.php
+　include/onupdate.inc.php
+　include/requestform.php
+　include/search.inc.php
+　include/sitemap.plugin.php
+　include/storyform.inc.php
+　include/waiting.plugin.php
+　language/japanese/admin.php
+　language/japanese/letter_format01.php
+　language/japanese/letter_format02.php
+　language/japanese/letter_format03.php
+　language/japanese/letter_format04.php
+　language/japanese/letter_format05.php
+　language/japanese/letter_format06.php
+　language/japanese/letter_format07.php
+　language/japanese/letter_format08.php
+　language/japanese/letter_format09.php
+　language/japanese/letter_format10.php
+　language/japanese/main.php
+　language/japanese/modinfo.php
+　templates/xwords_category.html
+　templates/xwords_entry.html
+　templates/xwords_index.html
+　templates/xwords_letter.html
+　templates/xwords_request.html
+　templates/xwords_submit.html
+　templates/xwords_search.html
+　templates/xwords_submit.html
+　templates/blocks/entries_new.html
+　templates/blocks/entries_random.html
+　templates/blocks/entries_top.html
+　category.php
+　entry.php
+　index.php
+　letter.php
+　preview.php
+　request.php
+　search.php
+　submit.php
+　xoops_version.php
+
+・追加ファイル
+　blocks/term_initial.php
+　include/myxwords.plugin.php
+　plugins/bluesbb.plugin.php
+　plugins/myalbum.plugin.php
+　plugins/mydownloads.plugin.php
+　plugins/mylinks.plugin.php
+　plugins/newbb.plugin.php
+　plugins/news.plugin.php
+　plugins/popnupblog.plugin.php
+　plugins/tinyd0.plugin.php
+　plugins/tinyd0.plugin.php
+　plugins/weblinks.plugin.php
+　plugins/weblog.plugin.php
+　plugins/wordpress.plugin.php
+　plugins/xfsection.plugin.php
+　plugins/xoopsfaq.plugin.php
+　templates/blocks/entries_initial.html
+　header.php
+　ChangeLog.txt
+
+・削除ファイル
+　language/japanese/letter_ini.php
+
+
+●2005/10/24 V0.41
+・複製したときにブロックなどエラーになるバグを修正。
+　アップデート後はブロックの設定を再度行ってください。
+
+
+・修正ファイル
+　blocks/entries_new.php
+　blocks/entries_top.php
+　blocks/random_term.php
+　category.php
+　letter.php
+　index.php
+　search.php
+　xoops_version.php
+
+・削除ファイル
+　sql/xwords_mysql.sql
+　include/cleantags.php
+
+
+●2005/10/20 V0.40
+・投稿日を未来や過去にできるようにした。
+　未来日にした場合、その日が来ると自動的に公開される。
+
+
+・修正ファイル
+　admin/entry.php
+　admin/index.php
+　blocks/entries_new.php
+　blocks/entries_top.php
+　blocks/random_term.php
+　include/functions.php
+　include/requestform.php
+　include/storyform.inc.php
+　include/search.inc.php
+　language/japanese/admin.php
+　templates/xwords_request.html
+　templates/xwords_submit.html
+　category.php
+　entry.php
+　letter.php
+　index.php
+　request.php
+　submit.php
+　search.php
+　xoops_version.php
+
+
+●2005/09/22 V0.39
+・検索 SELECT 文の修正（V0.38に漏れあり）。
+・ファイルアップ後に生成されるタグを修正。
+
+
+・修正ファイル
+　admin/upload.php
+　search.php
+　xoops_version.php
+
+
+●2005/09/04 V0.38
+・検索 SELECT 文の一部変更。
+
+
+・修正ファイル
+　include/search.inc.php
+　search.php
+　xoops_version.php
+
+
+●2005/08/27 V0.37
+・頭文字別集計方法（SELECT文）の一部変更。
+
+
+・修正ファイル
+　include/functions.php
+　xoops_version.php
+
+
+●2005/08/23 V0.36
+・一般設定の説明文を一部変更。
+・登録ユーザー用投稿フォームの読み込み方法を変更。（include → include_once）
+
+
+・修正ファイル
+　include/storyform.inc.php
+　language/japanese/modinfo.php
+　language/japanese/letter_format05.php
+　language/japanese/letter_format06.php
+　language/japanese/letter_format08.php
+　xoops_version.php
+
+
+●2005/07/31 V0.35
+・複製、ディレクトリの変更に自動対応。
+　ディレクトリを「xwords」から変更するだけです。
+
+
+・修正ファイル
+　index.php
+　xoops_version.php
+
+・追加ファイル
+　include/oninstall.inc.php
+
+
+●2005/07/18 V0.34
+・プレビューのバグを修正。
+
+
+・修正ファイル
+　admin/upload.php
+　class/xwords.textsanitizer.php
+　preview.php
+　xoops_version.php
+
+
+●2005/07/14 V0.33
+・検索語に片仮名を入れた場合にマッチしなかったのを修正。
+
+
+・修正ファイル
+　search.php
+　language/japanese/main.php
+　xoops_version.php
+
+
+●2005/07/13 V0.32
+・V0.31でデータ入力・修正が不能になっていたのを修正。
+
+
+・修正ファイル
+　admin/entry.php
+　admin/submissions.php
+　include/storyform.inc.php
+　xoops_version.php
+
+
+●2005/07/12 V0.31
+・データ入力・修正時のプレビュー機能を追加。
+
+
+・修正ファイル
+　admin/entry.php
+　admin/submissions.php
+　language/japanese/admin.php
+　language/japanese/main.php
+　include/storyform.inc.php
+　submit.php
+　xoops_version.php
+
+・追加ファイル
+　templates/xwords_preview.html
+　preview.php
+
+
+●2005/07/07 V0.30
+・管理者のデータ入力にSPAW（Wysiwygエディタ）を選択できるようにした。
+　ただし、TinyDまたはWordPressでSPAWを使用しているか、同モジュールに同梱されている
+　SPAWが必要。また、ブラウザの判定はしていない。IE6がおすすめ。
+
+
+・修正ファイル
+　admin/entry.php
+　admin/submissions.php
+　language/japanese/admin.php
+　xoops_version.php
+
+
+●2005/07/01 V0.29
+・$HTTP_SERVER_VARSをやめた。（PHP5でも動くかどうかは未確認）
+・イニシャル別集計方法に「数字＋アルファベット＋五十音＋その他」を追加。
+　language/japanese/letter_format**.php を書きかえることで変更できます。
+　配列は、$mb_init = 検索用、$mb_id = POST用、$mb_linktext = 表示用、
+　$mb_separator = 区切り文字となっています。
+
+
+・修正ファイル
+　language/japanese/letter.php
+　language/japanese/modinfo.php
+　include/functions.php
+　category.php
+　entry.php
+　letter.php
+　index.php
+　request.php
+　submit.php
+　xoops_version.php
+
+・追加ファイル
+　language/japanese/letter_format01.php
+　language/japanese/letter_format02.php
+　language/japanese/letter_format03.php
+　language/japanese/letter_format04.php
+　language/japanese/letter_format05.php
+　language/japanese/letter_format06.php
+　language/japanese/letter_format07.php
+　language/japanese/letter_format08.php
+　language/japanese/letter_format09.php
+　language/japanese/letter_format10.php
+
+
+●2005/06/30 V0.28
+・ほぼ Duplicatable になった。簡単に複製できるはず。
+　下記の手順でインストールしてください。
+
+１．まずは、ディレクトリを「xwords」から変更します。
+
+２．次に、エディタなどで sql/mysql.sql を開き、テーブル名を変更します。
+　　「CREATE TABLE `xwords_cat`」の部分と「CREATE TABLE `xwords_cat`」の部分、
+　　「xwords」から変更したディレクトリ名に書きかえます。
+　　例えば、ディレクトリ名が「dic」なら「CREATE TABLE `dic_cat`」というぐあいです。
+
+３．あとは、templates ディレクトリ内にあるファイルの名前をすべて変更します。
+　　例えば、ディレクトリ名が「dic」なら次のように。
+　　xwords_category.html       → dic_category.html
+　　xwords_entry.html          → dic_entry.html
+　　xwords_index.html          → dic_index.html
+　　xwords_letter.html         → dic_letter.html
+　　xwords_preview.html        → dic_preview.html
+　　xwords_request.html        → dic_request.html
+　　xwords_search.html         → dic_search.html
+　　xwords_submit.html         → dic_submit.html
+　　blocks/entries_new.html    → blocks/dic_new.html
+　　blocks/entries_random.html → blocks/dic_random.html
+　　blocks/entries_top.html    → blocks/dic_top.html
+
+
+
+・修正ファイル
+　admin/category.php
+　admin/entry.php
+　admin/index.php
+　admin/admin_header.php
+　admin/menu.php
+　admin/submissions.php
+　admin/update.php
+　admin/upload.php
+　admin/wb2xw.php
+　blocks/random_term.php
+　include/functions.php
+　include/requestform.php
+　include/storyform.inc.php
+　include/search.inc.php
+　include/waiting.plugin.php
+　language/japanese/admin.php
+　language/japanese/blocks.php
+　language/japanese/main.php
+　language/japanese/modinfo.php
+　language/japanese/waiting.php
+　templates/xwords_category.html
+　templates/xwords_entry.html
+　templates/xwords_letter.html
+　templates/xwords_index.html
+　templates/xwords_request.html
+　templates/xwords_search.html
+　templates/xwords_submit.html
+　category.php
+　entry.php
+　letter.php
+　index.php
+　request.php
+　submit.php
+　search.php
+　xoops_version.php
+
+
+●2005/06/28 V0.27
+・アマゾンのライブリンクに使用する語を、見出し語の先頭から全角２文字分に変更。
+・カテゴリー一覧をトップページ以外で表示しない設定の場合、
+　トップページにイニシャル別一覧を表示しない。
+・一般設定で、ユーザーのデータ追加フォームを管理者と同じものに変更可能。
+　同時に、myAlbum-P のイメージマネージャ統合機能による [siteimg] タグに対応。
+　（つまり、登録ユーザーも画像ファイルなどをアップ可能になったということ）
+
+
+・追加ファイル
+　class/xwords.textsanitizer.php
+
+・修正ファイル
+　admin/entry.php
+　include/functions.php
+　include/storyform.inc.php
+　language/japanese/main.php
+　language/japanese/modinfo.php
+　templates/xwords_entry.html
+　templates/xwords_index.html
+　templates/xwords_search.html
+　entry.php
+　search.php
+　xoops_version.php
+
+
+●2005/04/03 V0.26
+・用途別分類（カテゴリー）の選択をトップページだけに表示可能とした。
+・MYSQLの日本語環境が default-character-set = latin1 の場合、
+　管理メニューに大きなお世話的警告を表示していたのを廃止。
+・アマゾンのキーワードリンクがライブリンクに統合されたことに対応。
+
+
+・修正ファイル
+　include/functions.php
+　include/preferences.inc.php
+　language/japanese/main.php
+　templates/xwords_category.html
+　templates/xwords_entry.html
+　templates/xwords_letter.html
+　templates/xwords_index.html
+　category.php
+　entry.php
+　letter.php
+　search.php
+　xoops_version.php
+
+
+●2005/03/05 V0.25
+・ブラウザのタイトルバーとパンくずナビを見直し。
+・カテゴリーを優先し、カテゴリーごとに頭文字別リンクを集計するように変更。
+・関連サイトに入力したURLが正しくリンクされないバグを修正。
+
+
+・修正ファイル
+　admin/myblocksadmin.php
+　admin/myblockform.php
+　admin/mygrouppermform.php
+　admin/mymenu.php
+　include/blocksadmin.inc.php
+　include/functions.php
+　include/preferences.inc.php
+　include/gtickets.php
+　language/japanese/main.php
+　templates/xwords_category.html
+　templates/xwords_entry.html
+　templates/xwords_letter.html
+　templates/xwords_index.html
+　category.php
+　entry.php
+　letter.php
+　xoops_version.php
+
+
+●2005/02/23 V0.24
+・外部スタイルシート（style.css）の廃止。
+　モジュールで使用する外部スタイルシートの出力をする<{$xoops_module_header}>が
+　記述されていないテーマに対応するため、すべてテンプレートに移動した。
+・トップページの段組みを廃止した。
+　（テーマやブラウザによる表示の違いを極力小さくなるようにするため）
+
+
+・修正ファイル
+　admin/upload.php
+　blocks/random_term.php
+　include/functions.php
+　language/japanese/main.php
+　language/japanese/letter_ini.php
+　templates/blocks/entries_new.html
+　templates/blocks/entries_top.html
+　templates/xwords_category.html
+　templates/xwords_entry.html
+　templates/xwords_letter.html
+　templates/xwords_index.html
+　templates/xwords_request.html
+　templates/xwords_search.html
+　templates/xwords_submit.html
+　category.php
+　entry.php
+　letter.php
+　index.php
+　request.php
+　search.php
+　submit.php
+　xoops_version.php
+
+・削除ファイル
+　style.css
+
+
+●2005/02/21 V0.23
+・MYSQLの日本語環境が default-character-set = latin1 の場合、
+　管理メニューに警告を表示。（V0.22の動作を修正）
+
+
+・修正ファイル
+　include/functions.php
+　include/preferences.inc.php
+　xoops_version.php
+
+
+●2005/02/17 V0.22
+・トップページの表示（新着、人気とランダムを分けた）を修正。
+・MYSQLの日本語環境が default-character-set = ujis 以外でも頭文字別リンクや
+　国語辞典風のソートを正常に表示するよう対応。
+　ただし、default-character-set = ujis 以外のままでは、Xwordsも含めて
+　XOOPS全体の動作に支障が出る可能性があります。
+・管理メニューに default-character-set = ujis 以外を使用している場合、
+　警告を表示。
+
+
+・修正ファイル
+　admin/myblocksadmin.php
+　admin/mymenu.php
+　include/functions.php
+　include/preferences.inc.php
+　language/japanese/main.php
+　language/japanese/modinfo.php
+　index.php
+　category.php
+　letter.php
+　style.css
+　xoops_version.php
+
+
+●2005/02/15 V0.21
+・一般設定でRUBYタグを使用するに設定した場合、イニシャル別一覧表示のページ
+　（letter.php）でカテゴリー名が二重になっていたのを修正。
+
+
+・修正ファイル
+　templates/xwords_letter.html
+　templates/xwords_index.html
+　style.css
+　xoops_version.php
+
+
+●2005/02/14 V0.20
+・詳細表示のページ（entry.php）で用途の各カテゴリーへのリンクが機能して
+　いなかったのを修正。
+
+
+・修正ファイル
+　entry.php
+　xoops_version.php
+
+
+●2005/02/13 V0.19
+・検索して、ヒットした見出し語をクリック後、「戻る」ボタンで戻れるように修正。
+
+
+・修正ファイル
+　include/functions.php
+　xoops_version.php
+
+
+●2005/02/12 V0.18
+・検索結果のページ処理が機能しないバグを修正。
+・トップページの新着、人気が１件しか表示されないバグを修正。
+
+
+・修正ファイル
+　include/functions.php
+　search.php
+　style.css
+　index.php
+　xoops_version.php
+
+
+
+●2005/02/11 V0.17
+・トップページに表示していた新着、人気、ランダム、検索、登録数、
+　データ追加、リクエスト状況を一般設定で非表示選択可能とした。
+・XOOPSの検索ブロックを使用し、読みでAND検索、OR検索するとマッチしないバグを修正。
+・検索に検索タイプを追加。
+・スタイルシートの見直し。
+
+
+・修正ファイル
+　language/japanese/main.php
+　language/japanese/modinfo.php
+　templates/xwords_category.html
+　templates/xwords_entry.html
+　templates/xwords_letter.html
+　templates/xwords_index.html
+　templates/xwords_request.html
+　templates/xwords_search.html
+　templates/xwords_submit.html
+　include/functions.php
+　include/cleantags.php
+　include/search.inc.php
+　index.php
+　search.php
+　style.css
+　xoops_version.php
+
+
+●2005/02/07 V0.16
+・ランダムブロック、イニシャル別とカテゴリー別の一覧表示時における
+　XOOPSコードの扱いを修正。
+・インデックスのテンプレートを見直し。
+
+
+・修正ファイル
+　include/cleantags.php
+　include/functions.php
+　templates/xwords_index.html
+　style.css
+　xoops_version.php
+
+
+●2005/02/06 V0.15
+・ブラウザによっては、新着と人気ブロックの枠外に点が表示されるのを修正。
+・モジュール管理のバージョン表示をV0.12から変更していなかったので修正。
+
+・修正ファイル
+　templates/blocks/entries_new.html
+　templates/blocks/entries_top.html
+　style.css
+　xoops_version.php
+
+
+●2005/02/05 V0.14
+・データを追加する際、投稿日が記入されないバグを修正。
+
+・修正ファイル
+　admin/entry.php
+　xoops_version.php
+
+
+●2005/02/02 V0.13
+・データを修正する際、投稿日を更新するかどうかを選択可能にした。
+
+・修正ファイル
+　admin/entry.php
+　language/japanese/admin.php
+　xoops_version.php
+
+
+●2005/01/29 V0.12
+・XOOPS標準の検索機能に、読みでヒットしないバグを修正。
+
+・修正ファイル
+　include/search.inc.php
+　xoops_version.php
+
+
+●2005/01/28 V0.11
+・XOOPS標準の検索機能に対応できていないバグを修正。
+
+・修正ファイル
+　include/search.inc.php
+　xoops_version.php
+
+
+●2005/01/26 V0.10
+・一般設定に「頭文字別リンクの変更」を追加。４タイプを用意。
+・一般設定に「タイトルに画像ファイルを使うかどうか」を追加。
+　見本画像ファイルを４つ同梱していますが、皆さんのサイトに合わせて作成されることを
+　おすすめします。
+・一般設定に「リクエストを受けるかどうか」を追加。
+・一般設定に「投稿者にユーザーの基本情報などを表示するページへリンクするかどうか」を追加。
+・トップページに「目的など」を表示できるよう一般設定に項目を追加。
+・見出し語を元にアマゾンキーワードリンクの自動生成。（要 mbstring 関数）
+・検索対象に読み方を追加。
+・「拡張承認待ちブロック（ryujiさんのwaitingモジュール）」のプラグインを同梱。
+・「ブロック・グループ管理（GIJOEさんのmyblocksadmin.php）」をV0.24にアップ。
+・ワンタイムチケットの導入。（gtickets.php使用）
+・woodbookからXwordsへのデータコピーツールを追加。
+・新着、人気、ランダムの各ブロックをホームに置くとエラーになるバグを修正。
+・投稿日の時間表示フォーマットを変更可能とした。
+・ページのデザインをほんのちょっと修正。
+・読みをローマ字で入力しても五十音で分類。
+・頭文字別に表示するためのデータを別ファイルにした。
+　language/japanese/letter_ini.php を書きかえることで変更できます。
+　配列は、$mb_init = 検索用、$mb_id = POST用、$mb_linktext = 表示用、
+　$mb_separator = 区切り文字となっています。
+
+
+・修正ファイル
+　admin/category.php
+　admin/entry.php
+　admin/index.php
+　admin/admin_header.php
+　admin/myblocksadmin.php
+　admin/myblockform.php
+　admin/mygroupperm.php
+　admin/mygrouppermform.php
+　admin/submissions.php
+　blocks/entries_new.php
+　blocks/entries_top.php
+　blocks/random_term.php
+　include/functions.php
+　include/requestform.php
+　include/storyform.inc.php
+　include/search.inc.php
+　include/waiting.plugin.php
+　include/cleantags.php
+　language/japanese/admin.php
+　language/japanese/waiting.php
+　language/japanese/main.php
+　language/japanese/modinfo.php
+　templates/xwords_category.html
+　templates/xwords_entry.html
+　templates/xwords_letter.html
+　templates/xwords_index.html
+　templates/xwords_request.html
+　templates/xwords_search.html
+　templates/xwords_submit.html
+　category.php
+　entry.php
+　letter.php
+　index.php
+　request.php
+　submit.php
+　search.php
+　style.css
+　xoops_version.php
+
+・追加ファイル
+　admin/wb2xw.php
+　admin/admin.php
+　admin/mymenu.php
+　include/updateblock.inc.php
+　include/onupdate.inc.php
+　include/blocksadmin.inc.php
+　include/preferences.inc.php
+　include/gtickets.php
+　include/waiting.plugin.php
+　language/japanese/letter_ini.php
+　images/xwords_titlelogo.gif（タイトル用見本：初期値）
+　images/xwords_dictionary.gif（タイトル用見本）
+　images/xwords_yougokaisetu.gif（タイトル用見本）
+　images/xwords_yougosyuu.gif（タイトル用見本）
+
+・削除ファイル
+　header.php
+
+
+●2004/12/08 V0.09
+・コメントのある見出し語を削除した場合、コメントだけが残ってしまうのを修正。
+・ロケールをEUC-JPに設定できないサーバーをお使いの方のため、
+　ロケールに依存する関数を使用しないように変更。
+　これにより、英単語の最初の文字を大文字にするのを中止。
+　必要であれば、入力時に大文字にしてください。（文字化け対策です）
+・自動リンクの精度を向上させたつもり。
+
+
+・修正ファイル
+　admin/entry.php
+　admin/submissions.php
+　include/functions.php
+　language/japanese/main.php
+　blocks/entries_new.php
+　blocks/entries_top.php
+　blocks/random_term.php
+　category.php
+　entry.php
+　letter.php
+　index.php
+　search.php
+　xoops_version.php
+　style.css
+
+
+●2004/12/07 v0.08
+・インストール、アンインストール不能となっていました。
+
+・修正ファイル
+　xoops_version.php
+
+
+●2004/12/05 v0.07
+・説明文の中に「見出し語」があったらリンクする機能を日本語にも対応。
+　前後に「半角スペース」を入れるか、「全角のかぎ括弧」でくくってください。
+
+・修正ファイル
+　language/japanese/modinfo.php
+　entry.php
+　xoops_version.php
+
+
+●2004/12/02 v0.06
+・ユーザーが投稿できるように設定した場合、ゲストでも「データの追加」ボタンを
+　表示していたのを修正。
+・ユーザーが投稿できないように設定した場合でもメインメニューに「データの追加」を
+　表示していたのを修正。
+・category.php及びletter.phpを表示する際、説明文内の改行タグを「...」に
+　置きかえるようにしました。（空行をなくし、文字を全部詰める）
+・ゲストからのリクエストを受けると、本来はメールアドレス欄あてに確認メールを
+　送るはずが、管理者あてに送っていたので修正。
+　（ついでに、送信するかどうかを一般設定で変更できるようにしました）
+・ゲストからのリクエストを公開する際、著者を変更できないバグを修正。
+　（公開するときは管理者名になります）
+・見出し語、説明文に「'」など、使えない文字があったのを修正。
+・検索画面にある「データの追加」ボタンを管理者が押した場合、入れなかったのを修正。
+・イニシャル別に分類するためのデータを、見出し語と読み方から頭文字を
+　１文字ずつ保存するように変更。
+　language/japanese/main.php を書きかえることで変更できます。
+　詳しくは、language/japanese/main.php の「アルファベット、五十音など、
+　頭文字によるインデックスを作成するためのデータ」という部分をごらんください。
+　$mb_init = 検索用、$mb_id = POST用、$mb_linktext = 表示用配列です。
+
+
+・修正ファイル
+　admin/category.php
+　admin/entry.php
+　admin/index.php
+　admin/submissions.php
+　blocks/entries_new.php
+　blocks/entries_top.php
+　blocks/random_term.php
+　include/functions.php
+　include/cleantags.php
+　include/requestform.php
+　include/storyform.inc.php
+　language/japanese/admin.php
+　language/japanese/main.php
+　language/japanese/modinfo.php
+　templates/xwords_category.html
+　templates/xwords_entry.html
+　templates/xwords_letter.html
+　templates/xwords_index.html
+　templates/xwords_request.html
+　templates/xwords_search.html
+　category.php
+　entry.php
+　index.php
+　letter.php
+　request.php
+　search.php
+　submit.php
+　style.css
+　xoops_version.php
+
+・追加ファイル
+　templates/xwords_submit.html
+　admin/update.php
+
+
+●2004/11/03 v0.05
+・ユーザーからの投稿を許可している場合、ユーザーが投稿した語について、
+　ユーザー自身が変更できるようにした。
+・モジュールアイコンを変更。
+・UTF-8対応ハックをしやすくするために頭文字のフィールドを2バイト→10バイトへ変更。
+
+
+・修正ファイル
+　include/functions.php
+　include/storyform.inc.php
+　blocks/random_term.php
+　language/japanese/main.php
+　images/xwords_slogo.png
+　sql/mysql.sql
+　index.php
+　entry.php
+　category.php
+　letter.php
+　submit.php
+　xoops_version.php
+
+
+●2004/11/02 v0.04
+・ファイルアップロードの際、「添付ファイルのアイコンのみ」を選んでも
+　アイコンが表示されないバグを修正。
+・ファイルアップロードの設定を一般設定から変更できるようにした。
+・xoops_version.phpのバグを修正。
+・その他、文言をちょっとだけ変更。
+
+・修正ファイル
+　admin/upload.php
+　language/japanese/main.php
+　language/japanese/modinfo.php
+　language/japanese/admin.php
+　xoops_version.php
+
+・追加ファイル
+　images/file.gif
+
+
+●2004/10/08 v0.03
+・頭文字別リンクの「その他」を選んでも「すべて」の語を抽出していたバグを修正。
+・修正ファイル
+　language/japanese/main.php
+　letter.php
+　xoops_version.php
+
+●2004/09/28 v0.02
+・mbstring 関数を不要とした。
+・入力・修正時に表示される著者名のセレクトボタンの廃止。
+　もともと機能していなかったのと、全ユーザー名を表示するため、
+　たくさん（500人？以上）のユーザーを抱えるサイトでは表示しきれずに
+　タイムアウトの可能性が考えられたので、ぱっさりと切り捨てました。
+
+・修正ファイル
+　admin/entry.php
+　admin/submissions.php
+　include/functions.php
+　blocks/random_term.php
+　language/japanese/blocks.php
+　style.css
+　xoops_version.php
+　index.php
+　category.php
+　letter.php
+　search.php
+　entry.php
+
+・削除ファイル
+　language/english/全部
+　language/spanish/全部
+
+
+●2004/09/24 v0.01
+・モジュール名を「wordbookJ」から「Xwords」に変更。
+・バージョンを100分の1にしました。
+
+●2004/09/18 v1.00
+・公開
+
+---
+END
+---
+

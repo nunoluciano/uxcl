@@ -1,0 +1,33 @@
+table.topic td.date {
+	width: 15%;
+	text-align: center;
+	vertical-align: middle;
+	font-size: 12px;
+}
+
+table.topic td.name {
+	width: 80%;
+	vertical-align: middle;
+}
+
+table.topic td.author {
+	width: 85%;
+	vertical-align: middle;
+}
+
+table.topic td.body {
+	width: 80%;
+	word-break: break-all;
+}
+
+table.topic td.itemTitle {
+	width: 15%;
+	text-align: center;
+	vertical-align: middle;
+}
+
+table.topic td.itemValue {
+	width: 85%;
+	vertical-align: middle;
+}
+

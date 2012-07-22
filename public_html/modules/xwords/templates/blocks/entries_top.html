@@ -1,0 +1,5 @@
+<div style="margin:1em;padding:0em;line-height:120%;">
+  <{foreach item=popentries from=$block.popstuff}>
+    <div style="text-align:left;margin:0em;padding:0em;line-height:120%;"><a href="<{$xoops_url}>/modules/<{$popentries.dir}>/entry.php?entryID=<{$popentries.id}><{if $popentries.categoryID}>&amp;categoryID=<{$popentries.categoryID}><{/if}>" title="[<{$popentries.counter}>]"><{$popentries.linktext}></a>&nbsp;&nbsp;<span style="font-size:xx-small;">[<{$popentries.counter}>hit]</span></div>
+  <{/foreach}>
+</div>

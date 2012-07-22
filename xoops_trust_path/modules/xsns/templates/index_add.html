@@ -1,0 +1,63 @@
+<div id="mainFrame">
+<{if $mydirname}><{include file="db:`$mydirname`_inc_breadcrumbs.html"}><{/if}>
+
+<table class="outer commuEdit">
+
+<{$form_commu_add}>
+
+<tr class="even"><th colspan="2"><{$smarty.const._MD_XSNS_TITLE_INDEX_ADD}></th></tr>
+<tr class="head"><td colspan="2" style="text-align:right;"><{$smarty.const._MD_XSNS_REQUIRED_ITEM_DESC}></td></tr>
+
+<{if $errors|@count > 0}>
+<tr class="head"><td colspan="2" class="centerH">
+<ul>
+<{foreach item=error_message from=$errors}>
+<li><span class="red"><{$error_message}></span></li>
+<{/foreach}>
+</ul>
+</td></tr>
+<{/if}>
+
+<tr class="even">
+<td class="itemTitle bg0"><{$smarty.const._MD_XSNS_COMMU_NAME}><{$smarty.const._MD_XSNS_REQUIRED_ITEM}></td>
+<td class="itemValue"><input type="text" name="name" size="50" value="<{$default.name}>"></td>
+</tr>
+
+<tr class="even">
+<td class="itemTitle bg0"><{$smarty.const._MD_XSNS_CATEGORY}><{$smarty.const._MD_XSNS_REQUIRED_ITEM}></td>
+<td class="itemValue">
+<{$category_selector}>
+</td>
+</tr>
+
+<tr class="even">
+<td class="itemTitle bg0"><{$smarty.const._MD_XSNS_INDEX_PUBLIC}></td>
+<td class="itemValue">
+<input type="radio" name="public" value="1"<{$default.public1}>><{$smarty.const._MD_XSNS_INDEX_PUBLIC_L1}><br>
+<input type="radio" name="public" value="2"<{$default.public2}>><{$smarty.const._MD_XSNS_INDEX_PUBLIC_L2}><br>
+<input type="radio" name="public" value="3"<{$default.public3}>><{$smarty.const._MD_XSNS_INDEX_PUBLIC_L3}><br>
+</td>
+</tr>
+
+<tr class="even">
+<td class="itemTitle bg0"><{$smarty.const._MD_XSNS_DESC}><{$smarty.const._MD_XSNS_REQUIRED_ITEM}></td>
+<td class="itemValue"><{$xoops_codes}><{$xoops_smilies}></td>
+</tr>
+
+<tr class="even">
+<td class="itemTitle bg0"><{$smarty.const._MD_XSNS_IMAGE}></td>
+<td class="itemValue"><input type="file" name="image" size="40"></td>
+</tr>
+
+<tr class="foot">
+<td colspan="2" class="centerH">
+<div style="margin-top:20px;margin-bottom:20px">
+<input type="submit" class="submit" value="<{$smarty.const._MD_XSNS_BTN_ADD}>">
+</div>
+</td>
+</tr>
+</form>
+
+</table>
+
+</div>

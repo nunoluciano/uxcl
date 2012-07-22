@@ -1,0 +1,62 @@
+<{* Title *}>
+<{if $titleblockuse && $h1id}>
+  <h1 style="clear:both;background:transparent url(<{$smarty.const.XOOPS_URL}>/modules/<{$lang_moduledirname}>/images/<{$h1id}>) no-repeat center;font-size: 100%; overflow: hidden; margin: 0px; padding: 50px 0 0 0; height: 0px !important; height /**/:50px;">
+    <{$lang_modulename}>
+  </h1>
+<{elseif $titleblockuse}>
+  <h1 style="clear:both;margin: 0 0 10px 0; padding: 0.2em 0em; text-align: center; font-size: 1.4em;">
+    <{$lang_modulename}>
+  </h1>
+<{/if}>
+
+<{* pankuzu *}>
+<div class="itemPermaLink" style="margin:1em 0em;padding:0em;text-align:left;">
+  <a href="<{$xoops_url}>/"><{$lang_home}></a>&nbsp;&raquo;&nbsp;<a href="<{$xoops_url}>/modules/<{$lang_moduledirname}>/index.php"><{$lang_modulename}></a>&nbsp;&raquo;&nbsp;<{$lang_previewdsc}>
+</div>
+
+<{* Term block *}>
+<{* ruby tag sample start *}>
+<{* 
+<h2 style="margin: 2px 0px; padding: 2px 0px; font-size: 1.2em; text-align: center; background-color: transparent;">
+  <ruby><rb><{$term}></rb><rp><{$lang_rubyl}></rp><rt><{$proc}></rt><rp><{$lang_rubyr}></rp></ruby>
+</h2>
+*}>
+<{* ruby tag sample end *}>
+
+<div style="margin:20px 0px 2px 0px;padding:0px;font-size:0.8em;text-align:center;">
+  <{$proc}>
+</div>
+<h2 style="margin:2px 0px 20px 0px;padding:0px;font-size:1.2em;text-align:center;background-color: transparent;">
+  <span class="itemHead" style="margin:0px;padding:0px;font-size:1.2em;"><{$term}></span>
+</h2>
+
+<div class="comText" style="clear:both;text-align:left;margin:3em 0em 0em 0em;padding:0em 1em;line-height:1.4em;min-height:6em;">
+  <{$definition}>
+</div>
+
+<{* <{if $thisterm.ref || $thisterm.url || $thisterm.linkedterms}> *}>
+<div class="comText" style="clear:both;text-align:left;margin:5em 0em 0em 0em;padding:0em 1em;line-height:1.4em;">
+  <{if !$linktermsposition}>
+    <div style="margin:0.3em 0em 0em 0em;">
+      <{$lang_linkedterms}><{$linkedterms}>
+    </div>
+  <{/if}>
+  <{* <{if $ref}> *}>
+  <div style="margin:0.3em 0em 0em 0em;"><{$lang_entref}><{$ref}></div>
+  <{* <{/if}> *}>
+  <{* <{if $url}> *}>
+  <div style="margin:0.3em 0em 0em 0em;"><{$lang_enturl}><{$url}></div>
+  <{* <{/if}> *}>
+</div>
+<{* <{/if}> *}>
+
+<{* close nav *}>
+<form style="margin: 4em 0em 2em 0em;text-align:center;clear:both;">
+  <input type="button" value="<{$lang_close}>" onClick="window.close();" class="formButton" />
+</form>
+
+<{* Footer block *}>
+<div class="foot" style="clear:both;text-align:center;margin:2em 0em;padding:0em;">
+  Powered&nbsp;by&nbsp;<a href="http://www.kanpyo.net/" title="kanpyo"><strong>Xwords</strong></a>
+  &nbsp;based&nbsp;on&nbsp;<a href="http://dev.xoops.org/modules/xfmod/project/showfiles.php?group_id=1019" title="Official XOOPS Development Site"><strong>Wordbook</strong></a>
+</div>

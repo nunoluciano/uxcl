@@ -1,0 +1,35 @@
+<h3><{$smarty.const._MD_ATTACHFILE_LABEL_ADMIN_LIST}></h3>
+
+<div style="padding: 5px;">
+<{if $attached_files_count == 0}>
+	<{$smarty.const._MD_ATTACHFILE_MSG_FILENOTFOUND_LIST}>
+<{else}>
+<{assign var="seq" value=$offset_num}>
+<div><form action="<{$mod_url}>/admin/index.php" method="GET"><input name="page" type="hidden" value="list" /><{$smarty.const._MD_ATTACHFILE_LABEL_ALL_COUNT}>:<{$all_count}> <input type="submit" value="<{$smarty.const._MD_ATTACHFILE_LABEL_REFRESH}>" /> <{$smarty.const._MD_ATTACHFILE_LABEL_OFFSET}>:<input name="offset" type="text" value="<{$offset}>" size="10" /> <{$smarty.const._MD_ATTACHFILE_LABEL_ROW_PER_PAGE}>:<input name="limit" type="text" value="<{$limit}>" size="10" /></form></div>
+<table class="outer">
+	<tr class="head">
+		<th>&nbsp;</th>
+		<th><{$smarty.const._MD_ATTACHFILE_LABEL_ATTACH_ID}></th>
+		<th><{$smarty.const._MD_ATTACHFILE_LABEL_LINK_NAME}></th>
+		<th><{$smarty.const._MD_ATTACHFILE_LABEL_MODULE_DIRNAME}></th>
+		<th><{$smarty.const._MD_ATTACHFILE_LABEL_TARGET_ID}></th>
+		<th><{$smarty.const._MD_ATTACHFILE_LABEL_SAVED_NAME}></th>
+		<th><{$smarty.const._MD_ATTACHFILE_LABEL_FILE_SIZE_DB}></th>
+		<th><{$smarty.const._MD_ATTACHFILE_LABEL_TITLE}></th>
+	</tr>
+	<{foreach from=$attached_files item=attach}>
+	<{assign var="seq" value=$seq+1}>
+	<tr class="<{cycle values="even,odd"}>">
+		<td><{$seq}></td>
+		<td><{$attach.attach_id}></td>
+		<td><a href="<{$mod_url}>/index.php?mode=download&amp;attach_id=<{$attach.attach_id}>"><{$attach.link_name}></a></td>
+		<td><{$attach.module_dirname}></td>
+		<td><{$attach.target_id}></td>
+		<td><{$attach.saved_name}></td>
+		<td><{$attach.file_size}></td>
+		<td><{$attach.title}></td>
+	</tr>
+	<{/foreach}>
+</table>
+<{/if}>
+</div>

@@ -1,0 +1,9 @@
+.respopup{
+	position: absolute;
+	visibility: hidden;
+	background-color: #ffffcc;
+	border: 1px black solid;
+	font-size: 12px;
+	padding: 8px;
+	line-height: 120%;
+}

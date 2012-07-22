@@ -1,0 +1,42 @@
+<div id="mainFrame">
+
+<!-- User Menu -->
+<{if $mydirname}><{include file="db:`$mydirname`_inc_mypage_menu.html"}><{/if}>
+
+<table class="outer">
+<tr><th colspan="5"><{$smarty.const._MD_XSNS_TITLE_COMMU_LIST|sprintf:"`$user_name`"}></th></tr>
+
+<{if $commu_list|@count > 0}>
+
+<tr class="even">
+<{section name=id loop=$commu_list}>
+
+<{if $smarty.section.id.index > 0 && $smarty.section.id.index is div by 5}>
+</tr>
+<tr class="even">
+<{/if}>
+
+<td class="centerHV" style="width:110px;">
+<{if $commu_list[id].member_count > 0}>
+<div style="height:90px; padding-top:5px;">
+<a href="<{$commu_list[id].page_url}>"><img src="<{$commu_list[id].image.url_src|default:"images/cm_commu_default1.gif"}>" alt="<{$commu_list[id].name}>"></a>
+</div>
+<div style="height:2.5em">
+<a href="<{$commu_list[id].page_url}>">
+<{$commu_list[id].name|mb_truncate:16}>
+<small>(<{$commu_list[id].member_count}>)</small>
+</a>
+</div>
+<{/if}>
+</td>
+
+<{/section}>
+</tr>
+
+<tr><td colspan="5" class="odd centerH"><{$pager.selector}></td></tr>
+<tr><td colspan="5" class="odd" style="text-align:right"><{$pager.description}></td></tr>
+
+<{/if}>
+
+</table>
+</div>

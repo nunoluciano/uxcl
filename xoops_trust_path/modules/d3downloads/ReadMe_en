@@ -1,0 +1,59 @@
+===  d3downloads ( download module based on Duplicatable V3 (D3) )  ===
+
+It is a download module based on Duplicatable V3 (D3).
+This module require the latest ALTSYS installed.
+
+And you'd better install d3forum also.
+(This module supports comment system integrated with d3forum only)
+
+
+THE MAIN FEATURE:
+
+- Set View and Post privileges by category
+- File upload feature
+- Cumbersome to manage screen redesigned mydownloads
+- mydownloads, wfdownloads v3.10, d3downloads import
+- D3 module, rename the module directory and multiple installable
+
+
+HOW TO INSTALL:
+
+(1) copy html/modules/d3downloads into your moduels/.
+
+(2) name the directory name as you like. (eg. mydownload)
+
+(3) make a new folder out of DocumentRoot  (eg. /home/yourhome/xoops_trust_path/)
+
+(4) insert a line into just after defining XOOPS_URL in mainfile.php.
+    E.g. define('XOOPS_TRUST_PATH','/home/yourhome/xoops_trust_path');
+
+(5) make a directory 'modules' under the directory. (E.g. /home/yourhome/xoops_trust_path/modules/)
+
+(6) make a directory 'd3downloads' under the directory. (E.g. /home/yourhome/xoops_trust_path/d3downloads/)
+
+(7) copy xoops_trust_path/modules/d3downloads in this archive into XOOPS_TRUST_PATH/modules/ (E.g. /home/yourhome/xoops_trust_path/modules)
+
+(8) make a directory which has same name as (2) under XOOPS_TRUST_PATH/uploads/ (E.g. /home/yourhome/xoops_trust_path/uploads/mydownload)
+
+(9) copy html/class/smarty/plugins/ in the archive into your class/smarty/plugins/
+
+(10) install it in XOOPS modulesadmin
+
+
+D3FORUM TO INTEGRATE COMMENTS:
+
+(1) dirname of d3forum and forum ID are set by a general setting. 
+(2) configure format for comment-integration of d3forum. 
+    E.g. mydownload::d3downloadsComment::d3downloads
+    * The first is a dirname, the third a trust dirname.
+
+
+EXTRA ARCHIVE FOLDER, IF NECESSARY:
+
+- piCal - Plug-ins for piCal
+- d3pipes - For joint d3pipes
+- Mydownloads compatible with a URL. htaccess
+
+URL: either you can access When you use htaccess
+XOOPS_URL/modules/d3downloads/index.php?page=singlefile&cid=1&lid=1
+XOOPS_URL/modules/d3downloads/singlefile.php?cid=1&lid=1

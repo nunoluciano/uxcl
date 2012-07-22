@@ -1,0 +1,115 @@
+- mymenu -
+
+
+SUMMARY:
+
+This files add top navigation bar into admin section of your module.
+
+
+BACKGROUND:
+
+Some newer modules has navigation above its admin's section.
+But once someone click "preferences", the navigation will be lost.
+
+mymenu integrates your modules's preferences seamlessly into your 
+module's admin section.
+
+
+
+HOW TO USE:
+
+1) copy mymenu.php & admin.php to modules/(your module)/admin/
+   (this admin.php is compatible for myblocksadmin)
+
+2) copy preferences.inc.php & gtickets.php to modules/(your module)/include/
+   (this gtickets.php is compatible for myblocksadmin)
+
+3) edit all of your admin's files and add include('./mymenu.php'); 
+   after xoops_cp_header();
+
+
+This is a sample skelton of admin's file.
+
+----------------------------
+require_once( '../../../include/cp_header.php' ) ;
+
+(DB update section)
+
+xoops_cp_header() ;
+include('./mymenu.php');
+
+(output section)
+
+xoops_cp_footer() ;
+----------------------------
+
+
+That's all !
+
+
+
+CHANGELOG:
+
+2004-01-13 0.10 modified ticket system (limit stubs max 10)
+                fixed the highlight and the link to configs
+2004-01-04 0.08 modified the usage of XoopsForm (thx okuhiki)
+2004-12-30 0.07 modified using $_SERVER instead of $_ENV (thx Marijuana)
+2004-12-16 0.06 eliminated unsed codes from preferences.inc.php for the security
+2004-12-10 0.05 modified ticket system
+2004-12-06 0.04 modified ticket system
+2004-12-05 0.03 modified ticket system
+2004-12-03 0.02 modified to use $_GET or $_POST instead of $HTTP_*_VARS (mari)
+                added admin_refcheck() for security (mari)
+                added ticket system for security (mari)
+                eliminated foreach() extraction from $_POST (mari)
+                fixed a place to include language files (thx marcan)
+2004-06-15 0.01 the first release
+
+
+
+COPYRIGHT:
+
+I do not insist on the right of these codes, and don't guarantee.
+
+-------------------------------------------------------------
+(for Japanese)
+
+●要旨
+
+モジュールの管理画面すべてに、トップメニューをつけるためのファイル群です。
+
+
+●背景
+
+最近のモジュールには、管理画面用メニューを搭載したものが多く見られますが、そのいずれも、一般設定に入ると、途端にメニューが消えてしまい、しかも、一般設定を更新した後は変なページに飛ばされてしまいます。
+
+mymenuは、一般設定画面にもメニューを表示し、設定変更後も、その設定画面に戻れるようにするために作りました。
+
+
+●使い方：
+
+1) mymenu.php と admin.php を modules/(dirname)/admin/ にコピーします。
+   admin.php というファイルは、myblocksadmin にも含まれていますが、コンパチです。
+
+2) preferences.inc.php と gtickets.php を、modules/(dirname)/include/ にコピーします。
+   gtickets.php というファイルは、myblocksadmin にも含まれますが、コンパチです。
+
+3) 管理画面用のファイルを一通り編集し、include('./mymenu.php'); という行を、xoops_cp_header(); の直後に挿入します。
+
+
+管理画面用スクリプトのサンプルスケルトン：
+----------------------------
+require_once( '../../../include/cp_header.php' ) ;
+
+(DB update section)
+
+xoops_cp_header() ;
+include('./mymenu.php');
+
+(output section)
+
+xoops_cp_footer() ;
+----------------------------
+
+
+お試しあれ！

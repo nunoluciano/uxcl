@@ -1,0 +1,34 @@
+<{if $block.category}>
+	<table border="0" width="100%" cellspacing="10" cellpadding="10" align="center">
+		<tr>
+		    <{foreach from=$block.category.parent item="parent" key="count"}>
+	    	    <td valign="top">
+					<div style="border:dotted 1px #c0c0c0;padding:2px">
+						<div style="border:dotted 1px #808080;padding:10px">
+							<div>
+								<img src="<{$block.mod_url}>/images/folder.gif" width="18" height="14" border="0" />
+								&nbsp;<a href="<{$block.mod_url}>/<{$parent.url}>"><{$parent.title}></a>
+								&nbsp;<span style="font-size:smaller;">( <{$parent.files}> )</span>
+							</div>
+							<{if $block.intree}>
+								<{foreach from=$parent.child item="child"}>
+									<div>
+										&nbsp;<a href="<{$block.mod_url}>/<{$child.url}>"><{$child.title}></a>
+										&nbsp;<span style="font-size:smaller;">( <{$child.files}> )</span>
+									</div>
+								<{/foreach}>
+								<div style="font-size:smaller;">
+									( <{$block.lang_total}><{$parent.total_files}> )
+								</div>
+							<{/if}>
+						</div>
+					</div>
+				</td>
+		<{if ($count+1) is div by $block.cols}>
+				</tr>
+			<tr>
+		<{/if}>
+		  <{/foreach}>
+		</tr>
+	</table>
+<{/if}>

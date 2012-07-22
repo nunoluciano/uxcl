@@ -1,0 +1,42 @@
+<pattemplate:tmpl name="WholeBoard">
+
+<table border='0' cellspacing='0' cellpadding='0' width='150' style='width:150px;line-height:normal;margin:0px;'>
+  <tr>
+    <td width='150' class='calframe' style='{FRAME_CSS}'>
+      <table border='0' cellspacing='0' cellpadding='0' width='100%' style='border-collapse:collapse;margin:0px;'>
+
+        <!-- header part -->
+        <tr>
+          <td nowrap='nowrap' colspan='7' align='center' bgcolor='{CALHEAD_BGCOLOR}' valign='middle' style='vertical-align:middle;'><img src='{SKINPATH}/spacer.gif' alt='' width='18' height='14' border='0' /><font size='3' color='{CALHEAD_COLOR}'><b><span class='calhead'>{MONTH_NAME}</span></b></font><img src='{SKINPATH}/spacer.gif' alt='' width='18' height='14' border='0' /></td>
+        </tr>
+
+        <tr>
+          <!-- day name loop -->
+          <pattemplate:tmpl name="DayNameLoop">
+          <td align='center'><font size='2' color='{COLOR}'><span class='calweekname'>{DAYNAME}</span></font></td>
+          </pattemplate:tmpl>
+        </tr>
+
+        <!-- weekly loop -->
+        <pattemplate:tmpl name="WeekLoop">
+        <tr>
+          <!-- daily loop -->
+          <pattemplate:tmpl name="DailyLoop" type="condition" conditionvar="DATE_TYPE">
+            <pattemplate:sub condition="0">
+              <td><span class='calbody'><img src='{SKINPATH}/spacer.gif' alt='' width='20' height='12' /></span></td>
+            </pattemplate:sub>
+            <pattemplate:sub condition="1">
+              <td align='center' bgcolor='{BGCOLOR}'><a href='{GET_TARGET}?caldate={LINK}&amp;{QUERY_STRING}' class='calbody'><font size='2' color='{COLOR}'><span class='calbody'>{DATE}</span></font></a></td>
+            </pattemplate:sub>
+            <pattemplate:sub condition="default">
+              <td align='center' bgcolor='{BGCOLOR}'><a href='{GET_TARGET}?caldate={LINK}&amp;{QUERY_STRING}' class='calbody'><font size='2' color='{COLOR}'><span class='calbody' style='text-decoration:underline;'>{DATE}</span></font></a></td>
+            </pattemplate:sub>
+          </pattemplate:tmpl>
+        </tr>
+        </pattemplate:tmpl>
+      </table>
+    </td>
+  </tr>
+</table>
+
+</pattemplate:tmpl>

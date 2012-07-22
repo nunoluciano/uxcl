@@ -1,0 +1,44 @@
+table.member td.avatar {
+	width: 80px;
+	text-align: center;
+	vertical-align: middle;
+}
+
+table.member td.edit {
+	width: 15em;
+	text-align: center;
+	vertical-align: middle;
+}
+
+table.member td.date {
+	width: 8em;
+	text-align: center;
+	vertical-align: middle;
+}
+
+table.member td.itemTitle {
+	width: 10em;
+	text-align: center;
+	vertical-align: middle;
+}
+
+table.member td.itemValue {
+	vertical-align: middle;
+}
+
+
+table.memberReq td.avatar {
+	width: 80px;
+	text-align: center;
+	vertical-align: middle;
+}
+
+table.memberReq td.itemTitle {
+	vertical-align: middle;
+}
+
+table.memberReq td.itemValue {
+	width: 350px;
+	vertical-align: middle;
+}
+

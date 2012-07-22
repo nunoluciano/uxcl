@@ -1,0 +1,28 @@
+<input type="hidden" name="options[0]" value="<{$mydirname}>" />
+
+<p>
+	<label for="max_entry"><{$smarty.const._MB_D3DOWNLOADS_MAX_ENTRY}></label>:
+	<input type="text" name="options[1]" id="max_entry" value="<{$max_entry}>" size="30" />
+</p>
+
+<p>
+	<label for="max_size"><{$smarty.const._MB_D3DOWNLOADS_MAX_SIZE}></label>:
+	<input type="text" name="options[2]" id="max_size" value="<{$max_size}>" size="30" />
+</p>
+
+<p>
+	<label for="date_format"><{$smarty.const._MB_D3DOWNLOADS_DATE_FORMAT}></label>:
+	<input type="text" name="options[3]" id="date_format" value="<{$date_format}>" size="30" />
+</p>
+<p>
+	<label for="block_size"><{$smarty.const._MB_D3DOWNLOADS_BLOCK_SIZE}></label>:
+	<input type='radio' name='options[4]' id='o41' value='1' <{$block_size_1}> /><label for='o41'><{$smarty.const._MB_D3DOWNLOADS_BLOCKSIZE_TYPE1}></label>
+	<input type='radio' name='options[4]' id='o42' value='2'  <{$block_size_2}> /><label for='o42'><{$smarty.const._MB_D3DOWNLOADS_BLOCKSIZE_TYPE2}></label>
+	<input type='radio' name='options[4]' id='o43' value='3'  <{$block_size_3}> /><label for='o43'><{$smarty.const._MB_D3DOWNLOADS_BLOCKSIZE_TYPE3}></label>
+</p>
+
+<p>
+	<label for="this_template"><{$smarty.const._MB_D3DOWNLOADS_THISTEMPLATE}></label>:
+	<input type="text" size="60" name="options[5]" id="this_template" value="<{$this_template|escape}>" />
+	<a href="<{$xoops_url}>/modules/<{$mydirname}>/admin/index.php?mode=admin&amp;lib=altsys&amp;page=mytplsform&amp;tpl_file=<{$this_template|escape}>"><{$smarty.const._EDIT}></a>
+</p>

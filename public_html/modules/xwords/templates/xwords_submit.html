@@ -1,0 +1,56 @@
+<{* Title *}>
+<{if $titleblockuse && $h1id}>
+  <h1 style="clear:both;background:transparent url(<{$smarty.const.XOOPS_URL}>/modules/<{$lang_moduledirname}>/images/<{$h1id}>) no-repeat center;font-size: 100%; overflow: hidden; margin: 0px; padding: 50px 0 0 0; height: 0px !important; height /**/:50px;">
+    <{$lang_modulename}>
+  </h1>
+<{elseif $titleblockuse}>
+  <h1 style="clear:both;margin: 0 0 10px 0; padding: 0.2em 0em; text-align: center; font-size: 1.4em;">
+    <{$lang_modulename}>
+  </h1>
+<{/if}>
+
+<{* pankuzu *}>
+<div class="itemPermaLink" style="clear:both;margin:1em 0em;padding:0em;text-align:left;">
+  <a href="<{$xoops_url}>/"><{$lang_home}></a>&nbsp;&raquo;&nbsp;<a href="<{$xoops_url}>/modules/<{$lang_moduledirname}>/index.php"><{$lang_modulename}></a>&nbsp;&raquo;&nbsp;<{$lang_legendname}>
+</div>
+
+<{* information *}>
+<div style="clear:both;width:100%;margin:0.1em 0em;padding:0em;">
+  <fieldset class="item" style="border:1px solid #778;margin:1em 0em;text-align:left;background-color:transparent;">
+    <legend class="itemHead"><{$lang_legendname}></legend>
+    <div style="margin:1em;padding:0em;text-align:left;line-height:1.4em;">
+      <{$lang_legenddesc}>
+    </div>
+  </fieldset>
+</div>
+
+<{* Form block *}>
+<{$lang_caution}>
+<{$storyform.javascript}>
+<form name="<{$storyform.name}>" action="<{$storyform.action}>" method="<{$storyform.method}>" <{$storyform.extra}>>
+  <table class="outer" cellspacing="1" style="text-align:center;">
+    <tr>
+      <th colspan="2" style="text-align:left;"><{$storyform.title}></th>
+    </tr>
+    <{foreach item=element from=$storyform.elements}>
+      <{if $element.hidden != true}>
+        <tr>
+          <td class="<{cycle values="even,odd"}>" style="text-align:left;">
+            <{$element.caption}>
+          </td>
+          <td class="<{cycle values="even,odd"}>" style="text-align:left;">
+            <{$element.body}>
+          </td>
+        </tr>
+      <{else}>
+        <{$element.body}>
+      <{/if}>
+    <{/foreach}>
+  </table>
+</form>
+
+<{* Footer block *}>
+<div class="foot" style="clear:both;width:100%;text-align:center;margin:2em 0em;padding:0em;">
+  Powered&nbsp;by&nbsp;<a href="http://www.kanpyo.net/" title="kanpyo"><strong>Xwords</strong></a>
+  &nbsp;based&nbsp;on&nbsp;<a href="http://dev.xoops.org/modules/xfmod/project/showfiles.php?group_id=1019" title="Official XOOPS Development Site"><strong>Wordbook</strong></a>
+</div>

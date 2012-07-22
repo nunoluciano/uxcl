@@ -1,0 +1,79 @@
+<div class="d3downloads_feed_select">
+	<{if $mylink}><span class="d3downloads_mylink_info"><{$smarty.const._MD_D3DOWNLOADS_MYLINK_INFO}></span>&nbsp;<{/if}>
+	<{if $category_id}>
+		<a href="<{$mod_url}>/index.php?page=rdf&amp;cid=<{$category_id}><{if $intree}>&amp;intree=<{$intree}><{/if}><{if $mylink}>&amp;mylink=<{$mylink}><{/if}>">[RDF]</a>
+		<a href="<{$mod_url}>/rss.php?cid=<{$category_id}><{if $intree}>&amp;intree=<{$intree}><{/if}><{if $mylink}>&amp;mylink=<{$mylink}><{/if}>">[RSS]</a>
+		<a href="<{$mod_url}>/index.php?page=atom&amp;cid=<{$category_id}><{if $intree}>&amp;intree=<{$intree}><{/if}><{if $mylink}>&amp;mylink=<{$mylink}><{/if}>">[ATOM]</a>
+		<a href="<{$mod_url}>/index.php?page=filelist&amp;cid=<{$category_id}><{if $intree}>&amp;intree=<{$intree}><{/if}>">[<{$smarty.const._MD_D3DOWNLOADS_FILELIST}>]</a>
+	<{else}>
+		<a href="<{$mod_url}>/index.php?page=rdf<{if $mylink}>&amp;mylink=<{$mylink}><{/if}>">[RDF]</a>
+		<a href="<{$mod_url}>/rss.php<{if $mylink}>?mylink=<{$mylink}><{/if}>">[RSS]</a>
+		<a href="<{$mod_url}>/index.php?page=atom<{if $mylink}>&amp;mylink=<{$mylink}><{/if}>">[ATOM]</a>
+		<a href="<{$mod_url}>/index.php?page=filelist">[<{$smarty.const._MD_D3DOWNLOADS_FILELIST}>]</a>
+	<{/if}>
+</div>
+<{if $categories}>
+	<hr class="d3downloads_categories" />
+	<table class="d3downloads_categories" width="100%" border="0" cellspacing="5" cellpadding="0" align="center">
+		<tr>
+			<{foreach from=$categories item=cat key=count}>
+				<td class="d3downloads_categories" valign="top" align="right">
+					<{if $cat.imgurl != ""}>
+						<a href="<{$mod_url}>/index.php?cid=<{$cat.cid}><{$cat_arg}>">
+						<img src="<{$cat.imgurl}>" width="70" class="d3downloads_imgurl_frame" alt="<{$cat.title}>" title="<{$cat.title}>" /></a>
+					<{else}>
+						<a href="<{$mod_url}>/index.php?cid=<{$cat.cid}><{$cat_arg}>">
+						<img src="<{$mod_url}>/images/folder.gif" width="18" height="14" border="0" alt="<{$cat.title}>" title="<{$cat.title}>" /></a>
+					<{/if}>
+				</td>
+				<td class="d3downloads_categories" valign="top" align="left" width="33%">
+					<a href="<{$mod_url}>/index.php?cid=<{$cat.cid}><{$cat_arg}>"><{$cat.title}></a>
+					&nbsp;(<{$cat.subcat_total}>)&nbsp;
+					<a href="<{$mod_url}>/rss.php?cid=<{$cat.cid}><{if $intree}>&amp;intree=<{$intree}><{/if}>">[RSS]</a>
+					<a href="<{$mod_url}>/index.php?page=filelist&amp;cid=<{$cat.cid}><{if $intree}>&amp;intree=<{$intree}><{/if}>">[<{$smarty.const._MD_D3DOWNLOADS_FILELIST}>]</a>
+					<!-- Correction when ATOM for cat is necessity -->
+					<{* &nbsp;<a href="<{$mod_url}>/index.php?page=atom&amp;cid=<{$cat.cid}><{if $intree}>&amp;intree=<{$intree}><{/if}>">[ATOM]</a> *}>
+					<!-- Correction when RDF for cat is necessity -->
+					<{* &nbsp;<a href="<{$mod_url}>/index.php?page=rdf&amp;cid=<{$cat.cid}><{if $intree}>&amp;intree=<{$intree}><{/if}>">[RDF]</a> *}>
+					<br />
+					<{foreach from=$cat.subcategories item=subcat}>
+						<{if $subcat.number_of_subcat}>
+							<a href="<{$mod_url}>/index.php?cid=<{$subcat.cid}><{$cat_arg}>"><img src="<{$mod_url}>/images/folder16.gif" width="13" height="10" alt="<{$subcat.title}>" title="<{$subcat.title}>" /></a>
+							<a href="<{$mod_url}>/index.php?cid=<{$subcat.cid}><{$cat_arg}>"><{$subcat.title}></a>
+							&nbsp;(<{$subcat.subcat_total}>)&nbsp;
+							<img src="<{$mod_url}>/images/subcat.gif" width="15" height="15" />
+							<a href="<{$mod_url}>/rss.php?cid=<{$subcat.cid}><{if $intree}>&amp;intree=<{$intree}><{/if}>">[RSS]</a>
+							<a href="<{$mod_url}>/index.php?page=filelist&amp;cid=<{$subcat.cid}><{if $intree}>&amp;intree=<{$intree}><{/if}>">[<{$smarty.const._MD_D3DOWNLOADS_FILELIST}>]</a>
+							<!-- Correction when ATOM for cat is necessity -->
+							<{* &nbsp;<a href="<{$mod_url}>/index.php?page=atom&amp;cid=<{$subcat.cid}><{if $intree}>&amp;intree=<{$intree}><{/if}>">[ATOM]</a> *}>
+							<!-- Correction when RDF for cat is necessity -->
+							<{* &nbsp;<a href="<{$mod_url}>/index.php?page=rdf&amp;cid=<{$subcat.cid}><{if $intree}>&amp;intree=<{$intree}><{/if}>">[RDF]</a> *}>
+							<br />
+						<{else}>
+							<a href="<{$mod_url}>/index.php?cid=<{$subcat.cid}><{$cat_arg}>"><img src="<{$mod_url}>/images/folder16.gif" width="13" height="10" alt="<{$subcat.title}>" title="<{$subcat.title}>" /></a>
+							<a href="<{$mod_url}>/index.php?cid=<{$subcat.cid}><{$cat_arg}>"><{$subcat.title}></a>
+							&nbsp;(<{$subcat.subcat_total}>)&nbsp;
+							<a href="<{$mod_url}>/rss.php?cid=<{$subcat.cid}><{if $intree}>&amp;intree=<{$intree}><{/if}>">[RSS]</a>
+							<a href="<{$mod_url}>/index.php?page=filelist&amp;cid=<{$subcat.cid}><{if $intree}>&amp;intree=<{$intree}><{/if}>">[<{$smarty.const._MD_D3DOWNLOADS_FILELIST}>]</a>
+							<!-- Correction when ATOM for cat is necessity -->
+							<{* &nbsp;<a href="<{$mod_url}>/index.php?page=atom&amp;cid=<{$subcat.cid}><{if $intree}>&amp;intree=<{$intree}><{/if}>">[ATOM]</a> *}>
+							<!-- Correction when RDF for cat is necessity -->
+							<{* &nbsp;<a href="<{$mod_url}>/index.php?page=rdf&amp;cid=<{$subcat.cid}><{if $intree}>&amp;intree=<{$intree}><{/if}>">[RDF]</a> *}>
+							<br />
+						<{/if}>
+					<{/foreach}>
+					<{if $cat.subcategories}>
+						<div class="d3downloads_bcat_total">
+							( <{$smarty.const._MD_D3DOWNLOADS_BCAT_TOTAL}><{$cat.bcat_total}> )
+						</div>
+					<{/if}>
+				</td>
+	<{if ($count+1) is div by 3}>
+		</tr>
+		<tr>
+	<{/if}>
+			<{/foreach}>
+		</tr>
+	</table>
+	<hr class="d3downloads_categories" />
+<{/if}>

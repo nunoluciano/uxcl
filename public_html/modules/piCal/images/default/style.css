@@ -1,0 +1,7 @@
+/* Style sheet for piCal (you can add embed css's here) */
+
+tr.pical-monthly td { width: 90px; margin: 0; word-wrap:break-word; }
+tr.pical-monthly td.pical-weekmark { width: 10px; margin: 0; }
+
+table.pical-categoryform { table-layout:fixed; }
+td.pical-categoryform { margin: 4px 0; }

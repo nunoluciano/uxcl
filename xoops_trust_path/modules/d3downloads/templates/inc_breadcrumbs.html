@@ -1,0 +1,13 @@
+<div class="d3downloads_breadcrumbs">
+	<a href="<{$mod_url}>/index.php"><{$smarty.const._MD_D3DOWNLOADS_MAIN}></a>
+	<{foreach from=$xoops_breadcrumbs key="i" item="bc"}>
+		<{if $i > 0}>
+			&nbsp;&gt;&nbsp;
+			<{if $bc.url}>
+				<a href="<{$bc.url}>"><{$bc.name}></a>
+			<{else}>
+				<{$bc.name}>
+			<{/if}>
+		<{/if}>
+	<{/foreach}>
+</div>

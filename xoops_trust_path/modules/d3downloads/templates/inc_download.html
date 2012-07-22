@@ -1,0 +1,137 @@
+<table width="100%" cellspacing="0" class="d3downloads_outer">
+	<tr>
+		<td class="d3downloads_head" align="left" height="18" width="35%">
+			<{$smarty.const._MD_D3DOWNLOADS_CATEGORY}> <{$down.category}>
+		</td>
+		<td class="d3downloads_head" align="right" height="18" width="65%">
+			<form name="mylinkform" id="mylinkform" action="<{$mod_url}>/index.php?page=mylink" method="post">
+				<{if ! $down.is_mylink}>
+					<input type="submit" class="d3downloads_submit" name="add_mylink" id="add_mylink" value="<{$smarty.const._MD_D3DOWNLOADS_ADD_MYLINK}>" />
+				<{else}>
+					<input type="submit" class="d3downloads_submit" name="del_mylink" id="del_mylink" value="<{$smarty.const._MD_D3DOWNLOADS_DEL_MYLINK}>" onclick="return confirm('<{$smarty.const._MD_D3DOWNLOADS_MSG_CONFIRMDELETECONTENT}>')" />
+				<{/if}>
+				<input type="hidden" name="lid" value="<{$down.id}>" />
+			</form>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2" class="d3downloads_single_frame_title">
+			<{if ! $down.broken_link}>
+				<{$down.filelink}><span class="d3downloads_bold"><{$down.title}></span></a><{$down.new}><{$down.pop}>
+			<{else}>
+				<span class="d3downloads_bold"><{$down.title}></span>
+			<{/if}>
+		</td>
+	</tr>
+	<tr>
+		<td class="d3downloads_single_frame_gifimage">
+			<{if $down.gif_image && $down.gif_image !="download.gif"}>
+				<{$down.filelink}><img src="images/<{$down.gif_image}>" width="110" height="18"></a>
+			<{elseif $down.gif_image}>
+				<{$down.filelink}><img src="images/<{$down.gif_image}>" width="19" height="19"></a>
+			<{else}>
+				(&nbsp;<span class="d3downloads_broken_message"><{$smarty.const._MD_D3DOWNLOADS_BROKEN_FILE}></span>&nbsp;)
+			<{/if}>
+			<{if $down.filelink2}>
+				<{if $down.gif_image2 && $down.gif_image2 !="download.gif"}>
+					<{$down.filelink2}><img src="images/<{$down.gif_image2}>" width="110" height="18"></a>
+				<{elseif $down.gif_image2}>
+					<{$down.filelink2}><img src="images/<{$down.gif_image2}>" width="19" height="19"></a>
+				<{else}>
+					(&nbsp;<span class="d3downloads_broken_message"><{$smarty.const._MD_D3DOWNLOADS_BROKEN_FILE}></span>&nbsp;)
+				<{/if}>
+			<{/if}>
+		</td>
+		<td class="d3downloads_single_frame_version">
+			<{if $mod_config.show_postname}>
+				<span class="d3downloads_bold"><{$smarty.const._MD_D3DOWNLOADS_SUBMIT_POSTNAME}>:</span>&nbsp;<{$down.postname}>&nbsp;&nbsp;
+			<{/if}>
+			<{if $down.version}>
+				<span class="d3downloads_bold"><{$smarty.const._MD_D3DOWNLOADS_VERSION}>:</span>&nbsp;<{$down.version}>&nbsp;&nbsp;
+			<{/if}>
+			<span class="d3downloads_bold"><{$smarty.const._MD_D3DOWNLOADS_DATE}>:</span>&nbsp;&nbsp;<{$down.updated}>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2" class="d3downloads_odd" align="left">
+    			<span class="d3downloads_bold"><{$smarty.const._MD_D3DOWNLOADS_DESCRIPTION}></span>
+		    	<br />
+			<div class="d3downloads_single_frame_description">
+				<{if $canuseshots &&  ! $down.broken_link}>
+					<{$down.shots}>
+				<{/if}>
+				<{$down.description}>
+			</div>
+			<br />
+		</td>
+	</tr>
+	<{if $down.md5 || $down.md5_2}>
+		<tr>
+			<td colspan="2" class="d3downloads_even" align="left">
+				<div class="d3downloads_md5_line">
+					<{if $down.md5}><{$down.md5}><br /><{/if}> <{if $down.md5_2}><{$down.md5_2}><{/if}>
+				</div>
+			</td>
+		</tr>
+	<{/if}>
+	<tr>
+		<td colspan="2" class="d3downloads_even" align="left">
+			<img src="images/counter.gif" border="0" align="absmiddle" alt="<{$smarty.const._MD_D3DOWNLOADS_DOWNSUM}>" title="<{$smarty.const._MD_D3DOWNLOADS_DOWNSUM}>" />&nbsp;<{$down.hits}>&nbsp;&nbsp;
+			<{if $down.size}>
+				<img src="images/size.gif" border="0" align="absmiddle" alt="<{$smarty.const._MD_D3DOWNLOADS_SIZE}>" title="<{$smarty.const._MD_D3DOWNLOADS_SIZE}>" />&nbsp;<{$down.size}>&nbsp;&nbsp;
+			<{/if}>
+			<{if $down.platform}>
+				<img src="images/platform.gif" border="0" align="absmiddle" alt="<{$smarty.const._MD_D3DOWNLOADS_PLATFORM}>" title="<{$smarty.const._MD_D3DOWNLOADS_PLATFORM}>" />&nbsp;<{$down.platform}>&nbsp;&nbsp;
+			<{/if}>
+			<{if $mod_config.use_license && $down.license}>
+				<img src="images/editicon.gif" border="0" align="absmiddle" alt="<{$smarty.const._MD_D3DOWNLOADS_LICENSE}>" title="<{$smarty.const._MD_D3DOWNLOADS_LICENSE}>" />&nbsp;<{$down.license}>&nbsp;&nbsp;
+			<{/if}>
+			<{if $down.homepage}>
+				<img src="images/home.gif" border="0" align="absmiddle" alt="<{$smarty.const._MD_D3DOWNLOADS_HOMEPAGE}>" title="<{$smarty.const._MD_D3DOWNLOADS_HOMEPAGE}>"/>&nbsp;<{$down.homepage}>
+			<{/if}>
+		</td>
+	</tr>
+</table>
+
+<{if $down.extra}>
+	<hr class="d3downloads_extra_infomation" />
+	<table class="d3downloads_extra">
+		<{foreach item="info" from=$down.extra}>
+			<tbody><tr>
+				<td class="title" width="20%">
+					<{$info.title}>
+				</td>
+				<td class="desc" width="80%">
+					<{$info.desc}>
+				</td>
+			</tr>
+		<{/foreach}>
+	</tbody></table>
+<{/if}>
+
+<table>
+	<tr>
+		<td colspan="2" class="d3downloads_foot" align="center">
+			<div>
+				<span class="d3downloads_bold"><{$smarty.const._MD_D3DOWNLOADS_RATINGC}></span> <{$down.rating}> (<{$down.votes}>&nbsp;<{$smarty.const._MD_D3DOWNLOADS_VOTEC}>)
+			</div>
+			<a href="<{$mod_url}>/index.php?page=ratefile&amp;cid=<{$down.cid}>&amp;lid=<{$down.id}>"><{$smarty.const._MD_D3DOWNLOADS_RATE}></a>&nbsp;
+			<{if $down.canedit}>
+				|&nbsp;<a href="<{$mod_url}>/index.php?page=modfile&amp;cid=<{$down.cid}>&amp;lid=<{$down.id}>"><{$smarty.const._MD_D3DOWNLOADS_MODIFY}></a>&nbsp;
+			<{/if}>| 
+			<a href="<{$mod_url}>/index.php?page=brokenfile&amp;cid=<{$down.cid}>&amp;lid=<{$down.id}>"><{$smarty.const._MD_D3DOWNLOADS_REPORTBROKEN}></a>&nbsp;|&nbsp;
+			<a target="_top" href="<{$down.mail_link}>"><{$smarty.const._MD_D3DOWNLOADS_TELLAFRIEND}></a>&nbsp;|&nbsp;
+			<{if $down.d3comment && $down.cancomment}>
+				 <a href="<{$mod_url}>/index.php?page=singlefile&amp;cid=<{$down.cid}>&amp;lid=<{$down.id}>#comment">
+				<{$smarty.const._MD_D3DOWNLOADS_COMMENTS}> (<{$down.comments}>)</a>
+			<{elseif ! $down.singlelink}>
+				<a href="<{$mod_url}>/index.php?page=singlefile&amp;cid=<{$down.cid}>&amp;lid=<{$down.id}>">
+				 <{$smarty.const._MD_D3DOWNLOADS_SHOWDETAIL}></a>
+			<{/if}>
+			<{if $mod_config.show_postname && ! $mypost}>
+				&nbsp;|&nbsp;<{$down.mypost_more}>
+			<{/if}>
+		</td>
+	</tr>
+</table>
+<br />

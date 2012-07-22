@@ -1,0 +1,16 @@
+<input type="hidden" name="options[0]" value="<{$mydirname}>" />
+
+<p>
+	<label for="download_id"><{$smarty.const._MB_D3DOWNLOADS_DOWNLOAD_LID}></label>:
+	<select name="options[1]" id="download_id"><br />
+		<{html_options options=$download selected=$download_id}><br />
+	</select>
+	<{if $cid}>
+		<a href="<{$xoops_url}>/modules/<{$mydirname}>/index.php?page=modfile&amp;cid=<{$cid}>&amp;lid=<{$lid}>"><{$smarty.const._EDIT}></a>
+	<{/if}>
+</p>
+<br />
+	<label for="this_template"><{$smarty.const._MB_D3DOWNLOADS_THISTEMPLATE}></label>:
+	<input type="text" size="60" name="options[2]" id="this_template" value="<{$this_template|escape}>" />
+	<a href="<{$xoops_url}>/modules/<{$mydirname}>/admin/index.php?mode=admin&amp;lib=altsys&amp;page=mytplsform&amp;tpl_file=<{$this_template|escape}>"><{$smarty.const._EDIT}></a>
+</p>

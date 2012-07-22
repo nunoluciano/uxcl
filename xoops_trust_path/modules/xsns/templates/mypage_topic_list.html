@@ -1,0 +1,36 @@
+<div id="mainFrame">
+
+<!-- User Menu -->
+<{if $mydirname}><{include file="db:`$mydirname`_inc_mypage_menu.html"}><{/if}>
+
+<table class="outer">
+
+<tr><th colspan="3"><{$smarty.const._MD_XSNS_MYPAGE_TOPIC_LIST_ALL}></th></tr>
+
+<{if $topic_list|@count > 0}>
+
+<tr><td colspan="3" class="odd centerH"><{$pager.selector}></td></tr>
+<tr><td colspan="3" class="odd" style="text-align:right;"><{$pager.description}></td></tr>
+
+<tr class="head">
+<td class="centerH"><{$smarty.const._MD_XSNS_TOPIC}></td>
+<td class="centerH"><{$smarty.const._MD_XSNS_COMMU}></td>
+<td class="centerH" style="width:12em;"><{$smarty.const._MD_XSNS_LAST_UPDATE}></td>
+</tr>
+
+<{foreach item=topic from=$topic_list}>
+<tr class="even">
+<td class="centerV"><a href="<{$topic.url}>"><{$topic.name}></a></td>
+<td class="centerV"><a href="<{$topic.commu_url}>"><{$topic.commu_name}></a></td>
+<td class="centerHV"><{$topic.time|date_format:"%Y-%m-%d %H:%M:%S"}></td>
+</tr>
+<{/foreach}>
+
+<tr><td colspan="3" class="odd centerH"><{$pager.selector}></td></tr>
+<tr><td colspan="3" class="odd" style="text-align:right;"><{$pager.description}></td></tr>
+
+<{/if}>
+
+</table>
+
+</div>

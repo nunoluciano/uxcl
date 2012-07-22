@@ -1,0 +1,80 @@
+<{if $mod_config.show_breadcrumbs}>
+	<{include file="db:`$mydirname`_inc_breadcrumbs.html"}>
+<{/if}>
+<table width="100%" border="0" cellspacing="5" cellpadding="0" align="center">
+	<tr valign="top" align="left">
+		<td class="d3downloads_head">
+			<form name="cid_select" action="<{$mod_url}>/index.php?page=<{$page}>" method="get" style="margin:0px;text-align:center;">
+				<select name="cid" onchange="submit();">
+					<option value=""><{$lang_directcatsel}></option>
+					<{html_options options=$category}><br />
+				</select> &nbsp; &nbsp;
+				<{$download_total_num}>
+			</form>
+		</td>
+	</tr>
+</table>
+<br />
+<!-- Start ranking loop -->
+<{foreach item="ranking" from=$rankings}>
+	<table class="d3downloads_outer">
+		<tr>
+			<th colspan="6" align="center">
+				<{$ranking.title}> (<{$lang_sortby}>)
+			</th>
+		</tr>
+		<tr>
+			<td width="5%" class="d3downloads_head" style="text-align:center;">
+				<{$lang_rank}>
+			</td>
+			<td width="40%" class="d3downloads_head" style="text-align:center;">
+				<{$lang_title}>
+			</td>
+			<td width="28%" class="d3downloads_head" style="text-align:center;">
+				<{$lang_category}>
+			</td>
+			<td width="10%" class="d3downloads_head" style="text-align:center;">
+				<{$lang_hits}>
+			</td>
+			<td width="9%" class="d3downloads_head" style="text-align:center;">
+				<{$lang_rating}>
+			</td>
+			<td width="8%" class="d3downloads_head" style="text-align:center;">
+				<{$lang_vote}>
+			</td>
+		</tr>
+
+		<!-- Start files loop -->
+		<{foreach item="file" from=$ranking.file}>
+			<tr>
+				<td class="d3downloads_even" style="text-align:center;">
+					<{$file.rank}>
+				</td>
+				<td class="d3downloads_odd">
+					<a href="<{$mod_url}>/index.php?page=singlefile&amp;cid=<{$file.cid}>&amp;lid=<{$file.id}>"><{$file.title}></a>
+				</td>
+				<td class="d3downloads_even">
+					<{foreach item="category" key="count" from=$file.category name="category"}>
+						<{$category}>
+						<{if ( $count + 1 ) < $smarty.foreach.category.total}>
+							<span class="fg2">&raquo;&raquo;</span>
+						<{/if}>
+					<{/foreach}>
+				</td>
+				<td class="d3downloads_odd" align="center">
+					<{$file.hits}>
+				</td>
+				<td class="d3downloads_even" align="center">
+					<{$file.rating}>
+				</td>
+				<td  style="text-align:center;">
+					<{$file.votes}>
+				</td>
+			</tr>
+		<{/foreach}>
+		<!-- End links loop-->
+
+	</table>
+	<br />
+<{/foreach}>
+<!-- End ranking loop -->

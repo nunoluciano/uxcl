@@ -1,0 +1,21 @@
+<h2><{$smarty.const._MB_PICAL_EDIT_TITLE}></h2>
+<p>
+	<h3><{$smarty.const._MB_PICAL_EDIT_DATE}>&nbsp;<{$form.StartDate}></h3>
+	<{$form.StartHour}><{$smarty.const._PICAL_MB_HOUR_SUF}><{$form.StartMin}><{$smarty.const._PICAL_MB_MINUTE_SUF}>
+	<{$form.EndHour}><{$smarty.const._PICAL_MB_HOUR_SUF}><{$form.EndMin}><{$smarty.const._PICAL_MB_MINUTE_SUF}>
+</p>
+<p><{$smarty.const._MB_PICAL_EDIT_DESC}></p>
+<p><{$form.description_text}></p>
+<form action='index.php' method='post' name='MainForm'>
+	<{$form.ticket}>
+	<input type='hidden' name='caldate' value='<{$form.StartDate}>' />
+	<input type='hidden' name='poster_tz' value='<{$form.timezone}>' />
+	<input type='hidden' name='StartDate' value='<{$form.StartDate}>' />
+	<input type='hidden' name='StartHour' value='<{$form.StartHour}>'>
+	<input type='hidden' name='StartMin' value='<{$form.StartMin}>'>
+	<input type='hidden' name='EndDate' value='<{$form.EndDate}>' />
+	<input type='hidden' name='EndHour' value='<{$form.EndHour}>'>
+	<input type='hidden' name='EndMin' value='<{$form.EndMin}>'>
+	<input type='hidden' name='description_text' value='<{$form.description_text}>'>
+	<input name='insert' type='submit' value='<{$smarty.const._MB_PICAL_EDIT_SUBMIT}>' />
+</form>

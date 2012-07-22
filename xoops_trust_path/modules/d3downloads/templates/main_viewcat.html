@@ -1,0 +1,188 @@
+<{if $mod_config.show_breadcrumbs}>
+	<{include file="db:`$mydirname`_inc_breadcrumbs.html"}>
+<{/if}>
+<table width="100%" border="0" cellspacing="5" cellpadding="0" align="center">
+	<tr valign="top" align="left">
+		<td class="d3downloads_head">
+			<form name="cid_select" action="<{$mod_url}>/index.php?cid=<{$category_id}>" method="get" style="margin:0px;text-align:center;">
+				<input name="orderby" value="<{$orderby}>" type="hidden">
+				<{if ! $mypost}>
+					<select name="cid" onchange="submit();">
+						<{if $mylink}><option value=""><{$lang_directcatsel}></option><{/if}>
+						<{html_options options=$category selected=$category_id}><br />
+					</select>
+				<{else}>
+					<select name="submitter" onchange="submit();">
+						<{html_options options=$submitter_select selected=$submitter}><br />
+					</select>
+				<{/if}>
+				&nbsp;<{$download_total_num}> 
+				<{if $module_admin && $invisible_num && ! $mypost}>
+					<{$invisible_link}>
+				<{/if}>
+				&nbsp;| &nbsp;<{$smarty.const._MD_D3DOWNLOADS_LABEL_PERPAGE}>&nbsp;
+				<select name="perpage" onchange="submit();">
+					<{html_options options=$perpage selected=$select_perpage}>
+				</select>
+				<{if $category_id}>
+					&nbsp;| &nbsp;
+					<select name="intree" onchange="submit();">
+						<{html_options options=$select_intree selected=$intree}>
+					</select>
+				<{/if}>
+				<{if $mylink}>
+					<input name="page" value="mylink" type="hidden">
+				<{/if}>
+			</form>
+		</td>
+	</tr>
+</table>
+
+<{include file="db:`$mydirname`_inc_viewcat.html"}>
+
+<div class="d3downloads_sortedby">
+	<{$smarty.const._MD_D3DOWNLOADS_SORTBY}>&nbsp;&nbsp;<{$smarty.const._MD_D3DOWNLOADS_TITLE}> (<a href="<{$argument}>&amp;orderby=titleA"><img src="images/up.gif" border="0" align="middle" alt="" /></a><a href="<{$argument}>&amp;orderby=titleD"><img src="images/down.gif" border="0" align="middle" alt="" /></a>)&nbsp;<{$smarty.const._MD_D3DOWNLOADS_DATE}> (<a href="<{$argument}>&amp;orderby=dateA"><img src="images/up.gif" border="0" align="middle" alt="" /></a><a href="<{$argument}>&amp;orderby=dateD"><img src="images/down.gif" border="0" align="middle" alt="" /></a>)&nbsp;<{$smarty.const._MD_D3DOWNLOADS_RATING}> (<a href="<{$argument}>&amp;orderby=ratingA"><img src="images/up.gif" border="0" align="middle" alt="" /></a><a href="<{$argument}>&amp;orderby=ratingD"><img src="images/down.gif" border="0" align="middle" alt="" /></a>)&nbsp;<{$smarty.const._MD_D3DOWNLOADS_DOWNSUM}> (<a href="<{$argument}>&amp;orderby=hitsA"><img src="images/up.gif" border="0" align="middle" alt="" /></a><a href="<{$argument}>&amp;orderby=hitsD"><img src="images/down.gif" border="0" align="middle" alt="" /></a>)
+	<br /><span class="d3downloads_bold"><{$lang_cursortedby}></span>
+</div>
+
+<{if $category_id && ! $mylink}>
+	<{if $cat_description}>
+		<div class="d3downloads_cat_description">
+			<{$cat_description}>
+		</div>
+	<{/if}>
+
+	<{if $can_post || $module_admin}>
+		<br />
+		<table width="100%" cellspacing="0" cellpadding="10" border="0">
+			<tr>
+				<td class="d3downloads_submitlink">
+					<{if $module_admin}>
+						[<a href="<{$mod_url}>/admin/index.php?page=categoryedit&amp;cid=<{$category_id}>"><{$smarty.const._MD_D3DOWNLOADS_CAT_EDIT}></a>]&nbsp;
+						[<a href="#details_info"><{$smarty.const._MD_D3DOWNLOADS_LABEL_READ_INFO}></a>]&nbsp;
+						[<{$useraccess_edit}>]&nbsp;
+					<{/if}>
+					<{if $can_post}>
+						[<a href="<{$mod_url}>/index.php?page=submit&amp;cid=<{$category_id}>"><{$smarty.const._MD_D3DOWNLOADS_SUBMIT}></a>]
+					<{/if}>
+				</td>
+		</table>
+	<{/if}>
+	<{if $module_admin}>
+		<div class="d3downloads_canread_info">
+				<{$canread_info}>
+		</div>
+	<{/if}>
+<{elseif $mylink}>
+	<br />
+	<form name="delmylink" id="delmylink" action="<{$mod_url}>/index.php?page=mylink" method="post">
+		<table width="100%" cellspacing="0" cellpadding="10" border="0">
+			<tr>
+				<td class="d3downloads_submitlink">
+					<input type="submit" class="d3downloads_submit" name="del_allmylink" id="del_allmylink" value="<{$smarty.const._MD_D3DOWNLOADS_DELALL_MYLINK}>" onclick="return confirm('<{$smarty.const._MD_D3DOWNLOADS_MSG_CONFIRMDELETECONTENT}>')" />
+				</td>
+		</table>
+	</form>
+<{/if}>
+<br />
+<table width="100%" cellspacing="0" cellpadding="10" border="0">
+	<tr>
+		<td width="100%" align="center" valign="top">
+			<{if $file}>
+				<!-- Start link loop -->
+				<{section name=i loop=$file}>
+					<{include file="db:`$mydirname`_inc_download.html" down=$file[i]}>
+				<{/section}>
+				<!-- End link loop -->
+			<{else}>
+				<{$smarty.const._MD_D3DOWNLOADS_NOMATCH}>
+			<{/if}>
+		</td>
+	</tr>
+</table>
+
+<{$pagenav}>
+
+<{if $module_admin && $category_id && ! $mylink}>
+	<br />
+	<a name="details_info"></a>
+	<table>
+		<tr>
+			<th colspan="2" style="text-align:center;">
+				<span style="font-size: small;"><{$smarty.const._MD_D3DOWNLOADS_GROUPNAME}></span>
+			</th>
+			<th style="text-align:center;">
+				<span style="font-size: small;"><{$smarty.const._MD_D3DOWNLOADS_CAN_READ_INFO}></span>
+			</th>
+			<th style="text-align:center;">
+				<span style="font-size: small;"><{$smarty.const._MD_D3DOWNLOADS_CAN_POST_INFO}></span>
+			</th>
+			<th style="text-align:center;">
+				<span style="font-size: small;"><{$smarty.const._MD_D3DOWNLOADS_CAN_EDIT_INFO}></span>
+			</th>
+			<th style="text-align:center;">
+				<span style="font-size: small;"><{$smarty.const._MD_D3DOWNLOADS_CAN_DELETE_INFO}></span>
+			</th>
+			<th style="text-align:center;">
+				<span style="font-size: small;"><{$smarty.const._MD_D3DOWNLOADS_POST_AUTO_APPROVED_INFO}></span>
+			</th>
+			<th style="text-align:center;">
+				<span style="font-size: small;"><{$smarty.const._MD_D3DOWNLOADS_EDIT_AUTO_APPROVED_INFO}></span>
+			</th>
+			<th style="text-align:center;">
+				<span style="font-size: small;"><{$smarty.const._MD_D3DOWNLOADS_CAN_HTML_INFO}></span>
+			</th>
+			<th style="text-align:center;">
+				<span style="font-size: small;"><{$smarty.const._MD_D3DOWNLOADS_CAN_UPLOAD_INFO}></span>
+			</th>
+		</tr>
+			<{$group_trs}>
+	</table>
+	<br />
+	<{if $user_trs}>
+		<table>
+			<tr>
+				<th style="text-align:center;">
+					<span style="font-size: small;"><{$smarty.const._MD_D3DOWNLOADS_UID}></span>
+				</th>
+				<th colspan="2" style="text-align:center;">
+					<span style="font-size: small;"><{$smarty.const._MD_D3DOWNLOADS_UNAME}></span>
+				</th>
+				<th style="text-align:center;">
+					<span style="font-size: small;"><{$smarty.const._MD_D3DOWNLOADS_CAN_READ_INFO}></span>
+				</th>
+				<th style="text-align:center;">
+					<span style="font-size: small;"><{$smarty.const._MD_D3DOWNLOADS_CAN_POST_INFO}></span>
+				</th>
+				<th style="text-align:center;">
+					<span style="font-size: small;"><{$smarty.const._MD_D3DOWNLOADS_CAN_EDIT_INFO}></span>
+				</th>
+				<th style="text-align:center;">
+					<span style="font-size: small;"><{$smarty.const._MD_D3DOWNLOADS_CAN_DELETE_INFO}></span>
+				</th>
+				<th style="text-align:center;">
+					<span style="font-size: small;"><{$smarty.const._MD_D3DOWNLOADS_POST_AUTO_APPROVED_INFO}></span>
+				</th>
+				<th style="text-align:center;">
+					<span style="font-size: small;"><{$smarty.const._MD_D3DOWNLOADS_EDIT_AUTO_APPROVED_INFO}></span>
+				</th>
+				<th style="text-align:center;">
+					<span style="font-size: small;"><{$smarty.const._MD_D3DOWNLOADS_CAN_HTML_INFO}></span>
+				</th>
+				<th style="text-align:center;">
+					<span style="font-size: small;"><{$smarty.const._MD_D3DOWNLOADS_CAN_UPLOAD_INFO}></span>
+				</th>
+			</tr>
+			<{$user_trs}>
+			</tr>
+		</table>
+	<{/if}>
+	<div align="right">
+		[<{$useraccess_edit}>]
+	</div>
+<{/if}>
+<br />
+<hr class="notification" />
+<{if $category_id && ! $mylink}>
+	<{include file='db:system_notification_select.html'}>
+<{/if}>

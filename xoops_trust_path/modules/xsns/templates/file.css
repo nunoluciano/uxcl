@@ -1,0 +1,10 @@
+table.fileDel td.itemTitle {
+	width: 15%;
+	text-align: center;
+	vertical-align: middle;
+}
+
+table.fileDel td.itemValue {
+	width: 85%;
+	vertical-align: middle;
+}

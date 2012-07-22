@@ -1,0 +1,142 @@
+<{* Title *}>
+<{if $titleblockuse && $h1id}>
+  <h1 style="clear:both;width:100%;background:transparent url(<{$smarty.const.XOOPS_URL}>/modules/<{$lang_moduledirname}>/images/<{$h1id}>) no-repeat center;font-size: 100%; overflow: hidden; margin: 0px; padding: 50px 0 0 0; height: 0px !important; height /**/:50px;">
+    <{$lang_modulename}>
+  </h1>
+<{elseif $titleblockuse}>
+  <h1 style="clear:both;width:100%;margin: 0 0 10px 0; padding: 0.2em 0em; text-align: center; font-size: 1.4em;">
+    <{$lang_modulename}>
+  </h1>
+<{/if}>
+
+<{* pankuzu *}>
+<div class="itemPermaLink" style="clear:both;width:100%;margin:1em 0em;padding:0em;text-align:left;">
+  <a href="<{$xoops_url}>/"><{$lang_home}></a>&nbsp;&raquo;&nbsp;<a href="<{$xoops_url}>/modules/<{$lang_moduledirname}>/index.php"><{$lang_modulename}></a>
+  <{if $multicats == 1}>&raquo;&nbsp;<a href="<{$xoops_url}>/modules/<{$thisterm.dir}>/category.php?categoryID=<{$thisterm.categoryID}>"><{$thisterm.catname}></a><{/if}>
+  &nbsp;&raquo;
+  <{foreach item=eachletter from=$letterarray.navi}>
+    <a href="<{$xoops_url}>/modules/<{$lang_moduledirname}>/letter.php?init=<{$eachletter.id}>"><{$eachletter.text}></a>
+  <{/foreach}>
+  &raquo;&nbsp;<{$thisterm.term}>
+</div>
+
+<{* Category block *}>
+<{if $multicats && !$catsarrayuse}>
+  <div style="clear:both;width:100%;margin:0.1em 0em;padding:0em;">
+    <fieldset class="item" style="border:1px solid #778;margin:1em 0em;text-align:left;background-color:transparent;">
+      <legend class="itemHead"><{$lang_browsecat}></legend>
+      <div style="margin:1em;padding:0em;text-align:center;line-height:1.3em;">
+        <{foreach item=catlinks from=$block0.categories}>
+          <{if $catlinks.total > 0}><a href="<{$xoops_url}>/modules/<{$lang_moduledirname}>/category.php?categoryID=<{$catlinks.id}>" title="[<{$catlinks.total}>]"><{/if}><{$catlinks.linktext}><{if $catlinks.total > 0}></a><{/if}><{cycle values="..,..,..,..,..,..,<br />"}><{/foreach}>
+          <{if $publishedwords}><a href="<{$xoops_url}>/modules/<{$lang_moduledirname}>/category.php" title="[<{$publishedwords}>]"><{/if}><{$lang_allcats}><{if $publishedwords}></a><{/if}>
+      </div>
+    </fieldset>
+  </div>
+<{/if}>
+
+<{* Letterlink block *}>
+<div style="clear:both;width:100%;margin:0.1em 0em;padding:0em;">
+  <fieldset class="item" style="border:1px solid #778;margin:1em 0em;background-color:transparent;">
+    <legend class="itemHead"><{$lang_browseletter}></legend>
+    <div style="margin:1em;padding:0em;text-align:center;line-height:1.4em;">
+      <{foreach item=letterlinks from=$alpha.initial}>
+        <{$letterlinks.separator}><{if $letterlinks.total}><a href="<{$xoops_url}>/modules/<{$lang_moduledirname}>/letter.php?init=<{$letterlinks.id}><{if $thisterm.categoryID}>&amp;categoryID=<{$thisterm.categoryID}><{/if}>" title="[ <{$letterlinks.total}> ]"><{/if}><{$letterlinks.linktext}><{if $letterlinks.total}></a><{/if}>
+      <{/foreach}>
+    </div>
+  </fieldset>
+</div>
+
+<{* Term block *}>
+<{* ruby tag sample start *}>
+<{* 
+<h2 style="margin: 2px 0px; padding: 2px 0px; font-size: 1.2em; text-align: center; background-color: transparent;"<{if $multicats == 1}> title="[<{$lang_entcat}><{$thisterm.catname}>]"<{/if}>>
+  <ruby><rb><{$thisterm.term}></rb><rp><{$lang_rubyl}></rp><rt><{$thisterm.proc}></rt><rp><{$lang_rubyr}></rp></ruby>
+</h2>
+*}>
+<{* ruby tag sample end *}>
+
+<div style="clear:both;width:100%;margin: 20px 0px 2px 0px;padding:0px;font-size:0.8em;text-align:center;">
+  <{$thisterm.proc}>
+</div>
+<h2 class="itemHead" style="clear:both;width:100%;margin: 2px 0px 20px 0px;padding:0px;font-size:1.2em;text-align:center;background-color:transparent;"<{if $multicats == 1}> title="[<{$lang_entcat}>
+  <{$thisterm.catname}>]"<{/if}>>
+  <{$thisterm.term}>
+</h2>
+
+<div class="comText" style="clear:both;text-align:left;margin:3em 1em 0em 1em;padding:0em;line-height: 1.4em;">
+  <{$thisterm.definition}>
+</div>
+
+<{* <{if $thisterm.ref || $thisterm.url || $thisterm.linkedterms}> *}>
+<div class="comText" style="clear:both;text-align:left;margin:5em 1em 0em 1em;padding:0em;line-height:1.4em;">
+  <{if !$linktermsposition}>
+    <div style="margin:0.3em 0em 0em 0em;">
+      <{$lang_linkedterms}><{$thisterm.linkedterms}>
+    </div>
+  <{/if}>
+  <{* <{if $thisterm.ref}> *}>
+  <div style="margin:0.3em 0em 0em 0em;"><{$lang_entref}><{$thisterm.ref}></div>
+  <{* <{/if}> *}>
+  <{* <{if $thisterm.url}> *}>
+  <div style="margin:0.3em 0em 0em 0em;"><{$lang_enturl}><{$thisterm.url}></div>
+  <{* <{/if}> *}>
+  <{* 
+  <{if $amazon_id && $searchstring}>
+  <div style="margin:0.3em 0em 0em 0em;">
+  <{$lang_amazon}>
+  <a href="http://www.amazon.co.jp/exec/obidos/redirect?link_code=ur2&tag=<{$amazon_id}>&camp=247&creative=1211&path=external-search%3Fsearch-type=ss%26index=blended%26keyword=<{$searchstring}>"><{$thisterm.term}></a><{$lang_amazonlink}><img src="http://www.assoc-amazon.jp/e/ir?t=<{$amazon_id}>&amp;l=ur2&amp;o=9" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
+  </div>
+  <{/if}>
+  *}>
+</div>
+<{* <{/if}> *}>
+
+<{* counter *}>
+<div class="itemPermaLink" style="clear:both;margin:4em 1em 1em 0em; padding: 0em;text-align:right;clear:both;">
+  <{$microlinks}><{$lang_submitter}><{if $submitterlink}><{$thisterm.submitter}><{else}><{$thisterm.submitter|strip_tags}><{/if}>&nbsp;&nbsp;<{$lang_submitted}><{$thisterm.datesub}>&nbsp;&nbsp;<{$lang_count}><{$thisterm.counter}>
+</div>
+
+<{* Footer block *}>
+<div class="foot" style="clear:both;width:100%;text-align:center;margin:2em 0em;padding:0em;">
+  Powered&nbsp;by&nbsp;<a href="http://www.kanpyo.net/" title="kanpyo"><strong>Xwords</strong></a>
+  &nbsp;based&nbsp;on&nbsp;<a href="http://dev.xoops.org/modules/xfmod/project/showfiles.php?group_id=1019" title="Official XOOPS Development Site"><strong>Wordbook</strong></a>
+</div>
+
+<{if $moduleConfig.comment_dirname}>
+  <{d3comment mydirname='xwords' id=$thisterm.id subject=$thisterm.term class="xwordsD3commentContent}>
+<{else}>
+ <{* comment nav block *}>
+ <{if $commentsnav}>
+  <div style="clear:both;margin:0.1em 0em;padding:0em;">
+    <fieldset class="item" style="border:1px solid #778;margin:1em 0em;background-color:transparent;">
+      <legend class="itemHead"><{$lang_comment}></legend>
+      <div style="margin:1em 0em;padding:0em;text-align:center;line-height:1.3em;">
+        <{$commentsnav}>
+        <{$lang_notice}>
+        <!-- start comments loop -->
+        <{if $comment_mode == "flat"}>
+          <{include file="db:system_comments_flat.html"}>
+        <{elseif $comment_mode == "thread"}>
+          <{include file="db:system_comments_thread.html"}>
+        <{elseif $comment_mode == "nest"}>
+          <{include file="db:system_comments_nest.html"}>
+        <{/if}>
+        <!-- end comments loop -->
+      </div>
+    </fieldset>
+  </div>
+ <{/if}>
+<{/if}>
+
+<{* amazon tag *}>
+<{*
+<{if $amazon_id && $searchstring}>
+  <div style="clear:both;margin:0.1em 0em;padding:0em;">
+    <fieldset class="item" style="border:1px solid #778;margin:1em 0em;background-color:transparent;">
+      <legend class="itemHead">amazon</legend>
+      <div style="margin:1em 0em;padding:0em;text-align:center;line-height:1.3em;">
+        <iframe src="http://rcm-jp.amazon.co.jp/e/cm?t=<{$amazon_id}>&o=9&p=13&l=st1&mode=books-jp&search=<{$searchstring}>&=1&fc1=&&#108;&#116;1=&lc1=&bg1=&f=ifr" marginwidth="0" marginheight="0" width="468" height="60" border="0" frameborder="0" style="border:none;" scrolling="no"></iframe>
+      </div>
+    </fieldset>
+  </div>
+<{/if}>*}>

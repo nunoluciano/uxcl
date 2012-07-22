@@ -1,0 +1,38 @@
+<div id="mainFrame">
+
+<!-- User Menu -->
+<{if $mydirname}><{include file="db:`$mydirname`_inc_mypage_menu.html"}><{/if}>
+
+<table class="outer">
+
+<tr><th colspan="3"><{$smarty.const._MD_XSNS_TITLE_MYPAGE_INTRO_DEL}></th></tr>
+
+<tr class="head">
+<td class="centerH" style="width:15%;"><{$smarty.const._MD_XSNS_AVATAR}></td>
+<td class="centerH" style="width:35%;"><{$smarty.const._MD_XSNS_USER_NAME}></td>
+<td class="centerH" style="width:50%;"><{$smarty.const._MD_XSNS_MYPAGE_INTRO_BODY}></td>
+</tr>
+
+<tr class="even">
+<td class="centerHV"><a href="<{$intro.user_from.page_url}>"><img src="<{$intro.user_from.avatar_url}>"></a></td>
+<td class="centerV"><a href="<{$intro.user_from.page_url}>"><{$intro.user_from.name}></a></td>
+<td class="centerV"><{$intro.body}></td>
+</tr>
+
+<{$form_intro_del}>
+
+<tr class="foot">
+<td class="submitFrame" colspan="3">
+<p><{$smarty.const._MD_XSNS_MYPAGE_INTRO_DEL_DESC}></p>
+<p>
+<input type="submit" class="submit" value="<{$smarty.const._MD_XSNS_BTN_DEL}>">&nbsp;&nbsp;
+<input type="button" class="submit" value="<{$smarty.const._MD_XSNS_BTN_CANCEL}>" onclick="javascript:history.go(-1);">
+</p>
+</td>
+</tr>
+
+</form>
+
+</table>
+
+</div>

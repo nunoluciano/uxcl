@@ -1,0 +1,228 @@
+<div id="mainFrame">
+
+<table style="width:100%;"><tr><td>
+<{if $mydirname}><{include file="db:`$mydirname`_inc_breadcrumbs.html"}><{/if}>
+
+<{if $commu.show_commu_join}>
+
+<!-- Community Join : Start -->
+<div style="padding:2px;">
+<table class="outer" style="width:100%;">
+<tr class="head"><td class="centerHV submitFrame">
+<{$smarty.const._MD_XSNS_INDEX_JOIN_DESC}>&nbsp;&nbsp;&nbsp;<{$smarty.const._MD_XSNS_ARROW}>
+<a href="<{$url.commu_join}>"><{$smarty.const._MD_XSNS_INDEX_JOIN}></a>
+</td></tr>
+</table>
+</div>
+<br>
+<!-- Community Join : End -->
+
+<{/if}>
+
+<table style="width:100%;">
+
+<tr><!-- Top Row : Start -->
+
+<td style="width:50%;"><!-- Left Column : Start -->
+
+<table class="outer commuDetail" style="width:100%;">
+
+<!-- Community Image : Start -->
+<tr><th style="height:1.2em;"><{$commu.name|mb_truncate:25}></th></tr>
+<tr class="even"><td class="centerHV" style="padding:0;">
+<div style="height:274px;">
+<table><tr><td class="commuImage">
+<img src="<{$commu.image.url_src|default:"images/cm_commu_default3.gif"}>" alt="<{$commu.name}>"></a>
+</table></td></tr>
+</div>
+</td></tr>
+<!-- Community Image : End -->
+
+<!-- Community Rank : Start -->
+<tr class="even"><td>
+
+<div style="height:55px; margin:5px 0 0 10px;">
+<table cellspacing="0" cellpadding="0">
+<tr>
+<td><{$smarty.const._MD_XSNS_COMMU_POPULARITY}></td>
+<td><img src="<{$commu.statistics.popularity.image}>" alt=""></td>
+<td style="text-align:right;"><{$commu.statistics.popularity.value}> pts</td>
+</tr>
+<tr>
+<td><{$smarty.const._MD_XSNS_COMMU_UPDATE_FREQUENCY}></td>
+<td><img src="<{$commu.statistics.update_frequency.image}>" alt=""></td>
+<td style="text-align:right;"><{$commu.statistics.update_frequency.value}> pts</td>
+</tr>
+</table>
+</div>
+
+</td></tr>
+<!-- Community Rank : End -->
+
+</table>
+
+<br>
+</td><!-- Left Column : End -->
+
+<td>&nbsp;</td><!-- Blank Column -->
+
+<td style="width:50%;"><!-- Right Column : Start -->
+
+<table class="outer commuDetail" style="width:100%;">
+
+<!-- Member List : Start -->
+<tr><th colspan="3" style="height:1.2em;"><{$smarty.const._MD_XSNS_INDEX_DETAIL_MEMBER_LIST}></th></tr>
+
+<tr class="even">
+<{section name=id loop=$commu.member_list}>
+
+<{if $smarty.section.id.index > 0 && $smarty.section.id.index is div by 3}>
+</tr><tr class="even">
+<{/if}>
+
+<td style="margin:0; padding:0;">
+<div style="width:90px; height:90px;">
+<{if $commu.member_list[id].page_url != ""}>
+<table><tr><td class="avatar">
+<a href="<{$commu.member_list[id].page_url}>"><img src="<{$commu.member_list[id].avatar_url}>" width="<{$commu.member_list[id].avatar_width}>" height="<{$commu.member_list[id].avatar_height}>" alt="<{$commu.member_list[id].name}>" title="<{$commu.member_list[id].name}>"></a>
+</td></tr></table>
+<{/if}>
+</div>
+</td>
+
+<{/section}>
+</tr>
+
+<tr class="even"><td colspan="3">
+
+<div class="centerV" style="height:20px; padding-left:120px;">
+<{$smarty.const._MD_XSNS_ARROW}>
+<a href="<{$url.all_member}>"><{$smarty.const._MD_XSNS_INDEX_DETAIL_ALL_MEMBER}> (<{$commu.member_count|default:0}>)</a><br>
+</div>
+
+<div class="centerV" style="height:20px; padding-left:120px;">
+<{if $commu.show_member_config}>
+<{$smarty.const._MD_XSNS_ARROW}>
+<a href="<{$url.member_config}>"><{$smarty.const._MD_XSNS_INDEX_DETAIL_EDIT_MEMBER}></a><br>
+<{/if}>
+</div>
+
+<div class="centerV" style="height:20px; padding-left:120px;">
+<!--
+-->
+</div>
+
+</td></tr>
+<!-- Member List : End -->
+
+</table>
+<br>
+</td><!-- Right Column : End -->
+
+</tr><!-- Top Row : End -->
+</table>
+
+<table style="width:100%;">
+<tr><!-- Bottom Row : Start -->
+<td colspan="3">
+
+<!-- Community Information : Start -->
+<table class="outer commuDetail" style="width:100%;">
+
+	<tr class="even">
+	<th colspan="2"><{$smarty.const._MD_XSNS_COMMU}></th>
+	</tr>
+	<tr class="even">
+	<td class="itemTitle bg0"><{$smarty.const._MD_XSNS_COMMU_NAME}></td>
+	<td class="itemValue"><{$commu.name}></td>
+	</tr>
+	<tr class="even">
+	<td class="itemTitle bg0"><{$smarty.const._MD_XSNS_INDEX_DETAIL_DESC}></td>
+	<td class="itemValue"><{$commu.info}></td>
+	</tr>
+	<tr class="even">
+	<td class="itemTitle bg0"><{$smarty.const._MD_XSNS_INDEX_DETAIL_OPEN_DATE}></td>
+	<td class="itemValue"><{$commu.time|date_format:"%Y-%m-%d"}></td>
+	</tr>
+	<tr class="even">
+	<td class="itemTitle bg0"><{$smarty.const._MD_XSNS_INDEX_DETAIL_AUTHOR}></td>
+	<td class="itemValue"><a href="<{$commu.admin_url}>"><{$commu.admin_name}></a></td>
+	</tr>
+	<tr class="even">
+	<td class="itemTitle bg0"><{$smarty.const._MD_XSNS_CATEGORY}></td>
+	<td class="itemValue"><{$commu.category}></td>
+	</tr>
+	<tr class="even">
+	<td class="itemTitle bg0"><{$smarty.const._MD_XSNS_MEMBER_COUNT}></td>
+	<td class="itemValue"><{$commu.member_count}><{$smarty.const._MD_XSNS_PERSON}></td>
+	</tr>
+	<tr class="even">
+	<td class="itemTitle bg0"><{$smarty.const._MD_XSNS_INDEX_DETAIL_PUBLIC}></td>
+	<td class="itemValue"><{$commu.public}></td>
+	</tr>
+
+	<{if $commu.show_topic_list}>
+
+	<!-- Topic List : Start -->
+	<tr class="even">
+	<td class="itemTitle bg0"><{$smarty.const._MD_XSNS_INDEX_DETAIL_TOPIC}></td>
+	<td class="itemValue">
+	
+	<{foreach item=topic from=$commu.topic_list}>
+	<{$topic.time|date_format:"%Y-%m-%d"}> : <a href="<{$topic.page_url}>"><{$topic.name|mb_truncate:30}> (<{$topic.comment_count|default:0}>)</a><br>
+	<{/foreach}>
+	
+	<div style="padding-left:300px;">
+	<{$smarty.const._MD_XSNS_ARROW}>
+	<a href="<{$url.all_topic}>"><{$smarty.const._MD_XSNS_INDEX_DETAIL_ALL_TOPIC}> (<{$commu.topic_count|default:0}>)</a><br>
+	<{if $commu.show_topic_add}>
+	<{$smarty.const._MD_XSNS_ARROW}>
+	<a href="<{$url.add_topic}>"><{$smarty.const._MD_XSNS_INDEX_DETAIL_ADD_TOPIC}></a><br>
+	<{/if}>
+	</div>
+	
+	</td>
+	</tr>
+	<!-- Topic List : End -->
+
+	<{if $commu.show_commu_config || $commu.show_commu_leave}>
+	<tr class="even">
+	<td class="itemTitle bg0"></td>
+	<td>
+	<div style="padding-left:300px;">
+	
+	<{if $commu.show_commu_config}>
+	<{$smarty.const._MD_XSNS_ARROW}>
+	<a href="<{$url.commu_config}>"><{$smarty.const._MD_XSNS_INDEX_DETAIL_EDIT_COMMU}></a><br>
+	<{/if}>
+	
+	<{if $commu.show_commu_leave}>
+	<{$smarty.const._MD_XSNS_ARROW}>
+	<a href="<{$url.commu_leave}>"><{$smarty.const._MD_XSNS_INDEX_LEAVE}></a>
+	<{/if}>
+	
+	</div>
+	</td>
+	</tr>
+	<{/if}>
+
+	<{/if}>
+
+	</td></tr>
+</table>
+<!-- Community Information : End -->
+
+</td>
+</tr><!-- Bottom Row : End -->
+
+</table>
+
+<{if $commu.show_commu_notify}>
+<p>
+<{include file='db:system_notification_select.html'}>
+</p>
+<{/if}>
+
+</td></tr></table>
+
+</div>

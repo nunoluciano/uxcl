@@ -25,10 +25,10 @@ _notes
 /html/preload/AdelieDebug*
 
 ## XOOPS Cube
-/public_html/mainfile.php
-/public_html/cache/*
-/public_html/templates_c/*
-/public_html/uploads/*
-/xoops_trust_path/cache/*
-/xoops_trust_path/templates_c/*
-/xoops_trust_path/uploads/*
+# /public_html/mainfile.php
+# /public_html/cache/*
+# /public_html/templates_c/*
+# /public_html/uploads/*
+# /xoops_trust_path/cache/*
+# /xoops_trust_path/templates_c/*
+# /xoops_trust_path/uploads/*

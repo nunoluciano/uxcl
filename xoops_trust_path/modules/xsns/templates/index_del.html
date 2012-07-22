@@ -1,0 +1,29 @@
+<div id="mainFrame">
+<{if $mydirname}><{include file="db:`$mydirname`_inc_breadcrumbs.html"}><{/if}>
+
+<table class="outer commuEdit">
+<tr><th colspan="2"><{$smarty.const._MD_XSNS_TITLE_INDEX_DEL}></th></tr>
+
+<tr class="even">
+<td class="itemTitle bg0"><{$smarty.const._MD_XSNS_COMMU_NAME}></td>
+<td class="itemValue"><{$commu.name}></td>
+</tr>
+
+<tr class="even">
+<td class="itemTitle bg0"><{$smarty.const._MD_XSNS_DESC}></td>
+<td class="itemValue"><{$commu.info}></td>
+</tr>
+
+<tr class="foot">
+<{$form_commu_del}>
+<td colspan="2" class="submitFrame">
+<p><{$smarty.const._MD_XSNS_INDEX_DEL_DESC3}></p>
+<p>
+<input type="submit" class="submit" value="<{$smarty.const._MD_XSNS_BTN_DEL}>">&nbsp;&nbsp;
+<input type="button" class="submit" value="<{$smarty.const._MD_XSNS_BTN_CANCEL}>" onclick="javascript:history.go(-1);">
+</p>
+</td>
+</form>
+</tr>
+</table>
+</div>

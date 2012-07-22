@@ -1,0 +1,26 @@
+<div id="mainFrame">
+
+<!-- User Menu -->
+<{if $mydirname}><{include file="db:`$mydirname`_inc_mypage_menu.html"}><{/if}>
+
+<table class="outer">
+
+<{$form_intro_add}>
+
+<tr><th colspan="2"><{$smarty.const._MD_XSNS_TITLE_MYPAGE_INTRO_UNAME|sprintf:"`$user_name`"}></th></tr>
+<tr><td colspan="2" class="head" style="padding:10px 0 10px 10px;"><{$smarty.const._MD_XSNS_MYPAGE_INTRO_DESC}></th></tr>
+
+<tr>
+<td class="itemTitle bg0 centerH"><{$smarty.const._MD_XSNS_MYPAGE_INTRO_BODY}></td>
+<td class="even"><textarea name="body" cols="40" rows="6"><{$body}></textarea></td>
+</tr>
+
+<tr><td class="foot submitFrame" colspan="2">
+<input type="submit" class="submit" value="<{$smarty.const._MD_XSNS_BTN_ADD}>">
+</td></tr>
+
+</form>
+
+</table>
+
+</div>

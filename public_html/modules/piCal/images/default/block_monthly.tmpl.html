@@ -1,0 +1,37 @@
+<pattemplate:tmpl name="WholeBoard">
+  <table border='0' cellspacing='0' cellpadding='0' width='640'>
+    <tr>
+      <td width='640' class='calframe'>
+        <!-- header -->
+        <table border='0' cellspacing='0' cellpadding='0' style='width:640px;border-collapse:collapse;'>
+         <tr>
+           <td><img src='{SKINPATH}/spacer.gif' alt='' width='10' height='14' /></td>
+           <td width='18' align='left'><a href='{GET_TARGET}?caldate={PREV_MONTH}'><img src='{SKINPATH}/arrowleft.gif' width='18' height='14' border='0' alt='{LANG_PREV_MONTH}' title='{LANG_PREV_MONTH}' /></a></td>
+           <td nowrap='nowrap' align='center'>
+             <form action='{GET_TARGET}?smode=Monthly&amp;{QUERY_STRING}' method='post' style='margin:0px;'>
+               <select name='pical_year'>{YEAR_OPTIONS}</select>{LANG_YEAR} &nbsp; 
+               <select name='pical_month'>{MONTH_OPTIONS}</select>{LANG_MONTH} &nbsp; 
+               <input type='submit' name='pical_jumpcaldate' value='{LANG_JUMP}'>
+             </form>
+           </td>
+           <td width='18' align='right'><a href='{GET_TARGET}?caldate={NEXT_MONTH}'><img src='{SKINPATH}/arrowright.gif' width='18' height='14' border='0' alt='{LANG_NEXT_MONTH}' title='{LANG_NEXT_MONTH}' /></a></td>
+         </tr>
+        </table>
+
+        {CALENDAR_BODY}
+
+        <table border='0' cellspacing='0' cellpadding='0' width='150'>
+          <tr>
+            <td width='150' colspan='2' style='vertical-align:middle;'><img src='{SKINPATH}/spacer.gif' alt='' width='150' height='8' /></td>
+          </tr>
+          <tr>
+            <pattemplate:tmpl name="LongEventLegends" type="SimpleCondition" requiredvars="LEGEND">
+            <td><img src='{SKINPATH}/bar_0{BIT_MASK}.gif' width='12' height='12' alt='{LEGEND_ALT}' title='{LEGEND_ALT}' />&nbsp;{LEGEND}</td>
+            </pattemplate:tmpl>
+          </tr>
+        </table>
+
+      </td>
+    </tr>
+  </table>
+</pattemplate:tmpl>

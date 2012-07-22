@@ -1,0 +1,391 @@
+/* general - xoops */
+/* xoopsCode */
+
+#post_reference dd div.xoopsCode,
+#post_preview dd div.xoopsCode,
+div.mits_body div.xoopsCode{
+	width				:95%;
+	overflow				:auto;
+	margin				:10px 0;}
+
+/* xoopsQuote */
+
+div.mits_body blockquote{
+	margin				:0;
+	padding				:5px;}
+div.mits_body div.xoopsQuote{
+	margin				:0;
+	padding				:0;}
+#post_reference dd blockquote,
+#post_preview dd blockquote{
+	margin				:0;
+	padding				:5px;}
+
+/* em.mits_attn */
+
+em.mits_attn{
+	font-style			:normal;
+	border-bottom			:1px #333 dotted;
+	cursor				:help;}
+
+/* mits_breadcrumbs */
+
+div.mits_breadcrumbs{
+	font-size				:95%;
+	padding				:0 0 3px;
+	border-bottom			:1px #aaa solid;}
+
+/* head */
+
+.mits_head{
+	clear				:both;
+	padding				:3px 8px;}
+.mits_head h2 img{
+	vertical-align		:middle;}
+.mits_head p{
+	font-weight			:normal;
+	font-size				:95%;
+	margin				:0;
+	padding				:0 0 2px;}
+
+/* h1 */
+
+.mits_title{
+	font-size				:130%;
+	margin				:3px 0 15px;}
+.mits_title *{
+	vertical-align		:middle;}
+
+/* h2 */
+
+.mits_head h2{
+	font-size				:120%;
+	margin				:0;
+	padding				:0;}
+.mits_head h2.invisible {
+	background-color		:#f00;}
+.mits_head h2.yetapproval {
+	background-color		:#0ff;}
+.mits_head h2 img{
+	vertical-align		:middle;}
+h2.mits_head{
+	font-size				:120%;
+	padding				:3px 8px;}
+h2.mits_tree{
+	margin-bottom			:4px;}
+
+/* h3 */
+
+h3.mits_head_h3{
+	font-size				:120%;
+	margin				:5px 0 0;
+	padding				:2px 8px;
+	border-bottom			:1px #999 solid;}
+
+/* inc_eachpost.html */
+/* msgnum */
+
+.mits_msgnum{
+	font-size				:95%;
+	font-weight			:normal;}
+
+/* mits_info, mits_info_sub, mits_info_ctrl */
+
+.mits_info{
+	margin				:2px 0 0;
+	padding				:3px 8px;
+	background-color		:#eee;}
+.mits_info_sub{
+	padding				:2px 8px 3px;
+	background-color		:#fff;}
+.mits_info_ctrl{
+	text-align			:right;
+	clear				:both;
+	margin				:2px -2px 2px;
+	padding				:3px 10px;
+	background-color		:#fff;
+	border-top			:1px #aaa dotted;
+	border-bottom			:1px #aaa solid;}
+.mits_info form input,.mits_info_sub form input,.mits_info_ctrl form input{
+	vertical-align		:middle;}
+
+/* mits_body */
+
+.mits_body{
+	line-height			:150%;
+	margin				:0 -2px;
+	padding				:15px 8px;
+	border-top			:1px #aaa solid;}
+
+/* mits_avatar */
+
+.mits_avatar{
+	float				:right;
+	margin				:0 0 5px;}
+
+
+/* main_listposts.html */
+/* mits_wrap */
+
+.mits_wrap{
+	clear				:both;
+	border-top			:1px #aaa solid;
+	border-right			:1px #aaa solid;
+	border-left			:1px #aaa solid;
+	padding				:2px 2px 0;}
+
+/* mits_orderctrl */
+
+p.mits_viewctrl{
+	margin				:0;
+	padding				:3px;
+	text-align			:right;}
+
+/* mits_topicinfo */
+
+.mits_topicinfo{
+	text-align			:left;
+	margin				:0;
+	padding				:2px;}
+
+/* mits_ctrl */
+
+.mits_ctrl{
+	border				:1px #ccc solid;
+	background-color		:#f8f8f8;
+	padding				:5px;
+	line-height			:150%;
+	clear				:both;}
+
+div.mits_topctrl{
+	float				:left;
+	width				:auto;}
+
+div.mits_topctrl_icons{
+	float				:right;
+	width				:40px;}
+
+a.topic_icon_ctrl{
+	text-indent			:-9000px;
+	display				:block;
+	width				:20px;
+	height				:16px;
+	background-repeat		:no-repeat;
+	float				:left;}
+
+/* main_viewpost.html */
+/* eachbranch */
+
+ul.mits_eachbranch{
+	margin				:0;
+	padding				:0;}
+ul.mits_eachbranch li{
+	list-style			:none outside;
+	margin				:0;
+	padding				:0;}
+ul.mits_eachbranch li img{
+	vertical-align		:middle;}
+
+/* mits_currenttopic */
+
+.mits_eachbranch li.mits_eachbranchitem{
+	padding-top			:2px;
+	padding-bottom		:2px;
+	background-color		:#eee;}
+.mits_eachbranch li.mits_currenttopic{
+	background-color		:#fff;}
+
+/* main_listforums.html */
+/* mits_subcategories */
+
+ul.mits_subcategories li{
+	list-style			:none outside;}
+
+/* mitsorum_main_listcategories.html */
+/* infomations*/
+
+dl.mits_bbsinfo{
+	font-size			:95%;
+	margin			:0;
+	float				:left;}
+dl.mits_bbsinfo dt,dl.mits_bbsinfo dd{
+	display			:inline;
+	margin			:0;}
+dl.mits_bbsinfo dd{
+	margin			:0 5px 0 0;}
+dl.mits_timeinfo{
+	clear			:both;
+	font-size			:95%;
+	margin			:0;
+	padding			:0 0 10px;
+	float			:left;}
+dl.mits_timeinfo dt,dl.mits_timeinfo dd{
+	display			:inline;
+	margin			:0;}
+dl.mits_timeinfo dd{
+	margin			:0 5px 0 0;}
+
+ul.mits_listforums li{
+	list-style			:none outside;}
+
+/* main_listtopics.html */
+/* mits_bbsviewctrl */
+
+div.mits_bbsviewctrl{
+	line-height			:100%;
+	float				:left;
+	padding-bottom		:3px;}
+div.mits_bbsviewctrl form{
+	margin				:0;
+	padding				:0;}
+div.mits_bbsviewctrl form *,p.mits_bbsviewctrl *{
+	vertical-align		:middle;
+	margin				:0;
+	padding				:0;}
+
+/* mits_pagenav */
+
+.mits_pagenav{
+	text-align			:right;
+	padding				:3px;}
+
+table.mits_table{
+	clear				:both;}
+table.mits_table thead th,
+table.mits_table td{
+	text-align			:center !important;
+	padding				:3px;
+	vertical-align		:middle;}
+table.mits_table td.mits_topictitle,
+table.mits_table td.mits_posters{
+	text-align			:left !important;}
+table.mits_table td.mits_mainicon{
+	padding				:0;}
+
+table.mits_table td img{
+	vertical-align		:middle;
+	margin-right			:3px;}
+
+table.mits_table td dl{
+	text-align			:left !important;
+	margin				:0 -3px;
+	padding				:0;}
+table.mits_table td dt{
+	margin				:0;
+	padding				:3px 3px 5px;}
+table.mits_table td dd{
+	margin				:0;
+	padding				:0 3px 5px;}
+table.mits_table td dd.mits_td_topicinfo{
+	margin				:0;
+	padding				:3px 3px 1px;
+	border-top			:1px #777 dashed;
+	font-size				:95%;}
+
+/* mits_iconexp */
+
+div.mits_iconexps ul.mits_iconexp{
+	width				:45%;
+	float				:left;}
+
+ul.mits_iconexp{
+	padding-bottom		:15px;}
+
+ul.mits_iconexp li{
+	list-style			:none outside;
+	padding				:3px 0;}
+
+ul.mits_iconexp li img{
+	vertical-align		:middle;
+	margin-right			:3px;}
+
+
+/* mitsorum forms */
+
+#post_reference dd,
+#post_preview dd{
+	margin				:0;}
+
+/* table.mits_form_table */
+
+table.mits_form_table td,
+table.mits_form_table th{
+	vertical-align		:top !important;
+	text-align			:left;}
+
+/* mits_submit */
+
+p.mits_submit{
+	text-align			:center;
+	margin				:0;
+	padding				:10px;}
+
+
+/* edit colors */
+
+h2.attn {
+	background-color			:#f00;}
+.mits_form_table th {
+	color					:black;}
+
+/* invisible topic background */
+.mits_head h2.invisible {
+	background-color		:#f00;}
+
+/* Yet Approved topic background */
+.mits_head h2.yetapproval {
+	background-color		:#0ff;}
+
+/* each post: read controler background */
+.mits_info{
+	background-color		:#eee;}
+
+/* each post: read poster infomation background */
+.mits_info_sub{
+	background-color		:#fff;}
+
+/* each post: read controler background and border */
+.mits_info_ctrl{
+	background-color		:#fff;
+	border-top			:1px #aaa dotted;
+	border-bottom			:1px #aaa solid;}
+
+/* tree view: current and not current */
+.mits_eachbranch li.mits_eachbranchitem{
+	background-color		:#eee;}
+.mits_eachbranch li.mits_currenttopic{
+	background-color		:#fff;}
+
+/* page top: controler */
+.mits_ctrl{
+	border				:1px #ccc solid;
+	background-color		:#f8f8f8;}
+
+/* breadcrumbs */
+div.mits_breadcrumbs{
+	border-bottom			:1px #aaa solid;}
+
+/* top page: forum list title */
+h3.mits_head_h3{
+	border-bottom			:1px #999 solid;}
+
+
+/* each post: wraper */
+.mits_wrap{
+	border-top			:1px #aaa solid;
+	border-right			:1px #aaa solid;
+	border-left			:1px #aaa solid;}
+.mits_body{
+	border-top			:1px #aaa solid;}
+
+/* forum explanation border */
+
+table.mits_table td dd.mits_td_topicinfo{
+	border-top			:1px #777 dashed;}
+
+/* heading */
+/* remove this line
+.mits_head a:link{color		:#333 !important;}
+.mits_head a:visited{color	:#333 !important;}
+.mits_head a:hover{color		:#900 !important;}
+remove this line */

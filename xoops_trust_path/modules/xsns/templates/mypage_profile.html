@@ -1,0 +1,174 @@
+<{$profileform.javascript}>
+
+<div id="mainFrame">
+
+<!-- User Menu -->
+<{if $mydirname}><{include file="db:`$mydirname`_inc_mypage_menu.html"}><{/if}>
+
+<table class="outer">
+
+<form action="index.php" method="post">
+
+<!-- hidden -->
+<{foreach item=hidden from=$elements.hiddens}>
+<{$hidden.html}>
+<{/foreach}>
+
+<!-- title -->
+<tr>
+  <th colspan="2"><{$smarty.const._US_EDITPROFILE}></th>
+</tr>
+
+<!-- user name -->
+<tr>
+  <td class="head"><{$smarty.const._US_NICKNAME}></td>
+  <td class="even"><{$xoops_uname}></td>
+</tr>
+
+<!-- avatar -->
+<tr>
+  <td class="head"><{$smarty.const._US_AVATAR}></td>
+  <td class="even"><{$elements.avatar.html}></td>
+</tr>
+
+<!-- user name (real) -->
+<tr>
+  <td class="head"><{$smarty.const._US_REALNAME}></td>
+  <td class="even"><input type="text" name="<{$elements.realname.name}>" size="30" maxlength="60" value="<{$elements.realname.value}>"></td>
+</tr>
+
+<!-- e-mail -->
+<tr>
+  <td class="head"><{$smarty.const._US_EMAIL}></td>
+  <td class="even"><{$elements.email.html}></td>
+</tr>
+
+<!-- home page -->
+<tr>
+  <td class="head"><{$smarty.const._US_WEBSITE}></td>
+  <td class="even"><input type="text" name="<{$elements.url.name}>" size="60" maxlength="100" value="<{$elements.url.value}>"></td>
+</tr>
+
+<!-- time zone -->
+<tr>
+  <td class="head"><{$smarty.const._US_TIMEZONE}></td>
+  <td class="even"><{$elements.timezone.html}></td>
+</tr>
+
+<!-- ICQ -->
+<tr>
+  <td class="head"><{$smarty.const._US_ICQ}></td>
+  <td class="even"><input type="text" name="<{$elements.icq.name}>" size="15" maxlength="15" value="<{$elements.icq.value}>"></td>
+</tr>
+
+<!-- AIM -->
+<tr>
+  <td class="head"><{$smarty.const._US_AIM}></td>
+  <td class="even"><input type="text" name="<{$elements.aim.name}>" size="18" maxlength="18" value="<{$elements.aim.value}>"></td>
+</tr>
+
+<!-- YIM -->
+<tr>
+  <td class="head"><{$smarty.const._US_YIM}></td>
+  <td class="even"><input type="text" name="<{$elements.yim.name}>" size="25" maxlength="25" value="<{$elements.yim.value}>"></td>
+</tr>
+
+<!-- MSNM -->
+<tr>
+  <td class="head"><{$smarty.const._US_MSNM}></td>
+  <td class="even"><input type="text" name="<{$elements.msnm.name}>" size="30" maxlength="100" value="<{$elements.msnm.value}>"></td>
+</tr>
+
+<!-- location -->
+<tr>
+  <td class="head"><{$smarty.const._US_LOCATION}></td>
+  <td class="even"><input type="text" name="<{$elements.location.name}>" size="30" maxlength="100" value="<{$elements.location.value}>"></td>
+</tr>
+
+<!-- occupation -->
+<tr>
+  <td class="head"><{$smarty.const._US_OCCUPATION}></td>
+  <td class="even"><input type="text" name="<{$elements.occupation.name}>" size="30" maxlength="100" value="<{$elements.occupation.value}>"></td>
+</tr>
+
+<!-- interest -->
+<tr>
+  <td class="head"><{$smarty.const._US_INTEREST}></td>
+  <td class="even"><input type="text" name="<{$elements.interest.name}>" size="30" maxlength="150" value="<{$elements.interest.value}>"></td>
+</tr>
+
+<!-- signature -->
+<tr>
+  <td class="head"><{$smarty.const._US_SIGNATURE}></td>
+  <td class="even">
+    <{$sig_xoops_codes}><{$sig_xoops_smilies}><br>
+    <input type="checkbox" name="<{$elements.attachsig.name}>" value="1" <{$elements.attachsig.value}>><{$smarty.const._US_SHOWSIG}>
+  </td>
+</tr>
+
+<!-- extra info -->
+<tr>
+  <td class="head"><{$smarty.const._US_EXTRAINFO}></td>
+  <td class="even"><textarea name="<{$elements.extra.name}>" rows="5" cols="50"><{$elements.extra.value}></textarea></td>
+</tr>
+
+<!-- comment mode -->
+<tr>
+  <td class="head"><{$smarty.const._US_CDISPLAYMODE}></td>
+  <td class="even"><{$elements.umode.html}></td>
+</tr>
+
+<!-- comment order -->
+<tr>
+  <td class="head"><{$smarty.const._US_CSORTORDER}></td>
+  <td class="even"><{$elements.uorder.html}></td>
+</tr>
+
+<!-- event notify method -->
+<tr>
+  <td class="head"><{$smarty.const._NOT_NOTIFYMETHOD}></td>
+  <td class="even"><{$elements.notify_method.html}></td>
+</tr>
+
+<!-- event notify mode -->
+<tr>
+  <td class="head"><{$smarty.const._NOT_NOTIFYMODE}></td>
+  <td class="even"><{$elements.notify_mode.html}></td>
+</tr>
+
+<!-- password -->
+<tr>
+  <td class="head"><{$smarty.const._US_PASSWORD}></td>
+  <td class="even"><{$elements.password.html}></td>
+</tr>
+
+<!-- user cookie -->
+<tr>
+  <td class="head"><{$smarty.const._US_USECOOKIE}></td>
+  <td class="even"><{$elements.usercookie.html}></td>
+</tr>
+
+<!-- user mailok -->
+<tr>
+  <td class="head"><{$smarty.const._US_MAILOK}></td>
+  <td class="even"><{$elements.mailok.html}></td>
+</tr>
+
+<!-- submit -->
+<tr>
+  <td class="head"></td>
+  <td class="even"><input type="submit" value="<{$smarty.const._US_SAVECHANGES}>"></td>
+</tr>
+
+</form>
+
+</table>
+
+<{if $allow_self_delete}>
+<!-- user self delete -->
+<div style="text-align:right;">
+<a href="<{$xoops_url}>/user.php?op=delete"><{$smarty.const._US_DELACCOUNT}></a>
+</div>
+<{/if}>
+
+</div>

@@ -1,0 +1,75 @@
+<{$avatarform.javascript}>
+
+<{$uploadavatar.javascript}>
+
+<div id="mainFrame">
+
+<!-- User Menu -->
+<{if $mydirname}><{include file="db:`$mydirname`_inc_mypage_menu.html"}><{/if}>
+
+<{if $avatarform}>
+
+<!-- Avatar Upload -->
+<table class="outer">
+
+<form name="<{$avatarform.name}>" action="<{$avatarform.action}>" method="<{$avatarform.method}>" <{$avatarform.extra}>>
+
+<tr><th colspan="2"><{$smarty.const._MD_XSNS_PROFILE_AVATAR_UPLOAD}></th></tr>
+
+<{if $old_avatar}>
+<tr class="odd" style="text-align:center;">
+<td colspan="2">
+<img src="<{$old_avatar}>" alt="Avatar" title="Avatar"><br>
+<{$smarty.const._US_OLDDELETED}>
+</td>
+</tr>
+<{/if}>
+
+<{foreach item=element from=$avatarform.elements}>
+<{if $element.hidden != true}>
+<tr>
+  <td class="head" style="width:12em;"><{$element.caption}></td>
+  <td class="even"><{$element.body}></td>
+</tr>
+<{else}>
+  <{$element.body}>
+<{/if}>
+<{/foreach}>
+
+</form>
+
+</table>
+
+<br>
+
+<{/if}>
+
+<{if $avatar_list}>
+
+<!-- Avatar Select -->
+<table class="outer">
+<form name="<{$uploadavatar.name}>" action="<{$uploadavatar.action}>" method="<{$uploadavatar.method}>" <{$uploadavatar.extra}>>
+<{foreach item=element from=$uploadavatar.elements}>
+  <{$element.body}>
+<{/foreach}>
+<tr><th colspan="4"><{$smarty.const._MD_XSNS_PROFILE_AVATAR_SELECT}></th></tr>
+<tr>
+<{foreach item=avatar from=$avatar_list name=avatar}>
+<td class="odd centerH" style="width:25%;">
+<{if $avatar.file && $avatar.name}>
+<img src="<{$avatar.file}>" alt="<{$avatar.name}>" title="<{$avatar.name}>"><br>
+<{$avatar.name}><br>
+<input type="submit" name="avatar_id[<{$avatar.id}>]" class="submitS" value="<{$smarty.const._SELECT}>">
+<{/if}>
+</td>
+<{if $smarty.foreach.avatar.iteration%4==0 && !$smarty.foreach.avatar.last}>
+</tr><tr>
+<{/if}>
+<{/foreach}>
+</tr>
+</form>
+</table>
+
+<{/if}>
+
+</div>

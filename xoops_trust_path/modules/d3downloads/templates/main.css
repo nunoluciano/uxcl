@@ -1,0 +1,532 @@
+/* ------------ for common ------------ */
+
+.d3downloads_bold
+{
+	font-size: 100%; 
+	font-weight: bold; 
+}
+
+/* ------------ for table ------------ */
+
+.d3downloads_outer
+{
+	border: 1px solid #EEE;
+}
+
+.d3downloads_head
+{
+	padding: 5px;
+	color: inherit;
+	border-bottom: 1px solid #CACACA;
+	background: #F2F2F2;
+}
+.d3downloads_even
+{
+	padding: 2px;
+	color: inherit;
+	border-bottom: 1px solid #CACACA;
+	background: #F7F7F7;
+}
+.d3downloads_odd
+{
+	padding: 2px;
+	color: inherit;
+	border-bottom: 1px solid #CACACA;
+	background: #FAFAFA;
+}
+.d3downloads_foot
+{
+	padding: 5px;
+	font-weight: bold;
+}
+
+tr.d3downloads_even td
+{
+	padding: 2px;
+	border-bottom: 1px solid #CACACA;
+}
+
+tr.d3downloads_odd td
+{
+	padding: 2px;
+	border-bottom: 1px solid #CACACA;
+}
+
+tr.d3downloads_even
+{
+	color: inherit;
+	background: #F7F7F7;
+}
+
+tr.d3downloads_odd
+{
+	color: inherit;
+	background: #FAFAFA;
+}
+
+tr.d3downloads_odd:hover, tr.even:hover
+{
+	color: #000;
+	border-bottom: 1px solid #CACACA;
+	background: #DFDFDF;
+}
+
+td.d3downloads_submitlink
+{
+	padding: 5px;
+	color: inherit;
+	border-bottom: 1px solid #CACACA;
+	background: #F7F7F7;
+	text-align:right;
+}
+
+td.d3downloads_admin_link
+{
+	padding: 2px;
+	color: inherit;
+	border-bottom: 1px solid #CACACA;
+	background: #F7F7F7;
+	text-align:right;
+}
+
+td.d3downloads_single_frame_title
+{
+	padding: 2px;
+	color: inherit;
+	background: #F7F7F7;
+	text-align:left;
+	vertical-align:top;
+	line-height: 190%;
+}
+
+td.d3downloads_single_frame_gifimage
+{
+	padding: 2px;
+	color: inherit;
+	border-bottom: 1px solid #CACACA;
+	background: #F7F7F7;
+	text-align:left;
+	vertical-align:bottom;
+}
+
+td.d3downloads_single_frame_version
+{
+	padding: 2px;
+	color: inherit;
+	border-bottom: 1px solid #CACACA;
+	background: #F7F7F7;
+	text-align:right;
+	vertical-align:bottom;
+}
+
+div.d3downloads_single_frame_description
+{
+	color: #000000;
+	margin:  1px;
+	padding: 3px;
+	text-align: left;
+}
+
+.d3downloads_single_frame_description a img
+{
+	margin: 0 2px 3px 0;
+	padding: 5px;
+	border: 1px solid #CCC;
+}
+
+.d3downloads_link_single_frame_description img
+{
+	margin: 0 2px 3px 0;
+	padding: 5px;
+	border: 1px solid #CCC;
+}
+
+/* ------------ for md5_line ------- */
+
+div.d3downloads_md5_line
+{
+	background: #EFEFEF;
+	color:inherit;
+	border: 1px inset #CCC;
+	padding: 2px;
+}
+
+/* ------------ for extra_infomation ----------- */
+
+table.d3downloads_extra {
+	margin-top: 0.2em;
+	margin-bottom: 1em;
+	border-collapse: collapse;
+	border: solid 1px #999;
+	font-size: 100%;
+}
+
+table.d3downloads_extra td.title {
+	text-align: center;
+	vertical-align:middle;
+	border: solid 1px #999;
+	font-size: 110%;
+	font-weight: bolder;
+}
+
+table.d3downloads_extra td.desc {
+	text-align: left;
+	border: solid 1px #999;
+	padding: 4px 6px;
+	vertical-align:middle;
+}
+
+hr.d3downloads_extra_infomation {
+	height: 1px;
+	padding-top: 3px;
+	padding-bottom: 3px;
+	background: #F7F7F7;
+	border: 0;
+}
+
+/* ------------ for categories ----------- */
+
+.d3downloads_categories
+{
+	border-top:1px solid inherit;
+	border-right:1px solid inherit;
+	margin:5px ;
+	border-collapse:collapse;
+}
+
+td.d3downloads_categories {
+	color:inherit;
+	border-bottom:1px solid inherit;
+	padding: 3px 3px;
+}
+
+hr.d3downloads_categories {
+	height: 1px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	border: 0;
+}
+
+.d3downloads_bcat_total {
+	font-size: smaller;
+}
+
+/* ------------ for feed_select ----------- */
+
+.d3downloads_feed_select {
+	color: inherit;
+	text-align: right;
+	color:inherit;
+	border: 1px;
+	padding: 3px;
+}
+
+.d3downloads_mylink_info
+{ 
+	font-size: small; 
+	color:inherit;
+	padding: 2px;
+}
+
+/* ------------ for top_message ----------- */
+
+div.d3downloads_top_message
+{
+	margin:	3px;
+	padding: 3px;
+	border-width: 1px;
+	border-style: dotted;
+	border-color: #808080;
+}
+
+/* ------------ for cat_description ------- */
+
+div.d3downloads_cat_description
+{
+	margin:  3px;
+	padding: 3px;
+	border-width: 1px;
+	border-style: dotted;
+	border-color: #808080;
+}
+
+/* ------------ for cat_imgurl ------- */
+
+.d3downloads_imgurl_frame
+{
+	margin: 5 2px 3px;
+	padding: 5px;
+	border: 1px solid #CCC;
+	background:#FFF;
+	color:inherit;
+}
+
+/* ------------ for submit_help ------- */
+
+div.d3downloads_submit_help
+{
+	/*font-size:  90%; */
+	background: #EFEFEF;
+	color:inherit;
+	border: 1px inset #CCC;
+	padding: 2px;
+	width: 90%;
+}
+
+/* ------------ for submitlink ------------ */
+
+div.d3downloads_submitlink
+{
+	text-align: right;
+}
+
+/* ------------ for sortedby ------------ */
+
+div.d3downloads_sortedby
+{
+	text-align: center;
+}
+
+/* ------------ for breadcrumbs ------------ */
+
+div.d3downloads_breadcrumbs
+{
+	font-size: 100%;
+	padding: 0 0 10px;
+}
+
+/* ------------ for pagenav ------------ */
+
+.d3downloads_pagenav
+{
+	margin: 10px;
+	padding: 0;
+	white-space: nowrap;
+	color: #999;
+	text-align:center; 
+}
+
+.d3downloads_pagenav li
+{
+	display:inline; 
+	list-style: none;
+	font-family: Tahoma, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	margin: 0;
+	padding: 0;
+	background-color: #fff;
+}
+
+.d3downloads_pagenav li.currentpage
+{
+	margin:0 6px 0 2px;
+	padding: 2px 8px 2px 8px;
+	background:#eee;
+	color:#808080;
+	border: 1px solid #c0c0c0;
+}
+
+.d3downloads_pagenav li.prepage
+{
+	margin:0 4px;
+}
+
+.d3downloads_pagenav li.pageskip
+{
+	margin:0 6px 0 2px;
+	padding: 2px 8px 2px 8px;
+	background:#fff;
+	color:#808080;
+	border: 1px solid #c0c0c0;
+}
+
+.d3downloads_pagenav a
+{
+	margin:0 2px;
+	padding: 2px 8px 2px 8px;
+	text-decoration:none;
+	color:#808080;
+	border: 1px solid #c0c0c0;
+}
+
+.d3downloads_pagenav a:hover
+{
+	color:#FF9900;
+	background:#eee;
+}
+
+.d3downloads_pagenav li.prepage a {
+	background: #fff url(<{$mod_url}>/index.php?page=module_header&src=prepage.gif) 10% 50% no-repeat;
+	padding-left: 15px;
+}
+
+.d3downloads_pagenav li.prepage a:hover {
+	background: #fff url(<{$mod_url}>/index.php?page=module_header&src=prepage.gif) 10% 50% no-repeat;
+}
+
+.d3downloads_pagenav li.nextpage a {
+	background: #fff url(<{$mod_url}>/index.php?page=module_header&src=nextpage.gif) 90% 50% no-repeat;
+	padding-right: 15px;
+}
+
+.d3downloads_pagenav li.nextpage a:hover {
+	background: #fff url(<{$mod_url}>/index.php?page=module_header&src=nextpage.gif) 90% 50% no-repeat;
+}
+
+/* ------------ for canread_info ------------ */
+
+div.d3downloads_canread_info
+{ 
+	/*font-size:  90%; */
+	background: #EFEFEF;
+	color:inherit;
+	border: 1px inset #CCC;
+	padding: 2px;
+	text-align: right;
+}
+
+/* ------------ for broken ------------ */
+
+div.d3downloads_brokenlink_frame
+{
+	margin:  5px;
+	padding: 5px;
+	border-width: 1px;
+	border-style: solid;
+	border-color: #808080;
+}
+
+div.d3downloads_brokenlink_textarea
+{
+	margin:  10px;
+	padding: 10px;
+	border-width: 1px;
+	border-style: solid;
+	border-color: #808080;
+}
+
+div.d3downloads_brokenlink_form
+{
+	margin:  0px;
+	padding: 3px;
+	text-align: center;
+}
+
+/* ------------ for ratelink ------------ */
+
+div.d3downloads_ratelink_frame
+{
+	margin:  5px;
+	padding: 5px;
+	border-width: 1px;
+	border-style: solid;
+	border-color: #808080;
+}
+
+div.d3downloads_ratelink_form
+{
+	margin:  0px;
+	padding: 3px;
+	text-align: center;
+}
+
+/* ------------ for error_message ------------ */
+
+.d3downloads_broken_message
+{
+	color: #CC0000;
+	font-size: 100%; 
+	font-weight: bold; 
+}
+
+div.d3downloads_error_message
+{
+	color: #CC0000;
+	font-size: 100%; 
+	font-weight: bold; 
+	margin:  5px;
+	padding: 5px;
+	border-width: 1px;
+	border-style: solid;
+	border-color: #808080;
+}
+
+/* ------------ for submit -------------------- */
+
+.d3downloads_submit
+{
+	color: #000000;
+	background: #ffffff;
+	border: 1px solid #000000;
+}
+
+/* ------------ for editor_selector -------------------- */
+
+.d3downloads_editor_selector {
+	float: left;
+	width: auto;
+	color: #000000;
+	background: #ffffff;
+	font-size: 11px;
+	margin-top: 10px;
+	margin-right: 1px;
+	padding: 2px 10px;
+	border: 1px solid gray;
+	cursor: pointer;
+}
+
+/* ------------ for focus -------------------- */
+
+.d3downloads_focus {
+	border: 1px solid #CC0000;
+}
+
+/* ------------ for textarea -------------------- */
+
+div.grippie {
+	background:#EEEEEE url(<{$mod_url}>/index.php?page=module_header&src=grippie.png) no-repeat scroll center 2px;
+	border-color:#DDDDDD;
+	border-style:solid;
+	border-width:0pt 1px 1px;
+	cursor:s-resize;
+	height:9px;
+	overflow:hidden;
+}
+.resizable-textarea textarea {
+	display:block;
+	margin-bottom:0pt;
+}
+
+/* ------------ for lightbox -------------------- */
+
+#lightbox {
+	background-color: #eee;
+	padding: 10px;
+	border-bottom: 1px solid #666;
+	border-right: 1px solid #666;
+}
+#overlay {
+	text-align: left;
+	background-image: url(<{$mod_url}>/index.php?page=module_header&src=overlay.png);
+}
+#lightboxCaption {
+	color: #333;
+	background-color: #eee;
+	font-size: 90%;
+	text-align: center;
+	border-bottom: 1px solid #666;
+	border-right: 1px solid #666;
+}
+#lightboxIndicator {
+	border: 1px solid #fff;
+}
+#lightboxOverallView {
+	background-image: url(<{$mod_url}>/index.php?page=module_header&src=overlay.png);
+}
+* html #lightboxOverallView,
+* html #overlay {
+	background-color: #000;
+	background-image: url(<{$mod_url}>/index.php?page=module_header&src=blank.gif);
+	filter: Alpha(opacity=50);
+}

@@ -1,0 +1,47 @@
+<{if $mod_config.show_breadcrumbs}>
+	<{include file="db:`$mydirname`_inc_breadcrumbs.html"}>
+<{/if}>
+<div class="d3downloads_ratelink_frame">
+	<div align="center">
+		<h4><{$down.title}></h4>
+	</div>
+
+	<ul>
+		<li><{$lang_voteonce}>
+		<li><{$lang_ratingscale}>
+		<li><{$lang_beobjective}>
+		<li><{$lang_donotvote}>
+	</ul>
+	<div class="d3downloads_ratelink_form">
+		<form method="post" action="<{$mod_url}>/index.php?page=<{$page}>&amp;cid=<{$down.cid}>&amp;lid=<{$down.lid}>">
+			<input type="hidden" name="lid" id="lid" value="<{$down.lid}>" />
+			<input type="hidden" name="cid" id="cid" value="<{$down.cid}>" />
+			<input type="hidden" name="url" id="url" value="<{$mod_url}>/index.php?page=ajax_load" />
+				<select name="rating" id="rating">
+					<option value="0">--</option>
+					<option value="10">10</option>
+					<option value="9">9</option>
+					<option value="8">8</option>
+					<option value="7">7</option>
+					<option value="6">6</option>
+					<option value="5">5</option>
+					<option value="4">4</option>
+					<option value="3">3</option>
+					<option value="2">2</option>
+					<option value="1">1</option>
+				</select>&nbsp;&nbsp;
+			<input type="submit" name="rate_submit" id="rate_submit" value="<{$lang_rateit}>" />
+			<input type=button name="rate_cancel" id="rate_cancel" value="<{$lang_cancel}>" />
+		</form>
+	</div>
+</div>
+
+<script type="text/javascript">
+<!--//
+jQuery( function($){
+	$( 'form' ).submit(function() {
+ 		return ratelink_info(  'rating' , '<{$smarty.const._MD_D3DOWNLOADS_NORATING}>' ) ;
+    });
+});
+//-->
+</script>

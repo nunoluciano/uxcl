@@ -1,0 +1,241 @@
+<div id="mainFrame">
+<{if $mydirname}><{include file="db:`$mydirname`_inc_breadcrumbs.html"}><{/if}>
+
+<!-- Topic -->
+
+<{if $res_popup_list}>
+<!-- Response Popup (hidden) : Start -->
+<{foreach item=popup from=$res_popup_list}>
+	<span id="res<{$popup.id}>" class="respopup" style="width:400px;" onmouseover="showResPopUp('res<{$popup.id}>',event,true)">
+	<nobr><b><{$popup.id}>: <{$popup.uname}></b> [<{$popup.time|date_format:"%Y-%m-%d %H:%M:%S"}>]</nobr><br>
+	<{$popup.body}>
+	</span>
+<{/foreach}>
+<!-- Response Popup (hidden) : End -->
+<{/if}>
+
+<{if $comment_list.0}>
+
+<!-- Topic Table : Start -->
+<table class="outer topic">
+
+<tr><th colspan="2"><a name="<{$comment_list.0.number}>"></a>[<{$commu.name}>] <{$smarty.const._MD_XSNS_TOPIC}></th></tr>
+
+<tr class="even">
+<td class="date bg1" rowspan="3">
+<p><{$comment_list.0.time|date_format:"%Y-%m-%d %H:%M:%S"}></p>
+<!--
+<p><a href="<{$comment_list.0.author.page_url}>"><img src="<{$comment_list.0.author.avatar_url}>" alt="<{$comment_list.0.author.name}>"></a></p>
+-->
+</td>
+<td class="name bg0"><b><{$topic.name}></b></td>
+</tr>
+
+<tr class="even">
+<td class="author bg0"><a href="<{$comment_list.0.author.page_url}>"><{$comment_list.0.author.name}></a></td>
+</tr>
+
+<tr class="even">
+<td class="body">
+
+<{if count($comment_list.0.images)>0}>
+<!-- Images : Start -->
+<p>
+<{foreach item=image from=$comment_list.0.images}>
+<a href="<{$image.url}>" target="_blank"><img src="<{$image.url_src}>" alt=""></a>&nbsp;&nbsp;
+<{/foreach}>
+</p>
+<!-- Images : End -->
+<{/if}>
+
+<!-- Body : Start -->
+<{$comment_list.0.body}>
+<!-- Body : End -->
+
+<{if count($comment_list.0.files)>0}>
+<!-- Files : Start -->
+<p>
+<{foreach item=file from=$comment_list.0.files}>
+<a href="<{$file.url}>"><{$file.icon}><{$file.caption|mb_truncate:35}></a><br>
+<{/foreach}>
+</p>
+<!-- Files : End -->
+<{/if}>
+
+<{if $comment_list.0.show_edit}>
+<div style="text-align:right;"><a href="<{$comment_list.0.url_edit}>"><{$smarty.const._MD_XSNS_TOPIC_EDIT}></a></div>
+<{/if}>
+</td>
+</tr>
+
+</table>
+<!-- Topic Table : End -->
+<br>
+
+<{/if}>
+
+<{if $comment_count > 0}>
+
+<!-- Comment List Table : Start -->
+<table class="outer topic">
+
+<tr class="even"><th colspan="2"><a name="comment"></a><{$smarty.const._MD_XSNS_TOPIC_RESPONSE}></th></tr>
+<tr><td colspan="2" class="odd centerH"><{$pager.selector}></td></tr>
+<tr><td colspan="2" class="odd" style="text-align:right;"><{$pager.description}></td></tr>
+
+<{foreach item=comment from=$comment_list}>
+
+<{if $comment.number > 0}>
+
+<tr class="even">
+<td class="date bg1" rowspan="2">
+<p><{$comment.time|date_format:"%Y-%m-%d %H:%M:%S"}></p>
+<!--
+<p><a href="<{$comment.author.page_url}>"><img src="<{$comment.author.avatar_url}>" alt="<{$comment.author.name}>"></a></p>
+-->
+</td>
+<td class="author bg0">
+<b><{$comment.number}></b>: <a name="<{$comment.number}>" href="<{$comment.author.page_url}>"><{$comment.author.name}></a>
+</td>
+</tr>
+
+<tr class="even">
+<td class="body">
+
+<{if count($comment.images)>0}>
+<!-- Images : Start -->
+<p>
+<{foreach item=image from=$comment.images}>
+<a href="<{$image.url}>" target="_blank"><img src="<{$image.url_src}>" alt=""></a>&nbsp;&nbsp;
+<{/foreach}>
+</p>
+<!-- Images : End -->
+<{/if}>
+
+<!-- Comment Body : Start -->
+<{$comment.body}>
+<!-- Comment Body : End -->
+
+<{if count($comment.files)>0}>
+<!-- Files : Start -->
+<p>
+<{foreach item=file from=$comment.files}>
+<a href="<{$file.url}>"><{$file.icon}><{$file.caption|mb_truncate:35}></a><br>
+<{/foreach}>
+</p>
+<!-- Files : End -->
+<{/if}>
+
+<{if $comment.uid == 0}>
+<div style="text-align:right;"><{$smarty.const._MD_XSNS_TOPIC_COM_DELETED}></div>
+
+<{else}>
+<div style="text-align:right;">
+<{if $comment.show_res_add}>
+<a href="javascript:void(0);" onclick="Xsns_addResCode(<{$comment.number}>);"><{$smarty.const._MD_XSNS_TOPIC_ADD_RES}></a>
+<{/if}>
+<{if $comment.show_edit}>
+&nbsp;&nbsp;<a href="<{$comment.url_edit}>"><{$smarty.const._MD_XSNS_TOPIC_EDIT}></a>
+&nbsp;&nbsp;<a href="<{$comment.url_del}>"><{$smarty.const._MD_XSNS_TOPIC_DEL_RES}></a>
+<{/if}>
+</div>
+<{/if}>
+</td>
+</tr>
+
+<{/if}>
+
+<{/foreach}>
+
+<tr><td colspan="2" class="odd centerH"><{$pager.selector}></td></tr>
+<tr><td colspan="2" class="odd" style="text-align:right;"><{$pager.description}></td></tr>
+
+</table>
+<!-- Comment List Table : End -->
+
+<{/if}>
+
+<br>
+
+<{if $commu.auth_level >= 4 && $comment_count_all < 1000}>
+
+<!-- Comment Form Table : Start -->
+<table class="outer topic">
+
+<{$form_res_add}>
+
+<tr class="even"><th colspan="2"><a name="post"></a><{$smarty.const._MD_XSNS_TOPIC_WRITE}></th></tr>
+
+<tr class="even">
+<td class="itemTitle bg0"><{$smarty.const._MD_XSNS_TOPIC_RESPONSE}></td>
+<td class="itemValue"><{$xoops_codes}><{$xoops_smilies}></td>
+</tr>
+
+<{if $mod_config.image_form_limit > 0}>
+<!-- Images : Start -->
+<tr class="even">
+<td class="itemTitle bg0"><{$smarty.const._MD_XSNS_IMAGE}></td>
+<td class="itemValue">
+
+<div id="image1" style="display:block;">
+<input type="file" name="images[]" size="40">
+</div>
+<{section name=cnt start=0 loop=$mod_config.image_form_limit-1}>
+<div id="image<{$smarty.section.cnt.iteration+1}>" style="display:none;">
+<input type="file" name="images[]" size="40">
+</div>
+<{/section}>
+
+<div id="image_add">
+<a href="javascript:void(0);" onclick="Xsns_addUploadForm(0);">[<{$smarty.const._MD_XSNS_IMAGE_ADD}>]</a>
+</div>
+
+</td>
+</tr>
+<!-- Images : End -->
+<{/if}>
+
+<{if $mod_config.file_form_limit > 0}>
+<!-- Files : Start -->
+<tr class="even">
+<td class="itemTitle bg0"><{$smarty.const._MD_XSNS_FILE}></td>
+<td class="itemValue">
+
+<div id="file1" style="display:block;">
+<input type="file" name="files[]" size="40">
+</div>
+<{section name=cnt start=0 loop=$mod_config.file_form_limit-1}>
+<div id="file<{$smarty.section.cnt.iteration+1}>" style="display:none;">
+<input type="file" name="files[]" size="40">
+</div>
+<{/section}>
+
+<div id="file_add">
+<a href="javascript:void(0);" onclick="Xsns_addUploadForm(1);">[<{$smarty.const._MD_XSNS_FILE_ADD}>]</a>
+</div>
+
+</td>
+</tr>
+<!-- Files : End -->
+<{/if}>
+
+<tr class="foot">
+<td colspan="2" class="submitFrame"><input type="submit" class="submit" value="<{$smarty.const._MD_XSNS_BTN_POST}>"></td>
+</tr>
+
+</form>
+
+</table>
+<!-- Comment Form Table : End -->
+<br>
+
+<{/if}>
+
+<br>
+
+<!-- Top Page Link -->
+<div class="centerH">
+<a href="<{$mod_url}>/?cid=<{$commu.id}>">[<{$commu.name}>] <{$smarty.const._MD_XSNS_LINK_COMMU_TOP}></a>
+</div>
+
+</div>

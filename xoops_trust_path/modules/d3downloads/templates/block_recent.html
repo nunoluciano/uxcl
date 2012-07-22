@@ -1,0 +1,41 @@
+<{if $block.type eq 3}>
+	<table cellspacing="1" class="outer">
+		<tr>
+			<th align="center"><{$block.lang_category}></th>
+			<th align="center"><{$block.lang_title}></th>
+			<th align="center"><{$block.lang_postname}></th>
+			<th align="center"><{$block.lang_hits}></th>
+			<th align="center"><{$block.lang_updated}></th>
+			<{foreach  from=$block.download item=down}>
+				<tr class="<{cycle values="odd,even"}>" valign="middle">
+				<td>
+					<a href="<{$block.mod_url}>/index.php?cid=<{$down.cid}>"><{$down.category}></a>
+				</td>
+				<td>
+					<a href="<{$block.mod_url}>/index.php?page=singlefile&amp;cid=<{$down.cid}>&amp;lid=<{$down.lid}>"><{$down.title}></a>
+				</td>
+				<td>
+					<{$down.postname}>
+				</td>
+				<td align="center">
+					<{$down.hits}>
+				</td>
+				<td align="center">
+					<{$down.updated}>
+				</td>
+		</tr>
+			<{/foreach}>
+	</table>
+<{elseif $block.type eq 2}>
+	<ul class="d3downloads__block_ul">
+		<{foreach  from=$block.download item=down}>
+			<li><a href="<{$block.mod_url}>/index.php?page=singlefile&amp;cid=<{$down.cid}>&amp;lid=<{$down.lid}>"><{$down.title}></a>(<{$down.hits}>) <{$down.postname}> <{$down.updated}></li>
+		<{/foreach}>
+	</ul>
+<{else}>
+	<ul class="d3downloads__block_ul">
+		<{foreach  from=$block.download item=down}>
+			<li><a href="<{$block.mod_url}>/index.php?page=singlefile&amp;cid=<{$down.cid}>&amp;lid=<{$down.lid}>"><{$down.title}></a>(<{$down.updated}>)</li>
+		<{/foreach}>
+	</ul>
+<{/if}>

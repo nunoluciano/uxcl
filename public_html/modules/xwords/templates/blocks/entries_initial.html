@@ -1,0 +1,5 @@
+<div style="margin:1em;padding:0em;text-align:left;line-height:1.3em;">
+  <{foreach item=letterlinks from=$block.initstuff}>
+    <{$letterlinks.separator}><{if $letterlinks.total}><a href="<{$xoops_url}>/modules/<{$block.moduledirname}>/letter.php?init=<{$letterlinks.id}>" title="[ <{$letterlinks.total}> ]"><{/if}><{$letterlinks.linktext}><{if $letterlinks.total}></a><{/if}>
+  <{/foreach}>
+</div>

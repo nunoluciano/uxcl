@@ -1,0 +1,7 @@
+<ul>
+<{foreach item=info from=$block.info_list}>
+<li>
+<a href="<{$info.link}>"><{$info.title}></a>&nbsp;(<{$info.time|date_format:"%Y-%m-%d %H:%M:%S"}>)
+</li>
+<{/foreach}>
+</ul>

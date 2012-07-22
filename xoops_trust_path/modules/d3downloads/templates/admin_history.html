@@ -1,0 +1,183 @@
+<h2><span style="color: #CC0000;font-weight: bold;"><{$smarty.const._MD_D3DOWNLOADS_HISTORY}></span> : <{$history.title}></h2>
+<table class="outer">
+	<tr valign="top" align="left">
+		<td nowrap="nowrap" class="head">
+			<label for="title"><{$smarty.const._MD_D3DOWNLOADS_SUBMIT_TITLE}></label>
+		</td>
+		<td class="even">
+			<{$history.title}>
+		</td>
+	</tr>
+	<{if $history.version}>
+		<tr valign="top" align="left">
+			<td nowrap="nowrap" class="head">
+				<label for="version"><{$smarty.const._MD_D3DOWNLOADS_SUBMIT_VERSION}></label>
+			</td>
+			<td class="even">
+				<{$history.version}>
+			</td>
+		</tr>
+	<{/if}>
+	<tr valign="top" align="left">
+		<td nowrap="nowrap" class="head">
+			<label for="title"><{$smarty.const._MD_D3DOWNLOADS_DATE}></label>
+		</td>
+		<td class="even">
+			<{$history.date}>
+		</td>
+	</tr>
+	<tr valign="top" align="left">
+		<td nowrap="nowrap" class="head">
+			<label for="url"><{$smarty.const._MD_D3DOWNLOADS_SUBMIT_URL}></label>
+		</td>
+		<td class="even">
+			<{if ! $history.broken_link}>
+				<{$history.filelink}><{$history.url}></a>
+			<{else}>
+				<{$history.title}>
+				<br />(&nbsp;<font color="#CC0000"><span style="font-weight: bold;">broken file !!</span></font>&nbsp;)
+			<{/if}>
+		</td>
+	</tr>
+	<{if $history.filename}>
+		<tr valign="top" align="left">
+			<td nowrap="nowrap" class="head">
+				<label for="filename"><{$smarty.const._MD_D3DOWNLOADS_SUBMIT_FILENAME}></label>
+			</td>
+			<td class="even">
+				<{$history.filename_link}><br />
+			</td>
+		</tr>
+	<{/if}>
+	<{if $history.filename2}>
+		<tr valign="top" align="left">
+			<td nowrap="nowrap" class="head">
+				<label for="filename"><{$smarty.const._MD_D3DOWNLOADS_SUBMIT_FILENAME2}></label>
+			</td>
+			<td class="even">
+				<{$history.filename_link2}><br />
+			</td>
+		</tr>
+	<{/if}>
+	<tr valign="top" align="left">
+		<td nowrap="nowrap" class="head">
+			<label for="cid"><{$smarty.const._MD_D3DOWNLOADS_SUBMIT_CATEGORY}></label>
+		</td>
+		<td class="even">
+			<{$history.ctitle}>
+		</td>
+	</tr>
+	<tr valign="top" align="left">
+		<td nowrap="nowrap" class="head">
+			<label for="description"><{$smarty.const._MD_D3DOWNLOADS_SUBMIT_DESCRIPTION}></label>
+		</td>
+		<td class="even">
+			<{$history.description}>
+		</td>
+	</tr>
+</table>
+
+<{if $history.extra}>
+	<br />
+	<table style="margin-top: 0.2em;margin-bottom: 1em;border-collapse: collapse;border: solid 1px #999;font-size: 100%;">
+		<{foreach item="info" from=$history.extra}>
+			<tbody><tr>
+				<td style="text-align: center;vertical-align:middle;border: solid 1px #999;font-size: 110%;font-weight: bolder;" width="20%">
+					<{$info.title}>
+				</td>
+				<td style="text-align: left;border: solid 1px #999;padding: 4px 6px;vertical-align:middle;" width="80%">
+					<{$info.desc}>
+				</td>
+			</tr>
+		<{/foreach}>
+	</tbody></table>
+<{/if}>
+<br />
+<table>
+	<form name="history" id="history" action="<{$mod_url}>/admin/index.php?page=<{$page}>" method="post">
+		<{$gticket_hidden}>
+		<input type="hidden" name="id" value="<{$history.id}>" />
+		<input type="hidden" name="lid" value="<{$history.lid}>" />
+		<input type="hidden" name="cid" value="<{$history.cid}>" />
+		<tr valign="top" align="left">
+			<td colspan="2" class="head" style="text-align:center;">
+				<{$smarty.const._MD_D3DOWNLOADS_HISTORY_RESTORE}>
+				<input type="submit" name="restore" value="X" onclick="return confirm('<{$smarty.const._MD_D3DOWNLOADS_CONFIRM_HISTORY_RESTORE}>')" />
+			</td>
+		</tr>
+	</form>
+</table>
+<br />
+<span style="color: #CC0000;font-weight: bold;"><{$smarty.const._MD_D3DOWNLOADS_HISTORYLIST}></span>
+<br />
+<{foreach from=$historylist item="list"}>
+	<{$list.history_date}> : <{$list.history_title}> <a href="<{$mod_url}>/admin/index.php?page=history&amp;id=<{$list.history_id}>"><{$smarty.const._MD_D3DOWNLOADS_VIEWHISTORY}></a><br />
+<{/foreach}>
+<br />
+<span style="color: #CC0000;font-weight: bold;"><{$smarty.const._MD_D3DOWNLOADS_NOWDATALIST}></span>
+<{if $invisibleinfo}>
+	(&nbsp;<{$invisibleinfo}>&nbsp;)
+<{/if}>
+[<a href="<{$mod_url}>/index.php?page=singlefile&amp;cid=<{$down.cid}>&amp;lid=<{$down.id}>"><{$smarty.const._MD_D3DOWNLOADS_VISIBLE}></a>]
+[<a href="<{$mod_url}>/index.php?page=modfile&amp;cid=<{$down.cid}>&amp;lid=<{$down.id}>"><{$smarty.const._EDIT}></a>]
+<br />
+<table width="100%" cellspacing="0" class="outer">
+	<tr>
+		<td class="head" colspan="2" align="left" height="18">
+			<{$smarty.const._MD_D3DOWNLOADS_CATEGORY}> <{$down.category}>
+		</td>
+	</tr>
+	<tr>
+		<td class="even" width="65%" style="text-align:left;vertical-align:top;">
+			<{if ! $down.broken_link}>
+				<{$down.filelink}><span style="font-weight: bold;"><{$down.title}></span></a>
+			<{else}>
+				<span style="font-weight: bold;"><{$down.title}></span>
+				<br />(&nbsp;<span style="color: #CC0000;font-weight: bold;">broken file !!</span>&nbsp;)
+			<{/if}>
+		</td>
+		<td class="even" style="text-align:right;vertical-align:bottom;" width="35%">
+		<span style="font-weight: bold;"><{$smarty.const._MD_D3DOWNLOADS_VERSION}>:</span>&nbsp;<{$down.version}><br /><span style="font-weight: bold;"><{$smarty.const._MD_D3DOWNLOADS_DATE}>:</span>&nbsp;&nbsp;<{$down.updated}>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2" class="odd" align="left">
+			<span style="font-weight: bold;"><{$smarty.const._MD_D3DOWNLOADS_DESCRIPTION}></span>
+		    	<br />
+			<{if $down.shots && ! $down.broken_link}>
+				<{$down.shots}>
+			<{/if}>
+			<{$down.description}>
+			<br />
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2" class="even" align="left">
+			<span style="font-weight: bold;">[<{$smarty.const._MD_D3DOWNLOADS_SIZE}>]</span>&nbsp;<{$down.size}><br />
+			<{if $down.platform}>
+				<span style="font-weight: bold;">[<{$smarty.const._MD_D3DOWNLOADS_PLATFORM}>]</span>&nbsp;<{$down.platform}><br />
+			<{/if}>
+			<{if $mod_config.use_license && $down.license}>
+				<span style="font-weight: bold;">[<{$smarty.const._MD_D3DOWNLOADS_LICENSE}>]</span>&nbsp;<{$down.license}><br />
+			<{/if}>
+			<{if $down.homepage}>
+				<span style="font-weight: bold;">[<{$smarty.const._MD_D3DOWNLOADS_HOMEPAGE}>]</span>&nbsp;<{$down.homepage}>
+			<{/if}>
+		</td>
+	</tr>
+</table>
+<{if $down.extra}>
+	<br />
+	<table style="margin-top: 0.2em;margin-bottom: 1em;border-collapse: collapse;border: solid 1px #999;font-size: 100%;">
+		<{foreach item="downinfo" from=$down.extra}>
+			<tbody><tr>
+				<td style="text-align: center;vertical-align:middle;border: solid 1px #999;font-size: 110%;font-weight: bolder;" width="20%">
+					<{$downinfo.title}>
+				</td>
+				<td style="text-align: left;border: solid 1px #999;padding: 4px 6px;vertical-align:middle;" width="80%">
+					<{$downinfo.desc}>
+				</td>
+			</tr>
+		<{/foreach}>
+	</tbody></table>
+<{/if}>

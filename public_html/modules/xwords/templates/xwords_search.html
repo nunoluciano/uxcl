@@ -1,0 +1,108 @@
+<{* Title *}>
+<{if $titleblockuse && $h1id}>
+  <h1 style="clear:both;background:transparent url(<{$smarty.const.XOOPS_URL}>/modules/<{$lang_moduledirname}>/images/<{$h1id}>) no-repeat center;font-size: 100%; overflow: hidden; margin: 0px; padding: 50px 0 0 0; height: 0px !important; height /**/:50px;">
+    <{$lang_modulename}>
+  </h1>
+<{elseif $titleblockuse}>
+  <h1 style="clear:both;margin: 0 0 10px 0; padding:0.2em 0em;text-align:center;font-size:1.4em;">
+    <{$lang_modulename}>
+  </h1>
+<{/if}>
+
+<{* pankuzu *}>
+<div class="itemPermaLink" style="clear:both;margin:1em 0em;padding:0em;text-align:left;">
+  <a href="<{$xoops_url}>/"><{$lang_home}></a>&nbsp;&raquo;&nbsp;<a href="<{$xoops_url}>/modules/<{$lang_moduledirname}>/index.php"><{$lang_modulename}></a>&nbsp;&raquo;&nbsp;<{$lang_seachhead}>
+</div>
+
+<{* Readme 1st *}>
+<div style="clear:both;margin:0.1em 0em;padding:0em;">
+  <fieldset class="item" style="border:1px solid #778;margin:1em 0em;text-align:left;background-color:transparent;">
+    <legend class="itemHead"><{$lang_1st}></legend>
+    <div style="margin:1em;padding:0em;text-align:left;line-height:1.4em;">
+      <{if !$publishedwords}>
+        <{$lang_still}>
+      <{elseif $config_readme}>
+        <{$config_readme}><br />
+        <{$lang_now}>&nbsp;&nbsp;<{$lang_defs}><{$publishedwords}>
+        <{if $multicats == 1}><{$lang_cats}><{$totalcats}><{/if}>
+      <{/if}>
+    </div>
+  </fieldset>
+</div>
+
+<{* SearchForm block *}>
+<div style="clear:both;margin:0.1em 0em;padding:0em;">
+  <fieldset class="item" style="border:1px solid #778;margin:1em 0em;background-color:transparent;">
+    <legend class="itemHead"><{$lang_seachent}></legend>
+    <div style="margin:1em 0em;padding:0em;text-align:center;line-height:1.3em;">
+      <{$searchform}>
+    </div>
+  </fieldset>
+</div>
+
+<{* information *}>
+<p style="font-size:1em;margin:2em 0em;text-align:center;color:#cd5c5c;"><{$intro}></p>
+
+<{* page navbar *}>
+<{if $resultset.navbar}>
+  <div style='margin: 0.5em 0em; text-align: right; font-size: 75%;'>
+    <{$resultset.navbar}>
+  </div>
+<{/if}>
+
+<{* match words *}>
+<{* ruby tag sample start *}>
+<{* 
+<{foreach item=eachresult from=$resultset.match}>
+  <h2 style="margin: 0px; padding: 2px 0px; font-size: 1.1em; background-color: transparent;">
+    <img src="<{$xoops_url}>/modules/<{$eachresult.dir}>/images/xw.gif" />
+    <ruby><rb><a href="<{$xoops_url}>/modules/<{$eachresult.dir}>/entry.php?entryID=<{$eachresult.id}><{if $eachresult.categoryID}>&amp;categoryID=<{$eachresult.categoryID}><{/if}>"><{$eachresult.term}></a></rb><rp><{$lang_rubyl}></rp><rt><{$eachresult.proc}></rt><rp><{$lang_rubyr}></rp></ruby>
+  </h2>
+  <div class="comText" style="margin-bottom:1em;">
+    <{$eachresult.microlinks}><{$lang_letterdef}><{$eachresult.definition}>
+  </div>
+<{/foreach}>
+*}>
+<{* ruby tag sample end *}>
+
+<{foreach item=eachresult from=$resultset.match}>
+  <h2 style="margin:0px;padding:0px;font-size:1.2em;background-color:transparent;">
+    <img src="<{$xoops_url}>/modules/<{$eachresult.dir}>/images/xw.gif" />
+    <span class="head"><a href="<{$xoops_url}>/modules/<{$eachresult.dir}>/entry.php?entryID=<{$eachresult.id}><{if $eachresult.categoryID}>&amp;categoryID=<{$eachresult.categoryID}><{/if}>"><{$eachresult.term}></a></span>
+  </h2>
+  <div class="comText" style="font-size:0.9em;margin:0.5em 1em 1em 1em;padding:0px;">
+    <{$eachresult.microlinks}><{$lang_yomi}><{$eachresult.proc}>&nbsp;&nbsp;<{$lang_letterdef}><{$eachresult.definition}>
+  </div>
+<{/foreach}>
+<br />
+<br />
+
+<{* page navbar *}>
+<{if $resultset.navbar}>
+  <div style='margin: 0.5em 0em; text-align: right; font-size: 75%;'>
+    <{$resultset.navbar}>
+  </div>
+<{/if}>
+
+<{* return nav *}>
+<div class="itemPermaLink" style="text-align:center;margin:2em 0em;">
+  [&nbsp;<a href='javascript:history.go(-1)'><{$lang_return}></a>&nbsp;|&nbsp;<a href='<{$xoops_url}>/modules/<{$lang_moduledirname}>/'><{$lang_index}></a>&nbsp;]
+</div>
+
+<{* Footer block *}>
+<div class="foot" style="clear:both;text-align:center;margin:2em 0em;padding:0em;">
+  Powered&nbsp;by&nbsp;<a href="http://www.kanpyo.net/" title="kanpyo"><strong>Xwords</strong></a>
+  &nbsp;based&nbsp;on&nbsp;<a href="http://dev.xoops.org/modules/xfmod/project/showfiles.php?group_id=1019" title="Official XOOPS Development Site"><strong>Wordbook</strong></a>
+</div>
+
+<{* amazon tag *}>
+<{if $amazon_id && $searchstring}>
+  <div style="clear:both;margin:0.1em 0em;padding:0em;">
+    <fieldset class="item" style="border:1px solid #778;margin:1em 0em;background-color:transparent;">
+      <legend class="itemHead">amazon</legend>
+      <div style="margin:1em 0em;padding:0em;text-align:center;line-height:1.3em;">
+        <iframe src="http://rcm-jp.amazon.co.jp/e/cm?t=<{$amazon_id}>&o=9&p=13&l=st1&mode=books-jp&search=<{$searchstring}>&=1&fc1=&&#108;&#116;1=&lc1=&bg1=&f=ifr" marginwidth="0" marginheight="0" width="468" height="60" border="0" frameborder="0" style="border:none;" scrolling="no"></iframe>
+      </div>
+    </fieldset>
+  </div>
+<{/if}>

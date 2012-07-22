@@ -1,0 +1,80 @@
+<div id="mainFrame">
+<{if $mydirname}><{include file="db:`$mydirname`_inc_breadcrumbs.html"}><{/if}>
+
+<table class="outer topic">
+
+<tr><th colspan="2">[<{$commu.name}>] <{$smarty.const._MD_XSNS_TITLE_TOPIC_LIST}></th></tr>
+
+<tr class="head">
+<td colspan="2"><{$smarty.const._MD_XSNS_TOPIC_LIST_DESC}></td>
+</tr>
+
+<{if $topic_list|@count > 0}>
+
+<tr><td colspan="2" class="odd centerH"><{$pager.selector}></td></tr>
+<tr><td colspan="2" class="odd" style="text-align:right;"><{$pager.description}></td></tr>
+
+<{foreach item=topic from=$topic_list}>
+
+<tr class="even">
+<td class="date bg1" rowspan="3"><{$topic.time|date_format:"%Y-%m-%d %H:%M:%S"}></td>
+<td class="name"><a href="<{$topic.page_url}>"><b><{$topic.name|mb_truncate:30}></b></a></td>
+</tr>
+
+<tr class="even">
+<td style="width:80%">
+
+<{if count($topic.images)>0}>
+<!-- Images : Start -->
+<p>
+<{foreach item=image from=$topic.images}>
+<a href="<{$image.url}>" target="_blank"><img src="<{$image.url_src}>" alt=""></a>&nbsp;&nbsp;
+<{/foreach}>
+</p>
+<!-- Images : End -->
+<{/if}>
+
+<!-- Body : Start -->
+<{$topic.body}>
+<!-- Body : End -->
+
+<{if count($comment.files)>0}>
+<!-- Files : Start -->
+<p>
+<{foreach item=file from=$comment.files}>
+<a href="<{$file.url}>"><{$file.icon}><{$file.caption|mb_truncate:35}></a><br>
+<{/foreach}>
+</p>
+<!-- Files : End -->
+<{/if}>
+
+</td>
+</tr>
+
+<tr class="even">
+<td style="text-align:right;">
+<{if $topic.show_edit}>
+<a href="<{$topic.page_url_edit}>"><{$smarty.const._MD_XSNS_TOPIC_EDIT}></a>&nbsp;&nbsp;
+<{/if}>
+<a href="<{$topic.page_url}>"><{$smarty.const._MD_XSNS_TOPIC_RESPONSE}>(<{$topic.comment_count}>)</a>
+</td>
+</tr>
+
+<{/foreach}>
+
+<tr><td colspan="2" class="odd centerH"><{$pager.selector}></td></tr>
+<tr><td colspan="2" class="odd" style="text-align:right;"><{$pager.description}></td></tr>
+
+<{/if}>
+
+</table>
+
+<br>
+<br>
+
+<!-- Top Page Link -->
+<div class="centerH">
+<a href="<{$mod_url}>/?cid=<{$commu.id}>">[<{$commu.name}>] <{$smarty.const._MD_XSNS_LINK_COMMU_TOP}></a>
+</div>
+
+</div>

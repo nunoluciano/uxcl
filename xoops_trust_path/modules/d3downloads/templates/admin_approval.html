@@ -1,0 +1,364 @@
+<script type="text/javascript" src="<{$mod_url}>/index.php?page=module_header&src=jquery.js"></script>
+<script type="text/javascript" src="<{$mod_url}>/index.php?page=module_header&src=jquery.textarearesizer.js"></script>
+<script type="text/javascript" src="<{$mod_url}>/index.php?page=module_header&src=seekAttention.jquery.js"></script>
+<script type="text/javascript" src="<{$mod_url}>/index.php?page=module_header&src=d3downloads.js"></script>
+<h2 id="form_title"><{$formtitle}>: <{if $unapproval.title}><{$unapproval.title}><{/if}></h2>
+<{if $iserror}>
+	<div style="color: #CC0000;font-size:100%;font-weight:bold;margin:5px;padding:5px;border-width:1px;border-style:solid;border-color:#808080;">
+		<{$error_message}>
+	</div>
+<{/if}>
+<{if $preview_title || $preview_body}>
+	<dl id="post_preview" class="outer">
+		<{if $preview_title}>
+			<dt class="head"><{$preview_title}></dt>
+		<{/if}>
+		<{if $preview_body}>
+			<dd class="odd"><{$preview_body}></dd>
+		<{/if}>
+	</dl>
+<{/if}>
+<form name="approvalform" id="approvalform" action="<{$mod_url}>/admin/index.php?page=<{$page}>&amp;requestid=<{$unapproval.requestid}>" method="post">
+	<{$gticket_hidden}>
+	<input type="hidden" name="requestid" value="<{$unapproval.requestid}>" />
+	<input type="hidden" name="submitter" value="<{$unapproval.submitter}>" />
+	<input type="hidden" name="modify" value="<{$unapproval.modify}>" />
+	<input type="hidden" name="notify" value="<{$unapproval.notify}>" />
+	<input type="hidden" name="filename" value="<{$unapproval.filename}>" />
+	<input type="hidden" name="ext" value="<{$unapproval.ext}>" />
+	<input type="hidden" name="file2" value="<{$unapproval.file2}>" />
+	<input type="hidden" name="filename2" value="<{$unapproval.filename2}>" />
+	<input type="hidden" name="ext2" value="<{$unapproval.ext2}>" />
+	<{* <input type="hidden" name="myencode" value="<{$smarty.const._MD_D3DOWNLOADS_CHARSET}>" /> *}>
+	<{if $unapproval.lid}>
+		<input type="hidden" name="lid" value="<{$unapproval.lid}>" />
+	<{/if}>
+	<input type="hidden" name="ajax_url" id="ajax_url" value="<{$mod_url}>/index.php?page=ajax_load" />
+	<table class="outer">
+		<tr valign="top" align="left">
+			<td class="head"><label for="title"><{$smarty.const._MD_D3DOWNLOADS_SUBMIT_TITLE}></label></td>
+			<td class="even">
+				<input type="text" name="title" id="title" size="50" maxlength="199" value="<{$unapproval.title}>" />
+			</td>
+		</tr>
+		<tr valign="top" align="left">
+			<td class="head"><label for="postname"><{$smarty.const._MD_D3DOWNLOADS_SUBMIT_POSTNAME}></label></td>
+			<td class="even">
+				<{$unapproval.postname}>
+			</td>
+		</tr>
+		<tr valign="top" align="left">
+			<td class="head"><label for="url"><{$smarty.const._MD_D3DOWNLOADS_SUBMIT_URL}></label></td>
+			<td class="even">
+				<input type="text" name="url" id="url" size="90" maxlength="250" value="<{$unapproval.url}>" />&nbsp;<{$unapproval.filelink}>
+			</td>
+		</tr>
+		<{if $unapproval.filename}>
+			<tr valign="top" align="left">
+				<td class="head"><label for="filename"><{$smarty.const._MD_D3DOWNLOADS_SUBMIT_FILENAME}></label></td>
+				<td class="even">
+					<{$unapproval.filenamelink}><br />
+				</td>
+			</tr>
+		<{/if}>
+		<{if $unapproval.filename2}>
+			<tr valign="top" align="left">
+				<td class="head"><label for="filename2"><{$smarty.const._MD_D3DOWNLOADS_SUBMIT_FILENAME2}></label></td>
+				<td class="even">
+					<{$unapproval.filenamelink2}><br />
+				</td>
+			</tr>
+		<{/if}>
+		<tr valign="top" align="left">
+			<td class="head"><label for="cid"><{$smarty.const._MD_D3DOWNLOADS_SUBMIT_CATEGORY}></label></td>
+			<td class="even">
+				<select name="cid" id="cid"><br />
+					<{html_options options=$unapproval.category selected=$unapproval.cid}><br />
+				</select>
+			</td>
+		</tr>
+		<tr valign="top" align="left">
+			<td class="head"><label for="homepagetitle"><{$smarty.const._MD_D3DOWNLOADS_SUBMIT_HOMEPAGETITLE}></label></td>
+			<td class="even">
+				<input type="text" name="homepagetitle" id="homepagetitle" size="90" maxlength="260" value="<{$unapproval.homepagetitle}>" />
+			</td>
+		</tr>
+		<tr valign="top" align="left">
+			<td class="head"><label for="homepage"><{$smarty.const._MD_D3DOWNLOADS_SUBMIT_HOMEPAGE}></label></td>
+			<td class="even">
+				<input type="text" name="homepage" id="homepage" size="90" maxlength="100" value="<{if $unapproval.homepage}><{$unapproval.homepage}><{else}>http://<{/if}>" />&nbsp;[<a href="<{$unapproval.homepage}>" target="_blank"><{$smarty.const._MD_D3DOWNLOADS_SUBMIT_ACCESS_URL}></a>]
+			</td>
+		</tr>
+		<tr valign="top" align="left">
+			<td class="head"><label for="version"><{$smarty.const._MD_D3DOWNLOADS_SUBMIT_VERSION}></label></td>
+			<td class="even">
+				<input type="text" name="version" id="version" size="10" maxlength="10" value="<{$unapproval.version}>" />
+			</td>
+		</tr>
+		<tr valign="top" align="left">
+			<td class="head"><label for="size"><{$smarty.const._MD_D3DOWNLOADS_SUBMIT_SIZE}></label></td>
+			<td class="even">
+				<input type="text" name="size" id="size" size="10" maxlength="12" value="<{$unapproval.size}>" />&nbsp;<{$smarty.const._MD_D3DOWNLOADS_SUBMIT_BYTE}>
+			</td>
+		</tr>
+		<tr valign="top" align="left">
+			<td class="head"><label for="platform"><{$smarty.const._MD_D3DOWNLOADS_SUBMIT_PLATFORM}></label></td>
+			<td class="even">
+				<input type="text" name="platform" id="platform" size="50" maxlength="50" value="<{$unapproval.platform}>" /><br />
+				<select name="select_platform" id="select_platform">
+					<{html_options options=$select_platform}>
+				</select>
+				<select name="delimiter" id="delimiter">
+					<option value=" | "><{$smarty.const._MD_D3DOWNLOADS_SUBMIT_DELIMITER}> ( | )</option>
+					<option value=" , "><{$smarty.const._MD_D3DOWNLOADS_SUBMIT_DELIMITER}> ( , )</option>
+					<option value=" / "><{$smarty.const._MD_D3DOWNLOADS_SUBMIT_DELIMITER}> ( / )</option>
+					<option value="  "><{$smarty.const._MD_D3DOWNLOADS_SUBMIT_DELIMITER}> ( <{$smarty.const._MD_D3DOWNLOADS_SUBMIT_SPASE}> )</option>
+				</select>
+			</td>
+		</tr>
+		<{if $mod_config.use_license}>
+			<tr valign="top" align="left">
+				<td class="head"><label for="license"><{$smarty.const._MD_D3DOWNLOADS_SUBMIT_LICENSE}></label></td>
+				<td class="even">
+					<input type="text" name="license" id="license" size="50" maxlength="260" value="<{$unapproval.license}>" /><br />
+					<select name="select_license" id="select_license">
+						<{html_options options=$select_license}>
+					</select>
+				</td>
+			</tr>
+		<{/if}>
+		<tr valign="top" align="left">
+			<td class="head"><label for="description"><{$smarty.const._MD_D3DOWNLOADS_SUBMIT_DESCRIPTION}></label>
+				<br /><div id="editor_selector" style="display:none;"></div>
+			</td>
+			<td class="even">
+				<{xoopsdhtmltarea name="description" cols="60" rows="15" value=$unapproval.description"}>
+				<div style="font-size:  90%;background: #EFEFEF;color:inherit;border: 1px inset #CCC;padding: 2px;width: 90%;">
+					<{$smarty.const._MD_D3DOWNLOADS_SUBMIT_DESCRIPTION_DESC}>
+				</div>
+				<select name="current_data_list" id="current_data_list">
+					<option value="[title]"><{$smarty.const._MD_D3DOWNLOADS_SUBMIT_TITLE_INSERT}></option>
+					<option value="[filename]"><{$smarty.const._MD_D3DOWNLOADS_SUBMIT_FILENAME_INSERT}></option>
+					<option value="[filename2]"><{$smarty.const._MD_D3DOWNLOADS_SUBMIT_FILENAME2_INSERT}></option>
+					<option value="[expired]"><{$smarty.const._MD_D3DOWNLOADS_SUBMIT_EXPIRED_INSERT}></option>
+					<option value="[pagebreak]"><{$smarty.const._MD_D3DOWNLOADS_SUBMIT_PAGEBREAK_INSERT}></option>
+				</select>
+				<input type="button" name="current_data" id="current_data" class="formButton" value="<{$smarty.const._MD_D3DOWNLOADS_SUBMIT_INSERT}>" >
+			</td>
+		</tr>
+		<{if $canuseshots}>
+			<tr valign="top" align="left">
+				<td class="head"><label for="description_image"><{$smarty.const._MD_D3DOWNLOADS_SUBMIT_DESCRIPTION_IMAGE}></label></td>
+				<td class="even">
+					<select name="description_image" id="description_image"><br />
+						<{html_options options=$downimg.img_ar}><br />
+					</select>
+					<span style="cursor: pointer" id="description_image_left"><img src="<{$xoops_url}>/images/alignleft.gif" align="absbottom" alt="<{$smarty.const._MD_D3DOWNLOADS_LEFT}>" title="<{$smarty.const._MD_D3DOWNLOADS_LEFT}>"></span>
+					<span style="cursor: pointer" id="description_image_center"><img src="<{$xoops_url}>/images/aligncenter.gif" align="absbottom" alt="<{$smarty.const._MD_D3DOWNLOADS_CENTER}>" title="<{$smarty.const._MD_D3DOWNLOADS_CENTER}>"></span>
+					<span style="cursor: pointer" id="description_image_right"><img src="<{$xoops_url}>/images/alignright.gif" align="absbottom" alt="<{$smarty.const._MD_D3DOWNLOADS_RIGHT}>" title="<{$smarty.const._MD_D3DOWNLOADS_RIGHT}>"></span><br />
+					<div id="show_description_image_line">
+						<img src="<{$download.description_image}>" id="show_description_image" width="120" class="d3downloads_imgurl_frame">
+					</div>
+				</td>
+			</tr>
+			<tr valign="top" align="left">
+				<td class="head"><label for="logourl"><{$smarty.const._MD_D3DOWNLOADS_SUBMIT_LOGOURL}></label></td>
+				<td class="even">
+					<select name="logourl" id="logourl"><br />
+						<{html_options options=$downimg.img_ar selected=$unapproval.logourl}><br />
+					</select><br />
+					<{if $shots_help}>
+						<{$shots_help}>
+					<{/if}>
+					<div id="showlogourl_line">
+						<img src="<{$unapproval.shots_link}>" id="showlogourl" width="120" style="margin: 5 2px 3px;padding: 5px;border: 1px solid #CCC;background:#FFF;color:inherit;">
+					</div>
+				</td>
+			</tr>
+		<{/if}>
+		<tr valign="top" align="left">
+			<td class="head"><label for="option"><{$smarty.const._MD_D3DOWNLOADS_SUBMIT_OPTION}></label></td>
+			<td class="even">
+				<label for="html"><{$smarty.const._MD_D3DOWNLOADS_SUBMIT_HTML}></label>
+				<input type="checkbox" name="html" id="html" value="1" <{if $unapproval.html}>checked="checked"<{/if}> /><br />
+				<label for="smiley"><{$smarty.const._MD_D3DOWNLOADS_SUBMIT_SMILEY}></label>
+				<input type="checkbox" name="smiley" id="smiley" value="1" <{if $unapproval.smiley}>checked="checked"<{/if}> /><br />
+				<label for="br"><{$smarty.const._MD_D3DOWNLOADS_SUBMIT_BR}></label>
+				<input type="checkbox" name="br" id="br" value="1" <{if $unapproval.br}>checked="checked"<{/if}> /><br />
+				<label for="xcode"><{$smarty.const._MD_D3DOWNLOADS_SUBMIT_XCODE}></label>
+				<input type="checkbox" name="xcode" id="br" value="1" <{if $unapproval.xcode}>checked="checked"<{/if}> /><br />
+				<label for="visible"><{$smarty.const._MD_D3DOWNLOADS_SUBMIT_VISIBLE}></label>
+				<input type="checkbox" name="visible" id="visible" value="1" <{if $unapproval.visible}>checked="checked"<{/if}> /><br /> 
+				<label for="comment"><{$smarty.const._MD_D3DOWNLOADS_SUBMIT_COMMENT}></label>
+				<input type="checkbox" name="comment" id="comment" value="1" <{if $unapproval.cancomment}>checked="checked"<{/if}> />
+			</td>
+		</tr>
+		<{if $unapproval.filters}>
+			<tr valign="top" align="left">
+				<td class="head"><label for="filters"><{$smarty.const._MD_D3DOWNLOADS_SUBMIT_FILTERS}></label></td>
+				<td class="even">
+					<{foreach from=$unapproval.filters key="filter_name" item="filter"}>
+						<{$filter.title}> <input type="checkbox" name="filter_enabled_<{$filter_name}>" id="filter_enabled_<{$filter_name}>" value="1" <{if $filter.enabled}>checked="checked"<{/if}> <{if $filter.fixed}>disabled="disabled"<{/if}> /> <{$filter.desc}><br />
+					<{/foreach}>
+				</td>
+			</tr>
+		<{/if}>
+		<tr valign="top" align="left">
+			<td class="head">
+				<label for="extra"><{$smarty.const._MD_D3DOWNLOADS_SUBMIT_EXTRA}></label><br /><br />
+				<{$smarty.const._MD_D3DOWNLOADS_SUBMIT_EXTRA_SAMPLE}>
+			</td>
+			<td class="even">
+				<textarea name="extra" id="extra" cols="60" rows="6"><{$unapproval.extra}></textarea>
+				<div style="font-size:  90%;background: #EFEFEF;color:inherit;border: 1px inset #CCC;padding: 2px;width: 90%;">
+					<{$smarty.const._MD_D3DOWNLOADS_SUBMIT_EXTRA_DESC}>
+				</div>
+				<{$smarty.const._MD_D3DOWNLOADS_EXTRA_TITLE}><input id="extra_add_title" size="20" type="text">&nbsp;
+				<{$smarty.const._MD_D3DOWNLOADS_EXTRA_DESC}><input id="extra_add_desc" size="40" type="text">&nbsp;
+				<input type="button" name="extra_InsertText" id="extra_InsertText" class="d3downloads_submit" value="<{$smarty.const._MD_D3DOWNLOADS_SUBMIT_INSERT}>" >
+			</td>
+		</tr>
+		<tr valign="top" align="left">
+			<td class="head"><label for="created"><{$smarty.const._MD_D3DOWNLOADS_CREATED}></label></td>
+			<td class="even">
+				<input type="checkbox" name="createable" id="createable" value="1" <{if $unapproval.createable}> checked="checked"<{/if}> /><label for="createable"><{$smarty.const._MD_D3DOWNLOADS_LABEL_SPECIFY_DATETIME}></label><br />
+				<{html_select_date time=$form.created_ start_year="-1" end_year="+10" month_format="%m" day_format="%d" field_order="YMD" time=$unapproval.date field_array="created"}>
+				<{html_select_time time=$form.created_ minute_interval="10" display_seconds=false time=$unapproval.date field_array="created"}><br />
+			</td>
+		</tr>
+		<tr valign="top" align="left">
+			<td class="head"><label for="expired"><{$smarty.const._MD_D3DOWNLOADS_EXPIRED}></label></td>
+			<td class="even">
+				<input type="checkbox" name="expiredable" id="expiredable" value="1" <{if $unapproval.expiredable}> checked="checked"<{/if}> /><label for="expiredable"><{$smarty.const._MD_D3DOWNLOADS_LABEL_SPECIFY_DATETIME}></label><br />
+				<{html_select_date time=$form.expired_ start_year="-1" end_year="+10" month_format="%m" day_format="%d" field_order="YMD" time=$unapproval.expired field_array="expired"}>
+				<{html_select_time time=$form.expired_ minute_interval="10" display_seconds=false time=$unapproval.expired field_array="expired"}><br />
+			</td>
+		</tr>
+		<tr valign="top" align="left">
+			<td class="head"></td>
+			<td class="even">
+				<input type="submit" class="formButton" name="makedownload_post" id="makedownload_post" value="<{$smarty.const._MD_D3DOWNLOADS_APPROVAL}>" />
+				<input type="submit" class="formButton" name="makedownload_preview"  id="makedownload_preview" value="<{$smarty.const._PREVIEW}>" />
+				<{if $unapproval.requestid}>
+					<input type="submit" name="makedownloadform_delete" id="makedownloadform_delete" value="<{$smarty.const._DELETE}>" />
+				<{/if}>
+				<input name="back" id="back" type="button" value="<{$smarty.const._MD_D3DOWNLOADS_BTN_CANSEL}>" />
+			</td>
+		</tr>
+	</table>
+</form>
+<{if $down}>
+	<br />
+	<h2><{$smarty.const._MD_D3DOWNLOADS_NOWDATA}></h2>	
+	<table width='100%' cellspacing='0' class='outer'>
+		<tr>
+			<td class="head" colspan='2' align='left' height="18">
+				<{$smarty.const._MD_D3DOWNLOADS_CATEGORY}> <{$down.category}>
+			</td>
+		</tr>
+		<tr>
+			<td class='even' width='65%' style='text-align:left;vertical-align:top;'>
+				<{if ! $down.broken_link}>
+					<{$down.filelink}><b><{$down.title}></b></a>
+				<{else}>
+					<b><{$down.title}></b>
+					&nbsp;(&nbsp;<font color="#CC0000"><b>broken file !!</b></font>&nbsp;)
+				<{/if}>
+			</td>
+			<td class='even' style='text-align:right;vertical-align:bottom;' width='35%'>
+			<b><{$smarty.const._MD_D3DOWNLOADS_VERSION}>:</b>&nbsp;<{$down.version}><br /><b><{$smarty.const._MD_D3DOWNLOADS_DATE}>:</b>&nbsp;&nbsp;<{$down.updated}>
+			</td>
+		</tr>
+		<tr>
+			<td colspan='2' class='odd' align='left'>
+    				<b><{$smarty.const._MD_D3DOWNLOADS_DESCRIPTION}></b>
+			    	<br />
+				<{if $down.shots}>
+					<{$down.shots}>
+				<{/if}>
+				<{$down.description}>
+				<br />
+			</td>
+		</tr>
+		<tr>
+			<td colspan='2' class='even' align='left'>
+			<b>[<{$smarty.const._MD_D3DOWNLOADS_SIZE}>]</b>&nbsp;<{$down.size}><br />
+			<{if $down.platform}>
+				<b>[<{$smarty.const._MD_D3DOWNLOADS_PLATFORM}>]</b>&nbsp;<{$down.platform}><br />
+			<{/if}>
+			<{if $mod_config.use_license && $down.license}>
+				<b>[<{$smarty.const._MD_D3DOWNLOADS_LICENSE}>]</b>&nbsp;<{$down.license}><br />
+			<{/if}>
+			<{if $down.homepage}>
+				<b>[<{$smarty.const._MD_D3DOWNLOADS_HOMEPAGE}>]</b>&nbsp;<{$down.homepage}>
+			<{/if}>
+			</td>
+		</tr>
+	</table>
+	<{if $down.extra}>
+		<br />
+		<table style="margin-top: 0.2em;margin-bottom: 1em;border-collapse: collapse;border: solid 1px #999;font-size: 100%;" width="90%">
+			<{foreach item="info" from=$down.extra}>
+				<tbody><tr>
+					<td style="text-align: center;vertical-align:middle;border: solid 1px #999;font-size: 110%;font-weight: bolder;" width="20%">
+						<{$info.title}>
+					</td>
+					<td style="text-align: left;border: solid 1px #999;padding: 4px 6px;vertical-align:middle;" width="80%">
+						<{$info.desc}>
+					</td>
+				</tr>
+			<{/foreach}>
+		</tbody></table>
+	<{/if}>
+<{/if}>
+
+<{if $downimg.showlogourlselected}>
+<{$downimg.showlogourlselected}>
+<script type="text/javascript">
+<!--//
+jQuery( function($){
+    $( '#makedownloadform_delete' ).click( function(){
+		return confirm('<{$smarty.const._MD_D3DOWNLOADS_MSG_CONFIRMDELETECONTENT}>') ;
+    });
+
+    $( '#back' ).click( function(){
+		location.href="<{$mod_url}>/admin/index.php?page=approvalmanager" ;
+    });
+});
+
+showlogourlSelected( 'show_description_image' , 'description_image', 'show_description_image_line' , '<{$mod_url}>/index.php?page=ajax_load' ) ;
+showlogourlSelected( 'showlogourl' , 'logourl', 'showlogourl_line' , '<{$mod_url}>/index.php?page=ajax_load' ) ;
+//--></script>
+<{/if}>
+
+<style type="text/css">
+div.grippie {
+	background:#EEEEEE url(<{$mod_url}>/index.php?page=module_header&src=grippie.png) no-repeat scroll center 2px;
+	border-color:#DDDDDD;
+	border-style:solid;
+	border-width:0pt 1px 1px;
+	cursor:s-resize;
+	height:9px;
+	overflow:hidden;
+}
+.resizable-textarea textarea {
+	display:block;
+	margin-bottom:0pt;
+}
+.d3downloads_editor_selector {
+	float: left;
+	width: auto;
+	color: #000000;
+	font-weight: normal;
+	background: #ffffff;
+	font-size: 11px;
+	margin-top: 10px;
+	margin-right: 1px;
+	padding: 2px 10px;
+	border: 1px solid gray;
+	cursor: pointer;
+}
+.d3downloads_focus {
+	border: 1px solid #CC0000;
+}
+</style>

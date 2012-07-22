@@ -1,0 +1,153 @@
+<{strip}>
+<table width="97%" cellspacing="0" cellpadding="0" border="0" align="center">
+  <tr>
+    <td class='calframe'>
+
+      <{* HEADER *}>
+      <table border='0' cellspacing='0' cellpadding='0' style='width:640px;'>
+        <tr>
+          <td>
+            <{$cat_desc}>
+          </td>
+        </tr>
+        <tr>
+          <td nowrap='nowrap' align='center' bgcolor='<{$calhead_bgcolor}>'>
+            <table border='0' cellspacing='0' cellpadding='0' width='640' class='pical-categoryform'>
+              <tr>
+
+                <{* CATEGORY SELECT FORM *}>
+                <td align='center' valign='middle' style='vertical-align:middle;' class='pical-categoryform'>
+                  <{$categories_selform}>
+                </td>
+
+                <td width='8'>
+                  <img src='<{$images_url}>/spacer.gif' alt='' width='8' height='4' />
+                </td>
+
+                <{* DATE DESCRIPTION *}>
+                <td width='350' align='center' valign='middle' nowrap='nowrap' style='vertical-align:middle;'>
+                  <img src='<{$images_url}>/spacer.gif' alt='' width='350' height='4' /><br />
+                  <form action='<{$mod_url}>/index.php?smode=List&amp;num=<{$num}>&amp;cid=<{$now_cid}>&amp;order=<{$order}>' method='POST' style='margin:0px;'>
+                    <font size='4' color='<{$calhead_color}>'><span class='calhead'><{$ymdo_selects}><input type='submit' name='pical_jumpcaldate' value='<{$lang_button_jump}>' /></font></span></font><br />
+                  </form>
+                  <img src='<{$images_url}>/spacer.gif' alt='' width='350' height='4' />
+                </td>
+
+                <td align='right' valign='middle' style='vertical-align:middle;'>
+
+                  <{* ICONS *}>
+                  <img src='<{$images_url}>/spacer.gif' alt='' width='128' height='4' /><br />
+                  <a href='<{$get_target}>?cid=<{$now_cid}>&amp;smode=Yearly&amp;caldate=<{$caldate}>'><img src='<{$images_url}>/year_on.gif' border='0' width='30' height='24' alt='<{$alt_yearly}>' title='<{$alt_yearly}>' /></a>
+                  <a href='<{$get_target}>?cid=<{$now_cid}>&amp;smode=Monthly&amp;caldate=<{$caldate}>'><img src='<{$images_url}>/month_on.gif' border='0' width='30' height='24' alt='<{$alt_monthly}>' title='<{$alt_monthly}>' /></a>
+                  <a href='<{$get_target}>?cid=<{$now_cid}>&amp;smode=Weekly&amp;caldate=<{$caldate}>'><img src='<{$images_url}>/week_on.gif' border='0' width='30' height='24' alt='<{$alt_weekly}>' title='<{$alt_weekly}>' /></a>
+                  <a href='<{$get_target}>?cid=<{$now_cid}>&amp;smode=Daily&amp;caldate=<{$caldate}>'><img src='<{$images_url}>/day_on.gif' border='0' width='30' height='24' alt='<{$alt_daily}>' title='<{$alt_daily}>' /></a>
+
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+
+      <br />
+      <hr />
+
+      <{if $num_rows > 1}>
+      <div>
+
+        <{if $for_print <> true}>
+
+        <{$lang_sortby}>&nbsp;&nbsp;
+        <{$lang_startdatetime}> (<a href="index.php?smode=List&amp;cid=<{$now_cid}>&amp;caldate=<{$caldate}>&amp;op=<{$op}>&amp;order=start"><img src="<{$images_url}>/up.gif" border="0" align="middle" alt="" /></a><a href="index.php?smode=List&amp;cid=<{$now_cid}>&amp;caldate=<{$caldate}>&amp;op=<{$op}>&amp;order=start+DESC"><img src="<{$images_url}>/down.gif" border="0" align="middle" alt="" /></a>)
+        <{$lang_lastmodified}> (<a href="index.php?smode=List&amp;cid=<{$now_cid}>&amp;caldate=<{$caldate}>&amp;op=<{$op}>&amp;order=dtstamp"><img src="<{$images_url}>/up.gif" border="0" align="middle" alt="" /></a><a href="index.php?smode=List&amp;cid=<{$now_cid}>&amp;caldate=<{$caldate}>&amp;op=<{$op}>&amp;order=dtstamp+DESC"><img src="<{$images_url}>/down.gif" border="0" align="middle" alt="" /></a>)
+        <{$lang_summary}> (<a href="index.php?smode=List&amp;cid=<{$now_cid}>&amp;caldate=<{$caldate}>&amp;op=<{$op}>&amp;order=summary"><img src="<{$images_url}>/up.gif" border="0" align="middle" alt="" /></a><a href="index.php?smode=List&amp;cid=<{$now_cid}>&amp;caldate=<{$caldate}>&amp;op=<{$op}>&amp;order=summary+DESC"><img src="<{$images_url}>/down.gif" border="0" align="middle" alt="" /></a>)
+        <{$lang_submitter}> (<a href="index.php?smode=List&amp;cid=<{$now_cid}>&amp;caldate=<{$caldate}>&amp;op=<{$op}>&amp;order=uid"><img src="<{$images_url}>/up.gif" border="0" align="middle" alt="" /></a><a href="index.php?smode=List&amp;cid=<{$now_cid}>&amp;caldate=<{$caldate}>&amp;op=<{$op}>&amp;order=uid+DESC"><img src="<{$images_url}>/down.gif" border="0" align="middle" alt="" /></a>)
+        <br />
+        
+        <{/if}>
+        
+        <b><{$lang_cursortedby}> <{$lang_order}></b>
+      </div>
+      <hr />
+      <{/if}>
+
+      <br />
+    </td>
+  </tr>
+</table>
+
+<form name='MainForm' action='<{$mod_url}>/index.php' target='_blank' method='post' style='margin:0px;'>
+<table width="100%" cellspacing="0" cellpadding="10" border="0">
+  <tr>
+    <td width="100%" align="center" valign="top">
+      <table width="100%" cellspacing="0" cellpadding="0" border="0">
+        <tr>
+          <td style='text-align:left;vertical-align:middle;width=33%;'><{$page_nav_info}></td>
+          <td style='text-align:center;vertical-align:middle;width:33%;'><{$page_nav}></td>
+          <td style='text-align:right;vertical-align:middle;width:34%;'>
+          </td>
+        </tr>
+      </table>
+      <table width='100%' class='outer' cellpadding='4' cellspacing='1'>
+        <tr valign='middle'>
+          <th class='head'><{$lang_submitter}></th>
+          <th class='head'><{$lang_startdatetime}></th>
+          <th class='head'><{$lang_enddatetime}></th>
+          <th class='head'><{$lang_summary}></th>
+          <th class='head'><{$lang_rrule}></th>
+          <th class='head'><{$lang_admission}></th>
+          <th class='head'><input type='checkbox' name='dummy' onclick="with(document.MainForm){for(i=0;i<length;i++){if(elements[i].type=='checkbox'){elements[i].checked=this.checked;}}}" /></th>
+        </tr>
+        <!-- Start event loop -->
+        <{foreach item='event' from=$events}>
+        <tr>
+          <td class='<{$event.oddeven}>'><{$event.submitter_info}></td>
+          <td class='<{$event.oddeven}>'><{$event.start_date_desc}><br /><{$event.start_time_desc}></td>
+          <td class='<{$event.oddeven}>'><{$event.end_date_desc}><br /><{$event.end_time_desc}></td>
+          <td class='<{$event.oddeven}>'><a href='<{$mod_url}>/index.php?action=View&amp;event_id=<{$event.id}>'><{$event.summary}></a></td>
+          <td class='<{$event.oddeven}>'><{$event.rrule}></td>
+          <td class='<{$event.oddeven}>' align='center'>
+            <{$event.admission}>
+            <{if $event.editable == true}><a href='<{$get_target}>?smode=Daily&amp;action=Edit&amp;event_id=<{$event.id}>&amp;caldate=<{$caldate}>'><img src='<{$images_url}>/addevent.gif' border='0' width='14' height='12' /><{$lang_editevent}></a><{/if}>
+          </td>
+          <td class='<{$event.oddeven}>' align='right'><input type='checkbox' name='ids[]' value='<{$event.target_id}>' /></td>
+        </tr>
+        <{/foreach}>
+        <!-- End event loop -->
+
+        <{if $user_can_output_ics }>
+        <tr>
+          <td colspan='7' align='right' class='head'>
+            <{$lang_checkeditems}> &nbsp; <{$lang_icalendar_output}><input type='submit' name='output_ics_confirm' value='<{$lang_button_export}>' />
+          </td>
+        </tr>
+        <{/if}>
+
+      </table>
+
+      <table border='0' cellspacing='0' cellpadding='0' width='570'>
+        <tr>
+          <td width='10'><img src='<{$images_url}>/spacer.gif' alt='' width='10' height='10' /></td>
+          <td width='100%' align='right'><{$pical_copyright}></td>
+        </tr>
+        <{if $for_print <> true}>
+        <tr>
+          <td width='10'><img src='<{$images_url}>/spacer.gif' alt='' width='10' height='10' /></td>
+          <td width='100%' align='right'><a href="<{$print_link}>" target="_blank"><img src="<{$images_url}>/print.gif" alt="<{$alt_print}>" title="<{$alt_print}>" border="0" /></a></td>
+        </tr>
+        <{/if}>
+      </table>
+
+    </td>
+  </tr>
+</table>
+</form>
+
+<br /><br />
+<{/strip}>
+
+<{include file='db:system_notification_select.html'}>

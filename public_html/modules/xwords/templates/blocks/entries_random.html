@@ -1,0 +1,11 @@
+<div style="text-align:left;margin:1em;padding:0em;line-height:130%;">
+  <{foreach item=randomterm from=$block.randomstuff}>
+    <div style="text-align:left;margin:0em;padding:0em;">
+      <{$randomterm.adminlinks}><{$randomterm.userlinks}>
+      <a href="<{$xoops_url}>/modules/<{$randomterm.dir}>/entry.php?entryID=<{$randomterm.entryID}><{if $randomterm.multicats}>&amp;categoryID=<{$randomterm.categoryID}>" title="[<{$randomterm.categoryname}>]<{/if}>"><{$randomterm.term}></a><{if $randomterm.multicats}>&nbsp;<span style="font-size:xx-small;">[<a href="<{$xoops_url}>/modules/<{$randomterm.dir}>/category.php?categoryID=<{$randomterm.categoryID}>"><{$randomterm.categoryname}></a>]</span><{/if}><br /><{$randomterm.definition}>
+    </div>
+    <div style="text-align:right;font-size:x-small;margin:0em;padding:0em;">
+      <a href="<{$xoops_url}>/modules/<{$randomterm.dir}>/index.php"><{$randomterm.seemore}></a>
+    </div>
+  <{/foreach}>
+</div>

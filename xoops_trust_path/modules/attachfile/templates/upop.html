@@ -1,0 +1,54 @@
+<{include file="db:`$mydirname`_inc_header.html"}>
+<script language="JavaScript">
+function submitDelete( attach_id ) {
+	document.f.attach_id.value = attach_id ;
+	document.f.mode.value = "delete" ;
+	document.f.submit() ;
+}
+function submitUpload() {
+	document.f.attach_id.value = "" ;
+	document.f.mode.value = "upload" ;
+	document.f.submit() ;
+}
+function refreshCount() {
+	if( opener && opener.document ) {
+		var obj = opener.document.getElementById("<{$unique_id}>") ;
+		if( obj ) {
+			obj.innerHTML = "<{$attached_files_count}>";
+		}
+	}
+}
+refreshCount() ;
+</script>
+<div class="head" style="width: 100%; text-align: center;"><h1><{$smarty.const._MD_ATTACHFILE_UPLOAD_POPUP}></h1></div>
+<div style="padding: 5px;">
+<form name="f" method="POST" action="<{$mod_url}>/index.php" enctype="multipart/form-data">
+<input type="hidden" name="attach_id" value="" />
+<input type="hidden" name="mode" value="" />
+<input type="hidden" name="module_dirname" value="<{$module_dirname}>" />
+<input type="hidden" name="target_id" value="<{$target_id}>" />
+<input type="file" name="attach" id="attach" size="40" maxlength="255" />
+<input type="button" onclick="submitUpload();" value="<{$smarty.const._MD_ATTACHFILE_UPLOAD}>" />
+<br/>
+<{if $attached_files_count == 0}>
+	<{$smarty.const._MD_ATTACHFILE_MSG_FILENOTFOUND}>
+<{else}>
+<table class="outer">
+	<tr class="head">
+		<th><{$smarty.const._MD_ATTACHFILE_LABEL_FILE_NAME}></th>
+		<th><{$smarty.const._MD_ATTACHFILE_LABEL_FILE_SIZE}></th>
+	</tr>
+	<{foreach from=$attached_files item=attach}>
+	<tr class="<{cycle values="even,odd"}>">
+		<td>
+			<input type="button" onclick="submitDelete( '<{$attach.attach_id}>' );" value="<{$smarty.const._MD_ATTACHFILE_DELATTACH}>" />
+			<a href="<{$mod_url}>/index.php?mode=download&amp;attach_id=<{$attach.attach_id}>"><{$attach.link_name}></a>
+		</td>
+		<td><{$attach.file_size}></td>
+	</tr>
+	<{/foreach}>
+</table>
+<{/if}>
+</form>
+</div>
+<{include file="db:`$mydirname`_inc_footer.html"}>

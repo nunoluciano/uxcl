@@ -1,0 +1,42 @@
+<div id="mainFrame">
+<{if $mydirname}><{include file="db:`$mydirname`_inc_breadcrumbs.html"}><{/if}>
+
+<table class="outer topic">
+<tr><th colspan="2"><{$topic.lang_title}></th></tr>
+
+<tr class="even">
+<td class="itemTitle bg0"><{$smarty.const._MD_XSNS_TOPIC}></td>
+<td class="itemValue"><{$topic.title}></td>
+</tr>
+
+<{if $topic.number > 0}>
+<tr class="even">
+<td class="itemTitle bg0"><{$smarty.const._MD_XSNS_TOPIC_RESPONSE_ID}></td>
+<td class="itemValue"><{$topic.number}></td>
+</tr>
+<{/if}>
+
+<tr class="even">
+<td class="itemTitle bg0"><{$smarty.const._MD_XSNS_TOPIC_AUTHOR}></td>
+<td class="itemValue"><a href="<{$topic.author_url}>"><{$topic.author_name}></a></td>
+</tr>
+
+<tr class="even">
+<td class="itemTitle bg0"><{$smarty.const._MD_XSNS_TOPIC_BODY}></td>
+<td class="itemValue"><{$topic.body}></td>
+</tr>
+
+<{$form_topic_del}>
+<tr class="foot">
+<td colspan="2" class="submitFrame">
+<{$message}><br><br>
+<input type="submit" class="submit" value="<{$smarty.const._MD_XSNS_BTN_DEL}>">&nbsp;&nbsp;
+<input type="button" class="submit" value="<{$smarty.const._MD_XSNS_BTN_CANCEL}>" onclick="javascript:history.go(-1);">
+<br>
+</td>
+
+</tr>
+</form>
+
+</table>
+</div>

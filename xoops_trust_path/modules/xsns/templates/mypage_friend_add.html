@@ -1,0 +1,43 @@
+<div id="mainFrame">
+
+<!-- User Menu -->
+<{if $mydirname}><{include file="db:`$mydirname`_inc_mypage_menu.html"}><{/if}>
+
+<table class="outer memberReq">
+
+<tr><th colspan="3"><{$smarty.const._MD_XSNS_FRIEND_ADD}></td></tr>
+
+<tr class="head">
+<td colspan="3"><div class="msgFrame"><{$smarty.const._MD_XSNS_FRIEND_ADD_DESC}></div></td>
+</tr>
+
+<tr class="even">
+<td class="avatar" rowspan="2">
+<a href="<{$user.page_url}>"><img src="<{$user.avatar_url}>" width="<{$user.avatar_width}>" height="<{$user.avatar_height}>" alt=""></a>
+</td>
+<td class="itemTitle"><{$smarty.const._MD_XSNS_USER_NAME}></td>
+<td class="itemValue"><a href="<{$user.page_url}>"><{$user.name}></a></td>
+</tr>
+
+<tr class="even">
+<td class="itemTitle"><{$smarty.const._MD_XSNS_MEMBER_LAST_LOGIN}></td>
+<td class="itemValue"><{$user.last_login|date_format:"%Y-%m-%d %H:%M:%S"}></td>
+</tr>
+
+<{$form_friend_add_submit}>
+<tr class="foot">
+<td class="submitFrame" colspan="3">
+<p>
+<{$smarty.const._MD_XSNS_MEMBER_REQUEST_MESSAGE}> :<br>
+<textarea name="message" cols="40" rows="5"></textarea><br>
+</p>
+<p>
+<input type="submit" class="submit" value="<{$smarty.const._MD_XSNS_BTN_SEND}>">&nbsp;&nbsp;
+<input type="button" class="submit" value="<{$smarty.const._MD_XSNS_BTN_CANCEL}>" onclick="javascript:history.go(-1);">
+</p>
+</td>
+</tr>
+</form>
+
+</table>
+</div>

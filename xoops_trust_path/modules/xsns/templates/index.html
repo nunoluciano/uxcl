@@ -1,0 +1,110 @@
+<div id="mainFrame">
+
+<!-- Community Search -->
+<table class="outer commuSearch">
+
+<tr class="even"><th colspan="2"><{$smarty.const._MD_XSNS_INDEX_SEARCH}></th></tr>
+
+<{$form_search}>
+
+<tr class="even">
+<td colspan="2">
+<{$smarty.const._MD_XSNS_INDEX_KEYWORD}>
+<input type="text" name="keyword" value="<{$keyword}>">&nbsp;
+<{$smarty.const._MD_XSNS_CATEGORY}>
+
+<{$category_selector}>
+
+&nbsp;
+<input type="submit" class="submit" value="<{$smarty.const._MD_XSNS_BTN_SEARCH}>">
+</td>
+</tr>
+
+</form>
+
+<{if !$is_guest}>
+<tr class="even">
+<td colspan="2" style="text-align:right;">
+<a href="<{$xoops_url}>/modules/<{$mydirname}>/?act=add"><{$smarty.const._MD_XSNS_INDEX_ADD}></a>&nbsp;<{$smarty.const._MD_XSNS_INDEX_ADD_DESC}>
+</td>
+</tr>
+<{/if}>
+
+<tr class="even">
+<td colspan="2">
+<{$smarty.const._MD_XSNS_INDEX_SORT}>&nbsp;
+<a href="<{$url.sort_member}>"><{$smarty.const._MD_XSNS_INDEX_SORT_MEMBER}></a>&nbsp;|
+<a href="<{$url.sort_date}>"><{$smarty.const._MD_XSNS_INDEX_SORT_DATE}></a>&nbsp;|
+<a href="<{$url.sort_pop}>"><{$smarty.const._MD_XSNS_INDEX_SORT_POP}></a>&nbsp;|
+<a href="<{$url.sort_up}>"><{$smarty.const._MD_XSNS_INDEX_SORT_UP}></a>
+</td>
+</tr>
+
+<{foreach item=category from=$category_list}>
+<tr class="even">
+<td class="parentCategory"><{$category.name}></td>
+<td class="childCategory"><{$category.selector}></td>
+</tr>
+<{/foreach}>
+
+</table>
+<br>
+
+<!-- Community List -->
+<table class="outer commuList">
+
+<tr><th><{$smarty.const._MD_XSNS_INDEX_LIST}></th></tr>
+
+<{if $commu_list|@count > 0}>
+<tr><td class="odd centerH"><{$pager.selector}></td></tr>
+<{/if}>
+<tr><td class="odd" style="text-align:right;"><{$pager.description}></td></tr>
+
+<{if $commu_list|@count > 0}>
+<tr><td class="odd blankRow"></td></tr>
+<{/if}>
+
+<{foreach item=commu from=$commu_list}>
+
+<tr><td>
+<table class="outer" style="width:100%;">
+
+	<tr class="even">
+	<td rowspan="4" class="image">
+	<a href="<{$commu.page_url}>"><img src="<{$commu.image.url_src|default:"images/cm_commu_default1.gif"}>" alt=""></a>
+	</td>
+	<td class="itemTitle"><{$smarty.const._MD_XSNS_COMMU_NAME}></td>
+	<td colspan="2" class="centerV"><{$commu.name}></td>
+	</tr>
+
+	<tr class="even">
+	<td class="itemTitle"><{$smarty.const._MD_XSNS_MEMBER_COUNT}></td>
+	<td colspan="2"><{$commu.member_count}></td>
+	</tr>
+
+	<tr class="even">
+	<td class="itemTitle"><{$smarty.const._MD_XSNS_INDEX_DETAIL_DESC}></td>
+	<td colspan="2" class="centerV"><{$commu.info|mb_truncate:200}></td>
+	</tr>
+
+	<tr class="even">
+	<td class="itemTitle"><{$smarty.const._MD_XSNS_CATEGORY}></td>
+	<td class="category"><{$commu.category_name}></td>
+	<td class="detail"><a href="<{$commu.page_url}>"><{$smarty.const._MD_XSNS_INDEX_DETAIL}></a></td>
+	</tr>
+	
+
+</table>
+</td></tr>
+
+<tr><td class="odd blankRow"></td></tr>
+
+<{/foreach}>
+
+<{if $commu_list|@count > 0}>
+<tr><td class="odd centerH"><{$pager.selector}></td></tr>
+<tr><td class="odd" style="text-align:right;"><{$pager.description}></td></tr>
+<{/if}>
+
+</table>
+</div>

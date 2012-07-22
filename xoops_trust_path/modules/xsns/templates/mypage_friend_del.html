@@ -1,0 +1,37 @@
+<div id="mainFrame">
+
+<!-- User Menu -->
+<{if $mydirname}><{include file="db:`$mydirname`_inc_mypage_menu.html"}><{/if}>
+
+<table class="outer">
+
+<tr><th colspan="3"><{$smarty.const._MD_XSNS_FRIEND_DELETE}></th></tr>
+
+<tr class="head">
+<td colspan="3"><div class="msgFrame"><{$smarty.const._MD_XSNS_FRIEND_DELETE_DESC}></div></td>
+</tr>
+
+<tr class="even">
+<td class="centerHV" rowspan="2">
+<a href="<{$friend.page_url}>"><img src="<{$friend.avatar_url}>" width="<{$friend.avatar_width}>" height="<{$friend.avatar_height}>" alt=""></a>
+</td>
+<td class="centerV"><{$smarty.const._MD_XSNS_USER_NAME}></td>
+<td class="centerV" style="width:60%;"><a href="<{$friend.page_url}>"><{$friend.name}></a></td>
+</tr>
+
+<tr class="even">
+<td class="centerV"><{$smarty.const._MD_XSNS_MEMBER_LAST_LOGIN}></td>
+<td class="centerV" style="width:60%;"><{$friend.last_login|date_format:"%Y-%m-%d %H:%M:%S"}></td>
+</tr>
+
+<{$form_friend_del}>
+<tr class="foot">
+<td class="submitFrame" colspan="3">
+<input type="submit" class="submit" value="<{$smarty.const._MD_XSNS_BTN_SEND}>">&nbsp;&nbsp;
+<input type="button" class="submit" value="<{$smarty.const._MD_XSNS_BTN_CANCEL}>" onclick="javascript:history.go(-1);">
+</td>
+</tr>
+</form>
+
+</table>
+</div>

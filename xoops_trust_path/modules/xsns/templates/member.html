@@ -1,0 +1,48 @@
+<div id="mainFrame">
+<{if $mydirname}><{include file="db:`$mydirname`_inc_breadcrumbs.html"}><{/if}>
+
+<table class="outer member">
+
+<tr>
+<th colspan="5">[<{$commu.name}>] <{$smarty.const._MD_XSNS_TITLE_MEMBER}></th>
+</tr>
+
+<tr><td colspan="5" class="odd centerH"><{$pager.selector}></td></tr>
+<tr><td colspan="5" class="odd" style="text-align:right;"><{$pager.description}></td></tr>
+
+<tr class="head">
+<td class="centerH" style="width:15%;"><{$smarty.const._MD_XSNS_AVATAR}></td>
+<td class="centerH" style="width:45%;"><{$smarty.const._MD_XSNS_USER_NAME}></td>
+<td class="centerH" style="width:20%;"><{$smarty.const._MD_XSNS_MEMBER_REG_DATE}></td>
+<td class="centerH" style="width:20%;"><{$smarty.const._MD_XSNS_MEMBER_LAST_LOGIN}></td>
+</tr>
+
+<{foreach item=member from=$member_list}>
+
+<tr class="even">
+
+<td class="centerHV">
+<a href="<{$member.page_url}>"><img src="<{$member.avatar_url}>" width="<{$member.avatar_width}>" height="<{$member.avatar_height}>" alt="<{$member.name}>"></a>
+</td>
+
+<td class="centerV">
+<a href="<{$member.page_url}>"><{$member.name}></a>
+</td>
+
+<td class="centerHV">
+<{$member.time|date_format:"%Y-%m-%d<br>%H:%M:%S"}>
+</td>
+
+<td class="centerHV">
+<{$member.last_login|date_format:"%Y-%m-%d<br>%H:%M:%S"}>
+</td>
+
+</tr>
+
+<{/foreach}>
+
+<tr><td colspan="5" class="odd centerH"><{$pager.selector}></td></tr>
+<tr><td colspan="5" class="odd" style="text-align:right;"><{$pager.description}></td></tr>
+
+</table>
+</div>

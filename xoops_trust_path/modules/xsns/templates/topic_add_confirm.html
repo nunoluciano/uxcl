@@ -1,0 +1,56 @@
+<div id="mainFrame">
+<{if $mydirname}><{include file="db:`$mydirname`_inc_breadcrumbs.html"}><{/if}>
+
+<table class="outer topic">
+
+<tr><th colspan="2"><{$smarty.const._MD_XSNS_TITLE_TOPIC_ADD}></th></tr>
+
+<tr class="even">
+<td class="itemTitle bg0"><{$smarty.const._MD_XSNS_TOPIC_TITLE}></td>
+<td class="itemValue"><{$topic.name}></td>
+</tr>
+
+<tr class="even">
+<td class="itemTitle bg0"><{$smarty.const._MD_XSNS_TOPIC_BODY}></td>
+<td class="itemValue"><{$topic.body}></td>
+</tr>
+
+<{if $topic.images|@count > 0 && $mod_config.image_form_limit > 0}>
+<tr class="even">
+<td class="itemTitle bg0"><{$smarty.const._MD_XSNS_IMAGE}></td>
+<td class="itemValue">
+<{foreach item=image from=$topic.images}>
+<img src="<{$image.url_src}>" alt="">&nbsp;
+<{/foreach}>
+</td>
+</tr>
+<{/if}>
+
+<{if $topic.files|@count > 0 && $mod_config.file_form_limit > 0}>
+<tr class="even">
+<td class="itemTitle bg0"><{$smarty.const._MD_XSNS_FILE}></td>
+<td class="itemValue">
+<ul>
+<{foreach item=file from=$topic.files}>
+<li><{$file.caption|mb_truncate:40:"...":1:1}>&nbsp;(<{$file.size}> bytes.)</li>
+<{/foreach}>
+</ul>
+</td>
+</tr>
+<{/if}>
+
+<{$form_topic_add_submit}>
+<tr class="foot">
+<td colspan="2" class="submitFrame">
+<p><{$smarty.const._MD_XSNS_TOPIC_ADD_CONFIRM}></p>
+<p>
+<input type="submit" class="submit" value="<{$smarty.const._MD_XSNS_BTN_ADD}>">&nbsp;&nbsp;
+<input type="button" class="submit" value="<{$smarty.const._MD_XSNS_BTN_MODIFY}>" onclick="location.href='<{$url_modify}>'">
+</p>
+</td>
+</tr>
+</form>
+
+</table>
+
+</div>

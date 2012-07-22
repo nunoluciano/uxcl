@@ -1,0 +1,33 @@
+<{if $mod_config.show_breadcrumbs}>
+	<{include file="db:`$mydirname`_inc_breadcrumbs.html"}>
+<{/if}>
+<table width="100%" border="0" cellspacing="5" cellpadding="0" align="center">
+	<tr valign="top" align="left">
+		<td class="d3downloads_head">
+		<form name="cid_select" action="<{$mod_url}>/index.php?page=<{$page}>" method="get" style="margin:0px;text-align:center;">
+			<select name="cid" onchange="submit();">
+			<option value=""><{$lang_directcatsel}></option>
+				<{html_options options=$category}><br />
+			</select> &nbsp; &nbsp;
+			<{$download_total_num}>
+		</form>
+		</td>
+	</tr>
+</table>
+<br />
+<table width="100%" cellspacing="0" cellpadding="10" border="0">
+	<tr>
+		<td width="100%" align="center" valign="top">
+			<{include file="db:`$mydirname`_inc_download.html" down=$file}>
+		</td>
+	</tr>
+</table>
+<a name="comment"></a>
+<!-- d3forum comment integration -->
+<{if $file.cancomment && $d3comment_dirname && $d3comment_forum_id}>
+	<{d3comment mydirname=$mydirname class="d3downloadsComment"}>
+<{/if}>
+
+<hr class="notification" />
+
+<{include file='db:system_notification_select.html'}>

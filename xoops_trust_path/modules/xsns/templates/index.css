@@ -1,0 +1,99 @@
+table.commuSearch td.parentCategory {
+	width: 20%;
+	vertical-align: middle;
+}
+
+table.commuSearch td.childCategory {
+	width: 80%;
+	vertical-align: middle;
+}
+
+table.commuList td.detail {
+	width: 180px;
+	text-align: center;
+	vertical-align: middle;
+}
+
+table.commuList td.category {
+	width: 180px;
+	vertical-align: middle;
+}
+
+table.commuList td.image {
+	width: 100px;
+	text-align: center;
+	vertical-align: middle;
+}
+
+table.commuList td.itemTitle {
+	width: 80px;
+	vertical-align: middle;
+}
+
+table.commuList td.itemValue {
+	vertical-align: middle;
+	word-break: break-all;
+}
+
+
+table.commuDetail td.commuImage {
+	height: 270px;
+	padding: 0;
+	text-align: center;
+	vertical-align: middle;
+}
+
+table.commuDetail td.avatar {
+	width: 86px;
+	height: 86px;
+	margin: 0;
+	padding: 0;
+	text-align: center;
+	vertical-align: middle;
+}
+
+table.commuDetail td.itemTitle {
+	width: 6.5em;
+	text-align: center;
+	vertical-align: middle;
+}
+
+table.commuDetail td.itemValue {
+	vertical-align: middle;
+	word-break: break-all;
+}
+
+table.commuEdit td.itemTitle {
+	width: 6.5em;
+	text-align: center;
+	vertical-align: middle;
+}
+
+table.commuEdit td.itemValue {
+	vertical-align: middle;
+	word-break: break-all;
+}
+
+
+table.send td.itemTitle {
+	width: 6.5em;
+	text-align: center;
+	vertical-align: middle;
+}
+
+table.send td.itemValue {
+	vertical-align: middle;
+	word-break: break-all;
+}
+
+
+table.commuJoin td.itemTitle {
+	width: 8em;
+	text-align: center;
+	vertical-align: middle;
+}
+
+table.commuJoin td.itemValue {
+	vertical-align: middle;
+	word-break: break-all;
+}

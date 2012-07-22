@@ -1,0 +1,20 @@
+<div id="mainFrame">
+<{if $mydirname}><{include file="db:`$mydirname`_inc_breadcrumbs.html"}><{/if}>
+
+<{$form_commu_leave}>
+
+<table class="outer">
+<tr><th>[<{$commu.name}>] <{$smarty.const._MD_XSNS_TITLE_INDEX_LEAVE}></th></tr>
+
+<tr class="foot"><td class="submitFrame">
+<p><{$smarty.const._MD_XSNS_INDEX_LEAVE_DESC}></p>
+<p>
+<input type="submit" class="submit" value="<{$smarty.const._MD_XSNS_BTN_INDEX_LEAVE}>">&nbsp;&nbsp;
+<input type="button" class="submit" value="<{$smarty.const._MD_XSNS_BTN_INDEX_LEAVE_NO}>" onclick="javascript:history.go(-1);">
+</p>
+</td></tr>
+
+</table>
+
+</form>
+</div>

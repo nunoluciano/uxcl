@@ -1,0 +1,342 @@
+<div id="mainFrame">
+
+<!-- User Menu -->
+<{if $mydirname}><{include file="db:`$mydirname`_inc_mypage_menu.html"}><{/if}>
+
+<table style="margin:0; padding:0;"><tr><td>
+
+<{if $info_list|@count > 0}>
+
+<!-- Information Box : Start -->
+<table style="width:100%;"><tr><td>
+<table class="outer" style="width:100%;">
+<tr><th>INFORMATION</th></tr>
+<tr class="odd"><td>
+<ul>
+<{foreach item=info from=$info_list}>
+<li>
+<a href="<{$info.url}>"><font style="color:#ff0000; text-decoration:underline;"><{$info.message}></font></a>
+&nbsp(<{$info.time|date_format:"%Y-%m-%d %H:%M:%S"}>)
+</li>
+<{/foreach}>
+</ul>
+</td></tr>
+</table>
+</td></tr></table>
+<br>
+<!-- Information Box : End -->
+
+<{/if}>
+
+
+<!-- User Information : Start -->
+<table style="width:100%;"><tr><td>
+
+<table class="outer" style="width:100%;">
+<tr><th colspan="2"><{$smarty.const._MD_XSNS_MYPAGE_PROFILE|sprintf:"`$user_info.name`"}></th></tr>
+
+<{if $user_info.avatarurl != NULL}>
+<tr class="even">
+<td class="itemTitle bg0"><{$smarty.const._US_AVATAR}></td>
+<td class="even"><{$user_info.avatarurl}></td>
+</tr>
+<{/if}>
+
+<{if $user_info.name != NULL}>
+<tr class="even">
+<td class="itemTitle bg0"><{$smarty.const._US_USERNAME}></td>
+<td class="even"><{$user_info.name}></td>
+</tr>
+<{/if}>
+
+<{if $user_info.realname != NULL}>
+<tr class="even">
+<td class="itemTitle bg0"><{$smarty.const._US_REALNAME}></td>
+<td class="even"><{$user_info.realname}></td>
+</tr>
+<{/if}>
+
+<{if $user_info.rank != NULL}>
+<tr class="even">
+<td class="itemTitle bg0"><{$smarty.const._US_RANK}></td>
+<td class="even"><{$user_info.rank}>&nbsp;<{$user_info.ranktitle}>&nbsp;(<{$smarty.const._US_POSTS}>:<{$user_info.posts}>)</td>
+</tr>
+<{/if}>
+
+<{if $user_info.websiteurl != NULL}>
+<tr class="even">
+<td class="itemTitle bg0"><{$smarty.const._US_WEBSITE}></td>
+<td class="even"><{$user_info.websiteurl}></td>
+</tr>
+<{/if}>
+
+<{if $user_info.email != NULL}>
+<tr class="even">
+<td class="itemTitle bg0"><{$smarty.const._US_EMAIL}></td>
+<td class="even"><{$user_info.email}></td>
+</tr>
+<{/if}>
+
+<{if $user_info.pmlink != NULL}>
+<tr class="even">
+<td class="itemTitle bg0"><{$smarty.const._US_PM}></td>
+<td class="even"><{$user_info.pmlink}></td>
+</tr>
+<{/if}>
+
+<{if $user_info.icq != NULL}>
+<tr class="even">
+<td class="itemTitle bg0"><{$smarty.const._US_ICQ}></td>
+<td class="even"><{$user_info.icq}></td>
+</tr>
+<{/if}>
+
+<{if $user_info.aim != NULL}>
+<tr class="even">
+<td class="itemTitle bg0"><{$smarty.const._US_AIM}></td>
+<td class="even"><{$user_info.aim}></td>
+</tr>
+<{/if}>
+
+<{if $user_info.yim != NULL}>
+<tr class="even">
+<td class="itemTitle bg0"><{$smarty.const._US_YIM}></td>
+<td class="even"><{$user_info.yim}></td>
+</tr>
+<{/if}>
+
+<{if $user_info.msnm != NULL}>
+<tr class="even">
+<td class="itemTitle bg0"><{$smarty.const._US_MSNM}></td>
+<td class="even"><{$user_info.msnm}></td>
+</tr>
+<{/if}>
+
+<{if $user_info.location != NULL}>
+<tr class="even">
+<td class="itemTitle bg0"><{$smarty.const._US_LOCATION}></td>
+<td class="even"><{$user_info.location}></td>
+</tr>
+<{/if}>
+
+<{if $user_info.occupation != NULL}>
+<tr class="even">
+<td class="itemTitle bg0"><{$smarty.const._US_OCCUPATION}></td>
+<td class="even"><{$user_info.occupation}></td>
+</tr>
+<{/if}>
+
+<{if $user_info.interest != NULL}>
+<tr class="even">
+<td class="itemTitle bg0"><{$smarty.const._US_INTEREST}></td>
+<td class="even"><{$user_info.interest}></td>
+</tr>
+<{/if}>
+
+<{if $user_info.signature != NULL}>
+<tr class="even">
+<td class="itemTitle bg0"><{$smarty.const._US_SIGNATURE}></td>
+<td class="even"><{$user_info.signature}></td>
+</tr>
+<{/if}>
+
+<{if $user_info.extrainfo != NULL}>
+<tr class="even">
+<td class="itemTitle bg0"><{$smarty.const._US_EXTRAINFO}></td>
+<td class="even"><{$user_info.extrainfo}></td>
+</tr>
+<{/if}>
+
+<!--
+<{if $user_info.reg_date != NULL}>
+<tr class="even">
+<td class="itemTitle bg0"><{$smarty.const._US_MEMBERSINCE}></td>
+<td class="even"><{$user_info.reg_date|date_format:"%Y-%m-%d %H:%M:%S"}></td>
+</tr>
+<{/if}>
+
+<{if $user_info.last_login != NULL}>
+<tr class="even">
+<td class="itemTitle bg0"><{$smarty.const._US_LASTLOGIN}></td>
+<td class="even"><{$user_info.last_login|date_format:"%Y-%m-%d %H:%M:%S"}></td>
+</tr>
+<{/if}>
+-->
+
+</table>
+
+</td></tr></table>
+<!-- User Information : End -->
+
+</td></tr>
+<tr><td>
+
+<table style="width:100%;">
+  <tr>
+	<!-- Left Column : Start -->
+    <td style="vertical-align:top; width:50%;">
+	  <br>
+
+	  <{if $friend_list|@count > 0}>
+	  <!-- Friend List : Start -->
+	  <table class="outer" style="vertical-align:top; width:100%;">
+        <tr>
+        <th colspan="3"><{$smarty.const._MD_XSNS_MYPAGE_FRIEND_LIST|sprintf:"`$user_info.name`"}></th>
+        </tr>
+        
+		<tr class="even">
+		<{section name=id loop=$friend_list}>
+
+		<{if $smarty.section.id.index > 0 && $smarty.section.id.index is div by 3}>
+		</tr><tr class="even">
+		<{/if}>
+
+		<td class="centerHV" style="width:85px; height:85px;">
+		<{if $friend_list[id]}>
+		<a href="<{$friend_list[id].page_url}>"><img src="<{$friend_list[id].avatar_url}>" width="<{$friend_list[id].avatar_width}>" height="<{$friend_list[id].avatar_height}>" alt="<{$friend_list[id].name}>" title="<{$friend_list[id].name}>"><br><small><{$friend_list[id].name|truncate:11}></small></a>
+		<{/if}>
+		</td>
+
+		<{/section}>
+
+		<tr class="even">
+		<td colspan="3" style="text-align:right;">
+		<a href="<{$url.friend_list_all}>"><{$smarty.const._MD_XSNS_SHOW_ALL}> (<{$friend_count|default:0}>)</a>
+		</td>
+		</tr>
+      </table>
+	  <br>
+	  <!-- Friend List : End -->
+	  <{/if}>
+	  
+	  <{if $commu_list|@count > 0}>
+	  <!-- Community List : Start -->
+	  <table class="outer" style="vertical-align:top; width:100%;">
+        <tr>
+        <th colspan="3"><{$smarty.const._MD_XSNS_MYPAGE_COMMU_LIST|sprintf:"`$user_info.name`"}></th>
+        </tr>
+        
+		<tr class="even">
+		<{section name=id loop=$commu_list}>
+
+		<{if $smarty.section.id.index > 0 && $smarty.section.id.index is div by 3}>
+		</tr><tr class="even">
+		<{/if}>
+
+		<td class="centerHV" style="width:85px;height:85px;">
+		<{if $commu_list[id]}>
+		<a href="<{$commu_list[id].page_url}>"><img src="<{$commu_list[id].image.url_src|default:"$xoops_url/modules/$mydirname/images/cm_commu_default1.gif"}>" alt="<{$commu_list[id].name}> (<{$commu_list[id].member_count}>)" title="<{$commu_list[id].name}> (<{$commu_list[id].member_count}>)"><!--<br><small><{$commu_list[id].name}> (<{$commu_list[id].member_count}>)</small>--></a>
+		<{/if}>
+		</td>
+
+		<{/section}>
+		
+		<tr class="even">
+		<td colspan="3" style="text-align:right;"><a href="<{$url.commu_list_all}>"><{$smarty.const._MD_XSNS_SHOW_ALL}> (<{$commu_count|default:0}>)</a></td>
+		</tr>
+      </table>
+	  <br>
+	  <!-- Community List : End -->
+	  <{/if}>
+
+    </td>
+	<!-- Left Column : End -->
+	
+	<td>&nbsp;</td>
+	
+	<!-- Right Column : Start -->
+    <td style="vertical-align:top; width:50%;">
+		<br>
+		
+		<{if $blog_list|@count > 0}>
+		<!-- Blog List : Start -->
+		<table class="outer" style="vertical-align:top; width:100%;">
+		<tr>
+		<th>
+		<{if $is_own_page}>
+		<{$smarty.const._MD_XSNS_MYPAGE_BLOG_LIST}>
+		<{else}>
+		<{$smarty.const._MD_XSNS_MYPAGE_FRIEND_BLOG_LIST|sprintf:"`$user_info.name`"}>
+		<{/if}>
+		</th>
+		</tr>
+		
+		<tr class="even"><td>
+		
+		<{foreach item=blog from=$blog_list}>
+		<img src="<{$blog.image}>" style="vertical-align:middle;">
+		<b><a href="<{$blog.link}>"><{$blog.title}></a></b>
+		<div style="text-align:right;">
+		<small><{$blog.time}> <a href="<{$blog.link_author}>"><{$blog.author}></a></small>
+		</div>
+		<{/foreach}>
+		
+		</td></tr>
+		
+		<tr class="even">
+		<td style="text-align:right;">
+		<{if $is_own_page}>
+		<a href="<{$url.blog_list_all}>"><{$smarty.const._MD_XSNS_SHOW_ALL}> (<{$blog_count|default:0}>)</a>
+		<{else}>
+		<a href="<{$blog_list.0.link_author}>"><{$smarty.const._MD_XSNS_SHOW_ALL}> (<{$blog_count|default:0}>)</a>
+		<{/if}>
+		</td>
+		</tr>
+		
+		</table>
+		<br>
+		<!-- Blog List : End -->
+		<{/if}>
+		
+		<{if $topic_list|@count > 0}>
+		<!-- New Topic List : Start -->
+		<table class="outer" style="vertical-align:top; width:100%;">
+		<tr>
+		<th><{$smarty.const._MD_XSNS_MYPAGE_TOPIC_LIST}></th>
+		</tr>
+		<tr class="even"><td>
+		<{foreach item=topic from=$topic_list}>
+		<b><a href="<{$topic.url}>"><{$topic.name}></a></b><br>
+		<small>&nbsp;&nbsp;- <{$topic.commu_name}></small>
+		<div style="text-align:right;"><small><{$topic.time|date_format:"%Y-%m-%d %H:%M:%S"}></small></div>
+		<{/foreach}>
+		</td></tr>
+		<tr class="even">
+		<td style="text-align:right;">
+		<a href="<{$url.topic_list_all}>"><{$smarty.const._MD_XSNS_SHOW_ALL}> (<{$topic_count|default:0}>)</a>
+		</td>
+		</tr>
+		</table>
+		<br>
+		<!-- New Topic List : End -->
+		<{/if}>
+		
+		<{if $intro_list|@count > 0}>
+		<!-- Intro List : Start -->
+		<table class="outer" style="vertical-align:top; width:100%;">
+		<tr>
+		<th><{$smarty.const._MD_XSNS_MYPAGE_INTRO_LIST}></th>
+		</tr>
+		<{foreach item=intro from=$intro_list}>
+		<tr><td class="even">
+		<{$intro.body}>
+		<div style="text-align:right"><a href="<{$intro.user_from.page_url}>"><{$intro.user_from.name}></a></div>
+		</td></tr>
+		<{/foreach}>
+		<tr class="even">
+		<td style="text-align:right;">
+		<a href="<{$url.intro_list_all}>"><{$smarty.const._MD_XSNS_SHOW_ALL}> (<{$intro_count}>)</a>
+		</td>
+		</tr>
+		</table>
+		<!-- Intro List : End -->
+		<{/if}>
+		
+    </td>
+	<!-- Right Column : End -->
+  </tr>
+</table>
+
+</td></tr></table>
+
+</div>

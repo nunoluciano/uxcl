@@ -1,0 +1,41 @@
+<div id="mainFrame">
+
+<table class="outer fileDel">
+<tr><th colspan="2"><{$form_data.title}></th></tr>
+
+<tr class="even">
+<td class="itemTitle bg0"><{$form_data.file_name_desc}></td>
+<td class="itemValue"><{$form_data.name}></td>
+</tr>
+
+<tr class="even">
+<td class="itemTitle bg0"><{$smarty.const._MD_XSNS_FILE_SIZE}></td>
+<td class="itemValue"><{$form_data.size|number_format}> bytes</td>
+</tr>
+
+<tr class="even">
+<td class="itemTitle bg0"><{$smarty.const._MD_XSNS_FILE_TYPE}></td>
+<td class="itemValue"><{$form_data.type}></td>
+</tr>
+
+<tr class="even">
+<td class="itemTitle bg0"><{$smarty.const._MD_XSNS_POST_DATE}></td>
+<td class="itemValue"><{$form_data.time|date_format:"%Y-%m-%d %H:%M:%S"}></td>
+</tr>
+
+<{$form_del}>
+
+<tr class="foot">
+<td colspan="2" class="submitFrame">
+<p><{$form_data.desc}></p>
+<p>
+<input type="submit" class="submit" value="<{$smarty.const._MD_XSNS_BTN_DEL}>">&nbsp;&nbsp;
+<input type="button" class="submit" value="<{$smarty.const._MD_XSNS_BTN_CANCEL}>" onclick="javascript:history.go(-1);">
+</p>
+</td>
+</tr>
+
+</form>
+
+</table>
+</div>

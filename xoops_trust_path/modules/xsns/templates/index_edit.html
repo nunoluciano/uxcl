@@ -1,0 +1,84 @@
+<div id="mainFrame">
+<{if $mydirname}><{include file="db:`$mydirname`_inc_breadcrumbs.html"}><{/if}>
+
+<table class="outer commuEdit">
+
+<{$form_commu_edit}>
+
+<tr><th colspan="2"><{$smarty.const._MD_XSNS_TITLE_INDEX_EDIT}></th></tr>
+
+<tr class="even">
+<td class="itemTitle bg0"><{$smarty.const._MD_XSNS_COMMU_NAME}><{$smarty.const._MD_XSNS_REQUIRED_ITEM}></td>
+<td class="itemValue"><input type="text" name="name" size="50" value="<{$commu.name}>"></td>
+</tr>
+
+<tr class="even">
+<td class="itemTitle bg0"><{$smarty.const._MD_XSNS_CATEGORY}></td>
+<td class="itemValue"><{$category_selector}></td>
+</tr>
+
+<tr class="even">
+<td class="itemTitle bg0"><{$smarty.const._MD_XSNS_INDEX_PUBLIC}></td>
+<td class="itemValue">
+<input type="radio" name="public" value="1" <{$public.checked1}>><{$smarty.const._MD_XSNS_INDEX_PUBLIC_L1}><br>
+<input type="radio" name="public" value="2" <{$public.checked2}>><{$smarty.const._MD_XSNS_INDEX_PUBLIC_L2}><br>
+<input type="radio" name="public" value="3" <{$public.checked3}>><{$smarty.const._MD_XSNS_INDEX_PUBLIC_L3}><br>
+</td>
+</tr>
+
+<tr class="even">
+<td class="itemTitle bg0"><{$smarty.const._MD_XSNS_DESC}><{$smarty.const._MD_XSNS_REQUIRED_ITEM}></td>
+<td class="itemValue"><{$xoops_codes}><{$xoops_smilies}></td>
+</tr>
+
+<tr class="even">
+<td class="itemTitle bg0"><{$smarty.const._MD_XSNS_IMAGE}></td>
+<td class="itemValue">
+<{if $commu.image|@count > 0}>
+<p>
+<a href="<{$commu.image.url}>" target="_blank"><img src="<{$commu.image.url_src}>" alt=""></a>
+&nbsp;[<a href="<{$commu.image.url_del}>"><{$smarty.const._MD_XSNS_DELETE}></a>]
+</p>
+<{/if}>
+<{if $commu.image|@count == 0}>
+<input type="file" name="image" size="40">
+<{/if}>
+</td>
+</tr>
+
+<tr class="foot">
+<td colspan="2" class="submitFrame">
+<input type="submit" class="submit" value="<{$smarty.const._MD_XSNS_BTN_EDIT}>">
+</td>
+</tr>
+</form>
+</table>
+<br><br>
+
+<!-- Delete Form -->
+
+<table class="outer" width="100%">
+<{$form_commu_del}>
+<tr><th><{$smarty.const._MD_XSNS_TITLE_INDEX_DEL}></th></tr>
+<tr class="foot"><td class="submitFrame">
+
+<{if $commu.del_enabled}>
+
+<div class="centerH">
+<p><{$smarty.const._MD_XSNS_INDEX_DEL_DESC2}></p>
+<p><input type="submit" class="submit" value="<{$smarty.const._MD_XSNS_BTN_DEL}>"></p>
+</div>
+
+<{else}>
+
+<div style="text-align:center; width:85%; margin-left:auto; margin-right:auto;">
+<p style="text-align:left;"><{$smarty.const._MD_XSNS_INDEX_DEL_DESC1}></p>
+<p style="text-align:left;"><{$smarty.const._MD_XSNS_INDEX_DEL_DESC2}></p>
+</div>
+
+<{/if}>
+</td></tr>
+</form>
+</table>
+
+</div>

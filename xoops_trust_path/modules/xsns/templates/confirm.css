@@ -1,0 +1,24 @@
+td.avatar {
+	width: 100px;
+	text-align: center;
+	vertical-align: middle;
+}
+
+td.buttonFrame {
+	width: 100px;
+	text-align: center;
+	vertical-align: middle;
+}
+
+td.itemTitle {
+	width: 100px;
+	vertical-align: middle;
+}
+
+td.itemValue {
+	vertical-align: middle;
+}
+
+td.description {
+	padding: 15px 15px 15px 15px;
+}

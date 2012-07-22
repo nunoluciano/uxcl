@@ -1,0 +1,36 @@
+<div id="mainFrame">
+
+<!-- User Menu -->
+<{if $mydirname}><{include file="db:`$mydirname`_inc_mypage_menu.html"}><{/if}>
+
+<table class="outer">
+
+<tr><th colspan="3"><{$smarty.const._MD_XSNS_MYPAGE_BLOG_LIST_ALL}></th></tr>
+
+<{if $blog_list|@count > 0}>
+
+<tr><td colspan="3" class="odd centerH"><{$pager.selector}></td></tr>
+<tr><td colspan="3" class="odd" style="text-align:right;"><{$pager.description}></td></tr>
+
+<tr class="head">
+<td class="centerH"><{$smarty.const._MD_XSNS_MYPAGE_BLOG_TITLE}></td>
+<td class="centerH"><{$smarty.const._MD_XSNS_MYPAGE_BLOG_AUTHOR}></td>
+<td class="centerH" style="width:12em;"><{$smarty.const._MD_XSNS_POST_DATE}></td>
+</tr>
+
+<{foreach item=blog from=$blog_list}>
+<tr class="even">
+<td class="centerV"><a href="<{$blog.link}>"><{$blog.title|mb_truncate:20}></a></td>
+<td class="centerV"><a href="<{$blog.link_author}>"><{$blog.author}></a></td>
+<td class="centerHV"><{$blog.time}></td>
+</tr>
+<{/foreach}>
+
+<tr><td colspan="3" class="odd centerH"><{$pager.selector}></td></tr>
+<tr><td colspan="3" class="odd" style="text-align:right;"><{$pager.description}></td></tr>
+
+<{/if}>
+
+</table>
+
+</div>

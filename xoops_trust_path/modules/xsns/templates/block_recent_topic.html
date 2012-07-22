@@ -1,0 +1,7 @@
+<ul>
+<{foreach item=topic from=$block.topic_list}>
+<li>
+<{$topic.datetime}> &#133; <a href="<{$topic.link}>"><{$topic.title}> (<{$topic.comment_count}>)</a>&nbsp;&nbsp;(<a href="<{$topic.community.link}>"><{$topic.community.title}></a>)
+</li>
+<{/foreach}>
+</ul>

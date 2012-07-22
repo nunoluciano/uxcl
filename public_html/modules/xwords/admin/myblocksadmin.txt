@@ -1,0 +1,202 @@
+- myblocksadmin -
+
+
+SUMMARY:
+
+This files add blocks admin into your module.
+
+
+BACKGROUND:
+
+XOOPS's admin of blocks and groups will be hard to use,
+when many modules is installed.
+If each module has the block management screen for itself,
+webmasters using XOOPS will feel it easy, I think.
+I will recommend it to the module developers by all means.
+
+
+HOW TO USE:
+
+1) copy 5 files of
+     myblocksadmin.php
+     myblockform.php
+     mygroupperm.php
+     mygrouppermform.php
+     admin.php
+   into modules/(your module)/admin/
+   (this admin.php is compatible for mymenu)
+
+2) copy 3 file of
+     blocksadmin.inc.php
+     gtickets.php
+     updateblock.inc.php (optional)
+   into modules/(your module)/include
+   (this gtickets.php is compatible for mymenu)
+
+3) edit admin/menu.php and append a menu item like this:
+
+	$adminmenu[] = array( 'title' => _MI_SYSTEM_ADMENU2 ,
+	                      'link' => "admin/myblocksadmin.php" ) ;
+
+4) If you want to add a feature keeping block's options when module is updated:
+
+     append this code into the tale of your xoops_version.php
+
+[code]
+// On Update
+if( ! empty( $_POST['fct'] ) && ! empty( $_POST['op'] ) && $_POST['fct'] == 'modulesadmin' && $_POST['op'] == 'update_ok' && $_POST['dirname'] == $modversion['dirname'] ) {
+	include dirname( __FILE__ ) . "/include/onupdate.inc.php" ;
+}
+[/code]
+
+     copy onupdate.inc.php.sample in this archive to modules/(your module)/include/onupdate.inc.php
+     edit onupdate.inc.php as you like.
+
+
+5) If you want to modify a block cloneable, insert a line into xoops_version.php
+
+[code]
+$modversion['blocks'][(block_number)]['can_clone'] = true ;
+[/code]
+
+
+
+That's all !
+
+
+
+
+
+
+CHANGELOG:
+
+2004-01-13 0.24 modified ticket system (limit stubs max 10)
+                added blocks and groups admin for the other modules
+                added implementation about custom blocks -clone&edit&preview-
+2004-01-08 0.23 fixed losing template of cloned blocks (thx domifara)
+2004-12-30 0.22 modified using $_SERVER instead of $_ENV (thx Marijuana)
+                fixed bug with specifying cloneable block
+2004-12-23 0.21 fixed compatibility with 2.0.9RC and PHP5 (thx domifara)
+2004-12-22 0.20 cloning block supported
+                fixed for modules which has no blocks
+                added updateblock.inc.php (special thx! nobunobu)
+2004-12-16 0.12 eliminated unsed codes from blocksadmin.inc.php for the security
+2004-12-10 0.11 modified ticket system
+2004-12-06 0.10 modified ticket system
+2004-12-05 0.09 modified ticket system
+2004-12-03 0.08 modified to use $_GET or $_POST instead of $HTTP_*_VARS (mari)
+                added admin_refcheck() for security (mari)
+                added ticket system for security (mari)
+                eliminated foreach() extraction from $_POST (mari)
+                fixed a place to include language files (thx marcan)
+2004-07-19 0.07 modified redirection after edit into myblocksadmin
+                added a feature for modifying target modules & cachetime
+2004-06-15 0.06 added a feature for modifying orders
+                added coloring like admin_r (thx Ryuji)
+2004-03-09 0.05 modified all button's code of JavaScript
+2004-02-29 0.04 security patch
+2003-12-18 0.03 for XOOPS <= 2.0.3 patch
+                (gperm_handler->deleteByModule() has only 1 parameter)
+2003-12-12 0.02 'module_read' and 'module_admin' to be able to change
+2003-12-4  0.01 first release
+
+
+
+COPYRIGHT:
+
+I do not insist on the right of these codes, and don't guarantee.
+
+
+-------------------------------------------------------------
+(for Japanese)
+
+●要旨
+
+モジュールの管理画面に、そのモジュールだけのブロック管理・グループ
+管理画面を追加するためのファイル群です。
+
+
+●背景
+
+XOOPSのブロック管理・グループ管理はあまりにも使いづらいと思います。
+グループを追加した時ならともかく、モジュールを追加した時なんて最悪で
+す。
+
+そんな苦痛から逃れようと、作ったのがこのmyblocksadminです。
+
+モジュール毎に、ブロック管理・グループ管理が出来るので、非常に使いや
+すくなっていると自負しています。
+
+しかも、今では、ワンタイムチケットの導入・スーパーグローバルの
+foreach展開の廃止という２つの大きな変更により、コアよりもはるかに
+セキュアなコーディングとなっています。
+
+また、0.2 の目玉機能がブロックの複製機能です。
+カテゴリー絞り込み機能の持ったブロックが複製できれば、非常に強力な機
+能となるはずです。
+
+
+管理画面を持つモジュールすべてに、これが入ると本当に助かるのですが。
+
+
+●使い方：
+
+
+1) まずは解凍して下さい。
+
+
+2) 以下の５ファイルを modules/(dirname)/admin にコピーしてください。
+   admin.php というファイルは、mymenu にも含まれていますが、コンパチです。
+
+     myblocksadmin.php
+     myblockform.php
+     mygroupperm.php
+     mygrouppermform.php
+     admin.php
+
+
+3) 以下の３ファイルを modules/(dirname)include にコピーしてください。
+   gtickets.php というファイルは、mymenu にも含まれますが、コンパチです。
+
+     blocksadmin.inc.php
+     gtickets.php
+     updateblock.inc.php (下の5が必要な場合のみ)
+
+
+4) admin/menu.php をエディタで開き、こんな感じで１行追加して下さい。
+
+	$adminmenu[] = array( 'title' => _MI_SYSTEM_ADMENU2 ,
+	                      'link' => "admin/myblocksadmin.php" ) ;
+
+
+5) もし、ブロックオプションの保存機能が必要でしたら、xoops_version.php の最後に、
+
+[code]
+// On Update
+if( ! empty( $_POST['fct'] ) && ! empty( $_POST['op'] ) && $_POST['fct'] == 'modulesadmin' && $_POST['op'] == 'update_ok' && $_POST['dirname'] == $modversion['dirname'] ) {
+	include dirname( __FILE__ ) . "/include/onupdate.inc.php" ;
+}
+[/code]
+
+  と記述し、onupdate.inc.php.sample を 
+
+  modules/(dirname)/include/onupdate.inc.php
+
+  としてコピーし、その中身を編集して下さい。
+
+
+6) ブロックの複製機能を利用する場合は、xoops_version.php のブロック記述部に
+
+[code]
+$modversion['blocks'][(block_number)]['can_clone'] = true ;
+[/code]
+
+  と一行追加して下さい。
+
+
+(※)   5 および 6 は、必要な場合のみのオプションです。
+
+
+すべてのモジュール作者の方へ:
+
+「ぜひお試し下さい!!」

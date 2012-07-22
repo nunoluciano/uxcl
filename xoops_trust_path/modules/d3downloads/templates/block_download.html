@@ -1,0 +1,99 @@
+<table width="100%" cellspacing="0">
+	<tr>
+		<td class="d3downloads_head" colspan="2" align="left" height="18">
+			<{$block.lang_ctitle}> <{$block.download.category}>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2" class="d3downloads_single_frame_title">
+			<{if ! $block.download.broken_link}>
+				<{$block.download.filelink}><span class="d3downloads_bold"><{$block.download.title}></span></a><{$block.download.new}><{$block.download.pop}>
+			<{else}>
+				<span class="d3downloads_bold"><{$block.download.title}></span>
+			<{/if}>
+		</td>
+	</tr>
+	<tr>
+		<td class="d3downloads_single_frame_gifimage" width="30%">
+			<{if $block.download.gif_image && $block.download.gif_image !="download.gif"}>
+				<{$block.download.filelink}><img src="<{$block.mod_url}>/images/<{$block.download.gif_image}>" width="110" height="18"></a>
+			<{elseif $block.download.gif_image}>
+				<{$block.download.filelink}><img src="<{$block.mod_url}>/images/<{$block.download.gif_image}>" width="19" height="19"></a>
+			<{else}>
+				(&nbsp;<span class="d3downloads_broken_message"><{$block.lang_broken}></span>&nbsp;)
+			<{/if}>
+			<{if $block.download.filelink2}>
+				<{if $block.download.gif_image2 && $block.download.gif_image2 !="download.gif"}>
+					<{$block.download.filelink2}><img src="<{$block.mod_url}>/images/<{$block.download.gif_image2}>" width="110" height="18"></a>
+				<{elseif $block.download.gif_image2}>
+					<{$block.download.filelink2}><img src="<{$block.mod_url}>/images/<{$down.gif_image2}>" width="19" height="19"></a>
+				<{else}>
+					(&nbsp;<span class="d3downloads_broken_message"><{$block.lang_broken}></span>&nbsp;)
+				<{/if}>
+			<{/if}>
+		</td>
+		<td class="d3downloads_single_frame_version" width="70%">
+			<{if $block.show_postname}>
+				<span class="d3downloads_bold"><{$smarty.const._MB_D3DOWNLOADS_SUBMIT_POSTNAME}>:</span>&nbsp;<{$block.download.postname}>&nbsp;&nbsp;
+			<{/if}>
+			<{if $block.download.version}>
+				<span class="d3downloads_bold"><{$block.lang_version}>:</span>&nbsp;<{$block.download.version}>&nbsp;&nbsp;
+			<{/if}>
+			<span class="d3downloads_bold"><{$block.lang_updated}>:</span>&nbsp;&nbsp;<{$block.download.updated}>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2" class="d3downloads_odd" align="left">
+    			<span class="d3downloads_bold"><{$block.lang_description}></span>
+		    	<br />
+			<div class="d3downloads_single_frame_description">
+				<{if $block.canuseshots &&  ! $block.download.broken_link}>
+					<{$block.download.shots}>
+				<{/if}>
+				<{$block.download.description}>
+			</div>
+			<br />
+		</td>
+	</tr>
+	<{if $block.download.md5 || $block.download.md5_2}>
+		<tr>
+			<td colspan="2" class="d3downloads_even" align="left">
+				<div class="d3downloads_md5_line">
+					<{if $block.download.md5}><{$block.download.md5}><br /><{/if}> <{if $block.download.md5_2}><{$block.download.md5_2}><{/if}>
+				</div>
+			</td>
+		</tr>
+	<{/if}>
+	<tr>
+		<td colspan="2" class="d3downloads_even" align="left">
+			<img src="<{$block.mod_url}>/images/counter.gif" border="0" align="absmiddle" alt="<{$block.lang_hits}>" title="<{$block.lang_hits}>" />&nbsp;<{$block.download.hits}>&nbsp;&nbsp;
+			<{if $block.download.size}>
+				<img src="<{$block.mod_url}>/images/size.gif" border="0" align="absmiddle" alt="<{$block.lang_size}>" title="<{$block.lang_size}>" />&nbsp;<{$block.download.size}>&nbsp;&nbsp;
+			<{/if}>
+			<{if $block.download.platform}>
+				<img src="<{$block.mod_url}>/images/platform.gif" border="0" align="absmiddle" alt="<{$block.lang_platform}>" title="<{$block.lang_platform}>" />&nbsp;<{$block.download.platform}>&nbsp;&nbsp;
+			<{/if}>
+			<{if $block.use_license && $block.download.license}>
+				<img src="<{$block.mod_url}>/images/editicon.gif" border="0" align="absmiddle" alt="<{$block.lang_license}>" title="<{$block.lang_license}>" />&nbsp;<{$block.download.license}>&nbsp;&nbsp;
+			<{/if}>
+			<{if $block.download.homepage}>
+				<img src="<{$block.mod_url}>/images/home.gif" border="0" align="absmiddle" alt="<{$block.lang_homepage}>" title="<{$block.lang_homepage}>"/>&nbsp;<{$block.download.homepage}>
+			<{/if}>
+		</td>
+	</tr>
+</table>
+<{if $block.download.extra}>
+	<hr class="d3downloads_extra_infomation" />
+	<table class="d3downloads_extra">
+		<{foreach item="info" from=$block.download.extra}>
+			<tbody><tr>
+				<td class="title" width="20%">
+					<{$info.title}>
+				</td>
+				<td class="desc" width="80%">
+					<{$info.desc}>
+				</td>
+			</tr>
+		<{/foreach}>
+	</table>
+<{/if}>

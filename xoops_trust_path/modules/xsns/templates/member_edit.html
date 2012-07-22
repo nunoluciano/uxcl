@@ -1,0 +1,40 @@
+<div id="mainFrame">
+<{if $mydirname}><{include file="db:`$mydirname`_inc_breadcrumbs.html"}><{/if}>
+
+<table class="outer member">
+
+<tr>
+<th colspan="4">[<{$commu.name}>] <{$smarty.const._MD_XSNS_TITLE_MEMBER_EDIT}></th>
+</tr>
+
+<tr><td colspan="4" class="odd centerH"><{$pager.selector}></td></tr>
+<tr><td colspan="4" class="odd" style="text-align:right;"><{$pager.description}></td></tr>
+
+<tr class="head">
+<td class="centerHV"><{$smarty.const._MD_XSNS_AVATAR}></td>
+<td class="centerHV"><{$smarty.const._MD_XSNS_USER_NAME}></td>
+<td class="centerHV"><{$smarty.const._MD_XSNS_MEMBER_REG_DATE}></td>
+<td class="centerHV"><{$smarty.const._MD_XSNS_MEMBER_EDIT_MENU}></td>
+</tr>
+
+<{foreach item=member from=$member_list}>
+<tr class="even">
+<td class="avatar"><a href="<{$member.page_url}>"><img src="<{$member.avatar_url}>" width="<{$member.avatar_width}>" height="<{$member.avatar_height}>" alt=""></a></td>
+<td class="centerV"><a href="<{$member.page_url}>"><{$member.name}></a></td>
+<td class="date"><{$member.time|date_format:"%Y-%m-%d %H:%M:%S"}></td>
+<td class="edit">
+<{if $member.is_editable}>
+	<{$member.form_edit}>
+	<{$member.sel_edit}>
+	<input type="submit" class="submitS" value="<{$smarty.const._MD_XSNS_BTN_SEND}>"></td>
+	</form>
+<{/if}>
+</td>
+</tr>
+<{/foreach}>
+
+<tr><td colspan="4" class="odd centerH"><{$pager.selector}></td></tr>
+<tr><td colspan="4" class="odd" style="text-align:right;"><{$pager.description}></td></tr>
+
+</table>
+</div>

@@ -1,0 +1,46 @@
+<div id="mainFrame">
+<{if $mydirname}><{include file="db:`$mydirname`_inc_breadcrumbs.html"}><{/if}>
+
+<{$form_commu_join}>
+
+<table class="outer commuJoin">
+<tr><th colspan="2">[<{$commu.name}>] <{$smarty.const._MD_XSNS_TITLE_INDEX_JOIN}></th></tr>
+
+<{if $commu.is_public}>
+
+<tr class="foot">
+<td colspan="2" class="submitFrame">
+<p><{$smarty.const._MD_XSNS_INDEX_JOIN_DESC}></p>
+<p>
+<input type="submit" class="submit" value="<{$smarty.const._MD_XSNS_BTN_INDEX_JOIN}>">&nbsp;&nbsp;
+<input type="button" class="submit" value="<{$smarty.const._MD_XSNS_BTN_INDEX_JOIN_NO}>" onclick="javascript:history.go(-1);">
+</p>
+</td>
+</tr>
+
+<{else}>
+
+<tr class="head">
+<td colspan="2">
+<div class="msgFrame"><{$smarty.const._MD_XSNS_INDEX_JOIN_DESC_AUTH}></div>
+</td>
+</tr>
+
+<tr class="even">
+<td class="itemTitle bg0"><{$smarty.const._MD_XSNS_INDEX_JOIN_MESSAGE}></td>
+<td class="itemValue"><textarea name="message" cols="60" rows="5"></textarea></td>
+</tr>
+
+<tr class="foot">
+<td colspan="2" class="submitFrame">
+<input type="submit" class="submit" value="<{$smarty.const._MD_XSNS_BTN_INDEX_JOIN_REQUEST}>">&nbsp;&nbsp;
+<input type="button" class="submit" value="<{$smarty.const._MD_XSNS_BTN_CANCEL}>" onclick="javascript:history.go(-1);">
+</td>
+</tr>
+
+<{/if}>
+
+</table>
+
+</form>
+</div>

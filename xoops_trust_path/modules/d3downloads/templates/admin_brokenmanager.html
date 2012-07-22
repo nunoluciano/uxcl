@@ -1,0 +1,156 @@
+<script type="text/javascript" src="<{$mod_url}>/index.php?page=module_header&src=jquery.js"></script>
+<script type="text/javascript" src="<{$mod_url}>/index.php?page=module_header&src=d3downloads.js"></script>
+<h2><{$smarty.const._MD_D3DOWNLOADS_H2BROKENMANAGER}> ( <{$total_num}> )</h2>
+<{if $iserror}>
+	<div style="color: #CC0000;font-size:100%;font-weight:bold;margin:5px;padding:5px;border-width:1px;border-style:solid;border-color:#808080;">
+		<{$error_message}>
+	</div>
+<{/if}>
+<form name="brokenmanager" id="brokenmanager" action="<{$mod_url}>/admin/index.php?page=<{$page}>" method="post">
+<{$gticket_hidden}>
+<table class="outer">
+	<tr>
+		<th style="text-align:center;">
+			<{$smarty.const._MD_D3DOWNLOADS_TH_TITLE}>
+		</th>
+		<th style="text-align:center;vertical-align:middle;">
+			<{$smarty.const._MD_D3DOWNLOADS_TH_REPORT}>
+		</th>
+		<th nowrap="nowrap" style="text-align:center;">
+			<{$smarty.const._MD_D3DOWNLOADS_TH_BROKENDEL}>
+			<input type="checkbox" onclick="col_check_on_off( this, 'col_brokendel_' )">
+		</th>
+		<th style="text-align:right;">
+			<{$smarty.const._MD_D3DOWNLOADS_TH_CONTENTSACTIONS}>
+			<input type="checkbox" onclick="col_check_on_off( this, 'col_action_' )">
+		</th>
+	</tr>
+	<{foreach from=$broken.file item="item"}>
+		<tr class="<{cycle values="even,odd"}>">
+			<td style="vertical-align:middle;">
+				<{if ! $item.broken_link}>
+					<{$item.filelink}><{$item.title}></a>
+				<{else}>
+					<{$item.title}><br />( <span style="font-size: small; color: #CC0000;font-weight: bold; "><{$smarty.const._MD_D3DOWNLOADS_BROKEN_FILE}></span> )
+				<{/if}>
+				<br /><br />
+				<{if $item.filename_link}><{$item.filename_link}><br /><{/if}>
+				<{if $item.filename_link2}><{$item.filename_link2}><br /><{/if}>
+			</td>
+			<td width="50%" style="text-align:center;vertical-align:middle;">
+				<table style="margin-top: 0.2em;margin-bottom: 0.2em;border-collapse: collapse;border: solid 1px #999;font-size: 100%;">
+					<tr>
+						<th style="border: solid 1px #999;padding: 4px 6px;background: #E6E6E6;text-align: center;white-space: nowrap;color: #666;">
+							<{$smarty.const._MD_D3DOWNLOADS_TH_SENDERNAME}>
+						</th>
+						<th style="border: solid 1px #999;padding: 4px 6px;background: #E6E6E6;text-align: center;white-space: nowrap;color: #666;">
+							<{$smarty.const._MD_D3DOWNLOADS_TH_IP}>
+						</th>
+						<th style="border: solid 1px #999;padding: 4px 6px;background: #E6E6E6;text-align: center;white-space: nowrap;color: #666;">
+							<{$smarty.const._MD_D3DOWNLOADS_TH_REPORTDATE}>
+						</th>
+					<tr>
+						<{foreach from=$item.report item="broken" name="broken"}>
+							<td style="text-align:center;;border: solid 1px #999;padding: 4px 6px;">
+								<{$broken.sendername}>
+								<{if $broken.mail_link}><br /><{$broken.mail_link}><{/if}>
+							</td>
+							<td style="text-align:center;;border: solid 1px #999;padding: 4px 6px;">
+								<{$broken.ip}>
+							</td>
+							<td style="text-align:center;;border: solid 1px #999;padding: 4px 6px;">
+								<{$broken.date}>
+							</td>
+							<{if $broken.message}>
+								</tr><tr>
+									<td colspan="3" style="text-align:left;;border: solid 1px #999;padding: 4px 6px;">
+										<span style="font-weight: bold;">Message :</span><br /><{$broken.message}>
+								</td>
+							<{/if}>
+					</tr>
+						<{/foreach}>
+				</table>
+				<span style="font-size:smaller;">( Total : <{$smarty.foreach.broken.total}> )</span>
+			<td nowrap="nowrap" style="text-align:center;vertical-align:middle;">
+				<input type="checkbox" name="brokendel[<{$item.lid}>]" id="col_brokendel_<{$item.lid}>" value="1" /><br />
+			</td>
+			<td nowrap="nowrap" style="text-align:right;vertical-align:middle;">
+				<a href="<{$mod_url}>/index.php?page=singlefile&amp;cid=<{$item.cid}>&amp;lid=<{$item.lid}>"><{$smarty.const._MD_D3DOWNLOADS_VISIBLE}></a> |
+				<a href="<{$mod_url}>/index.php?page=modfile&amp;cid=<{$item.cid}>&amp;lid=<{$item.lid}>"><{$smarty.const._EDIT}></a> |
+				<input type="checkbox" name="action_selects[<{$item.lid}>]" id="col_action_<{$item.lid}>" value="1" /><br />
+				<{$item.postname}></a>
+				<br />
+				<{$item.updated}>
+			</td>
+		</tr>
+	<{/foreach}>
+	<tr>
+		<td colspan="11" align="center" class="head">
+			<input type="submit" name="brokenmanager_update" id="brokenmanager_update" value="<{$smarty.const._SUBMIT}>" tabindex="0" />
+		</td>
+	</tr>
+	<tr>
+		<th colspan="11" style="text-align:right;">
+			<{$smarty.const._MD_D3DOWNLOADS_LABEL_FILECHECKED}>
+			<input type="submit" name="delete" id="delete" value="<{$smarty.const._MD_D3DOWNLOADS_BTN_DELETE}>" /> 
+			<input type="submit" name="invisible" id="invisible" value="<{$smarty.const._MD_D3DOWNLOADS_BTN_INVISIBLE}>" /> 
+		</th>
+	</tr>
+	<tr>
+		<td colspan="11" align="center" class="head">
+			<input type="submit" name="brokencheck" id="brokencheck" value="<{$smarty.const._MD_D3DOWNLOADS_LABEL_BROKENCHECK}>" />
+			limit : <input name="limit" size="5" type="text" value="<{$limit}>">&nbsp;offset : <input name="offset" size="5" type="text" value="0">
+		</td>
+	</tr>
+	<tr>
+		<th colspan="11" align="center">
+			<{$smarty.const._MD_D3DOWNLOADS_NOLINK_CHECK}> <{$nolinkfile}> Files ( total <{$totalfile}> Files )
+		</th>
+	</tr>
+</table>
+</form>
+<div style="color:inherit;border: 1px inset #CCC;padding: 6px;with: 80%;font-size: small;">
+	<{$smarty.const._MD_D3DOWNLOADS_HELP_BROKENCHECK}>
+</div>
+
+
+<script type="text/javascript">
+<!--//
+jQuery( function($){
+	$( '#brokenmanager_update' ).click( function(){
+		infoDom_initialize() ;
+		col_action_check( 'col_brokendel_' ) ;
+		if( validate_checked == 0 ){
+			popup_info( '<{$smarty.const._MD_D3DOWNLOADS_ERROR_SEL_REPORT}>' )
+			return false ;
+		}
+    });
+
+	$( '#delete' ).click( function(){
+		infoDom_initialize() ;
+		col_action_check( 'col_action_' ) ;
+		if( validate_checked > 0 ){
+			return confirm('<{$smarty.const._MD_D3DOWNLOADS_CONFIRM_DELETE}>') ;
+		} else {
+			popup_info( '<{$smarty.const._MD_D3DOWNLOADS_ERROR_SEL_FILSE}>' )
+			return false ;
+		}
+    });
+
+	$( '#invisible' ).click( function(){
+		infoDom_initialize() ;
+		col_action_check( 'col_action_' ) ;
+		if( validate_checked > 0 ){
+			return confirm('<{$smarty.const._MD_D3DOWNLOADS_CONFIRM_INVISIBLE}>') ;
+		} else {
+			popup_info( '<{$smarty.const._MD_D3DOWNLOADS_ERROR_SEL_FILSE}>' )
+			return false ;
+		}
+    });
+
+	$( '#brokencheck' ).click( function(){
+		return confirm('<{$smarty.const._MD_D3DOWNLOADS_CONFIRM_BROKENCHECK}>') ;
+    });
+});
+//-->
+</script>
