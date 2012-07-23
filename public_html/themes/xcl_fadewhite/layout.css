@@ -1,8 +1,14 @@
 /*  
 
 	XOOPS Cube Legacy 
-    http://xoopscube.org  */
+	Nuno Luciano aka Gigamaster
+	Theme version 2.2.1
+	License BSD & GPL
+	Date 2012 / 07 / 20
+    http://xoopscube.org
 
+
+*/
 
 /*------------------------------------------------------- BODY LAYOUT */
 
@@ -14,7 +20,7 @@ body
 	background: #fff;
 	color: #555C6B;
 	font-size: 13px;
-	font-family:Trebuchet MS, Helvetia, Tahoma, Verdana, Arial, sans-serif;
+	font-family:Trebuchet MS, Helvetia, Tahoma, Verdana, Arial, sans-serif;	
 	}
 
 #layout 
@@ -26,6 +32,48 @@ body
 	display:block;
 	}
 
+/*------------------------------------------------------- CONTAINER */
+
+#container 
+	{
+	margin-top:15px;
+	padding:10px;
+	display:block;
+	}
+
+#side 
+	{
+	float:right; 
+	position:relative;
+	display:block; 
+	width: 220px;
+	padding:0px;
+	text-align:left;
+	}
+	
+.sidecolumn
+	{
+	width:220px;
+	}
+
+#main2columns 
+	{
+	width:700px;
+	float: left;
+	display:block;
+	position: relative;
+	padding:10px;
+	background-color:#f5f5f5;
+	border:1px solid #f3f3f3;
+	}  
+
+#content 
+	{
+	float:left;
+	margin:0px auto 20px;
+	padding:0px;
+	width:690px;
+	}
 
 /*------------------------------------------------------- HEADER */
 
@@ -34,7 +82,6 @@ body
 	width: 100%;
 	height:150px;
 	background:transparent url(images/xcl-header.jpg) top left no-repeat;
-	
 	}
 
 .headerbar 
@@ -138,29 +185,31 @@ input#headerSearchField
 
 #headerBlock
 	{ 
-	background:transparent url(images/xcl-block-top.jpg) top left no-repeat;
+	background:url(images/xcl-block-top.jpg) top left no-repeat;
 	display:block;
 	height:250px;
 	padding-top:5px;
 	}
 	
 /* container for slides */
-.images 
+.imageslider
 	{
-	background:none;
+	background:transparent ;
 	position:relative;
 	height:210px;
 	width:910px;
 	margin:5px auto 0px;
 	cursor:pointer;
-	-moz-border-radius:5px;
-	-webkit-border-radius:5px;
-	-moz-box-shadow:0 0 25px #666;
-	-webkit-box-shadow:0 0 25px #666;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+    box-shadow: 0px 2px 30px rgba(0, 0, 0, 0.30);
+    -moz-box-shadow: 0px 2px 30px rgba(0, 0, 0, 0.30);
+    -webkit-box-shadow: 0px 2px 30px rgba(0, 0, 0, 0.30);
 	}
 
 /* image slide control */
-.imageslide
+.imagesliderbutton
 	{
 	clear:both;
 	display:block;
@@ -170,7 +219,7 @@ input#headerSearchField
 	}
 	
 /* single slide */
-.images div 
+.imageslider div 
 	{
 	display:none;
 	position:absolute;
@@ -179,20 +228,37 @@ input#headerSearchField
 	margin:10px 10px 0px 10px;
 	padding:10px 10px 0px 10px;
 	height:170px;
+	width:100%;
 	}
 
 /* header */
-.images h3 
-	{
-	font-size:21px;
-	font-weight:normal;
-	margin:5px 0 15px 0;
-	color: #f1f1ff;
-	}
 
-.images p 
+
+.imageslider img
 	{
+	width:150px;
+	height:145px;
+	float:left;
+	margin:10px 20px 0px 40px;
+	}
+	
+.imageslider h2 
+	{
+	text-align:center;
+	font-size:32px;
+	margin-top:30px;
+	font-weight:normal;
+	color: #f1f1ff;
+	text-shadow: 1px 1px 2px rgba(27, 27, 27, 0.8);
+	}
+	
+.imageslider p 
+	{
+	text-align:center;
+	font-size:18px;
 	color: #DADFEC;
+	font-weight:bold;
+	text-shadow: -1px -1px 2px rgba(27, 27, 27, 1);
 	}
 	
 	
@@ -239,7 +305,7 @@ input#headerSearchField
 	}
 
 /* tabs (those little circles below slides) */
-.tabs 
+.imageslidertabs 
 	{
 	display:block;
 	margin:0px 70px;
@@ -247,7 +313,7 @@ input#headerSearchField
 	}
 
 /* single tab */
-.tabs a 
+.imageslidertabs a 
 	{
 	float:left;
 	width:8px;
@@ -260,13 +326,13 @@ input#headerSearchField
 	}
 
 /* mouseover state */
-.tabs a:hover
+.imageslidertabs a:hover
 	{
 	background-position:0 -8px;      
 	}
 
 /* active state */
-.tabs a.current 
+.imageslidertabs a.current 
 	{
 	background-position:0 -16px;     
 	}
@@ -275,52 +341,31 @@ input#headerSearchField
 .disabled 
 	{
 	visibility:hidden !important;		
-	}
+	}	
+	
+/*------------------------------------------------------- FOOTER CREDITS */
 
-
-/*------------------------------------------------------- CONTAINER */
-
-#container 
+#footerbar 
 	{
-	margin-top:15px;
-	padding:10px;
+	width: 960px;
+	margin: 20px auto;
+	padding:30px 10px 50px;
+	text-align: left;
 	display:block;
-	}
-
-#side 
-	{
-	float:right; 
-	position:relative; 
-	width: 220px;
-	padding:0px;
-	text-align:left;
+	clear:both;;
+	line-height:2em;
+	font-size:0.9em;
 	}
 	
-.sidecolumn
+#footerbar p
 	{
-	width:220px;
+	border-top:1px solid #C5C5D5;
 	}
-
-#main2columns 
-	{
-	width:700px;
-	float: left;
-	display:inline;
-	position: relative;
-	padding:10px 0px 0px 10px;
-	background-color:#f5f5f5;
-	border:1px solid #f3f3f3;
-	}  
-
-#content 
-	{
-	float:left;
-	margin:0px auto;
-	padding:0px;
-	width:690px;
+#footerbar span 
+	{ 
+	float:right;
 	}
 	
-
 /*------------------------------------------------------- FLOAT */
 
 .floatRight 
@@ -342,25 +387,8 @@ input#headerSearchField
     font-size: 1px;
 	}
 	
-	
-/*------------------------------------------------------- FOOTER CREDITS */
+/*------------------------------------------------------- CLEAR FIX */
 
-#footerbar 
-	{
-	clear:both;
-	margin: 0;
-	padding: 8px 200px;
-	line-height:2em;
-	font-size:0.9em;
-	text-align: center;
-	}
-
-#footerbar span 
-	{ 
-	float:right;
-	}
-	
-	
 .clearfix:after
 	{
 	content: "."; 
@@ -385,18 +413,3 @@ input#headerSearchField
 	display: block;
 	}
 /* End hide from IE-mac */ 
-
-
-/*------------------------------------------------------- PRELOAD OVERLAY CSS */
-
-.QOverlay 
-	{
-	background-color: #f7f7f7;
-	z-index: 9999;
-	}
-
-.QLoader 
-	{
-	background-color: #666F80;;
-	height: 1px;
-	}

@@ -1,10 +1,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<{$xoops_langcode}>" lang="<{$xoops_langcode}>">
 <head>
-<meta http-equiv="content-language" content="<{$xoops_langcode}>" />
-<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<meta http-equiv="content-type" content="text/html; charset=<{$xoops_charset}>" />
 <meta http-equiv="content-style-type" content="text/css" />
 <meta http-equiv="content-script-type" content="text/javascript" />
+<meta http-equiv="content-language" content="<{$xoops_langcode}>" />
 <meta name="robots" content="<{$xoops_meta_robots}>" />
 <meta name="keywords" content="<{$xoops_meta_keywords}>" />
 <meta name="description" content="<{$xoops_meta_description}>" />
@@ -13,9 +13,17 @@
 <meta name="copyright" content="<{$xoops_meta_copyright}>" />
 <meta name="generator" content="XOOPS Cube" />
 <title><{$xoops_sitename}> - <{$xoops_pagetitle}></title>
-
 <link rel="stylesheet" type="text/css" media="all" href="<{$xoops_themecss}>" />    
-    
+<!--
+
+	XOOPS Cube Legacy 
+	Nuno Luciano aka Gigamaster
+	Theme version 2.2.1
+	License BSD & GPL
+	Date 2012 / 07 / 20
+    http://xoopscube.org
+
+-->    
 <!-- RMV: added module header -->
 <{$xoops_module_header}>
 
@@ -26,42 +34,39 @@
 // -->
 </script>
 
-
-<script type="text/javascript" src="http://cdn.jquerytools.org/1.1.1/full/jquery.tools.min.js"></script>
-<script type="text/javascript" src="<{$xoops_imageurl}>js/queryLoader.js"></script>
-<script type="text/javascript" src="<{$xoops_imageurl}>js/jquery.corner.js"></script>
-<script type="text/javascript" src="<{$xoops_imageurl}>js/jquery.jqtransform.js" ></script>
-
-
-<script type="text/javascript">
-    // logic - call corner before DOM is ready
-	$('#main2columns').corner("keep");
-    $('.leftblock').corner("keep");
-			// Path to images to transform form fields
-			$(function(){
-			$('form').jqTransform({imgPath:'<{$xoops_imageurl}>img/'});
-		});
-</script>
-
+<script type="text/javascript" src="<{$xoops_imageurl}>js/jquery.tools.1.2.7-full.min.js"></script>
+<script type="text/javascript" src="<{$xoops_imageurl}>js/jquery.queryLoader2.js"></script>
 
 <!-- Navigation Tabs - change the css class name according to installed modules --> 
 <style type="text/css">
-	<{if $xoops_dirname == ""}>
-		body #navigation a.home {color: #fff;background:transparent url(<{$xoops_imageurl}>images/xcl-tabs.png) 0px -28px no-repeat;}
+
+	/*------------------------------------------------------- TOP MENU TOGGLE CLASS ACTIVE */
+	
+	<{if $xoops_modulename == ""}>
+	body #navigation a.Home {color: #fff;background:transparent url(<{$xoops_imageurl}>images/xcl-tabs.png) 0px -28px no-repeat;}
 		<{else}>
-			body #navigation a.home {color: #fff;background:transparent url(<{$xoops_imageurl}>images/xcl-tabs.png) 0px0px no-repeat;}
+			body #navigation a.Home {color: #fff;background:transparent url(<{$xoops_imageurl}>images/xcl-tabs.png) 0px0px no-repeat;}
 	<{/if}>
-	body.about #navigation a.about {color: #fff;background:transparent url(<{$xoops_imageurl}>images/xcl-tabs.png) 0px -28px no-repeat;}
-	body.news #navigation a.news {color: #fff;background:transparent url(<{$xoops_imageurl}>images/xcl-tabs.png) 0px -28px no-repeat;}
-	body.download #navigation a.download {color: #fff;background:transparent url(<{$xoops_imageurl}>images/xcl-tabs.png) 0px -28px no-repeat;}
-	body.support #navigation a.support {color: #fff;background:transparent url(<{$xoops_imageurl}>images/xcl-tabs.png) 0px -28px no-repeat;}
+	body.News #navigation a.News {color: #fff;background:transparent url(<{$xoops_imageurl}>images/xcl-tabs.png) 0px -28px no-repeat;}
+	body.Product #navigation a.Product {color: #fff;background:transparent url(<{$xoops_imageurl}>images/xcl-tabs.png) 0px -28px no-repeat;}
+	body.About #navigation a.About {color: #fff;background:transparent url(<{$xoops_imageurl}>images/xcl-tabs.png) 0px -28px no-repeat;}
+	body.Contact #navigation a.Contact {color: #fff;background:transparent url(<{$xoops_imageurl}>images/xcl-tabs.png) 0px -28px no-repeat;}
+	
+	/*------------------------------------------------------- PRELOAD OVERLAY CSS */
+	
+	#qLpercentage {
+	font-style:italic;
+	font-size:24py;
+	font-family:Helvetia, Geneva, "Lucida Sans Unicode", "Lucida Grande", Arial, sans-serif;
+	}
+
 </style>
 
 
 </head>
 
 <!-- Body class name = module -->
-<body class="<{$legacy_module}>">
+<body class="<{$xoops_modulename}>">
 
 <div id="layout">
 
@@ -74,11 +79,11 @@
     <div class="headerbar">
     <!-- Navigation Tabs - change css class according to installed modules -->  
             <ul id="navigation">
-            <li><a href="<{$xoops_url}>" class="home"><span>Home</span></a></li>
-            <li><a href="<{$xoops_url}>" class="about"><span>About</span></a></li>
-            <li><a href="<{$xoops_url}>" class="news"><span>News</span></a></li>
-            <li><a href="<{$xoops_url}>" class="download"><span>Download</span></a></li>
-            <li><a href="<{$xoops_url}>" class="support"><span>Support</span></a></li>
+            <li><a href="<{$xoops_url}>" class="Home"><span>Home</span></a></li>
+			<li><a href="<{$xoops_url}>" class="News"><span>News</span></a></li>
+            <li><a href="<{$xoops_url}>" class="Product"><span>Product</span></a></li>
+			<li><a href="<{$xoops_url}>" class="About"><span>About</span></a></li>
+            <li><a href="<{$xoops_url}>" class="Contact"><span>Contact</span></a></li>
             </ul>
     </div>
     
@@ -106,58 +111,48 @@
 
 
 	<!-- Container for Slides -->
-    <div class="images">
+    <div class="imageslider">
     
         <!-- Slide 1-->
         <div>
-        <h3>Build your own social website with ease!</h3>
-        <img src="<{$xoops_imageurl}>images/screens.png" width="150" height="145" alt="screens" style="float:left;margin:0 30px 0px 0" />
-        <p style="font-weight:bold">
-        XOOPS Cube is a a free Open Source Web Application Platform released under BSD license and Base Legacy modules released under GPL license.</p>
-        <p>The XOOPS Cube Project is friendly managed, maintained, developed and supported by a volunteer group to expand our network, vision, creativity and skills.</p>
+        <img src="<{$xoops_imageurl}>images/screens.png" alt="screens" />
+		<h2>Web Application Platform</h2>
+        <p>Download The Last Release Now For Free !</p>
         </div>
     
         <!-- Slide 2 -->
         <div>
-        <h3>XOOPS Cube Legacy Distributions</h3>
-        <img src="<{$xoops_imageurl}>images/packages.png" width="150" height="145" alt="packages" style="float:left;margin:0 30px 0px 0" />
-        <p style="font-weight:bold">
-        Package Legacy is highly compatible with XOOPS 2 empowering everyone to create dynamic and content rich websites with ease. Legacy ensures compatibility with XOOPS 2 modules while taking advantage from the new extendable Cube core.
-        </p>
-        <p>
-        Hodajuku Distribution is developped by the japanese community and released with a set of modules.
-        </p>
+        <img src="<{$xoops_imageurl}>images/packages.png" alt="packages" />
+		<h2>Build Dynamic Web Sites</h2>
+        <p>Maximize Your Imagination & Productivity !</p>
         </div>
     
         <!-- Slide 3 -->
         <div>
-        <h3>Extensibility</h3>
-        <img src="<{$xoops_imageurl}>images/extensions.png" width="150" height="145" alt="extensions" style="float:left;margin:0 30px 0px 0" />
-        <p style="font-weight:bold">
-        You can add functions to your website by installing modules. We recomend the next-generation of modules : Cube and D3 modules, which are known to be more secure, easily duplicated and renamed with an intuitive GUI to manage content, language catalog and templates.</p>
-        <p>XOOPS Cube functionality can also be easily extended with Preloads - one file based extension.</p>
+        <img src="<{$xoops_imageurl}>images/extensions.png" width="150" height="145" alt="extensions" />
+		<h2>Simple, Secure and Scalable</h2>
+        <p>Designed And Easily Extended With Free Modules</p>
         </div>
     
         <!-- Slide 4 -->
         <div>
-        <h3>Get Involved</h3>
-        <img src="<{$xoops_imageurl}>images/cubekun.png" width="150" height="145" alt="cubekun" style="float:left;margin:0 30px 0px 0" />
-        <p style="font-weight:bold">
-        XOOPS Cube Legacy 2.2 alpha is our next release that will be offer additional user interface enhancements and many substantial improvements to users and data management.</p>
-        <p>This is a functional alpha containing some of the features we expect providing in the first stable release of XOOPS Cube Legacy 2.</p>
+        <img src="<{$xoops_imageurl}>images/cubekun.png" width="150" height="145" alt="cubekun" />
+		<h2>Make a Difference To Open Source</h2>
+        <p>
+        Get Involved With A Friendly Community-Driven Project</p>
         </div>
     
     <!-- End Container for Slides -->
     </div>
 
             <!-- Image Slide Control-->
-            <div class="imageslide">
+            <div class="imagesliderbutton">
             
                 <!-- Previous Button -->
                 <div class="backward"><a>prev</a></div>
                 
                 <!-- the tabs -->
-                <div class="tabs">
+                <div class="imageslidertabs">
                     <a href="#"></a>
                     <a href="#"></a>
                     <a href="#"></a>
@@ -170,27 +165,6 @@
             <!-- End Image Slide Control-->
             </div>
 
-
-			<script type="text/javascript">
-            // Slide setup 
-            $(function() {
-                
-                $("div.tabs").tabs(".images > div", {
-            
-                    // enable "cross-fading" effect
-                    effect: 'fade',
-                    fadeOutSpeed: "slow",
-                    interval: '9000',
-                    
-                    // start from the beginning after the last tab
-                    rotate: true,
-                    
-            
-                // use the slideshow plugin. It accepts its own configuration: autoplay!
-                }).slideshow({autoplay: true});
-            });
-            </script>
-
 <!-- End Header Block with custom Slides-->
 </div>
 
@@ -201,33 +175,33 @@
    
 
 <div id="main2columns">
-
+	
     <{if !empty($xoops_contents)}>
         <!-- Module Content -->
         <div id="content"><{$xoops_contents}></div>
         <!-- Float Clear -->
         <div class="floatClear" /></div>
+		
+		<hr />
     <{/if}>
  
-
-        <{if $xoops_showcblock == 1}>
-            <!-- BLOCK Center-Center -->  
-            <div class="centerCcolumn">
-                <{foreach item=block from=$xoops_ccblocks}>
-                <div class="centerCblock">
-                    <div class="centerCblockTitle">
-                    <{if $xoops_isadmin}>
-                    <a href="<{$xoops_url}>/modules/legacy/admin/index.php?action=BlockEdit&amp;bid=<{$block.id}>">
-                    <img src="<{$xoops_imageurl}>images/edit.png" alt="edit" />
-                    </a> 
-                    <{/if}>
-                    <{$block.title}>
-                    </div>                      
-                    <div class="centerCblockContent"><{$block.content}></div>
-                </div>
-                <{/foreach}>
-            </div>
-        <{/if}>
+ 
+ <{if $xoops_showrblock == 1}>
+    <!-- Block Right --> 
+    <{foreach item=block from=$xoops_rblocks}>
+        <div class="rightblock">
+            <h2>
+                <{if $xoops_isadmin}>
+                <a href="<{$xoops_url}>/modules/legacy/admin/index.php?action=BlockEdit&amp;bid=<{$block.id}>">
+                <img src="<{$xoops_imageurl}>images/edit.png" alt="edit" />
+                </a>
+                <{/if}>
+                <{$block.title}>
+            </h2>
+            <div class="rightblockContent"><{$block.content}></div>
+        </div>
+   <{/foreach}>
+<{/if}>
 
 <!-- End main2columns -->
 </div>
@@ -243,33 +217,14 @@
     <!-- Block Left -->
     <{foreach item=block from=$xoops_lblocks}> 
         <div class="leftblock">
-            <div class="leftblockTitle">
+            <h2>
             <{if $xoops_isadmin}>
             <a href="<{$xoops_url}>/modules/legacy/admin/index.php?action=BlockEdit&amp;bid=<{$block.id}>">
-            <img src="<{$xoops_imageurl}>images/edit.png" alt="edit" />
-            </a>
+			<img src="<{$xoops_imageurl}>images/edit.png" alt="edit" /></a>
             <{/if}>
             <{$block.title}>
-            </div>
+            </h2>
             <div class="leftblockContent"><{$block.content}></div>
-        </div>
-    <{/foreach}>
-    <{/if}>
-
-    
-    <{if $xoops_showrblock == 1}>
-    <!-- Block Right --> 
-    <{foreach item=block from=$xoops_rblocks}>
-        <div class="rightblock">
-            <div class="rightblockTitle">
-                <{if $xoops_isadmin}>
-                <a href="<{$xoops_url}>/modules/legacy/admin/index.php?action=BlockEdit&amp;bid=<{$block.id}>">
-                <img src="<{$xoops_imageurl}>images/edit.png" alt="edit" />
-                </a>
-                <{/if}>
-                <{$block.title}>
-            </div>
-            <div class="rightblockContent"><{$block.content}></div>
         </div>
     <{/foreach}>
     <{/if}>
@@ -286,40 +241,56 @@
 <!-- End Layout -->
 </div>
 
-
+<div class="clearfix"></div>
 
 <{if $xoops_showcblock == 1}>
 <!-- Bottom Blocks : Center-Left and Center-Right -->
 <div id="centerBlocks">
+
     <div id="centerBlocksContainer">
 
     <div class="centerLcolumn">
         <{foreach item=block from=$xoops_clblocks}>
             <div class="centerLblock">
-                <div class="centerLblockTitle">
+                <h2>
                 <{if $xoops_isadmin}>
                 <a href="<{$xoops_url}>/modules/legacy/admin/index.php?action=BlockEdit&amp;bid=<{$block.id}>">
-                <img src="<{$xoops_imageurl}>images/edit.png" alt="edit" />
-                </a>
+                <img src="<{$xoops_imageurl}>images/edit.png" alt="edit" /></a>
                 <{/if}>
                 <{$block.title}>
-                </div>
+                </h2>
             <div class="centerLblockContent"><{$block.content}></div>
             </div>
         <{/foreach}>
     </div>
 
+            <!-- BLOCK Center-Center -->  
+            <div class="centerCcolumn">
+                <{foreach item=block from=$xoops_ccblocks}>
+                <div class="centerCblock">
+                    <h2>
+                    <{if $xoops_isadmin}>
+                    <a href="<{$xoops_url}>/modules/legacy/admin/index.php?action=BlockEdit&amp;bid=<{$block.id}>">
+                    <img src="<{$xoops_imageurl}>images/edit.png" alt="edit" /></a> 
+                    <{/if}>
+                    <{$block.title}>
+                    </h2>                      
+                    <div class="centerCblockContent"><{$block.content}></div>
+                </div>
+                <{/foreach}>
+            </div>
+     
+
     <div class="centerRcolumn">
         <{foreach item=block from=$xoops_crblocks}>
             <div class="centerRblock">
-                <div class="centerRblockTitle">
+                <h2>
                 <{if $xoops_isadmin}>
                 <a href="<{$xoops_url}>/modules/legacy/admin/index.php?action=BlockEdit&amp;bid=<{$block.id}>">
-                <img src="<{$xoops_imageurl}>images/edit.png" alt="edit" />
-                </a>
+                <img src="<{$xoops_imageurl}>images/edit.png" alt="edit" /></a>
                 <{/if}>
                 <{$block.title}>
-                </div>
+                </h2>
             <div class="centerRblockContent"><{$block.content}></div>
             </div>
         <{/foreach}>
@@ -336,19 +307,46 @@
 <{/if}>
 
 <!-- Float Clear -->
-<div class="floatClear"></div>
+<div class="clearfix"></div>
 
 <div id="footerbar">
-<a href="http://xoopscube.com.br/">Brasilian</a> | <a href="http://xoopscube.org/">English</a> | <a href="http://xoopscube.fr/">French</a> | <a href="http://www.xoopscube.de/">German</a> | <a href="http://www.xoopscube.gr/">Greek</a> | <a href="http://xoopscube.sourceforge.net/ja/">Japanese</a> | <a href="http://www.xoops.ne.kr/xoopscube/">Korean</a> | <a href="http://www.xoopscube.ru/">Russian</a> | <a href="http://www.xoopscube.tw/">T-Chinese</a>
-<span><a href="#top"><img src="<{$xoops_imageurl}>images/top.gif" alt="top" title="top" hspace="15" /></a></span>
-<br />
-<{$xoops_footer}>
+<p><{$xoops_footer}><span><a href="#top"><img src="<{$xoops_imageurl}>images/top.gif" alt="top" title="top" hspace="15" /></a></span>
+</p>
 </div>
 
-<!-- Preload -->
 <script type="text/javascript">
-		QueryLoader.selectorPreload = "body";
-		QueryLoader.init();
+
+// Imageslider settings 
+
+$("div.imageslidertabs").tabs(".imageslider > div", {
+
+		// enable "cross-fading" effect
+		effect: "fade",
+		fadeOutSpeed: "slow",	
+		// start from the beginning after the last tab
+		rotate: true,
+		autopause: true,
+		clickable:true,
+		interval: "3000"
+
+	// use the slideshow plugin : autoplay!
+	}).slideshow({autoplay: true});
+			
+
+//  Preload Images
+	
+	$(document).ready(function () {
+    $("body").queryLoader2({
+        backgroundColor: "#f7f7f7",
+		barColor: "#666F80",
+		barHeight: 4,
+        percentage: true,
+		deepSearch: true,
+        completeAnimation: "grow"
+    });
+	
+});
+
 </script>
 
 </body>

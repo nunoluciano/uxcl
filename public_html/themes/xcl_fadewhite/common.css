@@ -1,7 +1,14 @@
 /*  
 
 	XOOPS Cube Legacy 
-    http://xoopscube.org  */
+	Nuno Luciano aka Gigamaster
+	Theme version 2.2.1
+	License BSD & GPL
+	Date 2012 / 07 / 20
+    http://xoopscube.org
+
+
+*/
 
 /*------------------------------------------------------- COMMON */
 
@@ -84,6 +91,13 @@ img
 	border:0;
 	}
 
+hr
+	{
+	border:0;
+	border-top:1px solid #f7f7f7;
+	border-bottom:1px solid #C5C5D5;
+	/*color:#C5C5D5;*/
+	}
 
 /*------------------------------------------------------- Table Data */
 
@@ -142,6 +156,7 @@ table.outer th
 div.errorMsg 
 	{
 	background-color:#A23335;
+	color:#f7f7f7;
 	border-top:#565A65 1px solid;
 	border-bottom:#565A65 1px solid;
 	font-weight: bold;
@@ -155,7 +170,7 @@ div.confirmMsg
 	background-color:#D2A905;
 	border-top:#565A65 1px solid;
 	border-bottom:#565A65 1px solid;
-	color: White;
+	color:#f7f7f7;
 	font-weight: bold;
 	text-align: center;
 	margin: 10px;
@@ -167,7 +182,7 @@ div.resultMsg
 	background-color:#55863F;
 	border-top:#565A65 1px solid;
 	border-bottom:#565A65 1px solid;
-	color: White;
+	color:#f7f7f7;
 	font-weight: bold;
 	text-align: center;
 	margin: 10px;
