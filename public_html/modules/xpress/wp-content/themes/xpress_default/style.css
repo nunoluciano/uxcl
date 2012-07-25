@@ -180,6 +180,7 @@ Tags: none color, xpressme default, variable width, two columns, widgets
 }
 
 .xpress-post .xpress-link-pages {
+	font-size:1.4em;
 	padding-top:10px;
 	clear: both;
 	text-align: center;
@@ -829,7 +830,7 @@ div.aligncenter {
 #access .menu-header,
 #access .menu,
 #xpress-menu .menu-header {
-	font-size: 11px;
+	font-size: 13px;
 	margin-left: 12px;
 }
 #access .menu-header ul,
@@ -850,7 +851,7 @@ div.aligncenter {
 	display:block;
 	text-decoration:none;
 //	color:#aaa;
-	padding:0 2px;
+	padding:10px;
 	line-height:16px;
 }
 #access ul ul,

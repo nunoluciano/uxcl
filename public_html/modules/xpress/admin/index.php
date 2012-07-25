@@ -28,9 +28,13 @@
 // URL: http://xoopsforge.com, http://xoops.org.cn                           //
 // ------------------------------------------------------------------------- //
 //include_once 'cp_functions.php';
+/*require_once '../../../include/cp_header.php' ;*/
+
 
 function admin_check_user_meta_prefix($is_report = false){
+	
 	global $xoopsModule;
+	
 	$xoopsDB =& Database::getInstance();
 	
 	$mydirname = basename(dirname(dirname(__FILE__)));
@@ -64,12 +68,12 @@ function admin_check_user_meta_prefix($is_report = false){
 		echo "******** "  . _AM_XP2_USER_META_KEY . "********" . "<br />\n";
 		echo $check_str . "<br />\n<br />\n";
 	} else {
-		echo "<fieldset><legend style='font-weight: bold; color: #900;'>" . _AM_XP2_USER_META_KEY . "</legend>";
+		echo "<div class='resultMsg'>";
+		echo "<h4 class='admintitle'>" . _AM_XP2_USER_META_KEY . "</h4>";
 		echo "<div style='padding: 8px;'>";
 		echo $check_str;
 		echo "</div>";
-		echo '</legend>';
-		echo "</fieldset><br />";
+		echo "</div><br />";
 	}
 
 }
@@ -150,12 +154,12 @@ function xpress_active_plugin_list($is_report = false)
 		echo "******** "  . _AM_XP2_PLUGIN . "********" . "<br />\n";
 		echo get_xpress_active_plugin_list('') . "<br />\n";
 	} else {
-		echo "<fieldset><legend style='font-weight: bold; color: #900;'>" . _AM_XP2_PLUGIN . "</legend>";
-		echo "<div style='padding: 8px;'>";
+		echo "<div class='resultMsg'>";
+		echo "<h4>" ._AM_XP2_PLUGIN ."</h4>";
+		echo "<div >";
 		echo get_xpress_active_plugin_list();
 		echo "</div>";
-		echo '</legend>';
-		echo "</fieldset><br />";
+		echo "</div><br />";
 	}
 }
 
@@ -239,7 +243,8 @@ function xpress_sys_info($is_report = false)
 		echo "<br />\n";
 		echo "<br />\n";
 	} else {
-		echo "<fieldset><legend style='font-weight: bold; color: #900;'>" . _AM_XP2_SYSTEM_INFO . "</legend>";
+		echo "<div class='resultMsg'>";
+		echo "<h4>" . _AM_XP2_SYSTEM_INFO . "</h4>";
 		echo "<div style='padding: 8px;'>";
 		echo "<label>" . "<strong>SERVER:</strong>" . ":</label><text>" . $_SERVER['SERVER_SOFTWARE'] . "</text><br />";
 		echo "<label>" . "<strong>PHP Version:</strong>" . ":</label><text>" . phpversion() . "</text><br />";
@@ -314,8 +319,7 @@ function xpress_sys_info($is_report = false)
 		echo  ( ini_get( 'mbstring.func_overload' )) ? "ON" : "OFF";
 		echo "</text><br />";
 		echo "</div>";
-		echo '</legend>';
-		echo "</fieldset><br />";
+		echo "</div><br />";
 	}
 }
 
@@ -404,103 +408,103 @@ function xpress_config_nomal_view()
 	require_once dirname(dirname( __FILE__ )).'/class/config_from_xoops.class.php' ;
 	$xoops_config = new ConfigFromXoops;
 	
-	echo '<table width="400" cellspacing="1" cellpadding="1" border="1">';
+	echo '<table class="outer">';
 	echo '<tbody>';
 	echo '<tr>';
-	echo '<td>Define item</td>';
-	echo '<td>XOOPS setting value</td>';
-	echo '<td>xoops_config get value</td>';
+	echo '<th>Define item</th>';
+	echo '<th>XOOPS setting value</th>';
+	echo '<th>xoops_config get value</th>';
 	echo '</tr>';
-	echo '<tr>';
+	echo '<tr class="odd">';
 	if(XOOPS_ROOT_PATH !== $xoops_config->xoops_root_path)
 		echo '<td><strong><span style="color: rgb(255, 0, 0);">XOOPS_ROOT_PATH</span></strong></td>';
 	else
-		echo '<td>XOOPS_ROOT_PATH</td>';	
+		echo '<td class="head">XOOPS_ROOT_PATH</td>';	
 	echo '<td>' . XOOPS_ROOT_PATH . '</td>';
 	echo '<td>' . $xoops_config->xoops_root_path . '</td>';
 	echo '</tr>';
 
-	echo '<tr>';
+	echo '<tr class="even">';
 	if(XOOPS_TRUST_PATH !== $xoops_config->xoops_trust_path)
 		echo '<td><strong><span style="color: rgb(255, 0, 0);">XOOPS_TRUST_PATH</span></strong></td>';
 	else
-		echo '<td>XOOPS_TRUST_PATH</td>';	
+		echo '<td class="head">XOOPS_TRUST_PATH</td>';	
 	echo '<td>' . XOOPS_TRUST_PATH . '</td>';
 	echo '<td>' . $xoops_config->xoops_trust_path . '</td>';
 	echo '</tr>';
 
-	echo '<tr>';
+	echo '<tr class="odd">';
 	if(XOOPS_URL !== $xoops_config->xoops_url)
-		echo '<td><strong><span style="color: rgb(255, 0, 0);">XOOPS_URL</span></strong></td>';
+		echo '<td class="head">XOOPS_URL</td>';
 	else
-		echo '<td>XOOPS_URL</td>';	
+		echo '<td class="head">XOOPS_URL</td>';	
 	echo '<td>' . XOOPS_URL . '</td>';
 	echo '<td>' . $xoops_config->xoops_url . '</td>';
 	echo '</tr>';
 
 	if (defined('XOOPS_SALT')){
-		echo '<tr>';
+		echo '<tr class="even">';
 		if(XOOPS_SALT !== $xoops_config->xoops_salt)
-			echo '<td><strong><span style="color: rgb(255, 0, 0);">XOOPS_SALT</span></strong></td>';
+			echo '<td class="head">XOOPS_SALT</td>';
 		else
-			echo '<td>XOOPS_SALT</td>';
+			echo '<td class="head">XOOPS_SALT</td>';
 		echo '<td>' . XOOPS_SALT . '</td>';
 		echo '<td>' . $xoops_config->xoops_salt . '</td>';
 		echo '</tr>';
 	}
 
 	if (defined('XOOPS_DB_SALT')){
-		echo '<tr>';
+		echo '<tr class="even">';
 		if(XOOPS_DB_SALT !== $xoops_config->xoops_db_salt)
-			echo '<td><strong><span style="color: rgb(255, 0, 0);">XOOPS_DB_SALT</span></strong></td>';
+			echo '<td class="head">XOOPS_DB_SALT</td>';
 		else
-			echo '<td>XOOPS_DB_SALT</td>';
+			echo '<td class="head">XOOPS_DB_SALT</td>';
 		echo '<td>' . XOOPS_DB_SALT . '</td>';
 		echo '<td>' . $xoops_config->xoops_db_salt . '</td>';
 		echo '</tr>';
 	}
 
-	echo '<tr>';
+	echo '<tr class="odd">';
 	if(XOOPS_DB_HOST !== $xoops_config->xoops_db_host)
-		echo '<td><strong><span style="color: rgb(255, 0, 0);">XOOPS_DB_HOST</span></strong></td>';
+		echo '<td class="head">XOOPS_DB_HOST</td>';
 	else
-		echo '<td>XOOPS_DB_HOST</td>';
+		echo '<td class="head">XOOPS_DB_HOST</td>';
 	echo '<td>' . XOOPS_DB_HOST . '</td>';
 	echo '<td>' . $xoops_config->xoops_db_host . '</td>';
 	echo '</tr>';
 
-	echo '<tr>';
+	echo '<tr class="even">';
 	if(XOOPS_DB_USER !== $xoops_config->xoops_db_user)
-		echo '<td><strong><span style="color: rgb(255, 0, 0);">XOOPS_DB_USER</span></strong></td>';
+		echo '<td class="head">XOOPS_DB_USER</td>';
 	else
-		echo '<td>XOOPS_DB_USER</td>';
+		echo '<td class="head">XOOPS_DB_USER</td>';
 	echo '<td>' . XOOPS_DB_USER . '</td>';
 	echo '<td>' . $xoops_config->xoops_db_user . '</td>';
 	echo '</tr>';
 
-	echo '<tr>';
+	echo '<tr class="odd">';
 	if(XOOPS_DB_PASS !== $xoops_config->xoops_db_pass)
-		echo '<td><strong><span style="color: rgb(255, 0, 0);">XOOPS_DB_PASS</span></strong></td>';
+		echo '<td class="head">XOOPS_DB_PASS</td>';
 	else
-		echo '<td>XOOPS_DB_PASS</td>';
+		echo '<td class="head">XOOPS_DB_PASS</td>';
 	echo '<td>' . XOOPS_DB_PASS . '</td>';
 	echo '<td>' . $xoops_config->xoops_db_pass . '</td>';
 	echo '</tr>';
 
-	echo '<tr>';
+	echo '<tr class="even">';
 	if(XOOPS_DB_NAME !== $xoops_config->xoops_db_name)
-		echo '<td><strong><span style="color: rgb(255, 0, 0);">XOOPS_DB_NAME</span></strong></td>';
+		echo '<td class="head">XOOPS_DB_NAME</td>';
 	else
-		echo '<td>XOOPS_DB_NAME</td>';
+		echo '<td class="head">XOOPS_DB_NAME</td>';
 	echo '<td>' . XOOPS_DB_NAME . '</td>';
 	echo '<td>' . $xoops_config->xoops_db_name . '</td>';
 	echo '</tr>';
 
-	echo '<tr>';
+	echo '<tr class="odd">';
 	if(XOOPS_DB_PREFIX !== $xoops_config->xoops_db_prefix)
-		echo '<td><strong><span style="color: rgb(255, 0, 0);">XOOPS_DB_PREFIX</span></strong></td>';
+		echo '<td class="head">XOOPS_DB_PREFIX</td>';
 	else
-		echo '<td>XOOPS_DB_PREFIX</td>';
+		echo '<td class="head">XOOPS_DB_PREFIX</td>';
 	echo '<td>' . XOOPS_DB_PREFIX . '</td>';
 	echo '<td>' . $xoops_config->xoops_db_prefix . '</td>';
 	echo '</tr>';
@@ -521,16 +525,15 @@ function xpress_config_from_xoops_view($is_report = false)
 		xpress_config_report_view();
 		echo "<br />\n";
 	} else {
-		echo "<fieldset><legend style='font-weight: bold; color: #900;'>" . _AM_XP2_XOOPS_CONFIG_INFO . "</legend>";
-		echo "<div style='padding: 8px;'>";
+		echo "<div class='resultMsg'>";
+		echo "<h4>" . _AM_XP2_XOOPS_CONFIG_INFO . "</h4>";
+		echo "</div><div style='padding: 8px;'>";
 		if ($xoopsUserIsAdmin && $is_admin_group){
 			xpress_config_nomal_view();
 		} else {
 			xpress_config_report_view();
 		}
-		echo "</div>";
-		echo '</legend>';
-		echo "</fieldset><br />";
+		echo "</div><br />";
 	}
 }
 
@@ -595,7 +598,8 @@ function xpress_state($is_report = false)
 			echo _AM_XP2_AUTHORS .":  ". $count_author[$i]. "<br />\n";
 			
 		} else {
-			echo "<fieldset><legend style='font-weight: bold; color: #900;'>" . $blogname[$i] . _AM_XP2_STATS . "</legend>";
+			echo "<div class='resultMsg'>";
+			echo "<h4>" . $blogname[$i] . _AM_XP2_STATS . "</h4>";
 			echo "<div style='padding: 8px;'>";
 			echo "<label>" . _AM_XP2_CATEGORIES .":</label><text>".@$count_category[$i];
 			echo "</text><br />";
@@ -604,8 +608,7 @@ function xpress_state($is_report = false)
 			echo "<label>" . _AM_XP2_AUTHORS .":</label><text>". $count_author[$i];
 			echo "</text>";
 			echo "</div>";
-			echo '</legend>';
-			echo "</fieldset>";
+			echo "</div>";
 		}
 	}
 }
@@ -623,15 +626,16 @@ function xpress_group_role_state($is_report = false)
 	if ($is_report){
 		echo "******** " . _AM_XP2_GROUP_ROLE . "********" . "<br />\n";
 	} else {
-		echo "<fieldset><legend style='font-weight: bold; color: #900;'>" . _AM_XP2_GROUP_ROLE . "</legend>";
+		echo "<div class='resultMsg'>";
+		echo "<h4>" . _AM_XP2_GROUP_ROLE . "</h4>";
 		echo "<div style='padding: 8px;'>";
-		echo '<table width="400" cellspacing="1" cellpadding="1" border="1">';
+		echo '<table class="outer">';
 		echo '<tbody>';
 		echo '<tr>';
-		echo '<td>GROUP</td>';
-		echo '<td>GROUPE TYPE</td>';
-		echo '<td>ROLE</td>';
-		echo '<td>Allways Check</td>';
+		echo '<th>Group</th>';
+		echo '<th>Group Type</th>';
+		echo '<th>Rolr</th>';
+		echo '<th>Allways Check</th>';
 		echo '</tr>';
 	}
 	$groupe_list = '';
@@ -663,8 +667,7 @@ function xpress_group_role_state($is_report = false)
 		echo '</tbody>';
 		echo '</table>';
 		echo "</div>";
-		echo '</legend>';
-		echo "</fieldset><br />";
+		echo "</div><br />";
 	}
 }
 function xpress_block_state($is_report = false)
@@ -680,19 +683,20 @@ function xpress_block_state($is_report = false)
 		echo "<br />\n";
 		echo "<br />\n";
 	} else {
-		echo "<fieldset><legend style='font-weight: bold; color: #900;'>" . _AM_XP2_BLOCK_STATS . "</legend>";
+		echo "<div class='resultMsg'>";
+		echo "<h4>" . _AM_XP2_BLOCK_STATS . "</h4>";
 		echo "<div style='padding: 8px;'>";
 		echo $xoops_block_check->get_message();
 		echo "</div>";
-		echo '</legend>';
-		echo "</fieldset><br />";
+		echo "</div><br />";
 	}		
 }
 
 function xpress_block_options($is_report = false)
 {
+	
 	$mydirname = basename( dirname( dirname( __FILE__ ) ) ) ;
-
+	
 	$module_objs = & get_module_objects($mydirname);
 	$module_obj = $module_objs[0];
 	$mod_id = $module_obj->getVar('mid', 'n');
@@ -706,26 +710,26 @@ function xpress_block_options($is_report = false)
 		}
 		echo "<br />\n";
 	} else {
-		echo "<fieldset><legend style='font-weight: bold; color: #900;'>" . _AM_XP2_BLOCK_OPTIONS . "</legend>";
-		echo "<div style='padding: 8px;'>";
-		echo '<table width="400" cellspacing="1" cellpadding="1" border="1">';
+		echo "<div class='resultMsg'>";
+		echo "<h4>" . _AM_XP2_BLOCK_OPTIONS . "</h4><br><br>";
+		/*	echo "<br />";
+	echo "<div>";*/
+		echo '<table class="outer">';
 		echo '<tbody>';
 		echo '<tr>';
-		echo '<td>Title</td>';
-		echo '<td>Options</td>';
+		echo '<th>Title</th>';
+		echo '<th>Options</th>';
 		echo '</tr>';
 		foreach ( $blocks as $block )
 		{
 			echo '<tr>';
-			echo '<td>' . $block->getVar('title') . '</td>';
+			echo '<td class="head">' . $block->getVar('title') . '</td>';
 			echo '<td>' . $block->getVar('options') . '</td>';
 			echo '</tr>';
 		}
 		echo '</tbody>';
 		echo '</table>';
-		echo '</div>';
-		echo '</legend>';
-		echo "</fieldset><br />";
+		echo "</div><br />";
 	}
 
 }

@@ -73,7 +73,7 @@ $table_prefix  = $xoops_config->module_db_prefix;
  * Example:
  * define ('WPLANG', '');		// language support to English
  */
-define ('WPLANG', 'ja');		// language support to Japanese
+define ('WPLANG', 'en');		// language support to Japanese
 
 /* That's all, stop editing! Happy blogging. */
 

@@ -41,11 +41,11 @@ class Xpress_Upgrader extends WP_Upgrader {
 		if ( is_wp_error($working_dir) )
 			return $working_dir;
 		$kit_dir = $working_dir .'/xpressme_integration_kit/';
-		if (!file_exists($kit_dir)){	// search sub dir.
+		if (!$wp_filesystem->exists($kit_dir)){	// search sub dir.
 			$kit_dir = '';
 			$subdirs = $wp_filesystem->dirlist($working_dir,false);
 			foreach($subdirs as $subdir){
-				if (file_exists($working_dir .'/' .$subdir['name'] .'/xpressme_integration_kit/')){
+				if ($wp_filesystem->exists($working_dir .'/' .$subdir['name'] .'/xpressme_integration_kit/')){
 					$kit_dir = $working_dir .'/' .$subdir['name'] .'/xpressme_integration_kit/';
 					continue;
 				}

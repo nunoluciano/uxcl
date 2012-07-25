@@ -16,7 +16,7 @@
 
 include_once dirname( __FILE__ ).'/../../../mainfile.php';
 include_once XOOPS_ROOT_PATH.'/class/xoopsblock.php';
-
+	
 //=========================================================
 // class xoops_block_check
 //=========================================================
@@ -245,11 +245,22 @@ function _check_block_by_module( &$module_obj )
 
 function _check_block_by_obj( &$info, &$block_obj )
 {
+/*	
+	TODO
+	Enhance UI Legacy css
+	Gigamaster 2012/07
+	UI : icon block edit
+*/
+	require_once dirname(dirname( __FILE__ )).'/class/config_from_xoops.class.php' ;
+	$xoops_config = new ConfigFromXoops;
+	$iconblock = '<img src="'. $xoops_config->xoops_url . '/modules/legacy/admin/theme/icons/block_edit.png" />';
+
 	$this->_error_flag = false;
+	
 	
 	$bid = $block_obj->getVar('bid', 'n');
 	$edit_url = $this->_build_url_block_edit( $bid );
-	$name = '<a href="' . $edit_url . '">'. htmlspecialchars( $info['name'] ). '</a>';
+	$name = '<a href="' . $edit_url . '">'. $iconblock .' &nbsp; '. htmlspecialchars( $info['name'] ). '</a>';
 //	$name = htmlspecialchars( $info['name'] );
 
 	if ( isset($info['file']) && ( $info['file'] != $block_obj->getVar('func_file', 'n') ) )
@@ -433,7 +444,7 @@ function _delete_block( &$obj )
 //--------------------------------------------------------
 // token handler
 //--------------------------------------------------------
-function _create_token()
+/*function _create_token()
 {
 	$token_handler =& xoops_gethandler('SingleToken');
 	$obj =& $token_handler->quickCreate( $this->_TOKEN_NAME );
@@ -444,7 +455,29 @@ function _validate_token()
 {
 	$token_handler =& xoops_gethandler('SingleToken');
 	return $token_handler->quickValidate( $this->_TOKEN_NAME );
-}
+}*/
+
+/**  
+	TODO
+	Token handler
+	Failed opening required '/public_html/kernel/singletoken.php'
+	Fix /extras/utility_tools/BlockTableChecker/check_blocks.php
+	Gigamaster 2012/07
+**/
+
+    function _create_token()
+    {
+        $handler =new XoopsSingleTokenHandler();
+        $obj =& $handler->create($this->_TOKEN_NAME);
+        return $obj->getHtml();
+    }
+
+    function _validate_token()
+    {
+        $handler = new XoopsSingleTokenHandler();
+        return $handler->autoValidate($this->_TOKEN_NAME);
+    }
+
 
 //--------------------------------------------------------
 // xoops version

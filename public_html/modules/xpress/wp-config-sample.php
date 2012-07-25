@@ -2,48 +2,43 @@
 /**
  * The base configurations of the WordPress.
  *
- * このファイルは、MySQL、テーブル接頭辞、秘密鍵、言語、ABSPATH の設定を含みます。
- * より詳しい情報は {@link http://wpdocs.sourceforge.jp/wp-config.php_%E3%81%AE%E7%B7%A8%E9%9B%86 
- * wp-config.php の編集} を参照してください。MySQL の設定情報はホスティング先より入手できます。
+ * This file has the following configurations: MySQL settings, Table Prefix,
+ * Secret Keys, WordPress Language, and ABSPATH. You can find more information
+ * by visiting {@link http://codex.wordpress.org/Editing_wp-config.php Editing
+ * wp-config.php} Codex page. You can get the MySQL settings from your web host.
  *
- * このファイルはインストール時に wp-config.php 作成ウィザードが利用します。
- * ウィザードを介さず、このファイルを "wp-config.php" という名前でコピーして直接編集し値を
- * 入力してもかまいません。
+ * This file is used by the wp-config.php creation script during the
+ * installation. You don't have to use the web site, you can just copy this file
+ * to "wp-config.php" and fill in the values.
  *
  * @package WordPress
  */
 
-// 注意: 
-// Windows の "メモ帳" でこのファイルを編集しないでください !
-// 問題なく使えるテキストエディタ
-// (http://wpdocs.sourceforge.jp/Codex:%E8%AB%87%E8%A9%B1%E5%AE%A4 参照)
-// を使用し、必ず UTF-8 の BOM なし (UTF-8N) で保存してください。
-
-// ** MySQL 設定 - こちらの情報はホスティング先から入手してください。 ** //
-/** WordPress のためのデータベース名 */
+// ** MySQL settings - You can get this info from your web host ** //
+/** The name of the database for WordPress */
 define('DB_NAME', 'database_name_here');
 
-/** MySQL データベースのユーザー名 */
+/** MySQL database username */
 define('DB_USER', 'username_here');
 
-/** MySQL データベースのパスワード */
+/** MySQL database password */
 define('DB_PASSWORD', 'password_here');
 
-/** MySQL のホスト名 */
+/** MySQL hostname */
 define('DB_HOST', 'localhost');
 
-/** データベースのテーブルを作成する際のデータベースのキャラクターセット */
+/** Database Charset to use in creating database tables. */
 define('DB_CHARSET', 'utf8');
 
-/** データベースの照合順序 (ほとんどの場合変更する必要はありません) */
+/** The Database Collate type. Don't change this if in doubt. */
 define('DB_COLLATE', '');
 
 /**#@+
- * 認証用ユニークキー
+ * Authentication Unique Keys and Salts.
  *
- * それぞれを異なるユニーク (一意) な文字列に変更してください。
- * {@link https://api.wordpress.org/secret-key/1.1/salt/ WordPress.org の秘密鍵サービス} で自動生成することもできます。
- * 後でいつでも変更して、既存のすべての cookie を無効にできます。これにより、すべてのユーザーを強制的に再ログインさせることになります。
+ * Change these to different unique phrases!
+ * You can generate these using the {@link https://api.wordpress.org/secret-key/1.1/salt/ WordPress.org secret-key service}
+ * You can change these at any point in time to invalidate all existing cookies. This will force all users to have to log in again.
  *
  * @since 2.6.0
  */
@@ -59,31 +54,33 @@ define('NONCE_SALT',       'put your unique phrase here');
 /**#@-*/
 
 /**
- * WordPress データベーステーブルの接頭辞
+ * WordPress Database Table prefix.
  *
- * それぞれにユニーク (一意) な接頭辞を与えることで一つのデータベースに複数の WordPress を
- * インストールすることができます。半角英数字と下線のみを使用してください。
+ * You can have multiple installations in one database if you give each a unique
+ * prefix. Only numbers, letters, and underscores please!
  */
 $table_prefix  = 'wp_';
 
 /**
- * ローカル言語 - このパッケージでは初期値として 'ja' (日本語 UTF-8) が設定されています。
+ * WordPress Localized Language, defaults to English.
  *
- * WordPress のローカル言語を設定します。設定した言語に対応する MO ファイルが
- * wp-content/languages にインストールされている必要があります。例えば de_DE.mo を
- * wp-content/languages にインストールし WPLANG を 'de_DE' に設定することでドイツ語がサポートされます。
+ * Change this to localize WordPress. A corresponding MO file for the chosen
+ * language must be installed to wp-content/languages. For example, install
+ * de_DE.mo to wp-content/languages and set WPLANG to 'de_DE' to enable German
+ * language support.
  */
-define('WPLANG', 'ja');
+define('WPLANG', '');
 
 /**
- * 開発者へ: WordPress デバッグモード
+ * For developers: WordPress debugging mode.
  *
- * この値を true にすると、開発中に注意 (notice) を表示します。
- * テーマおよびプラグインの開発者には、その開発環境においてこの WP_DEBUG を使用することを強く推奨します。
+ * Change this to true to enable the display of notices during development.
+ * It is strongly recommended that plugin and theme developers use WP_DEBUG
+ * in their development environments.
  */
 define('WP_DEBUG', false);
 
-/* 編集が必要なのはここまでです ! WordPress でブログをお楽しみください。 */
+/* That's all, stop editing! Happy blogging. */
 
 /** Absolute path to the WordPress directory. */
 if ( !defined('ABSPATH') )

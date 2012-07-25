@@ -119,8 +119,8 @@ function get_current_site_name( $current_site ) {
 		$current_site->site_name = $wpdb->get_var( $wpdb->prepare( "SELECT meta_value FROM $wpdb->sitemeta WHERE site_id = %d AND meta_key = 'site_name'", $current_site->id ) );
 		if ( ! $current_site->site_name )
 			$current_site->site_name = ucfirst( $current_site->domain );
+		wp_cache_set( $current_site->id . ':site_name', $current_site->site_name, 'site-options' );
 	}
-	wp_cache_set( $current_site->id . ':site_name', $current_site->site_name, 'site-options' );
 
 	return $current_site;
 }
@@ -134,6 +134,10 @@ function get_current_site_name( $current_site ) {
  */
 function wpmu_current_site() {
 	global $wpdb, $current_site, $domain, $path, $sites, $cookie_domain;
+
+	if ( empty( $current_site ) )
+		$current_site = new stdClass;
+
 	if ( defined( 'DOMAIN_CURRENT_SITE' ) && defined( 'PATH_CURRENT_SITE' ) ) {
 		$current_site->id = defined( 'SITE_ID_CURRENT_SITE' ) ? SITE_ID_CURRENT_SITE : 1;
 		$current_site->domain = DOMAIN_CURRENT_SITE;
@@ -207,10 +211,12 @@ function wpmu_current_site() {
 	}
 
 	// Still no dice.
+	wp_load_translations_early();
+
 	if ( 1 == count( $sites ) )
-		wp_die( sprintf( /*WP_I18N_BLOG_DOESNT_EXIST*/'そのサイトは存在しません。<a href="%s">%s</a> をお試しください。'/*/WP_I18N_BLOG_DOESNT_EXIST*/, $sites[0]->domain . $sites[0]->path ) );
+		wp_die( sprintf( __( 'That site does not exist. Please try <a href="%s">%s</a>.' ), 'http://' . $sites[0]->domain . $sites[0]->path ) );
 	else
-		wp_die( /*WP_I18N_NO_SITE_DEFINED*/'このホスト上ではサイトが定義されていません。もしあなたがサイトの所有者なら、<a href="http://wpdocs.sourceforge.jp/Debugging_a_WordPress_Network">WordPress ネットワークのデバッグ</a>のヘルプをご覧ください。'/*/WP_I18N_NO_SITE_DEFINED*/ );
+		wp_die( __( 'No site defined on this host. If you are the owner of this site, please check <a href="http://codex.wordpress.org/Debugging_a_WordPress_Network">Debugging a WordPress Network</a> for help.' ) );
 }
 
 /**
@@ -224,19 +230,21 @@ function wpmu_current_site() {
 function ms_not_installed() {
 	global $wpdb, $domain, $path;
 
-	$title = /*WP_I18N_FATAL_ERROR*/'データベース接続確立エラー'/*/WP_I18N_FATAL_ERROR*/;
+	wp_load_translations_early();
+
+	$title = __( 'Error establishing database connection' );
 	$msg  = '<h1>' . $title . '</h1>';
 	if ( ! is_admin() )
 		die( $msg );
-	$msg .= '<p>' . /*WP_I18N_CONTACT_OWNER*/'サイトが表示されない場合は、このネットワークの所有者にご連絡ください。'/*/WP_I18N_CONTACT_OWNER*/ . '';
-	$msg .= ' ' . /*WP_I18N_CHECK_MYSQL*/'あなたがこのネットワークのオーナーなら、MySQL が適切に動いていることと、すべてのテーブルにエラーがないことを確認してください。'/*/WP_I18N_CHECK_MYSQL*/ . '</p>';
+	$msg .= '<p>' . __( 'If your site does not display, please contact the owner of this network.' ) . '';
+	$msg .= ' ' . __( 'If you are the owner of this network please check that MySQL is running properly and all tables are error free.' ) . '</p>';
 	if ( false && !$wpdb->get_var( "SHOW TABLES LIKE '$wpdb->site'" ) )
-		$msg .= '<p>' . sprintf( /*WP_I18N_TABLES_MISSING_LONG*/'<strong>データベーステーブルがありません。</strong>MySQL が起動していないか、WordPress が正しくインストールされていないか、<code>%s</code> が削除されています。今すぐデータベースをチェックした方が良いでしょう。'/*/WP_I18N_TABLES_MISSING_LONG*/, $wpdb->site ) . '</p>';
+		$msg .= '<p>' . sprintf( __( '<strong>Database tables are missing.</strong> This means that MySQL is not running, WordPress was not installed properly, or someone deleted <code>%s</code>. You really should look at your database now.' ), $wpdb->site ) . '</p>';
 	else
-		$msg .= '<p>' . sprintf( /*WP_I18N_NO_SITE_FOUND*/'<strong>サイト <code>%1$s</code> が見つかりませんでした。</strong> <code>%2$s</code> データベース内で <code>%3$s</code> テーブルを検索しましたが、これで間違いありませんか ?'/*/WP_I18N_NO_SITE_FOUND*/, rtrim( $domain . $path, '/' ), $wpdb->blogs, DB_NAME ) . '</p>';
-	$msg .= '<p><strong>' . /*WP_I18N_WHAT_DO_I_DO*/'What do I do now?'/*WP_I18N_WHAT_DO_I_DO*/ . '</strong> ';
-	$msg .= /*WP_I18N_RTFM*/'<a target=”_blank" href="http://wpdocs.sourceforge.jp/Debugging_a_WordPress_Network">バグレポート</a>のページをご覧ください。ガイドラインに従えば、問題点の解決に役に立つかもしれません。'/*/WP_I18N_RTFM*/;
-	$msg .= ' ' . /*WP_I18N_STUCK*/'このメッセージが表示され続ける場合は、データベースに以下のテーブルが含まれているか確認してください。'/*/WP_I18N_STUCK*/ . '</p><ul>';
+		$msg .= '<p>' . sprintf( __( '<strong>Could not find site <code>%1$s</code>.</strong> Searched for table <code>%2$s</code> in database <code>%3$s</code>. Is that right?' ), rtrim( $domain . $path, '/' ), $wpdb->blogs, DB_NAME ) . '</p>';
+	$msg .= '<p><strong>' . __( 'What do I do now?' ) . '</strong> ';
+	$msg .= __( 'Read the <a target="_blank" href="http://codex.wordpress.org/Debugging_a_WordPress_Network">bug report</a> page. Some of the guidelines there may help you figure out what went wrong.' );
+	$msg .= ' ' . __( 'If you&#8217;re still stuck with this message, then check that your database contains the following tables:' ) . '</p><ul>';
 	foreach ( $wpdb->tables('global') as $t => $table ) {
 		if ( 'sitecategories' == $t )
 			continue;
@@ -246,5 +254,3 @@ function ms_not_installed() {
 
 	wp_die( $msg, $title );
 }
-
-?>

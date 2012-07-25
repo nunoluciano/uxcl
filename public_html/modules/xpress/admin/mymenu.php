@@ -79,7 +79,7 @@ if( ! defined( 'XOOPS_ORETEKI' ) ) {
 	$mymenu_uri = empty( $mymenu_fake_uri ) ? $_SERVER['REQUEST_URI'] : $mymenu_fake_uri ;
 	$mymenu_link = substr( strstr( $mymenu_uri , '/admin/' ) , 1 ) ;
 
-	foreach( array_keys( $adminmenu ) as $i ) {
+/*	foreach( array_keys( $adminmenu ) as $i ) {
 		if( $mymenu_link == $adminmenu[$i]['link'] ) {
 			$adminmenu[$i]['color'] = '#FFCCCC' ;
 			$adminmenu_hilighted = true ;
@@ -96,6 +96,27 @@ if( ! defined( 'XOOPS_ORETEKI' ) ) {
 				break ;
 			}
 		}
+	}*/
+
+	//Gigamaster 2012/07
+	// highlight
+	foreach( array_keys( $adminmenu ) as $i ) {
+		if( $mymenu_link == $adminmenu[$i]['link'] ) {
+			$adminmenu[$i]['selected'] = true ;
+			$adminmenu_hilighted = true ;
+			$GLOBALS['altsysAdminPageTitle'] = $adminmenu[$i]['title'] ;
+		} else {
+			$adminmenu[$i]['selected'] = false ;
+		}
+	}
+	if( empty( $adminmenu_hilighted ) ) {
+		foreach( array_keys( $adminmenu ) as $i ) {
+			if( stristr( $mymenu_uri , $adminmenu[$i]['link'] ) ) {
+				$adminmenu[$i]['selected'] = true ;
+				$GLOBALS['altsysAdminPageTitle'] = $adminmenu[$i]['title'] ;
+				break ;
+			}
+		}
 	}
 
 	// link conversion from relative to absolute
@@ -106,11 +127,12 @@ if( ! defined( 'XOOPS_ORETEKI' ) ) {
 	}
 
 	// display
-	echo "<div style='text-align:left;width:98%;'>" ;
-	foreach( $adminmenu as $menuitem ) {
-		echo "<div style='float:left;height:1.5em;'><nobr><a href='".htmlspecialchars($menuitem['link'],ENT_QUOTES)."' style='background-color:{$menuitem['color']};font:normal normal bold 9pt/12pt;'>".htmlspecialchars($menuitem['title'],ENT_QUOTES)."</a> | </nobr></div>\n" ;
-	}
-	echo "</div>\n<hr style='clear:left;display:block;' />\n" ;
+	require_once XOOPS_TRUST_PATH.'/libs/altsys/class/D3Tpl.class.php' ;
+	$tpl = new D3Tpl() ;
+	$tpl->assign( array(
+		'adminmenu' => $adminmenu ,
+	) ) ;
+	$tpl->display( 'db:altsys_inc_mymenu.html' ) ;
 
 }
 

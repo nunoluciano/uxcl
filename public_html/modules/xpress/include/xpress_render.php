@@ -179,6 +179,41 @@ function xpress_remake_global_for_permlink(){
 	}
 }
 
+function xpress_meta_assign($meta_key,$meta_word){
+	global $xoopsTpl,$xoTheme; //for XOOPS
+
+	if (!empty($meta_key) && !empty($meta_word)){
+		if (defined('LEGACY_MODULE_VERSION') && version_compare(LEGACY_MODULE_VERSION, '2.2', '>=')) {
+    		// For XCL 2.2
+    		$xclRoot =& XCube_Root::getSingleton();
+    		$headerScript = $xclRoot->mContext->getAttribute('headerScript');
+    		$headerScript->addMeta($meta_key, $meta_word);
+		} elseif (isset($xoTheme) && is_object($xoTheme)) {
+    		// For XOOPS 2.3 or higher & Impress CMS.
+    		$xoTheme->addMeta('meta', $meta_key, $meta_word);
+		}
+		$xoopsTpl->assign('xoops_meta_'.  $meta_key, $meta_word);				
+	}	
+}
+function xpress_get_xoops_meta($meta_key){
+	global $xoopsTpl,$xoTheme; //for XOOPS
+	
+	if (defined('LEGACY_MODULE_VERSION') && version_compare(LEGACY_MODULE_VERSION, '2.2', '>=')) {
+    		// For XCL 2.2
+			$moduleHandler =& xoops_gethandler('module');
+			$legacyRender =& $moduleHandler->getByDirname('legacyRender');
+    		$configHandler =& xoops_gethandler('config');
+			$configs =& $configHandler->getConfigsByCat(0, $legacyRender->get('mid'));
+ 			$ret = htmlspecialchars($configs['meta_'.$meta_key]);
+	} elseif (isset($xoTheme) && is_object($xoTheme)) {
+		$ret = $xoTheme->metas['meta'][$meta_key];
+	} else {
+		$ret = $xoopsTpl->get_template_vars('xoops_meta_'.$meta_key);
+	}
+	return $ret;
+}
+	
+
 //rendering for the module header and the body
 function xpress_render($contents){
 	global $xoops_config;
@@ -195,14 +230,16 @@ function xpress_render($contents){
 	$page_title = $GLOBALS["xoopsModule"]->getVar("name"). ' &raquo;'. get_xpress_title($contents);
 	$xoopsTpl->assign('xoops_pagetitle', $page_title);
 	
-	$xoops_keywords = $xoopsTpl->get_template_vars('xoops_meta_keywords');
+	$xoops_keywords =  xpress_get_xoops_meta('keywords');
+	
 	$wp_keyword = get_xpress_meta_name('keywords',$contents);
 	switch ($xpress_config->meta_keyword_type){
 		case 'xoops':
 			break;
 		case 'wordpress':
-			if (!empty($wp_keyword))
-				$xoopsTpl->assign('xoops_meta_keywords', $wp_keyword);
+			if (!empty($wp_keyword)){
+				xpress_meta_assign('keywords', $wp_keyword);
+			}
 			break;
 		case 'wordpress_xoops':
 			if (!empty($wp_keyword)){
@@ -211,20 +248,22 @@ function xpress_render($contents){
 				} else {
 					$keywords = $wp_keyword;
 				}
-				$xoopsTpl->assign('xoops_meta_keywords', $keywords);
+				xpress_meta_assign('keywords', $keywords);
 			} 
 			break;
 		default :
 	}
 
-	$xoops_description = $xoopsTpl->get_template_vars('xoops_meta_description');
+	$xoops_description =  xpress_get_xoops_meta('description');
 	$wp_description = get_xpress_meta_name('description',$contents);
+
 	switch ($xpress_config->meta_description_type){
 		case 'xoops':
 			break;
 		case 'wordpress':
-			if (!empty($wp_description))
-				$xoopsTpl->assign('xoops_meta_description', $wp_description);
+			if (!empty($wp_description)){
+				xpress_meta_assign('description', $wp_description);
+			}
 			break;
 		case 'wordpress_xoops':
 			if (!empty($wp_description)){
@@ -233,7 +272,7 @@ function xpress_render($contents){
 				} else {
 					$description = $wp_description;
 				}
-				$xoopsTpl->assign('xoops_meta_description', $description);
+				xpress_meta_assign('description', $description);
 			} 
 			break;
 		default :
@@ -245,7 +284,7 @@ function xpress_render($contents){
 			break;
 		case 'wordpress':
 			if (!empty($wp_robots))
-				$xoopsTpl->assign('xoops_meta_robots', $wp_robots);
+				xpress_meta_assign('robots', $wp_robots);
 			break;
 		default :
 	}

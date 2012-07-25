@@ -82,7 +82,7 @@ include $mydirpath .'/wp-includes/version.php' ;
 
 $modversion['name'] = ucfirst($mydirname) . ' ' . constant('_MI_XP2_NAME') ;
 $modversion['description'] = constant( '_MI_XP2_DESC');
-$modversion['version'] = "2.42";
+$modversion['version'] = "2.45";
 $modversion['credits'] = "Wordpress DEV (http://wordpress.org/) XPressME DEV Toemon) (http://ja.xpressme.info) ;";
 $modversion['author'] = "toemon (http://ja.xpressme.info)";
 $modversion['license'] = "GPL see LICENSE";

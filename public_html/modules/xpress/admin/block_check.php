@@ -60,8 +60,9 @@ include( './mymenu.php' ) ;
 include_once(dirname(__FILE__) . '/../class/check_blocks_class.php');
 
 //BLOCK CHECK
-echo "<fieldset><legend style='font-weight: bold; color: #900;'>" . 'Check ' . $mydirname . ' block table' . "</legend>";
-echo "<div style='padding: 8px;'>";
+		echo "<div class='resultMsg'>\n";
+		echo "<h4>"  . 'Check ' . $mydirname . ' block table' . "</h4>\n";
+echo "<div style='padding: 8px;'>\n";
 
 $xoops_block_check =& xoops_block_check::getInstance();
 
@@ -82,7 +83,7 @@ case "remove_block":
 default:
 	if ($xoops_block_check->check_blocks($mydirname)){
 			echo $xoops_block_check->get_message();
-			echo "<br /><br />";
+			echo "<br /><br />\n";
 			echo _AM_XP2_BLOCK_OK ;
 	} else {
 
@@ -120,7 +121,7 @@ default:
 //	$xoopsTpl->assign( 'xoops_contents', $cont );
 //} else {
 //}
-echo "</fieldset>";
+echo "</div>";
 xoops_cp_footer();
 	
 ?>

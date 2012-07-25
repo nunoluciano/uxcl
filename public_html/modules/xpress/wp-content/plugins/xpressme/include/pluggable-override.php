@@ -316,10 +316,17 @@ function wp_clear_auth_cookie() {
 }
 endif;
 
-
-
-
-
+if ( !function_exists('is_user_logged_in') ) :
+function is_user_logged_in() {
+	$user = wp_get_current_user();
+	if (method_exists($user, 'exists')) {
+		if ( ! $user->exists() ) return false;
+	} else {
+		if ( empty( $user->ID ) ) return false;
+	}
+	return true;
+}
+endif;
 
 // ***********************************  End Of Pluggable Function Edit (wp-include/pluggable.php) ************************************
 

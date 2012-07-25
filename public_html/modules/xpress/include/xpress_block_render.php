@@ -182,6 +182,10 @@ if(!defined('XPRESS_BLOCK_RENDER_FUNCTION_READ')){
 			$templates_file = 'db:'.$mydirname. '_' . str_replace(".php", ".html", $block_function_name);
 		}
 		
+		if (defined('ICMS_ROOT_PATH')) {
+            include_once ICMS_ROOT_PATH.'/class/template.php';
+        }
+
 		$tpl =& new XoopsTpl() ;
 		$tpl->template_dir = $xoops_config->module_path . '/templates';
 		if (!$tpl->template_exists($templates_file)){
