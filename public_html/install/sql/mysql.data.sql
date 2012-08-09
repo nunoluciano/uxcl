@@ -30,6 +30,7 @@ INSERT INTO bannerclient VALUES (0, 'Sample client', 'XOOPS Cube Project Team', 
 #
 
 INSERT INTO configcategory VALUES (1, '_MD_AM_GENERAL', 0);
+INSERT INTO configcategory VALUES (3, '_MD_AM_SECURITY', 0);
 INSERT INTO configcategory VALUES (4, '_MD_AM_CENSOR', 0);
 INSERT INTO configcategory VALUES (5, '_MD_AM_SEARCH', 0);
 INSERT INTO configcategory VALUES (6, '_MD_AM_MAILER', 0);
@@ -38,20 +39,20 @@ INSERT INTO configcategory VALUES (6, '_MD_AM_MAILER', 0);
 # Dumping data for table `configoption`
 #
 
-INSERT INTO configoption VALUES (1, '_MD_AM_DEBUGMODE1', '1', 13);
-INSERT INTO configoption VALUES (2, '_MD_AM_DEBUGMODE2', '2', 13);
-INSERT INTO configoption VALUES (3, '_NESTED', 'nest', 32);
-INSERT INTO configoption VALUES (4, '_FLAT', 'flat', 32);
-INSERT INTO configoption VALUES (5, '_THREADED', 'thread', 32);
-INSERT INTO configoption VALUES (6, '_OLDESTFIRST', '0', 33);
-INSERT INTO configoption VALUES (7, '_NEWESTFIRST', '1', 33);
-INSERT INTO configoption VALUES (14, '_MD_AM_DEBUGMODE3', '3', 13);
-INSERT INTO configoption VALUES (23, '_MD_AM_DEBUGMODE0', '0', 13);
+INSERT INTO configoption VALUES (1, '_MD_AM_DEBUGMODE1', '1', 9);
+INSERT INTO configoption VALUES (2, '_MD_AM_DEBUGMODE2', '2', 9);
+INSERT INTO configoption VALUES (3, '_NESTED', 'nest', 29);
+INSERT INTO configoption VALUES (4, '_FLAT', 'flat', 29);
+INSERT INTO configoption VALUES (5, '_THREADED', 'thread', 29);
+INSERT INTO configoption VALUES (6, '_OLDESTFIRST', '0', 30);
+INSERT INTO configoption VALUES (7, '_NEWESTFIRST', '1', 30);
+INSERT INTO configoption VALUES (14, '_MD_AM_DEBUGMODE3', '3', 9);
+INSERT INTO configoption VALUES (23, '_MD_AM_DEBUGMODE0', '0', 9);
 
-INSERT INTO configoption VALUES (24,'PHP mail()','mail',64);
-INSERT INTO configoption VALUES (25,'sendmail','sendmail',64);
-INSERT INTO configoption VALUES (26,'SMTP','smtp',64);
-INSERT INTO configoption VALUES (27,'SMTPAuth','smtpauth',64);
+INSERT INTO configoption VALUES (24,'PHP mail()','mail',36);
+INSERT INTO configoption VALUES (25,'sendmail','sendmail',36);
+INSERT INTO configoption VALUES (26,'SMTP','smtp',36);
+INSERT INTO configoption VALUES (27,'SMTPAuth','smtpauth',36);
 
 
 
