@@ -7,19 +7,40 @@ bin-release/
 .flexProperties
 .settings/
 
-## Misc
+## Misc for Mac OS Windows
 .project
 .DS_Store
 dwsync.xml
 _notes
 /_notes/#
+Thumbs.db
+/._*
+._
 
+## for Win
+# Build and Release Folders
+bin-debug/
+bin-release/
 
-## for MacOS
-.DS_Store
+# Project property files
+.actionScriptProperties
+.flexProperties
+.settings/
 
 ## for PhpStorm
 /.idea
+
+## AdelieDebug
+/html/preload/AdelieDebug*
+
+## XOOPS Cube
+# /public_html/mainfile.php
+# /public_html/cache/*
+# /public_html/templates_c/*
+# /public_html/uploads/*
+# /xoops_trust_path/cache/*
+# /xoops_trust_path/templates_c/*
+# /xoops_trust_path/uploads/*
 
 ## AdelieDebug
 /html/preload/AdelieDebug*
