@@ -4,7 +4,7 @@
 // CHECK THE FUNCTION IN THE BOTTOM OF THIS FILE (for multibyte languages)
 //
 
-define('_MD_PICO_NUM','displays');
+define('_MD_PICO_NUM','Displays');
 define('_MD_PICO_TOP','TOP');
 define('_MD_PICO_ALLCONTENTS','All contents');
 define('_MD_PICO_DELETEDCONTENTS','Deleted contents');
@@ -14,55 +14,55 @@ define('_MD_PICO_MODIFIED','Modified');
 define('_MD_PICO_EXPIRING','Expiring');
 define('_MD_PICO_BYTE','byte');
 define('_MD_PICO_HISTORY','History');
-define('_MD_PICO_DIFF2NOW','diff to now');
-define('_MD_PICO_DIFFFROMPREV','diff from previous');
+define('_MD_PICO_DIFF2NOW','Diff to now');
+define('_MD_PICO_DIFFFROMPREV','Diff from previous');
 define('_MD_PICO_REFERIT','Refer it');
 define('_MD_PICO_DOWNLOADIT','Download it');
 define('_MD_PICO_VIEWED','Views');
 define('_MD_PICO_NEXT','Next');
 define('_MD_PICO_PREV','Prev');
-define('_MD_PICO_CATEGORYINDEX','top of the category');
+define('_MD_PICO_CATEGORYINDEX','Top of the category');
 define('_MD_PICO_NOSUBJECT','(no subject)');
 define('_MD_PICO_FMT_PUBLIC','Public');
 define('_MD_PICO_FMT_PRIVATE','Private');
 define('_MD_PICO_FMT_PUBLICCOUNT','Public: %s items');
 define('_MD_PICO_FMT_PRIVATECOUNT','Private: %s items');
-define('_MD_PICO_WAITINGRELEASE','waiting release');
+define('_MD_PICO_WAITINGRELEASE','Waiting release');
 define('_MD_PICO_EXPIRED','Expired');
 define('_MD_PICO_INVISIBLE','Invisible');
-define('_MD_PICO_WAITINGAPPROVAL','waiting approval');
-define('_MD_PICO_WAITINGREGISTER','waiting new');
-define('_MD_PICO_WAITINGUPDATE','waiting update');
+define('_MD_PICO_WAITINGAPPROVAL','Waiting approval');
+define('_MD_PICO_WAITINGREGISTER','Waiting new');
+define('_MD_PICO_WAITINGUPDATE','Waiting update');
 define('_MD_PICO_REGISTERED_AUTOMATICALLY','AUTOMATIC');
 define('_MD_PICO_ONOFF','ON/OFF');
 
 define('_MD_PICO_CATEGORY','Category');
 define('_MD_PICO_CATEGORIES','Categories');
-define('_MD_PICO_SUBCATEGORY','Subcategory');
-define('_MD_PICO_SUBCATEGORIES','Subcategories');
+define('_MD_PICO_SUBCATEGORY','Sub-category');
+define('_MD_PICO_SUBCATEGORIES','Sub-categories');
 define('_MD_PICO_CONTENT','Content');
 define('_MD_PICO_CONTENTS','Contents');
 
-define('_MD_PICO_LINK_MAKECATEGORY','Make a category');
-define('_MD_PICO_LINK_MAKESUBCATEGORY','Make a subcategory');
-define('_MD_PICO_LINK_MAKECONTENT','Make a content');
+define('_MD_PICO_LINK_MAKECATEGORY','Make a new category');
+define('_MD_PICO_LINK_MAKESUBCATEGORY','Make new sub-category');
+define('_MD_PICO_LINK_MAKECONTENT','Make new content');
 define('_MD_PICO_LINK_EDITCATEGORY','Edit the category');
 define('_MD_PICO_LINK_EDITCONTENT','Edit the content');
 define('_MD_PICO_LINK_CATEGORYPERMISSIONS','Permissions');
 define('_MD_PICO_LINK_BATCHCONTENTS','Batch');
-define('_MD_PICO_LINK_PUBLICCATEGORYINDEX','Public index of the category');
+define('_MD_PICO_LINK_PUBLICCATEGORYINDEX','Public index of category');
 
-define('_MD_PICO_LINK_PRINTERFRIENDLY','Printer friendly');
-define('_MD_PICO_LINK_TELLAFRIEND','Tell a friend');
+define('_MD_PICO_LINK_PRINTERFRIENDLY','Printer-friendly');
+define('_MD_PICO_LINK_TELLAFRIEND','Tell A Friend');
 define('_MD_PICO_FMT_TELLAFRIENDSUBJECT','Article found in %s');
 define('_MD_PICO_FMT_TELLAFRIENDBODY',"I've just found an interestiong article\nSubject:%s");
-define('_MD_PICO_JUMPTOTOPOFPICOBODY',"Jump to the top");
+define('_MD_PICO_JUMPTOTOPOFPICOBODY',"Jump to the Top");
 define('_MD_PICO_CSVENCODING','UTF-8');
 
 
 define('_MD_PICO_ERR_SQL','SQL Error Occurred in: ');
 define('_MD_PICO_ERR_DUPLICATEDVPATH','The virtual path is duplicated');
-define('_MD_PICO_ERR_PIDLOOP','parent/child loop error');
+define('_MD_PICO_ERR_PIDLOOP','Parent/child loop error');
 
 define('_MD_PICO_MSG_UPDATED','Updated successfully');
 
@@ -96,11 +96,11 @@ define('_MD_PICO_TH_HTMLHEADER','HTML headers');
 define('_MD_PICO_TH_HTMLHEADER_WAITING','Waiting HTML headers');
 define('_MD_PICO_TH_BODY','body');
 define('_MD_PICO_TH_BODY_WAITING','Waiting body');
-define('_MD_PICO_TH_FILTERS','filters');
+define('_MD_PICO_TH_FILTERS','Filters');
 define('_MD_PICO_TH_TAGS','Tags');
-define('_MD_PICO_TH_TAGSDSC','separate tags by a space');
-define('_MD_PICO_TH_WEIGHT','weight');
-define('_MD_PICO_TH_CONTENTOPTIONS','options');
+define('_MD_PICO_TH_TAGSDSC','Separate tags by a space');
+define('_MD_PICO_TH_WEIGHT','Weight');
+define('_MD_PICO_TH_CONTENTOPTIONS','Options');
 define('_MD_PICO_LABEL_USECACHE','use cache');
 define('_MD_PICO_NOTE_USECACHEDSC','Enable it only for static contents');
 define('_MD_PICO_LABEL_LOCKED','Lock (only moderators can edit/delete it)');
@@ -121,12 +121,12 @@ define('_MD_PICO_MSG_CONFIRMDELETECATEGORY','All contents in the category will b
 define('_MD_PICO_MSG_CONFIRMDELETECONTENT','Are you OK to delete it?');
 define('_MD_PICO_MSG_CONFIRMSAVEASCONTENT','Are you OK to save as?');
 //define('_MD_PICO_MSG_GOTOPREFERENCE4EDITTOP','The TOP category is the special. You can change the settings of the TOP in module preferences.');
-define('_MD_PICO_LABEL_HTMLHEADERONOFF','display the textarea');
+define('_MD_PICO_LABEL_HTMLHEADERONOFF','Display the textarea');
 define('_MD_PICO_LABEL_HTMLHEADERCONFIGALERT','(HTML header for each contents is disabled by preferences)');
 define('_MD_PICO_LABEL_INPUTHELPER','Input Helper ON/OFF');
-define('_MD_PICO_BTN_SUBMITEDITING','register this form');
-define('_MD_PICO_BTN_SUBMITSAVEAS','save as');
-define('_MD_PICO_BTN_COPYFROMWAITING','register waiting data');
+define('_MD_PICO_BTN_SUBMITEDITING','Save');
+define('_MD_PICO_BTN_SUBMITSAVEAS','Save a Copy');
+define('_MD_PICO_BTN_COPYFROMWAITING','Register waiting data');
 define('_MD_PICO_MSG_CONFIRMCOPYFROMWAITING','Data you edited in this form will be lost. Are you OK?');
 define('_MD_PICO_HOWTO_OVERRIDEOPTIONS','If you override preferences, write a line like:<br />(option name):(option value)<br />eg)<br />show_breadcrumbs:1 <br /><br />Overridable options and current values:');
 
@@ -148,7 +148,7 @@ define('_MD_PICO_FMT_QUERYTAGDESC','Contents tagged %s');
 define('_MD_PICO_ERR_NOCONTENTMATCHED','No contents');
 
 // filters
-define('_MD_PICO_FILTERS_EVALTITLE','php code');
+define('_MD_PICO_FILTERS_EVALTITLE','PHP code');
 define('_MD_PICO_FILTERS_EVALDESC','It will be the parameter of eval() function');
 define('_MD_PICO_FILTERS_HTMLSPECIALCHARSTITLE','HTML special character escape');
 define('_MD_PICO_FILTERS_HTMLSPECIALCHARSDESC','If you want to use BBCode etc. also, set it the first place.');

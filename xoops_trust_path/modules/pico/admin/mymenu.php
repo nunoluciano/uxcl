@@ -19,7 +19,7 @@ require_once( $langmanpath ) ;
 $langman =& D3LanguageManager::getInstance() ;
 $langman->read( 'modinfo.php' , $mydirname , $mytrustdirname ) ;
 
-include dirname(dirname(__FILE__)).'/admin_menu.php' ;
+include dirname(dirname(__FILE__)) . '/admin_menu.php';
 
 $adminmenu = array_merge( $adminmenu , $adminmenu4altsys ) ;
 

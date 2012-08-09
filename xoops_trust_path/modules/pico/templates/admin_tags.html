@@ -66,7 +66,7 @@
 				<td>
 					<{$tag.created_time|formatTimestamp}>
 				</td>
-				<td align="<{$smarty.const._ALIGN_START}>">
+				<td align="left">
 					<input type="checkbox" name="action_selects[<{$tag.label}>]" id="col_action_<{$tag.id}>" value="1" />
 				</td>
 			</tr>
@@ -75,7 +75,7 @@
 			<th colspan="4" style="text-align:center;">
 				<input type="submit" name="tags_update" value="<{$smarty.const._SUBMIT}>" />
 			</th>
-			<th colspan="2" style="text-align:<{$smarty.const._ALIGN_END}>;">
+			<th colspan="2" style="text-align:right;">
 				<{$smarty.const._MD_A_PICO_LABEL_EXTRASRIGHTCHECKED}>
 				<input type="submit" name="tags_delete" value="<{$smarty.const._MD_A_PICO_BTN_DELETE}>" onclick="return confirm('<{$smarty.const._MD_A_PICO_CONFIRM_DELETE}>');" />
 			</th>

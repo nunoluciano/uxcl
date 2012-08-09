@@ -11,7 +11,7 @@ $constpref = '_MI_' . strtoupper( $mydirname ) ;
 
 $modversion['name'] = $mydirname ;
 $modversion['description'] = constant($constpref.'_DESC') ;
-$modversion['version'] = 1.83 ;
+$modversion['version'] = 1.84 ;
 $modversion['credits'] = "PEAK Corp.";
 $modversion['author'] = "GIJ=CHECKMATE<br />PEAK Corp.(http://www.peak.ne.jp/)" ;
 $modversion['help'] = "" ;
@@ -245,7 +245,7 @@ $modversion['config'][] = array(
 	'description'	=> '' ,
 	'formtype'		=> 'yesno' ,
 	'valuetype'		=> 'int' ,
-	'default'		=> 1 ,
+	'default'		=> 0 ,
 	'options'		=> array()
 ) ;
 
@@ -375,8 +375,8 @@ $modversion['config'][] = array(
 	'description'	=> '' ,
 	'formtype'		=> 'select' ,
 	'valuetype'		=> 'text' ,
-	'default'		=> 'xoopsdhtml' ,
-	'options'		=> array( 'xoopsdhtml' => 'xoopsdhtml' , 'common/fckeditor' => 'common_fckeditor' )
+	'default'		=> 'wysiwygeditor' ,
+	'options'		=> array( 'xoopsdhtml' => 'xoopsdhtml' , 'WYSIWYG Editor' => 'wysiwygeditor' )
 ) ;
 
 $modversion['config'][] = array(
@@ -395,7 +395,7 @@ $modversion['config'][] = array(
 	'description'	=> '' ,
 	'formtype'		=> 'textbox' ,
 	'valuetype'		=> 'int' ,
-	'default'		=> 20 ,
+	'default'		=> 5 ,
 	'options'		=> array()
 ) ;
 
@@ -455,7 +455,7 @@ $modversion['config'][] = array(
 	'description'	=> $constpref.'_EFIMAGES_SIZEDSC' ,
 	'formtype'		=> 'textbox' ,
 	'valuetype'		=> 'text' ,
-	'default'		=> '480x480 160x160' ,
+	'default'		=> '1024x800 800x600 480x480 160x160' ,
 	'options'		=> array()
 ) ;
 

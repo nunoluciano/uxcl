@@ -20,9 +20,9 @@ if( ! $use_custom_icon && function_exists( 'imagecreatefrompng' ) && function_ex
 
 	$im = imagecreatefrompng( $icon_fullpath ) ;
 
-	$color = imagecolorallocate( $im , 0 , 0 , 0 ) ; // black
-	$px = ( 92 - 6 * strlen( $mydirname ) ) / 2 ;
-	imagestring( $im , 3 , $px , 34 , $mydirname , $color ) ;
+	$color = imagecolorallocate( $im , 255 , 255 , 255 ) ; // black
+	$px = ( 127 - 6 * strlen( $mydirname ) ) / 2 ;
+	imagestring( $im , 2 , $px , 5 , $mydirname , $color ) ;
 	imagepng( $im ) ;
 	imagedestroy( $im ) ;
 

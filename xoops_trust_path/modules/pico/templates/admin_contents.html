@@ -12,11 +12,11 @@
 <p>
 	<{$smarty.const._MD_PICO_CATEGORY}>:<strong><{$cat_title}></strong>
 	<{if $cat_id >= 0}>
-		[<a href="<{$mod_url}>/index.php?page=categorymanager&amp;cat_id=<{$cat_id}>"><{$smarty.const._EDIT}></a>]
-		[<a href="<{$mod_url}>/admin/index.php?page=category_access&amp;cat_id=<{$cat_id}>"><{$smarty.const._MD_PICO_LINK_CATEGORYPERMISSIONS}></a>]
-		[<a href="<{$mod_url}>/index.php?page=makecategory&amp;pid=<{$cat_id}>"><{$smarty.const._MD_PICO_LINK_MAKESUBCATEGORY}></a>]
-		[<a href="<{$mod_url}>/index.php?page=makecontent&amp;cat_id=<{$cat_id}>&amp;ret=ac<{$cat_id}>"><{$smarty.const._MD_PICO_LINK_MAKECONTENT}></a>]
-		[<a href="<{$mod_url}>/<{$cat_link}>"><{$smarty.const._MD_PICO_LINK_PUBLICCATEGORYINDEX}></a>]
+		<a href="<{$mod_url}>/index.php?page=categorymanager&amp;cat_id=<{$cat_id}>"><img src="<{$mod_imageurl}>/icon_edit.png" title="<{$smarty.const._EDIT}>" /></a>
+		<a href="<{$mod_url}>/admin/index.php?page=category_access&amp;cat_id=<{$cat_id}>"><img src="<{$mod_imageurl}>/icon_permissions.png" title="<{$smarty.const._MD_PICO_LINK_CATEGORYPERMISSIONS}>" /></a>
+		<a href="<{$mod_url}>/index.php?page=makecategory&amp;pid=<{$cat_id}>"><img src="<{$mod_imageurl}>/icon_folder.png" title="<{$smarty.const._MD_PICO_LINK_MAKESUBCATEGORY}>" /></a>
+		<a href="<{$mod_url}>/index.php?page=makecontent&amp;cat_id=<{$cat_id}>&amp;ret=ac<{$cat_id}>"><img src="<{$mod_imageurl}>/images/icon_doc.png" title="<{$smarty.const._MD_PICO_LINK_MAKECONTENT}>" /></a>
+		<a href="<{$mod_url}>/<{$cat_link}>"><{$smarty.const._MD_PICO_LINK_PUBLICCATEGORYINDEX}></a>]
 	<{/if}>
 </p>
 
@@ -24,7 +24,7 @@
 <h2 class="head"><{$smarty.const._MD_A_PICO_H2_CONTENTS}></h2>
 <form name="contents" action="<{$mod_url}>/admin/index.php?page=contents&amp;cat_id=<{$cat_id}>" method="post" style="margin:20px 0px;">
 	<{$gticket_hidden}>
-	<div align="<{$smarty.const._ALIGN_END}>"><{$smarty.const._MD_A_PICO_LEGEND_CONTENTSTHS}></div>
+	<div align="right"><{$smarty.const._MD_A_PICO_LEGEND_CONTENTSTHS}></div>
 	<table class="outer">
 		<tr>
 			<th>
@@ -59,21 +59,21 @@
 				<br />
 				<input type="checkbox" onclick="with(document.contents){for(i=0;i<length;i++){if(elements[i].type=='checkbox'&&elements[i].id.indexOf('col_allow_comment_')>=0){elements[i].checked=this.checked;}}}">
 			</th>
-			<th style="text-align:<{$smarty.const._ALIGN_END}>;">
+			<th style="text-align:right;">
 				<{$smarty.const._MD_A_PICO_TH_CONTENTSACTIONS}>
 				<input type="checkbox" onclick="with(document.contents){for(i=0;i<length;i++){if(elements[i].type=='checkbox'&&elements[i].id.indexOf('col_action_')>=0){elements[i].checked=this.checked;}}}">
 			</th>
 		</tr>
 		<{foreach from=$contents item="content"}>
 			<tr class="<{cycle values="even,odd"}>">
-				<td style="text-align:<{$smarty.const._ALIGN_END}>;">
+				<td style="text-align:right;">
 					<{$content.id}>
 					<{if $cat_id == $smarty.const.SPECIAL_CAT_ID_ALL}>
 						<br />
 						<span title="<{"-- "|str_repeat:$content.cat_depth_in_tree}><{$content.cat_title}>">(<{$content.cat_id}>)</span>
 					<{/if}>
 				</td>
-				<td align="<{$smarty.const._ALIGN_START}>">
+				<td align="left">
 					<input type="text" size="24" name="subjects[<{$content.id}>]" id="col_subject_<{$content.id}>" value="<{$content.subject}>" />
 				</td>
 				<td align="center">
@@ -86,7 +86,7 @@
 					<{/if}>
 				</td>
 				<td align="center">
-					<input type="text" size="3" name="weights[<{$content.id}>]" id="col_weight_<{$content.id}>" value="<{$content.weight}>" style="text-align:<{$smarty.const._ALIGN_END}>;" />
+					<input type="text" size="3" name="weights[<{$content.id}>]" id="col_weight_<{$content.id}>" value="<{$content.weight}>" style="text-align:right;" />
 				</td>
 				<td align="center">
 					<input type="checkbox" name="visibles[<{$content.id}>]" id="col_visible_<{$content.id}>" value="1" <{if $content.visible}>checked="checked"<{/if}> />
@@ -100,7 +100,7 @@
 				<td align="center">
 					<input type="checkbox" name="allow_comments[<{$content.id}>]" id="col_allow_comment_<{$content.id}>" value="1" <{if $content.allow_comment}>checked="checked"<{/if}> />
 				</td>
-				<td nowrap="nowrap" style="text-align:<{$smarty.const._ALIGN_END}>;">
+				<td nowrap="nowrap" style="text-align:right;">
 					<{if $content.is_deleted}>
 						<ul class="pico_content_history_list">
 							<{foreach from=$content.histories item="history"}>
@@ -149,7 +149,7 @@
 			</td>
 		</tr>
 		<tr>
-			<th colspan="9" style="text-align:<{$smarty.const._ALIGN_END}>;">
+			<th colspan="9" style="text-align:right;">
 				<{$smarty.const._MD_A_PICO_LABEL_CONTENTSRIGHTCHECKED}>
 				<input type="submit" name="contents_delete" value="<{$smarty.const._MD_A_PICO_BTN_DELETE}>" onclick="return confirm('<{$smarty.const._MD_A_PICO_CONFIRM_DELETE}>');" />
 				<input type="submit" name="contents_move" value="<{$smarty.const._MD_A_PICO_BTN_MOVE}>" />

@@ -5,11 +5,11 @@
 <{* admin controllers *}>
 <{capture name="controllers"}>
 	<{if $content.can_edit}>
-		<a href="<{$mod_url}>/index.php?page=contentmanager&amp;content_id=<{$content.id}>">[<{$smarty.const._MD_PICO_LINK_EDITCONTENT}>]</a>
+		<a href="<{$mod_url}>/index.php?page=contentmanager&amp;content_id=<{$content.id}>"><img src="<{$mod_imageurl}>/icon_edit.png" title="<{$smarty.const._MD_PICO_LINK_EDITCONTENT}>" /></a>
 	<{/if}>
 
 	<{if $xoops_isadmin}>
-		<a href="<{$mod_url}>/admin/index.php?page=contents&amp;cat_id=<{$category.id}>">[<{$smarty.const._MD_PICO_LINK_BATCHCONTENTS}>]</a>
+		<a href="<{$mod_url}>/admin/index.php?page=contents&amp;cat_id=<{$category.id}>"><img src="<{$mod_imageurl}>/icon_batch.png" title="<{$smarty.const._MD_PICO_LINK_BATCHCONTENTS}>" /></a>
 	<{/if}>
 <{/capture}>
 
@@ -41,12 +41,12 @@
 
 <!-- print icon -->
 <{if $mod_config.show_printicon}>
-	<div class="pico_print_icon"><a href="<{$mod_url}>/<{$content.link}><{if $mod_config.use_wraps_mode || $mod_config.use_rewrite}>?<{else}>&amp;<{/if}>page=print"><img src="<{$mod_imageurl}>/icon_print.gif" border="0" alt="<{$smarty.const._MD_PICO_LINK_PRINTERFRIENDLY}>" /></a></div>
+	<div class="pico_print_icon"><a href="<{$mod_url}>/<{$content.link}><{if $mod_config.use_wraps_mode || $mod_config.use_rewrite}>?<{else}>&amp;<{/if}>page=print"><img src="<{$mod_imageurl}>/icon_print.png" title="<{$smarty.const._MD_PICO_LINK_PRINTERFRIENDLY}>" /></a></div>
 <{/if}>
 
 <!-- tell a friend -->
 <{if $mod_config.show_tellafriend && $content.tellafriend_uri}>
-	<div class="pico_tellafriend_icon"><a href="<{$content.tellafriend_uri}>" target="_top"><img src="<{$mod_imageurl}>/icon_tellafriend.gif" border="0" alt="<{$smarty.const._MD_PICO_LINK_TELLAFRIEND}>" /></a></div>
+	<div class="pico_tellafriend_icon"><a href="<{$content.tellafriend_uri}>" target="_top"><img src="<{$mod_imageurl}>/icon_tellafriend.png" title="<{$smarty.const._MD_PICO_LINK_TELLAFRIEND}>" /></a></div>
 <{/if}>
 
 <!-- vote -->
@@ -97,19 +97,19 @@
 <{if $mod_config.show_pagenavi && $content.id}>
 <table width="100%" border="0" cellpadding="0" cellspacing="0" class="pico_pagenavigation">
 <tr>
-	<td width="33%" align="<{$smarty.const._ALIGN_START}>" valign="top">
+	<td width="33%" align="left" valign="top">
 	<{if $prev_content.id}>
-		<a href="<{$mod_url}>/<{$prev_content.link}>" accesskey="F"><img src="<{$mod_imageurl}>/navicon_<{if $smarty.const._ALIGN_START=='left'}>prev<{else}>next<{/if}>.gif" alt="<{$smarty.const._MD_PICO_PREV}>" /></a><br />
+		<a href="<{$mod_url}>/<{$prev_content.link}>" accesskey="F"><img src="<{$mod_imageurl}>/icon_prev.png" alt="<{$smarty.const._MD_PICO_PREV}>" /></a><br />
 		<{$prev_content.subject}>
 	<{/if}>
 	</td>
 	<td width="34%" align="center" valign="top">
-		<a href="<{$mod_url}>/<{$category.link}>" accesskey="P"><img src="<{$mod_imageurl}>/navicon_up.gif" alt="<{$smarty.const._MD_PICO_CATEGORYINDEX}>" /></a><br />
+		<a href="<{$mod_url}>/<{$category.link}>" accesskey="P"><img src="<{$mod_imageurl}>/icon_up.png" alt="<{$smarty.const._MD_PICO_CATEGORYINDEX}>" /></a><br />
 		<{$category.title}>
 	</td>
-	<td width="33%" align="<{$smarty.const._ALIGN_END}>" valign="top">
+	<td width="33%" align="right" valign="top">
 	<{if $next_content.id}>
-		<a href="<{$mod_url}>/<{$next_content.link}>" accesskey="F"><img src="<{$mod_imageurl}>/navicon_<{if $smarty.const._ALIGN_START=='left'}>next<{else}>prev<{/if}>.gif" alt="<{$smarty.const._MD_PICO_NEXT}>" /></a><br />
+		<a href="<{$mod_url}>/<{$next_content.link}>" accesskey="F"><img src="<{$mod_imageurl}>/icon_next.png" alt="<{$smarty.const._MD_PICO_NEXT}>" /></a><br />
 		<{$next_content.subject}>
 	<{/if}>
 	</td>

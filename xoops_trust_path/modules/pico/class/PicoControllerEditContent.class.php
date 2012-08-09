@@ -93,10 +93,11 @@ function execute( $request )
 	// preview
 	$this->processPreview( $request ) ;
 
-	// editor (wysiwyg etc)
+	// editor (wysiwyg etc) Add CKEditor
 	$editor_assigns = $this->getEditorAssigns( 'body' , $this->assign['content']['body_raw'] ) ;
-	$this->assign['body_wysiwyg'] = $editor_assigns['body'] ;
-	$this->html_header .= $editor_assigns['header'] ;
+    $this->assign['body_wysiwyg'] = $editor_assigns['body'] ;
+    $this->html_header .= $editor_assigns['header'] ;
+
 }
 
 
@@ -113,10 +114,12 @@ function getEditorAssigns( $name , $value )
 	} else {
 		$editor = $_POST['body_editor'] ;
 	}
+    $editor = $this->mod_config['body_editor'] ; // Add CKEditor
 
-	if( $editor == 'common_fckeditor' ) {
+	// if( $editor == 'common_fckeditor' ) {
+    if( $editor != 'xoopsdhtml' ) {
 		// FCKeditor in common/fckeditor/
-		$header = '
+/*		$header = '
 			<script type="text/javascript" src="'.XOOPS_URL.'/common/fckeditor/fckeditor.js"></script>
 			<script type="text/javascript"><!--
 				function fckeditor_exec() {
@@ -129,6 +132,10 @@ function getEditorAssigns( $name , $value )
 			// --></script>
 		' ;
 		$body = '<textarea id="'.$name.'" name="'.$name.'">'.htmlspecialchars($value,ENT_QUOTES).'</textarea><script>fckeditor_exec();</script>' ;
+*/
+        $header = '' ; // Add CKEditor
+        $body = $value; // Add CKEditor
+
 	} else {
 		// normal (xoopsdhtmltarea)
 		$header = '' ;

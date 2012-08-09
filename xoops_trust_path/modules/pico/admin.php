@@ -4,7 +4,7 @@ $mytrustdirname = basename( dirname( __FILE__ ) ) ;
 $mytrustdirpath = dirname( __FILE__ ) ;
 
 // environment
-require_once XOOPS_ROOT_PATH.'/class/template.php' ;
+require_once XOOPS_ROOT_PATH . '/class/template.php';
 $module_handler =& xoops_gethandler( 'module' ) ;
 $xoopsModule =& $module_handler->getByDirname( $mydirname ) ;
 $config_handler =& xoops_gethandler( 'config' ) ;
@@ -15,7 +15,7 @@ $moduleperm_handler =& xoops_gethandler( 'groupperm' ) ;
 if( ! is_object( @$xoopsUser ) || ! $moduleperm_handler->checkRight( 'module_admin' , $xoopsModule->getVar( 'mid' ) , $xoopsUser->getGroups() ) ) die( 'only admin can access this area' ) ;
 
 $xoopsOption['pagetype'] = 'admin' ;
-require XOOPS_ROOT_PATH.'/include/cp_functions.php' ;
+require XOOPS_ROOT_PATH . '/include/cp_functions.php';
 
 // initialize language manager
 $langmanpath = XOOPS_TRUST_PATH.'/libs/altsys/class/D3LanguageManager.class.php' ;

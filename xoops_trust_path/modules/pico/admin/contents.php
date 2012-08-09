@@ -1,12 +1,12 @@
 <?php
 
-require_once dirname(dirname(__FILE__)).'/include/main_functions.php' ;
-require_once dirname(dirname(__FILE__)).'/include/common_functions.php' ;
-require_once dirname(dirname(__FILE__)).'/include/transact_functions.php' ;
-require_once dirname(dirname(__FILE__)).'/include/import_functions.php' ;
-require_once dirname(dirname(__FILE__)).'/include/history_functions.php' ;
-require_once dirname(dirname(__FILE__)).'/class/pico.textsanitizer.php' ;
-require_once dirname(dirname(__FILE__)).'/class/gtickets.php' ;
+require_once dirname(dirname(__FILE__)) . '/include/main_functions.php';
+require_once dirname(dirname(__FILE__)) . '/include/common_functions.php';
+require_once dirname(dirname(__FILE__)) . '/include/transact_functions.php';
+require_once dirname(dirname(__FILE__)) . '/include/import_functions.php';
+require_once dirname(dirname(__FILE__)) . '/include/history_functions.php';
+require_once dirname(dirname(__FILE__)) . '/class/pico.textsanitizer.php';
+require_once dirname(dirname(__FILE__)) . '/class/gtickets.php';
 $myts =& PicoTextSanitizer::getInstance() ;
 $db =& Database::getInstance() ;
 
@@ -183,7 +183,7 @@ while( $content_row = $db->fetchArray( $ors ) ) {
 //
 
 xoops_cp_header();
-include dirname(__FILE__).'/mymenu.php' ;
+include dirname(__FILE__) . '/mymenu.php';
 $tpl = new XoopsTpl() ;
 $tpl->assign( array(
 	'mydirname' => $mydirname ,

@@ -1,7 +1,7 @@
 <?php
 
-require_once dirname(dirname(__FILE__)).'/include/common_functions.php' ;
-require_once dirname(dirname(__FILE__)).'/class/gtickets.php' ;
+require_once dirname(dirname(__FILE__)) . '/include/common_functions.php';
+require_once dirname(dirname(__FILE__)) . '/class/gtickets.php';
 $myts =& MyTextSanitizer::getInstance() ;
 $db =& Database::getInstance() ;
 
@@ -14,7 +14,7 @@ if( empty( $cat_id ) ) {
 }
 $redundants = pico_common_unserialize( $redundants_serialized ) ;
 
-include dirname(dirname(__FILE__)).'/include/category_permissions.inc.php' ;
+include dirname(dirname(__FILE__)) . '/include/category_permissions.inc.php';
 
 //
 // transaction stage
@@ -176,7 +176,7 @@ for( $i = 0 ; $i < 5 ; $i ++ ) {
 //
 
 xoops_cp_header();
-include dirname(__FILE__).'/mymenu.php' ;
+include dirname(__FILE__) . '/mymenu.php';
 $tpl = new XoopsTpl() ;
 $tpl->assign( array(
 	'mydirname' => $mydirname ,

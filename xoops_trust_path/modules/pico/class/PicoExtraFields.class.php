@@ -131,7 +131,15 @@ function uploadImage( &$extra_fields , $file , $field_name )
 	// resize loop
 	foreach( $this->image_sizes as $size_key => $sizes ) {
 		$image_path = $this->getImageFullPath( $field_name , $size_key , $image_id ) ;
-		exec( $this->mod_config['image_magick_path']."convert -geometry {$sizes[0]}x{$sizes[1]} $tmp_image $image_path" ) ;
+		////////// Gigamaster
+		// TODO GD Library resize
+		//exec( $this->mod_config['image_magick_path']."convert -geometry {$sizes[0]}x{$sizes[1]} $tmp_image $image_path" ) ;
+		// start
+		$copy_result = copy( $tmp_image, $image_path );
+		if( ! $copy_result ) {
+		die( 'check the permission/owner of the directory '.htmlspecialchars( $this->mod_config['extra_images_dir'] , ENT_QUOTES ) ) ;
+		}
+		// end
 		@chmod( $image_path , 0644 ) ;
 	}
 
