@@ -20,6 +20,14 @@ Note: This module changes textarea input field only. This means showing this are
 
 Update History
 --------------
+
+ver 0.21 (2012.08.10)
+- Set Context User Role
+- Toolbar_Full for Module Admin
+- Toolbar customized for User
+- Toolbar BBcode for Anonymous
+- Config. editor width to be responsive  
+
 ver 0.2(2012.08.08)
 - Update  script to 3.6.4
 - Preload custom editor
