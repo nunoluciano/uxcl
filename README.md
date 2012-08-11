@@ -1,4 +1,3 @@
-
 # UX Xoops Cube Legacy
 
 ***
@@ -25,7 +24,20 @@ Turn religious, turn conservative, turn radical.
 
 And then forget all about it and find your way to create."
 
+### Documentation
 
+XOOPS Cube Legacy :: API Documentation
+<http://xoopscube.org>
+
+### Modules
+
+XOOPS Cube Legacy :: API Documentation
+<http://xoopscube.org>
+
+### Themes and Templates
+
+XOOPS Cube Legacy :: API Documentation
+<http://xoopscube.org>
 
 ***
 
@@ -39,7 +51,3 @@ If you want to test it make a new install in your local server.
 
 ***
 
-### Documentation
-
-XOOPS Cube Legacy :: API Documentation
-<http://xoopscube.org>
