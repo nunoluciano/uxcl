@@ -11,7 +11,7 @@ uxcl
 Themes and modules templates can be built with different CSS frameworks 
 **Bootstrap** - **Blueprint** - **Fondation** - **YUI** - **960**
 
-![UXCK Admin Users v2.2](http://lh6.ggpht.com/xoopscube.themes/SB6fy2ZAAKI/AAAAAAAAAeI/SBiQsYmnfDk/xcl_admin_group.png "UXCL v2.2")
+![UXCK Admin Users v2.2](https://lh3.googleusercontent.com/-zvk7AYsIJlY/T-12NfS-f8I/AAAAAAAAEbg/UAthIRFSxNE/s680/uxcl.jpg "UXCL v2.2")
 
 
 ## Creative Content Creation
