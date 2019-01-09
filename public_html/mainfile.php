@@ -25,7 +25,7 @@
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
 //  ------------------------------------------------------------------------ //
 /**
- * Xoops is not installed, redirect to the installer 
+ * XCL is not installed, redirect to the installer 
  **/
 
 // XOOPS is not installed yet.
