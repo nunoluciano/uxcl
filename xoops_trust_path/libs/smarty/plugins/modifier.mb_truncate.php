@@ -28,7 +28,7 @@ function smarty_modifier_mb_truncate($string, $length = 80, $etc = '...', $break
 	if ($length == 0){
 		return '';
 	}
-	$encode = 'EUC-JP';
+	$encode = defined('_CHARSET')? _CHARSET : 'UTF-8';
 	
 	// decode
 	$string = preg_replace(array("/&gt;/i", "/&lt;/i", "/&quot;/i", "/&#039;/i"), array(">", "<", "\"", "'"), $string);
