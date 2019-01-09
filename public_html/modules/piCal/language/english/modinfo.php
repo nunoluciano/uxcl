@@ -66,6 +66,8 @@ define("_MI_WEEKNUMBERING", "Numbering rule for weeks");
 define("_MI_DAYSTARTFROM", "Borderline to separate days");
 define("_MI_TIMEZONE_USING", "Timezone of the server");
 define("_MI_USE24HOUR", "24hours system (No means 12hours system)");
+define("_MI_WHATDAY_PLUGINS", "whatday plugins");
+define("_MI_DESCWHATDAY_PLUGINS", "Enables whatday plugins separated by comma. (rokuyou,24sekki,kyureki)");
 define("_MI_NAMEORUNAME" , "Poster name displayed" ) ;
 define("_MI_DESCNAMEORUNAME" , "Select which 'name' is displayed" ) ;
 define("_MI_PROXYSETTINGS" , "Proxy settings (host:port:user:pass)" ) ;

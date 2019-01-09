@@ -17,7 +17,7 @@ if( ! function_exists( 'b_sitemap_piCal_base' ) ) {
 function b_sitemap_piCal_base( $mydirname )
 {
 	global $xoopsConfig , $xoopsDB , $xoopsUser ;
-	$myts =& MyTextSanitizer::getInstance();
+	(method_exists('MyTextSanitizer', 'sGetInstance') and $myts =& MyTextSanitizer::sGetInstance()) || $myts =& MyTextSanitizer::getInstance();
 
 	// get $mydirnumber
 	if( ! preg_match( '/^(\D+)(\d*)$/' , $mydirname , $regs ) ) echo ( "invalid dirname: " . htmlspecialchars( $mydirname ) ) ;

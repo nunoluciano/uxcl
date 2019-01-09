@@ -1,0 +1,7 @@
+<?php
+
+defined('_MD_PICAL_WHATDAY_KYUREKI_KYU')
+|| define('_MD_PICAL_WHATDAY_KYUREKI_KYU', 'C:');
+
+defined('_MD_PICAL_WHATDAY_KYUREKI_URUU')
+ || define('_MD_PICAL_WHATDAY_KYUREKI_URUU', 'B');

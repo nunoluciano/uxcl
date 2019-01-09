@@ -1,3 +1,4 @@
+(function($){
 elFinder.prototype.commands.perm = function() {
 	this.updateOnSelect = false;
 	var self = this;
@@ -21,22 +22,23 @@ elFinder.prototype.commands.perm = function() {
 	};
 
 	this.tpl = {
-		main       : '<div class="ui-helper-clearfix elfinder-info-title"><span class="elfinder-cwd-icon {class} ui-corner-all"/>{title}</div>'
+		main       : '<div class="ui-helper-clearfix elfinder-info-title elfinder-perm-dialog"><span class="elfinder-cwd-icon {class} ui-corner-all"/>{title}</div>'
 					+'{filter}{dataTable}{targetGroups}',
-		filter     : '<div>'+fm.i18n('mimeserach')+': <input id="{id}-filter" type="textbox" name="filter" size="30" value="{value}"></div>',
-		itemTitle  : '<strong>{name}</strong><span id="elfinder-info-kind">{kind}</span> ('+fm.i18n('owner')+':<span id="{id}-owner-name"><span class="'+spclass+'"/></span>)',
+		filter     : '<div>'+fm.i18n('mimeserach')+': <input class="elfinder-tabstop" id="{id}-filter" type="textbox" name="filter" size="30" value="{value}"></div>',
+		itemTitle  : '<strong>{name}</strong><span id="elfinder-info-kind">{kind}</span> ('+fm.i18n('owner')+':<span id="{id}-owner-name">{owner}{uidinput}</span>)',
 		groupTitle : '<strong>{items}: {num}</strong>',
 		dataTable  : '<table id="{id}-table-{type}"><tr><td>{0}</td><td>{1}</td><td>{2}</td></tr></table>'
-					+'<div class="">'+msg.perm+': <input id="{id}-{type}" type="text" size="4" maxlength="3" value="{value}"></div>',
+					+'<div class="">'+msg.perm+': <input class="elfinder-tabstop elfinder-focus" id="{id}-{type}" type="text" size="4" maxlength="3" value="{value}"></div>',
 		fieldset   : '<fieldset id="{id}-fieldset-{level}"><legend>{f_title}</legend>'
-					+'<input type="checkbox" value="4" id="{id}-read-{level}-{type}"{checked-r}> <label for="{id}-read-{level}-{type}">'+msg.read+'</label><br>'
-					+'<input type="checkbox" value="6" id="{id}-write-{level}-{type}"{checked-w}{disabled-w}> <label for="{id}-write-{level}-{type}">'+msg.write+'</label><br>'
-					+'<input type="checkbox" value="5" id="{id}-unlock-{level}-{type}"{checked-u}> <label for="{id}-unlock-{level}-{type}">'+msg.unlock+'</label><br>'
-					+'<input type="checkbox" value="8" id="{id}-hidden-{level}-{type}"{checked-h}{disabled-h}> <label for="{id}-hidden-{level}-{type}">'+msg.hidden+'</label></fieldset>',
+					+'<input type="checkbox" value="4" class="elfinder-tabstop" id="{id}-read-{level}-{type}"{checked-r}> <label for="{id}-read-{level}-{type}">'+msg.read+'</label><br>'
+					+'<input type="checkbox" value="6" class="elfinder-tabstop" id="{id}-write-{level}-{type}"{checked-w}{disabled-w}> <label for="{id}-write-{level}-{type}">'+msg.write+'</label><br>'
+					+'<input type="checkbox" value="5" class="elfinder-tabstop" id="{id}-unlock-{level}-{type}"{checked-u}> <label for="{id}-unlock-{level}-{type}">'+msg.unlock+'</label><br>'
+					+'<input type="checkbox" value="8" class="elfinder-tabstop" id="{id}-hidden-{level}-{type}"{checked-h}{disabled-h}> <label for="{id}-hidden-{level}-{type}">'+msg.hidden+'</label></fieldset>',
 		tab        : '<div id="{id}-tab"><ul><li><a href="#{id}-tab-perm">'+msg.perms+'</a></li><li><a href="#{id}-tab-umask">'+msg.newitem+'</a></li></ul>'
 					+'<div id="{id}-tab-perm">{permTable}</div><div id="{id}-tab-umask">{umaskTable}</div></div>',
 		groups     : '<fieldset id="{id}-fieldset-groups"><legend>'+fm.i18n('targetgroups')+'</legend><div id="{id}-groups"><span class="'+spclass+'"/></div></fieldset>',
-		groupCheck : '<input type="checkbox" id="{id}-group-{gid}" name="gids" value="{gid}"{checked} /><label for="{id}-group-{gid}">{gname}</label>'
+		groupCheck : '<input type="checkbox" class="elfinder-tabstop" id="{id}-group-{gid}" name="gids" value="{gid}"{checked} /><label for="{id}-group-{gid}">{gname}</label>',
+		uidInput   : ' uid: <input type="text" class="elfinder-tabstop" id="{id}-uid" class="perm-uid" value="{uid}">'
 	};
 
 	this.shortcuts = [{
@@ -46,6 +48,9 @@ elFinder.prototype.commands.perm = function() {
 	this.getstate = function(sel) {
 		var fm = this.fm;
 		sel = sel || fm.selected();
+		if (sel.length == 0) {
+			sel = [ fm.cwd().hash ];
+		}
 		return !this._disabled && self.checkstate(this.files(sel)) ? 0 : -1;
 	};
 	
@@ -54,19 +59,27 @@ elFinder.prototype.commands.perm = function() {
 		if (!cnt) return false;
 		var loccheck = (cnt && sel[0]._localalias);
 		var chk = $.map(sel, function(f) {
-			return (f.isowner && (cnt == 1 || f.mime != 'directory') && (f._localalias || !f.alias) && !((f._localalias) ^ loccheck)) ? f : null;
+			return (f.isowner && (cnt == 1 || f.mime != 'directory') && !((f._localalias) ^ loccheck)) ? f : null;
 		}).length;
 		return (cnt == chk)? true : false;
 	};
 
 	this.exec = function(hashes) {
+		var files   = this.files(hashes);
+		if (! files.length) {
+			hashes = [ this.fm.cwd().hash ];
+			files   = this.files(hashes);
+		}
 		var fm  = this.fm,
 		dfrd    = $.Deferred().always(function() {
 			fm.enable();
 		}),
 		tpl     = this.tpl,
-		files   = this.files(hashes),
 		hashes  = this.hashes(hashes),
+		phashes = $.map(hashes, function(h) {
+			var f = fm.file(h);
+			return f.thash && f.phash? f.phash : '';
+		}),
 		cnt     = files.length,
 		file    = files[0],
 		id = fm.namespace + '-perm-' + file.hash,
@@ -81,6 +94,7 @@ elFinder.prototype.commands.perm = function() {
 		save = function() {
 			var perm = $('#'+id+'-perm').val();
 			var umask = $('#'+id+'-umask').val();
+			var uid = $('#'+id+'-uid').val();
 			var gids = [];
 			var filter = $('#'+id+'-filter').val();
 			$('#'+id+'-fieldset-groups input[name=gids]:checked').map(function() {
@@ -95,14 +109,20 @@ elFinder.prototype.commands.perm = function() {
 				umask = '';
 			}
 			
+			if (fm.customData && !fm.customData.admin) {
+				uid = '';
+			}
+			
 			fm.request({
 				data : {
 					cmd    : 'perm',
 					target : hashes,
+					phash  : phashes,
 					perm   : perm,
 					umask  : umask,
 					gids   : gids,
-					filter : filter
+					filter : filter,
+					uid    : uid
 				},
 				notify : {type : 'perm', cnt : cnt}
 			})
@@ -118,16 +138,16 @@ elFinder.prototype.commands.perm = function() {
 			var _perm;
 			for (var i = 0; i < 3; i++){
 				_perm = 0;
-				if ($("#"+id+"-read-"+level[i]+'-'+type).attr('checked') == 'checked') {
+				if ($("#"+id+"-read-"+level[i]+'-'+type).is(':checked')) {
 					_perm = (_perm | 4);
 				}
-				if ($("#"+id+"-write-"+level[i]+'-'+type).attr('checked') == 'checked') {
+				if ($("#"+id+"-write-"+level[i]+'-'+type).is(':checked')) {
 					_perm = (_perm | 2);
 				}
-				if ($("#"+id+"-unlock-"+level[i]+'-'+type).attr('checked') == 'checked') {
+				if ($("#"+id+"-unlock-"+level[i]+'-'+type).is(':checked')) {
 					_perm = (_perm | 1);
 				}
-				if ($("#"+id+"-hidden-"+level[i]+'-'+type).attr('checked') == 'checked') {
+				if ($("#"+id+"-hidden-"+level[i]+'-'+type).is(':checked')) {
 					_perm = (_perm | 8);
 				}
 				perm += _perm.toString(16);
@@ -138,21 +158,21 @@ elFinder.prototype.commands.perm = function() {
 			var _perm;
 			for (var i = 0; i < 3; i++){
 				_perm = parseInt(perm.slice(i, i+1), 16);
-				$("#"+id+"-read-"+level[i]+'-'+type).removeAttr('checked');
-				$("#"+id+"-write-"+level[i]+'-'+type).removeAttr('checked');
-				$("#"+id+"-unlock-"+level[i]+'-'+type).removeAttr('checked');
-				$("#"+id+"-hidden-"+level[i]+'-'+type).removeAttr('checked');
+				$("#"+id+"-read-"+level[i]+'-'+type).prop("checked", false);
+				$("#"+id+"-write-"+level[i]+'-'+type).prop("checked", false);
+				$("#"+id+"-unlock-"+level[i]+'-'+type).prop("checked", false);
+				$("#"+id+"-hidden-"+level[i]+'-'+type).prop("checked", false);
 				if ((_perm & 4) == 4) {
-					$("#"+id+"-read-"+level[i]+'-'+type).attr('checked', 'checked');
+					$("#"+id+"-read-"+level[i]+'-'+type).prop("checked", true);
 				}
 				if ((_perm & 2) == 2) {
-					$("#"+id+"-write-"+level[i]+'-'+type).attr('checked', 'checked');
+					$("#"+id+"-write-"+level[i]+'-'+type).prop("checked", true);
 				}
 				if ((_perm & 1) == 1) {
-					$("#"+id+"-unlock-"+level[i]+'-'+type).attr('checked', 'checked');
+					$("#"+id+"-unlock-"+level[i]+'-'+type).prop("checked", true);
 				}
 				if (i && (_perm & 8) == 8) {
-					$("#"+id+"-hidden-"+level[i]+'-'+type).attr('checked', 'checked');
+					$("#"+id+"-hidden-"+level[i]+'-'+type).prop("checked", true);
 				}
 			}
 			setperm(type);
@@ -192,7 +212,7 @@ elFinder.prototype.commands.perm = function() {
 			return perm;
 		},
 		makeDataTable = function(perm, type) {
-			var _perm;
+			var _perm, fieldset;
 			var value = '';
 			var dataTable = tpl.dataTable;
 			for (var i = 0; i < 3; i++){
@@ -220,22 +240,28 @@ elFinder.prototype.commands.perm = function() {
 		opts    = {
 			title : this.title,
 			width : 'auto',
-			buttons : buttons,
+			buttons : buttons(),
 			close : function() { $(this).elfinderdialog('destroy'); }
 		},
 		dialog = fm.getUI().find('#'+id),
-		tmb = '', title, dataTable, targetGroups, filter;
+		tmb = '', title, dataTable, targetGroups, filter, uidInput;
 
 		if (dialog.length) {
 			dialog.elfinderdialog('toTop');
 			return $.Deferred().resolve();
+		}
+		
+		if (fm.customData && fm.customData.admin) {
+			uidInput = tpl.uidInput.replace('{uid}', file.uid);
+		} else {
+			uidInput = '';
 		}
 
 		view  = view.replace('{class}', cnt > 1 ? 'elfinder-cwd-icon-group' : fm.mime2class(file.mime));
 		if (cnt > 1) {
 			title = tpl.groupTitle.replace('{items}', fm.i18n('items')).replace('{num}', cnt);
 		} else {
-			title = tpl.itemTitle.replace('{name}', file.name).replace('{kind}', fm.mime2kind(file));
+			title = tpl.itemTitle.replace('{name}', file.name).replace('{kind}', fm.mime2kind(file)).replace('{owner}', file.owner).replace('{uidinput}', uidInput);
 			if (file.tmb) {
 				tmb = fm.option('tmbUrl')+file.tmb;
 			}
@@ -252,8 +278,8 @@ elFinder.prototype.commands.perm = function() {
 
 		view = view.replace('{title}', title).replace('{filter}', filter).replace('{dataTable}', dataTable).replace('{targetGroups}', targetGroups).replace(/{id}/g, id);
 
-		buttons[fm.i18n('btnCancel')] = function() { dialog.elfinderdialog('close'); };
 		buttons[fm.i18n('btnApply')] = save;
+		buttons[fm.i18n('btnCancel')] = function() { dialog.elfinderdialog('close'); };
 
 		dialog = fm.dialog(view, opts);
 		dialog.attr('id', id);
@@ -261,41 +287,44 @@ elFinder.prototype.commands.perm = function() {
 		// load thumbnail
 		if (tmb) {
 			$('<img/>')
-				.load(function() { dialog.find('.elfinder-cwd-icon').css('background', 'url("'+tmb+'") center center no-repeat'); })
+				.on('load', function() { dialog.find('.elfinder-cwd-icon').css('background', 'url("'+tmb+'") center center no-repeat'); })
 				.attr('src', tmb);
 		}
 
-		$('#' + id + '-table-perm :checkbox').click(function(){setperm('perm');});
-		$('#' + id + '-perm').keydown(function(e) {
+		$('#' + id + '-table-perm :checkbox').on('click', function(){setperm('perm');});
+		$('#' + id + '-perm').on('keydown', function(e) {
 			var c = e.keyCode;
-			e.stopPropagation();
-			if (c == 13) {
+			if (c == $.ui.keyCode.ENTER) {
+				e.stopPropagation();
 				save();
 				return;
 			}
-
-		});
-		$('#' + id + '-perm').keyup(function(e) {
-			if ($(this).val().length == 3) {
+		}).on('focus', function(e){
+			$(this).select();
+		}).on('keyup', function(e) {
+			if ($(this).val().length === 3) {
+				$(this).select();
 				setcheck($(this).val(), 'perm');
 			}
 		});
-		$('#' + id + '-filter').keydown(function(e) {
-			e.stopPropagation();
+		$('#' + id + '-filter,#' + id + '-uid').keydown(function(e) {
+			e.keyCode !== $.ui.keyCode.TAB && e.stopPropagation();
 		});
 		if (file.mime == 'directory') {
 			$('#' + id + '-tab').tabs();
-			$('#' + id + '-table-umask :checkbox').click(function(){setperm('umask');});
-			$('#' + id + '-umask').keydown(function(e) {
+			$('#' + id + '-table-umask :checkbox').on('click', function(){setperm('umask');});
+			$('#' + id + '-umask').on('keydown', function(e) {
 				var c = e.keyCode;
-				e.stopPropagation();
-				if (c == 13) {
+				if (c == $.ui.keyCode.ENTER) {
+					e.stopPropagation();
 					save();
 					return;
 				}
-			});
-			$('#' + id + '-umask').keyup(function(e) {
+			}).on('focus', function(e){
+				$(this).select();
+			}).on('keyup', function(e) {
 				if ($(this).val().length == 3) {
+					$(this).select();
 					setcheck($(this).val(), 'umask');
 				}
 			});
@@ -320,9 +349,9 @@ elFinder.prototype.commands.perm = function() {
 				};
 			}
 			replSpinner(html ? html : msg.unknown, id+'-groups');
-			replSpinner(data.uname, id+'-owner-name');
 		});
 
 		return dfrd;
 	};
 };
+}(jQuery));

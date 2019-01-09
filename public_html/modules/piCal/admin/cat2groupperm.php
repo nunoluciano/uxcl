@@ -29,7 +29,7 @@ if( ! empty( $_POST['submit'] ) ) {
 
 
 // creating Objects of XOOPS
-$myts =& MyTextSanitizer::getInstance();
+(method_exists('MyTextSanitizer', 'sGetInstance') and $myts =& MyTextSanitizer::sGetInstance()) || $myts =& MyTextSanitizer::getInstance();
 $cattree = new XoopsTree( $cat_table , "cid" , "pid" ) ;
 $form = new MyXoopsGroupPermForm( _AM_MENU_CAT2GROUP , $xoopsModule->mid() , 'pical_cat' , _AM_CAT2GROUPDESC ) ;
 

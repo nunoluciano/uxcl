@@ -4,7 +4,7 @@ if( ! class_exists( 'PicalBlocksFactory' ) ) {
 
 class PicalBlocksFactory
 {
-	function createInstance(&$instance, $xoopsBlock)
+	public static function createInstance(&$instance, $xoopsBlock)
 	{
 		if( $xoopsBlock->get( 'show_func' ) == 'pical_after_schedule_show_tpl' ) {
 			$instance = new Pical_AfterScheduleBlockProcedure( $xoopsBlock ) ;

@@ -15,7 +15,7 @@ if( ! defined( 'XOOPS_CUBE_LEGACY' ) && substr( XOOPS_VERSION , 6 , 3 ) == 2.2 )
 
 function pical_minical_ex_show( $options )
 {
-	global $xoopsConfig , $xoopsDB , $xoopsUser ;
+	global $xoopsConfig , $xoopsDB , $xoopsUser , $xoopsTpl ;
 
 	// speed check
 	//global $GIJ_common_time ;
@@ -109,7 +109,7 @@ function pical_minical_ex_show( $options )
 	}
 
 	// MyTextSanitizer
-	$myts =& MyTextSanitizer::getInstance();
+	(method_exists('MyTextSanitizer', 'sGetInstance') and $myts =& MyTextSanitizer::sGetInstance()) || $myts =& MyTextSanitizer::getInstance();
 
 	// setting physical & virtual paths
 	$mod_path = XOOPS_ROOT_PATH."/modules/$mydirname" ;
@@ -158,6 +158,9 @@ function pical_minical_ex_show( $options )
 		$block['root_url'] = '' ;
 		$block['additional_get'] = $additional_get ;
 	}
+
+	// add CSS into xoops_module_header
+	$xoopsTpl->assign( "xoops_module_header" , $cal->get_CSS_link_tag() . $xoopsTpl->get_template_vars( 'xoops_module_header' ) ) ;;
 
 	return $block ;
 }

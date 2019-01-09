@@ -115,10 +115,10 @@ if( isset( $_POST[ 'http_import' ] ) && ! empty( $_POST[ 'import_uri' ] ) ) {
 			xoops_comment_delete( $xoopsModule->mid() , $id ) ;
 		}
 		$sql = "DELETE FROM $cal->table WHERE ($whr 0) AND (rrule_pid=0 OR rrule_pid=id)" ;
-		mysql_query( $sql , $conn ) ;
-		$records = mysql_affected_rows( $conn ) ;
+		$xoopsDB->query( $sql ) ;
+		$records = $xoopsDB->getAffectedRows() ;
 		$sql = "DELETE FROM $cal->table WHERE $whr 0 " ;
-		if( ! mysql_query( $sql , $conn ) ) echo mysql_error() ;
+		if( ! $xoopsDB->query( $sql ) ) echo $xoopsDB->error() ;
 		else $mes = urlencode( "$records "._AM_MES_DELETED ) ;
 	} else {
 		$mes = "" ;
@@ -134,9 +134,9 @@ else $new_imported = 0 ;
 // クエリ（１時間以内のレコードだけを表示）
 $older_limit = time() - 3600 ;
 $whr = "UNIX_TIMESTAMP(dtstamp) > $older_limit AND (rrule_pid=0 OR rrule_pid=id)" ;
-$rs = mysql_query( "SELECT COUNT(id) FROM $cal->table WHERE $whr" , $conn ) ;
-$numrows = mysql_result( $rs , 0 , 0 ) ;
-$rs = mysql_query( "SELECT * FROM $cal->table WHERE $whr ORDER BY dtstamp DESC LIMIT $pos,$num" , $conn ) ;
+$rs = $xoopsDB->query( "SELECT COUNT(id) FROM $cal->table WHERE $whr" ) ;
+list($numrows) = $xoopsDB->fetchRow( $rs ) ;
+$rs = $xoopsDB->query( "SELECT * FROM $cal->table WHERE $whr ORDER BY dtstamp DESC LIMIT $pos,$num" ) ;
 
 // ページ分割処理
 include XOOPS_ROOT_PATH.'/class/pagenav.php';
@@ -206,7 +206,8 @@ echo "
 $myts = MyTextSanitizer::getInstance() ;
 $oddeven = 'odd' ;
 $count = 0 ;
-while( $event = mysql_fetch_object( $rs ) ) {
+while( $event = $xoopsDB->fetchArray( $rs ) ) {
+	$event = (object)$event;
 	$oddeven = ( $oddeven == 'odd' ? 'even' : 'odd' ) ;
 	if( $count ++ < $new_imported ) $newer_style = "style='background-color:#FFFFCC;'" ;
 	else $newer_style = '' ;

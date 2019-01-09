@@ -41,6 +41,11 @@
 			$$key = $val ;
 		}
 	}
+	
+	// whatday_plugins の正規化
+	if ($cal->whatday_plugins) {
+		$cal->whatday_plugins = trim($cal->whatday_plugins, ' ,');
+	}
 
 	// get server timezone
 	switch( $timezone_using ) {
@@ -82,9 +87,10 @@
 
 			// 管理者のカテゴリアクセス権限（全カテゴリ）
 			$sql = "SELECT cid,pid,cat_title,cat_desc,ismenuitem,cat_depth FROM $cal->cat_table ORDER BY weight" ;
-			$rs = mysql_query( $sql ) ;
+			$rs = $xoopsDB->query( $sql ) ;
 			$cal->categories = array() ;
-			while( $cat = mysql_fetch_object( $rs ) ) {
+			while( $cat = $xoopsDB->fetchArray( $rs ) ) {
+				$cat = (object)$cat;
 				$cal->categories[ intval( $cat->cid ) ] = $cat ;
 			}
 
@@ -105,9 +111,10 @@
 
 			// 一般ユーザのカテゴリアクセス権限
 			$sql = "SELECT distinct cid,pid,cat_title,cat_desc,ismenuitem,cat_depth FROM $cal->cat_table LEFT JOIN ".$xoopsDB->prefix('group_permission')." ON cid=gperm_itemid WHERE gperm_name='pical_cat' AND gperm_modid='$mid' AND enabled AND gperm_groupid IN $ids4sql ORDER BY weight" ;
-			$rs = mysql_query( $sql ) ;
+			$rs = $xoopsDB->query( $sql ) ;
 			$cal->categories = array() ;
-			while( $cat = mysql_fetch_object( $rs ) ) {
+			while( $cat = $xoopsDB->fetchArray( $rs ) ) {
+				$cat = (object)$cat;
 				$cal->categories[ intval( $cat->cid ) ] = $cat ;
 			}
 
@@ -167,9 +174,10 @@
 
 		// ゲストのカテゴリアクセス権限
 		$sql = "SELECT distinct cid,pid,cat_title,cat_desc,ismenuitem,cat_depth FROM $cal->cat_table LEFT JOIN ".$xoopsDB->prefix('group_permission')." ON cid=gperm_itemid WHERE gperm_name='pical_cat' AND gperm_modid='$mid' AND enabled AND gperm_groupid='".XOOPS_GROUP_ANONYMOUS."' ORDER BY weight" ;
-		$rs = mysql_query( $sql ) ;
+		$rs = $xoopsDB->query( $sql ) ;
 		$cal->categories = array() ;
-		while( $cat = mysql_fetch_object( $rs ) ) {
+		while( $cat = $xoopsDB->fetchArray( $rs ) ) {
+			$cat = (object)$cat;
 			$cal->categories[ intval( $cat->cid ) ] = $cat ;
 		}
 

@@ -18,8 +18,6 @@
 	// $xoopsConfig[ 'language' ] = 'french' ;
 
 	// MySQLへの接続
-	// $conn = mysql_connect( XOOPS_DB_HOST , XOOPS_DB_USER , XOOPS_DB_PASS ) or die( "Could not connect." ) ;
-	// mysql_select_db( XOOPS_DB_NAME , $conn ) ;
 	$conn = $xoopsDB->conn ;
 
 	// setting physical & virtual paths
@@ -31,6 +29,7 @@
 	if( ! class_exists( 'piCal_xoops' ) ) {
 		require_once( "$mod_path/class/piCal.php" ) ;
 		require_once( "$mod_path/class/piCal_xoops.php" ) ;
+		require_once( "$mod_path/class/piCal_whatday_abstract.php" ) ;
 	}
 
 	// GET,POST変数の取得・前処理
@@ -105,12 +104,19 @@
 		}
 	}
 
+	// XCL 2.2.1.1 以降でもメインメニューのサブメニューが表示されるようにモジュールキャッシュをクリア
+	if (defined('LEGACY_BASE_VERSION') && version_compare(LEGACY_BASE_VERSION, '2.2.1.1', '>=')) {
+		$module_handler =& xoops_gethandler('module');
+		$thisModule =& $module_handler->getByDirname($mydirname);
+		$thisModule->modinfo = null;
+	}
+
 	// XOOPSヘッダ出力
 	include( XOOPS_ROOT_PATH.'/header.php' ) ;
 
-	// embed style sheet の出力 (thx Ryuji)
-	$xoopsTpl->assign( "xoops_module_header" , "<style><!-- \n" . $cal->get_embed_css() . "\n--></style>\n" . $xoopsTpl->get_template_vars( "xoops_module_header" ) ) ;
-
+	// CSS ｆｉｌｅ
+	$xoopsTpl->assign( "xoops_module_header" , $cal->get_CSS_link_tag() . $xoopsTpl->get_template_vars( 'xoops_module_header' ) ) ;;
+	
 	// クローラーにリンクをへつらせない follow -> nofollow
 	$meta_robots = str_replace( ',follow' , ',nofollow' , $xoopsTpl->get_template_vars( "xoops_meta_robots" ) ) ;
 	$xoopsTpl->assign( "xoops_meta_robots" , $meta_robots ) ;
@@ -161,7 +167,42 @@
 		}
 		echo $cal->get_schedule_edit_html( ) ;
 	} else if( $action == 'View' ) {
-		// echo $cal->get_schedule_view_html( ) ;
+		// for head icons
+		$xoopsTpl->assign(
+			array(
+			'get_target' => '' ,
+			'now_cid' => $cal->now_cid ,
+			'images_url' => $cal->images_url ,
+			'mod_url' => $cal->base_url ,
+			'caldate' => $cal->caldate ,
+			'calhead_bgcolor' => $cal->calhead_bgcolor ,
+			'calhead_color' => $cal->calhead_color ,
+			'alt_list' => _PICAL_ICON_LIST ,
+			'alt_daily' => _PICAL_ICON_DAILY ,
+			'alt_weekly' => _PICAL_ICON_WEEKLY ,
+			'alt_monthly' => _PICAL_ICON_MONTHLY ,
+			'alt_yearly' => _PICAL_ICON_YEARLY ,
+			'alt_print' => _PICAL_BTN_PRINT ,
+			'lang_checkeditems' => _PICAL_MB_LABEL_CHECKEDITEMS ,
+			'lang_icalendar_output' => _PICAL_MB_LABEL_OUTPUTICS ,
+			'lang_button_export' => _PICAL_BTN_EXPORT ,
+			'lang_button_jump' => _PICAL_BTN_JUMP ,
+			'lang_summary' => _PICAL_TH_SUMMARY ,
+			'lang_startdatetime' => _PICAL_TH_STARTDATETIME ,
+			'lang_enddatetime' => _PICAL_TH_ENDDATETIME ,
+			'lang_location' => _PICAL_TH_LOCATION ,
+			'lang_contact' => _PICAL_TH_CONTACT ,
+			'lang_description' => _PICAL_TH_DESCRIPTION ,
+			'lang_categories' => _PICAL_TH_CATEGORIES ,
+			'lang_submitter' => _PICAL_TH_SUBMITTER ,
+			'lang_class' => _PICAL_TH_CLASS ,
+			'lang_rrule' => _PICAL_TH_RRULE ,
+			'lang_admissionstatus' => _PICAL_TH_ADMISSIONSTATUS ,
+			'lang_lastmodified' => _PICAL_TH_LASTMODIFIED ,
+			'lang_cursortedby' => _PICAL_MB_CURSORTEDBY ,
+			'lang_sortby' => _PICAL_MB_SORTBY )
+		) ;
+
 		$xoopsTpl->assign( 'detail_body' , $cal->get_schedule_view_html( ) ) ;
 		$xoopsTpl->assign( 'xoops_pagetitle' , $cal->last_summary ) ;
 		$xoopsTpl->assign( 'xoops_default_comment_title' , 'Re: ' . $cal->last_summary ) ;
@@ -222,10 +263,6 @@
 	// list( $usec , $sec ) = explode( " " , microtime() ) ;
 	// echo "<p>" . ( $sec + $usec - $picalstarttime ) . "sec.</p>" ;
 
-	// by Bluemoon inc.
-	$header = $xoopsTpl->get_template_vars('xoops_module_header');
-	$header .= '<link rel="stylesheet" type="text/css" media="all" href="style.css" />';
-	$xoopsTpl->assign('xoops_module_header', $header);
 	// XOOPSフッタ出力
 	include( XOOPS_ROOT_PATH.'/footer.php' ) ;
 

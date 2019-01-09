@@ -88,7 +88,7 @@ if( isset( $_POST[ 'admit' ] ) && isset( $_POST[ 'ids' ] ) && is_array( $_POST[ 
 		$whr .= "id=$id OR rrule_pid=$id OR " ;
 	}
 	$sql = "UPDATE $cal->table SET admission=1 WHERE $whr 0" ;
-	if( ! mysql_query( $sql , $conn ) ) echo mysql_error() ;
+	if( ! $xoopsDB->query( $sql ) ) echo $xoopsDB->error() ;
 	else $mes = urlencode( _AM_MES_ADMITTED ) ;
 	foreach( $_POST[ 'ids' ] as $id ) {
 		$cal->notify_new_event( $id ) ;
@@ -110,10 +110,10 @@ if( isset( $_POST[ 'admit' ] ) && isset( $_POST[ 'ids' ] ) && is_array( $_POST[ 
 			xoops_comment_delete( $xoopsModule->mid() , $id ) ;
 		}
 		$sql = "DELETE FROM $cal->table WHERE ($whr 0) AND (rrule_pid=0 OR rrule_pid=id)" ;
-		mysql_query( $sql , $conn ) ;
-		$records = mysql_affected_rows( $conn ) ;
+		$xoopsDB->query( $sql ) ;
+		$records = $xoopsDB->getAffectedRows( $conn ) ;
 		$sql = "DELETE FROM $cal->table WHERE $whr 0 " ;
-		if( ! mysql_query( $sql , $conn ) ) echo mysql_error() ;
+		if( ! $xoopsDB->query( $sql ) ) echo $xoopsDB->error() ;
 		else $mes = urlencode( "$records "._AM_MES_DELETED ) ;
 	} else {
 		$mes = "" ;
@@ -143,9 +143,9 @@ if( $txt != "" ) {
 }
 
 // クエリ
-$rs = mysql_query( "SELECT COUNT(id) FROM $cal->table WHERE $whr" , $conn ) ;
-$numrows = mysql_result( $rs , 0 , 0 ) ;
-$rs = mysql_query( "SELECT * FROM $cal->table WHERE $whr ORDER BY start,end LIMIT $pos,$num" , $conn ) ;
+$rs = $xoopsDB->query( "SELECT COUNT(id) FROM $cal->table WHERE $whr" ) ;
+list($numrows) = $xoopsDB->fetchRow( $rs ) ;
+$rs = $xoopsDB->query( "SELECT * FROM $cal->table WHERE $whr ORDER BY start,end LIMIT $pos,$num" ) ;
 
 // ページ分割処理
 include XOOPS_ROOT_PATH.'/class/pagenav.php';
@@ -201,7 +201,8 @@ echo "<h4>"._AM_ADMISSION."</h4>
 // リスト出力部
 $myts = MyTextSanitizer::getInstance() ;
 $oddeven = 'odd' ;
-while( $event = mysql_fetch_object( $rs ) ) {
+while( $event = $xoopsDB->fetchArray( $rs ) ) {
+	$event = (object)$event;
 	$oddeven = ( $oddeven == 'odd' ? 'even' : 'odd' ) ;
 	if( $event->allday ) {
 		$start_desc = date( _AM_DTFMT_LIST_ALLDAY , $event->start ) . '<br />(' . _PICAL_MB_ALLDAY_EVENT . ')' ;

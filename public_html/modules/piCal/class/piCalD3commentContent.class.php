@@ -9,7 +9,7 @@ if( !class_exists('piCalD3commentContent') )
 		function fetchSummary( $external_link_id )
 		{
 			global $xoopsDB, $xoopsConfig, $xoopsUser;
-			$myts =& MyTextSanitizer::getInstance();
+			(method_exists('MyTextSanitizer', 'sGetInstance') and $myts =& MyTextSanitizer::sGetInstance()) || $myts =& MyTextSanitizer::getInstance();
 
 			$module_handler =& xoops_gethandler( 'module' ) ;
 			$module =& $module_handler->getByDirname( $this->mydirname ) ;

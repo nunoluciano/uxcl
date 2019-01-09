@@ -113,10 +113,10 @@ if( isset( $_POST[ 'delete' ] ) ) {
 			xoops_comment_delete( $xoopsModule->mid() , $id ) ;
 		}
 		$sql = "DELETE FROM $cal->table WHERE ($whr 0) AND (rrule_pid=0 OR rrule_pid=id)" ;
-		mysql_query( $sql , $conn ) ;
-		$records = mysql_affected_rows( $conn ) ;
+		$xoopsDB->query( $sql ) ;
+		$records = $xoopsDB->getAffectedRows() ;
 		$sql = "DELETE FROM $cal->table WHERE $whr 0 " ;
-		if( ! mysql_query( $sql , $conn ) ) echo mysql_error() ;
+		if( ! $xoopsDB->query( $sql ) ) echo $xoopsDB->error() ;
 		else $mes = urlencode( "$records "._AM_MES_DELETED ) ;
 	} else {
 		$mes = "" ;
@@ -139,8 +139,8 @@ if( isset( $_POST[ 'delete' ] ) ) {
 		$whr .= "id=$id OR rrule_pid=$id OR " ;
 	}
 	$sql = "UPDATE $cal->table SET categories=CONCAT(categories,'$cid4sql') WHERE ($whr 0) AND categories NOT LIKE '%$cid4sql%'" ;
-	if( ! mysql_query( $sql , $conn ) ) echo mysql_error() ;
-	$records = mysql_affected_rows( $conn ) ;
+	if( ! $xoopsDB->query( $sql ) ) echo $xoopsDB->error() ;
+	$records = $xoopsDB->getAffectedRows() ;
 	$mes = urlencode( "$records "._AM_MES_EVENTLINKTOCAT ) ;
 	$cal->redirect( "cid=$cid&num=$num&tz=$tz&done=copied&mes=$mes" ) ;
 	exit ;
@@ -162,8 +162,8 @@ if( isset( $_POST[ 'delete' ] ) ) {
 		$whr .= "id=$id OR rrule_pid=$id OR " ;
 	}
 	$sql = "UPDATE $cal->table SET categories=REPLACE(categories,'$old_cid4sql','$cid4sql') WHERE ($whr 0)" ;
-	if( ! mysql_query( $sql , $conn ) ) echo mysql_error() ;
-	$records = mysql_affected_rows( $conn ) ;
+	if( ! $xoopsDB->query( $sql ) ) echo $xoopsDB->error() ;
+	$records = $xoopsDB->getAffectedRows() ;
 	if( $cid > 0 ) $mes = urlencode( "$records "._AM_MES_EVENTLINKTOCAT ) ;
 	else $mes = urlencode( "$records "._AM_MES_EVENTUNLINKED ) ;
 	$cal->redirect( "cid=$old_cid&num=$num&tz=$tz&done=moved&mes=$mes" ) ;
@@ -210,9 +210,9 @@ if( $txt != "" ) {
 }
 
 // Pre query for rrule events
-$prs = mysql_query( "SELECT distinct rrule_pid FROM $cal->table WHERE $whr_cid AND $whr_txt AND $whr_pf AND rrule_pid>0" , $conn ) ;
+$prs = $xoopsDB->query( "SELECT distinct rrule_pid FROM $cal->table WHERE $whr_cid AND $whr_txt AND $whr_pf AND rrule_pid>0" ) ;
 $pids = array() ;
-while( list( $pid ) = mysql_fetch_row( $prs ) ) {
+while( list( $pid ) = $xoopsDB->fetchRow( $prs ) ) {
 	$pids[] = $pid ;
 }
 
@@ -221,9 +221,9 @@ $whr = "$whr_cid AND $whr_txt AND $whr_pf AND rrule_pid=0" ;
 if( ! empty( $pids ) ) $whr .= " OR id IN (".implode(",",$pids).")" ;
 
 // Main query
-$rs = mysql_query( "SELECT COUNT(id) FROM $cal->table WHERE $whr" , $conn ) ;
-$numrows = mysql_result( $rs , 0 , 0 ) ;
-$rs = mysql_query( "SELECT * FROM $cal->table WHERE $whr ORDER BY start,end LIMIT $pos,$num" , $conn ) ;
+$rs = $xoopsDB->query( "SELECT COUNT(id) FROM $cal->table WHERE $whr" ) ;
+list($numrows) = $xoopsDB->fetchRow( $rs ) ;
+$rs = $xoopsDB->query( "SELECT * FROM $cal->table WHERE $whr ORDER BY start,end LIMIT $pos,$num" ) ;
 
 // Page Navigation
 include XOOPS_ROOT_PATH.'/class/pagenav.php';
@@ -285,7 +285,8 @@ echo "
 // リスト出力部
 $myts = MyTextSanitizer::getInstance() ;
 $oddeven = 'odd' ;
-while( $event = mysql_fetch_object( $rs ) ) {
+while( $event = $xoopsDB->fetchArray( $rs ) ) {
+	$event = (object)$event;
 	$oddeven = ( $oddeven == 'odd' ? 'even' : 'odd' ) ;
 	if( $event->allday ) {
 		$start_desc = date( _AM_DTFMT_LIST_ALLDAY , $event->start ) . '<br />(' . _PICAL_MB_ALLDAY_EVENT . ')' ;

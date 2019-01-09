@@ -10,7 +10,7 @@ define( 'PICAL_BLOCK_MONTHLY_CALENDAR_INCLUDED' , 1 ) ;
 
 function pical_monthly_calendar_show( $options )
 {
-	global $xoopsConfig , $xoopsDB ;
+	global $xoopsConfig , $xoopsDB , $xoopsTpl ;
 
 	$mydirname = empty( $options[0] ) ? basename( dirname( dirname( __FILE__ ) ) ) : $options[0] ;
 
@@ -38,10 +38,11 @@ function pical_monthly_calendar_show( $options )
 	$cal->images_url = "$mod_url/images/$skin_folder" ;
 	$cal->images_path = "$mod_path/images/$skin_folder" ;
 
-	$original_level = error_reporting( E_ALL ^ E_NOTICE ) ;
+	$original_level = error_reporting( PICAL_ERR_REPORTING_LEVEL ) ;
 	require_once( "$mod_path/include/patTemplate.php" ) ;
 	$tmpl = new PatTemplate() ;
-	$tmpl->readTemplatesFromFile( "$cal->images_path/block_monthly.tmpl.html" ) ;
+	//$tmpl->readTemplatesFromFile( "$cal->images_path/block_monthly.tmpl.html" ) ;
+	$cal->set_patTemplate( $tmpl , 'block_monthly.tmpl.html' );
 
 	// setting skin folder
 	$tmpl->addVar( "WholeBoard" , "SKINPATH" , $cal->images_url ) ;
@@ -71,6 +72,9 @@ function pical_monthly_calendar_show( $options )
 		$tmpl->addVar( "LongEventLegends" , "SKINPATH" , $cal->images_url ) ;
 		$tmpl->parseTemplate( "LongEventLegends" , "a" ) ;
 	}
+
+	// add CSS into xoops_module_header
+	$xoopsTpl->assign( "xoops_module_header" , $cal->get_CSS_link_tag() . $xoopsTpl->get_template_vars( 'xoops_module_header' ) ) ;;
 
 	// content generated from patTemplate
 	$block['content'] = $tmpl->getParsedTemplate( "WholeBoard" ) ;

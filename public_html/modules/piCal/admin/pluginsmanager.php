@@ -40,7 +40,7 @@ $cal->images_path = "$mod_path/images/$skin_folder" ;
 
 
 // XOOPS関連の初期化
-$myts =& MyTextSanitizer::getInstance();
+(method_exists('MyTextSanitizer', 'sGetInstance') and $myts =& MyTextSanitizer::sGetInstance()) || $myts =& MyTextSanitizer::getInstance();
 
 // get block instances of minicalex
 $mcx_blocks = array() ;
@@ -84,7 +84,7 @@ if( ! empty( $_POST['update'] ) ) {
 
 		foreach( $types as $type ) {
 			$type4sql = addslashes( $type ) ;
-			if( ! mysql_query( "INSERT INTO $cal->plugin_table SET pi_type='$type4sql', pi_options='$pi_options4sql', pi_weight='$pi_weight4sql', pi_title='$pi_title4sql', pi_dirname='$pi_dirname4sql', pi_file='$pi_file4sql', pi_dotgif='$pi_dotgif4sql', pi_enabled='1'" , $conn ) ) die( mysql_error() ) ;
+			if( ! $xoopsDB->query( "INSERT INTO $cal->plugin_table SET pi_type='$type4sql', pi_options='$pi_options4sql', pi_weight='$pi_weight4sql', pi_title='$pi_title4sql', pi_dirname='$pi_dirname4sql', pi_file='$pi_file4sql', pi_dotgif='$pi_dotgif4sql', pi_enabled='1'" ) ) die( $xoopsDB->error() ) ;
 		}
 	}
 
@@ -92,7 +92,7 @@ if( ! empty( $_POST['update'] ) ) {
 	foreach( array_keys( $_POST['pi_titles'] ) as $pi_id ) {
 		if( $pi_id <= 0 ) continue ;
 		if( ! empty( $_POST['deletes'][$pi_id] ) ) {
-			if( ! mysql_query( "DELETE FROM $cal->plugin_table WHERE pi_id=$pi_id" , $conn ) ) die( mysql_error() ) ;
+			if( ! $xoopsDB->query( "DELETE FROM $cal->plugin_table WHERE pi_id=$pi_id" ) ) die( $xoopsDB->error() ) ;
 		} else {
 			$pi_type4sql = addslashes( $_POST['pi_types'][$pi_id] ) ;
 			$pi_options4sql = addslashes( $_POST['pi_options'][$pi_id] ) ;
@@ -104,7 +104,7 @@ if( ! empty( $_POST['update'] ) ) {
 			$pi_dotgif4sql = addslashes( $_POST['pi_dotgifs'][$pi_id] ) ;
 			$pi_enabled4sql = ! empty( $_POST['pi_enableds'][$pi_id] ) ? 1 : 0 ;
 	
-			if( ! mysql_query( "UPDATE $cal->plugin_table SET pi_type='$pi_type4sql', pi_options='$pi_options4sql', pi_weight='$pi_weight4sql', pi_title='$pi_title4sql', pi_dirname='$pi_dirname4sql', pi_file='$pi_file4sql', pi_dotgif='$pi_dotgif4sql', pi_enabled='$pi_enabled4sql' WHERE pi_id=$pi_id" , $conn ) ) die( mysql_error() ) ;
+			if( ! $xoopsDB->query( "UPDATE $cal->plugin_table SET pi_type='$pi_type4sql', pi_options='$pi_options4sql', pi_weight='$pi_weight4sql', pi_title='$pi_title4sql', pi_dirname='$pi_dirname4sql', pi_file='$pi_file4sql', pi_dotgif='$pi_dotgif4sql', pi_enabled='$pi_enabled4sql' WHERE pi_id=$pi_id" ) ) die( $xoopsDB->error() ) ;
 		}
 	}
 
@@ -248,7 +248,8 @@ include( './mymenu.php' ) ;
 
 	// リスト出力部
 	$oddeven = 'odd' ;
-	while( $plugin = mysql_fetch_object( $prs ) ) {
+	while( $plugin = $xoopsDB->fetchArray( $prs ) ) {
+		$plugin = (object)$plugin;
 		$oddeven = ( $oddeven == 'odd' ? 'even' : 'odd' ) ;
 
 		$pi_id = intval( $plugin->pi_id ) ;

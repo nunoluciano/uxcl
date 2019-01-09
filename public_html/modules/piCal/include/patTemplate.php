@@ -342,7 +342,7 @@ function	setType( $type = "" )
 		$template								=	strtoupper( $template );
 		$attribute								=	strtolower( $attribute );
 
-		return	$this->attributes[$template][$attribute];
+		return	isset($this->attributes[$template][$attribute])? $this->attributes[$template][$attribute] : '';
 	}
 
 /**
@@ -1222,6 +1222,8 @@ function	setType( $type = "" )
 	function	parseDependencies( $name, &$temp, $mode = "w" )
 	{
 		$name	=	strtoupper( $name );
+
+		if (!isset($this->dependencies[$name]) || !is_array($this->dependencies[$name])) return;
 
 		for( $i = 0; $i < count( $this->dependencies[$name] ); $i++ )
 		{

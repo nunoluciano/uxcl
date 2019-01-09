@@ -48,7 +48,7 @@ function pical'.$mydirnumber.'_notify_iteminfo($not_category, $item_id)
 	}
 	$mod_url = XOOPS_URL . "/modules/" . $module->getVar("dirname") ;
 
-	$myts =& MyTextSanitizer::getInstance();
+	(method_exists('MyTextSanitizer', 'sGetInstance') and $myts =& MyTextSanitizer::sGetInstance()) || $myts =& MyTextSanitizer::getInstance();
 
 	if ($not_category=="global") {
 		$item["name"] = "";

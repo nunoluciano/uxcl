@@ -30,7 +30,7 @@
 // ------------------------------------------------------------------------- //
 
 if (!defined('XOOPS_ROOT_PATH')) {
-	exit();
+    exit();
 }
 
 /**
@@ -57,21 +57,25 @@ class XoopsConfigCategory extends XoopsObject
      * Constructor
      * 
      */
-    function XoopsConfigCategory()
+    public function __construct()
     {
         $this->XoopsObject();
         $this->initVar('confcat_id', XOBJ_DTYPE_INT, null);
         $this->initVar('confcat_name', XOBJ_DTYPE_OTHER, null);
         $this->initVar('confcat_order', XOBJ_DTYPE_INT, 0);
     }
+    public function XoopsConfigCategory()
+    {
+        return self::__construct();
+    }
 
     /**
      * Get a constract of name
      */
-    function getName()
+    public function getName()
     {
-		return defined($this->get('confcat_name')) ? constant($this->get('confcat_name')) : $this->get('confcat_name');
-	}
+        return defined($this->get('confcat_name')) ? constant($this->get('confcat_name')) : $this->get('confcat_name');
+    }
 }
 
 
@@ -97,7 +101,7 @@ class XoopsConfigCategoryHandler extends XoopsObjectHandler
      * 
      * @return	object  New {@link XoopsConfigCategory} 
      */
-    function &create($isNew = true)
+    public function &create($isNew = true)
     {
         $confcat =new XoopsConfigCategory();
         if ($isNew) {
@@ -113,7 +117,7 @@ class XoopsConfigCategoryHandler extends XoopsObjectHandler
      * 
      * @return	object  {@link XoopsConfigCategory}, FALSE on fail
      */
-    function &get($id)
+    public function &get($id)
     {
         $ret = false;
         $id = (int)$id;
@@ -122,9 +126,9 @@ class XoopsConfigCategoryHandler extends XoopsObjectHandler
             if ($result = $this->db->query($sql)) {
                 $numrows = $this->db->getRowsNum($result);
                 if ($numrows == 1) {
-                        $confcat =new XoopsConfigCategory();
+                    $confcat =new XoopsConfigCategory();
                     $confcat->assignVars($this->db->fetchArray($result), false);
-                        $ret =& $confcat;
+                    $ret =& $confcat;
                 }
             }
         }
@@ -138,7 +142,7 @@ class XoopsConfigCategoryHandler extends XoopsObjectHandler
      * 
      * @return	bool    TRUE on success
      */
-    function insert(&$confcat)
+    public function insert(&$confcat)
     {
         if (strtolower(get_class($confcat)) != 'xoopsconfigcategory') {
             return false;
@@ -175,7 +179,7 @@ class XoopsConfigCategoryHandler extends XoopsObjectHandler
      * 
      * @return	bool    TRUE on success
      */
-    function delete(&$confcat)
+    public function delete(&$confcat)
     {
         if (strtolower(get_class($confcat)) != 'xoopsconfigcategory') {
             return false;
@@ -195,7 +199,7 @@ class XoopsConfigCategoryHandler extends XoopsObjectHandler
      * 
      * @return	array   Array of {@link XoopsConfigCategory}s
      */
-    function &getObjects($criteria = null, $id_as_key = false)
+    public function &getObjects($criteria = null, $id_as_key = false)
     {
         $ret = array();
         $limit = $start = 0;
@@ -224,4 +228,3 @@ class XoopsConfigCategoryHandler extends XoopsObjectHandler
         return $ret;
     }
 }
-?>

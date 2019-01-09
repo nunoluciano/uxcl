@@ -1,4 +1,56 @@
-<{$detail_body}>
+<{strip}>
+<div class='calframe'>
+	<div class='calhead calhead_list' style='background-color:<{$calhead_bgcolor}>'>
+		<div class='calmode'>
+			<a href='
+				<{$get_target}>?cid=
+				<{$now_cid}>&amp;smode=Yearly&amp;caldate=
+				<{$caldate}>' title='
+				<{$alt_yearly}>'>
+				<img src='
+				<{$images_url}>/year_on.gif' border='0' width='30' height='24' alt='
+				<{$alt_yearly}>' />
+			</a>
+			<a href='
+				<{$get_target}>?cid=
+				<{$now_cid}>&amp;smode=Monthly&amp;caldate=
+				<{$caldate}>' title='
+				<{$alt_monthly}>'>
+				<img src='
+				<{$images_url}>/month_on.gif' border='0' width='30' height='24' alt='
+				<{$alt_monthly}>' />
+			</a>
+			<a href='
+				<{$get_target}>?cid=
+				<{$now_cid}>&amp;smode=Weekly&amp;caldate=
+				<{$caldate}>' title='
+				<{$alt_weekly}>'>
+				<img src='
+				<{$images_url}>/week_on.gif' border='0' width='30' height='24' alt='
+				<{$alt_weekly}>' />
+			</a>
+			<a href='
+				<{$get_target}>?cid=
+				<{$now_cid}>&amp;smode=Daily&amp;caldate=
+				<{$caldate}>' title='
+				<{$alt_daily}>'>
+				<img src='
+				<{$images_url}>/day_on.gif' border='0' width='30' height='24' alt='
+				<{$alt_daily}>' />
+			</a>
+			<a href='
+				<{$get_target}>?cid=
+				<{$now_cid}>&amp;smode=List&amp;caldate=
+				<{$caldate}>' title='
+				<{$alt_list}>'>
+				<img src='
+				<{$images_url}>/list_on.gif' border='0' width='30' height='24' alt='
+				<{$alt_list}>' />
+			</a>
+		</div>
+	</div>
+	<{$detail_body}>
+</div>
 
 <div style="text-align: right; padding: 0px; margin: 0px;">
   <a href="<{$print_link}>" target="_blank"><img src="<{$skinpath}>/print.gif" alt="<{$lang_print}>" title="<{$lang_print}>" border="0" /></a>
@@ -26,5 +78,5 @@
 <!-- end comments loop -->
 </div>
 <{/if}>
-
+<{/strip}>
 <{include file='db:system_notification_select.html'}>

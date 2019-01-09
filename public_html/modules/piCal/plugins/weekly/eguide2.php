@@ -27,18 +27,17 @@
 
 	// query
         $cond = isset($_GET['eid'])?" AND e.eid=".intval($_GET['eid']):"";
-	 $sql = "SELECT title,catname,e.eid,exid,IF(exdate,exdate,edate) edate,summary, 
-		IF(x.reserved,x.reserved,o.reserved)/IF(expersons,expersons,persons)*100, closetime FROM ".
-		$db->prefix("eguide")." e LEFT JOIN ".
-		$db->prefix("eguide_category")." c ON e.topicid=c.catid LEFT JOIN ".
-		$db->prefix("eguide_opt")." o ON e.eid=o.eid LEFT JOIN ".
-		$db->prefix("eguide_extent")." x ON e.eid=eidref 
+	$result = $db->query( "SELECT title,e.eid,exid,
+IF(exdate,exdate,edate) edate,summary, 
+IF(x.reserved,x.reserved,o.reserved)/IF(expersons,expersons,persons)*100, closetime FROM ".
+			      $db->prefix("eguide")." e LEFT JOIN ".
+			      $db->prefix("eguide_opt")." o ON e.eid=o.eid LEFT JOIN ".
+			      $db->prefix("eguide_extent")." x ON e.eid=eidref 
 WHERE ((edate BETWEEN $range_start_s AND $range_end_s AND exdate IS NULL) 
   OR exdate BETWEEN $range_start_s AND $range_end_s) 
 AND IF(exdate,exdate,edate) BETWEEN $range_start_s 
-AND $range_end_s AND status=0 $cond ORDER BY edate";
-        $result = $db->query( $sql ) ;
-echo $sql;die;
+AND $range_end_s AND status=0 $cond ORDER BY edate" ) ;
+
 
 if (!function_exists("eguide_marker")) {
 function eguide_marker($full, $dirname) {
@@ -58,7 +57,8 @@ function eguide_marker($full, $dirname) {
 }
 }
 
-	while( list( $title , $catname, $id , $sub, $edate , $description , $full, $close) = $db->fetchRow( $result ) ) {
+	while( list( $title , $id , $sub, $edate , $description , $full, $close) = $db->fetchRow( $result ) ) {
+
 		if (($edate-$close)<$now) $full = -1;
 		$mark = eguide_marker($full, $plugin['dirname']);
 		$server_time = $edate;
@@ -75,7 +75,7 @@ function eguide_marker($full, $dirname) {
 			'server_time' => $server_time ,
 			'user_time' => $user_time ,
 			'name' => 'eid' ,
-			'title' => $myts->makeTboxData4Show( $title )."&nbsp;".$catname,	//"$mark"
+			'title' => "$mark".$myts->makeTboxData4Show( $title ),
 			'description' => $myts->displayTarea( $description )
 		) ;
 

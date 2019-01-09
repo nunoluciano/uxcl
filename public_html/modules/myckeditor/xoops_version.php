@@ -5,20 +5,22 @@
  * @version $Id$
  */
 
-if (!defined('XOOPS_ROOT_PATH')) exit();
+if (!defined('XOOPS_ROOT_PATH')) {
+    exit();
+}
 
 //
 // Define a basic manifesto.
 //
 $modversion['name'] = _MI_MYCKEDITOR_LANG_MYCKEDITOR;
-$modversion['version'] = 0.21;
+$modversion['version'] = 0.10;
 $modversion['description'] = _MI_MYCKEDITOR_DESC_MYCKEDITOR;
 $modversion['author'] = "HIKAWA Kilica http://xoopsdev.com/";
 $modversion['credits'] = "HIKAWA Kilica";
 $modversion['help'] = "help.html";
 $modversion['license'] = "GPL";
 $modversion['official'] = 0;
-$modversion['image'] = "images/module_icon.png";
+$modversion['image'] = "images/mydhtml.png";
 $modversion['dirname'] = "myckeditor";
 
 $modversion['cube_style'] = true;
@@ -49,5 +51,4 @@ $modversion['adminmenu'] = "admin/menu.php";
 $modversion['hasMain'] = 0;
 // $modversion['sub'][]['name'] = "";
 // $modversion['sub'][]['url'] = "";
-
-?>
+;

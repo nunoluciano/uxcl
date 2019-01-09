@@ -11,31 +11,31 @@ class piCal_xoops extends piCal {
 
 function textarea_sanitizer_for_show( $data )
 {
-	$myts =& MyTextSanitizer::getInstance();
+	(method_exists('MyTextSanitizer', 'sGetInstance') and $myts =& MyTextSanitizer::sGetInstance()) || $myts =& MyTextSanitizer::getInstance();
 	return $myts->displayTarea($data,0,1,1,1,1);
 }
 
 function textarea_sanitizer_for_edit( $data )
 {
-	$myts =& MyTextSanitizer::getInstance();
+	(method_exists('MyTextSanitizer', 'sGetInstance') and $myts =& MyTextSanitizer::sGetInstance()) || $myts =& MyTextSanitizer::getInstance();
 	return $myts->makeTareaData4Edit($data);
 }
 
 function textarea_sanitizer_for_export_ics( $data )
 {
-	$myts =& MyTextSanitizer::getInstance();
+	(method_exists('MyTextSanitizer', 'sGetInstance') and $myts =& MyTextSanitizer::sGetInstance()) || $myts =& MyTextSanitizer::getInstance();
 	return $myts->displayTarea($data,0,1,1,1,1);
 }
 
 function text_sanitizer_for_show( $data )
 {
-	$myts =& MyTextSanitizer::getInstance();
+	(method_exists('MyTextSanitizer', 'sGetInstance') and $myts =& MyTextSanitizer::sGetInstance()) || $myts =& MyTextSanitizer::getInstance();
 	return $myts->makeTboxData4Show( $data ) ;
 }
 
 function text_sanitizer_for_edit( $data )
 {
-	$myts =& MyTextSanitizer::getInstance();
+	(method_exists('MyTextSanitizer', 'sGetInstance') and $myts =& MyTextSanitizer::sGetInstance()) || $myts =& MyTextSanitizer::getInstance();
 	return $myts->makeTboxData4Edit( $data ) ;
 }
 
@@ -169,13 +169,13 @@ function get_xoops_search_result( $keywords , $andor , $limit , $offset , $uid )
 	$sql = "SELECT id,uid,summary,UNIX_TIMESTAMP(dtstamp) AS udtstamp, start, end, allday, start_date, end_date, $select4con FROM $this->table WHERE admission>0 AND (rrule_pid=0 OR rrule_pid=id) AND ($whr_categories) AND ($whr_class) AND ($whr_text) AND ($whr_uid) ORDER BY dtstamp DESC LIMIT $offset,$limit" ;
 
 	// クエリ
-	$rs = mysql_query( $sql , $this->conn ) ;
+	$rs = $this->db->query( $sql ) ;
 
 	$ret = array() ;
 	$context = '' ;
-	$myts =& MyTextSanitizer::getInstance();
-	while( $event = mysql_fetch_object( $rs ) ) {
-
+	(method_exists('MyTextSanitizer', 'sGetInstance') and $myts =& MyTextSanitizer::sGetInstance()) || $myts =& MyTextSanitizer::getInstance();
+	while( $event = $this->db->fetchArray( $rs ) ) {
+		$event = (object)$event;
 		if( isset( $event->start_date ) ) $start_str = $event->start_date ;
 		else if( $event->allday ) $start_str = $this->get_long_ymdn( $event->start ) ;
 		else $start_str = $this->get_long_ymdn( $event->start + $tzoffset ) ;
@@ -211,8 +211,8 @@ function get_xoops_search_result( $keywords , $andor , $limit , $offset , $uid )
 // triggerEvent で渡すURIは、& で区切る (&amp; ではない)
 function notify_new_event( $event_id )
 {
-	$rs = mysql_query( "SELECT summary,admission,categories,class,uid,groupid FROM $this->table WHERE id='$event_id'" , $this->conn ) ;
-	$event = mysql_fetch_object( $rs ) ;
+	$rs = $this->db->query( "SELECT summary,admission,categories,class,uid,groupid FROM $this->table WHERE id='$event_id'" ) ;
+	$event = (object)$this->db->fetchArray( $rs ) ;
 
 	// No notification if not admitted yet
 	if( ! $event->admission ) return false ;
@@ -263,8 +263,8 @@ function get_blockarray_date_event( $get_target = '' )
 	$whr_class = $this->get_where_about_class() ;
 
 	// 当日のスケジュール取得
-	$yrs = mysql_query( "SELECT start,end,summary,id,uid,allday,location,contact,description,(start>='$toptime_of_day') AS is_start_date,(end<='$bottomtime_of_day') AS is_end_date FROM $this->table WHERE admission>0 AND ($whr_term) AND ($whr_categories) AND ($whr_class) ORDER BY start,end" , $this->conn ) ;
-	$num_rows = mysql_num_rows( $yrs ) ;
+	$yrs = $this->db->query( "SELECT start,end,summary,id,uid,allday,location,contact,description,(start>='$toptime_of_day') AS is_start_date,(end<='$bottomtime_of_day') AS is_end_date FROM $this->table WHERE admission>0 AND ($whr_term) AND ($whr_categories) AND ($whr_class) ORDER BY start,end" ) ;
+	$num_rows = $this->db->getRowsNum( $yrs ) ;
 
 	$block = array(
 		'insertable' => $this->insertable ,
@@ -278,8 +278,8 @@ function get_blockarray_date_event( $get_target = '' )
 		'lang_PICAL_MB_ALLDAY_EVENT' => _PICAL_MB_ALLDAY_EVENT
 	) ;
 
-	while( $event = mysql_fetch_object( $yrs ) ) {
-
+	while( $event = $this->db->fetchArray( $yrs ) ) {
+		$event = (object)$event;
 		if( ! $event->allday ) {
 			// 通常イベント
 			// $event->start,end はサーバ時間  $start,$end はユーザ時間
@@ -378,11 +378,11 @@ function get_blockarray_coming_event( $get_target = '' , $num = 5 , $for_coming 
 	}
 
 	// 件数の取得
-	$yrs = mysql_query( "SELECT COUNT(*) FROM $this->table WHERE admission>0 AND ($whr_term) AND ($whr_categories) AND ($whr_class) AND ($whr_until)" , $this->conn ) ;
-	$num_rows = mysql_result( $yrs , 0 , 0 ) ;
+	$yrs = $this->db->query( "SELECT COUNT(*) FROM $this->table WHERE admission>0 AND ($whr_term) AND ($whr_categories) AND ($whr_class) AND ($whr_until)" ) ;
+	list($num_rows) = $this->db->fetchRow( $yrs ) ;
 
 	// 本クエリ
-	$yrs = mysql_query( "SELECT start,end,summary,id,uid,allday,location,contact,description FROM $this->table WHERE admission>0 AND ($whr_term) AND ($whr_categories) AND ($whr_class) AND ($whr_until) ORDER BY start LIMIT $num" , $this->conn ) ;
+	$yrs = $this->db->query( "SELECT start,end,summary,id,uid,allday,location,contact,description FROM $this->table WHERE admission>0 AND ($whr_term) AND ($whr_categories) AND ($whr_class) AND ($whr_until) ORDER BY start LIMIT $num" ) ;
 
 	$block = array(
 		'insertable' => $this->insertable ,
@@ -398,8 +398,8 @@ function get_blockarray_coming_event( $get_target = '' , $num = 5 , $for_coming 
 		'lang_PICAL_MB_ALLDAY_EVENT' => _PICAL_MB_ALLDAY_EVENT
 	) ;
 
-	while( $event = mysql_fetch_object( $yrs ) ) {
-
+	while( $event = $this->db->fetchArray( $yrs ) ) {
+		$event = (object)$event;
 		// $event->start,end はサーバ時間  $start,$end はユーザ時間
 		if( $event->allday ) {
 			$can_time_disp = false ;
@@ -488,9 +488,9 @@ function get_blockarray_new_event( $get_target = '' , $num = 5 )
 	$whr_class = $this->get_where_about_class() ;
 
 	// 新しい順にスケジュール取得
-	$yrs = mysql_query( "SELECT id,uid,summary,UNIX_TIMESTAMP(dtstamp) AS udtstamp , start, end, allday, start_date, end_date FROM $this->table WHERE admission>0 AND ($whr_categories) AND ($whr_class) AND (rrule_pid=0 OR rrule_pid=id) ORDER BY dtstamp DESC" , $this->conn ) ;
+	$yrs = $this->db->query( "SELECT id,uid,summary,UNIX_TIMESTAMP(dtstamp) AS udtstamp , start, end, allday, start_date, end_date FROM $this->table WHERE admission>0 AND ($whr_categories) AND ($whr_class) AND (rrule_pid=0 OR rrule_pid=id) ORDER BY dtstamp DESC" ) ;
 
-	$num_rows = mysql_num_rows( $yrs ) ;
+	$num_rows = $this->db->getRowsNum( $yrs ) ;
 
 	$block = array(
 		'insertable' => $this->insertable ,
@@ -507,8 +507,8 @@ function get_blockarray_new_event( $get_target = '' , $num = 5 )
 	) ;
 
 	$count = 0 ;
-	while( $event = mysql_fetch_object( $yrs ) ) {
-
+	while( $event = $this->db->fetchArray( $yrs ) ) {
+		$event = (object)$event;
 		if( ++ $count > $num ) break ;
 
 		if( isset( $event->start_date ) ) $start_str = $event->start_date ;
@@ -652,11 +652,11 @@ function assign_event_list( &$tpl , $get_target = '' )
 
 	// レコード数の取得
 	$whr = "($whr_term) AND ($whr_categories) AND ($whr_class)" ;
-	$yrs = mysql_query( "SELECT *,UNIX_TIMESTAMP(dtstamp) AS udtstamp , start, end, allday, start_date, end_date FROM $this->table WHERE $whr" , $this->conn ) ;
-	$num_rows = mysql_num_rows( $yrs ) ;
+	$yrs = $this->db->query( "SELECT *,UNIX_TIMESTAMP(dtstamp) AS udtstamp , start, end, allday, start_date, end_date FROM $this->table WHERE $whr" ) ;
+	$num_rows = $this->db->getRowsNum( $yrs ) ;
 
 	// 本クエリ
-	$yrs = mysql_query( "SELECT *,UNIX_TIMESTAMP(dtstamp) AS udtstamp , start, end, allday, start_date, end_date FROM $this->table WHERE $whr ORDER BY $order LIMIT $pos,$num" , $this->conn ) ;
+	$yrs = $this->db->query( "SELECT *,UNIX_TIMESTAMP(dtstamp) AS udtstamp , start, end, allday, start_date, end_date FROM $this->table WHERE $whr ORDER BY $order LIMIT $pos,$num" ) ;
 
 	// ページ分割処理
 	include_once( XOOPS_ROOT_PATH.'/class/pagenav.php' ) ;
@@ -719,8 +719,8 @@ function assign_event_list( &$tpl , $get_target = '' )
 	// イベントアサインループ
 	$count = 0 ;
 	$events = array() ;
-	while( $event = mysql_fetch_object( $yrs ) ) {
-
+	while( $event = $this->db->fetchArray( $yrs ) ) {
+		$event = (object)$event;
 		if( ++ $count > $num ) break ;
 
 		// 編集可能かどうか
@@ -854,7 +854,7 @@ function import_ics_via_fopen( $uri , $force_http = true , $user_uri = '' )
 function get_minical_ex( $gifaday = 2 , $just1gif = 0 , $plugins = array() )
 {
 	$db =& Database::getInstance() ;
-	$myts =& MyTextSanitizer::getInstance() ;
+	(method_exists('MyTextSanitizer', 'sGetInstance') and $myts =& MyTextSanitizer::sGetInstance()) || $myts =& MyTextSanitizer::getInstance() ;
 
 	$tzoffset_s2u = intval( ( $this->user_TZ - $this->server_TZ ) * 3600 ) ;
 	$now = time() ;
@@ -992,10 +992,10 @@ function get_minical_ex( $gifaday = 2 , $just1gif = 0 , $plugins = array() )
 // 指定されたtypeのプラグイン配列を返す
 function get_plugins( $type )
 {
-	global $xoopsDB , $xoopsUser ;
+	global $xoopsUser ;
 
 	// MyTextSanitizer
-	$myts =& MyTextSanitizer::getInstance();
+	(method_exists('MyTextSanitizer', 'sGetInstance') and $myts =& MyTextSanitizer::sGetInstance()) || $myts =& MyTextSanitizer::getInstance();
 
 	// allowed modules
 	$moduleperm_handler =& xoops_gethandler('groupperm');
@@ -1004,12 +1004,12 @@ function get_plugins( $type )
 
 	// plugins
 	$plugins = array() ;
-	$prs = $xoopsDB->query( "SELECT pi_title,pi_dirname AS dirname,pi_file AS file,pi_dotgif AS dotgif,pi_options AS options FROM $this->plugin_table WHERE pi_type='".addslashes($type)."' AND pi_enabled ORDER BY pi_weight" ) ;
-	while( $plugin = $xoopsDB->fetchArray( $prs ) ) {
+	$prs = $this->db->query( "SELECT pi_title,pi_dirname AS dirname,pi_file AS file,pi_dotgif AS dotgif,pi_options AS options FROM $this->plugin_table WHERE pi_type='".addslashes($type)."' AND pi_enabled ORDER BY pi_weight" ) ;
+	while( $plugin = $this->db->fetchArray( $prs ) ) {
 		$dirname4sql = addslashes( $plugin['dirname'] ) ;
-		$mrs = $xoopsDB->query( "SELECT mid,name FROM ".$xoopsDB->prefix("modules")." WHERE dirname='$dirname4sql'" ) ;
-		if( $mrs && $xoopsDB->getRowsNum( $mrs ) ) {
-			list( $mid , $name ) = $xoopsDB->fetchRow( $mrs ) ;
+		$mrs = $this->db->query( "SELECT mid,name FROM ".$this->db->prefix("modules")." WHERE dirname='$dirname4sql'" ) ;
+		if( $mrs && $this->db->getRowsNum( $mrs ) ) {
+			list( $mid , $name ) = $this->db->fetchRow( $mrs ) ;
 			if( ! in_array( $mid , $allowed_mids ) ) continue ;
 			$plugin['pi_title'] = $myts->makeTboxData4Show( $plugin['pi_title'] ) ;
 			$plugin['name'] = $myts->makeTboxData4Show( $name ) ;

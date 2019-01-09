@@ -15,8 +15,12 @@ function display_edit_form( $cat , $form_title , $action )
 	$form->addElement( new XoopsFormText( _AM_CAT_TH_TITLE , 'cat_title' , 60 , 128 , htmlspecialchars( $cat->cat_title , ENT_QUOTES ) ) , true ) ;
 
 	// Description
+	$tarea = new XoopsFormDhtmlTextArea( '' , 'cat_desc' , htmlspecialchars( $cat->cat_desc , ENT_QUOTES ) , 15 , 60 ) ;
+	if ( defined('LEGACY_BASE_VERSION') && version_compare(LEGACY_BASE_VERSION, '2.2.2.1', '>=') ) {
+		$tarea->setEditor('bbcode');
+	}
 	$tarea_tray =  new XoopsFormElementTray( _AM_CAT_TH_DESC , '<br />' ) ;
-	$tarea_tray->addElement( new XoopsFormDhtmlTextArea( '' , 'cat_desc' , htmlspecialchars( $cat->cat_desc , ENT_QUOTES ) , 15 , 60 ) ) ;
+	$tarea_tray->addElement( $tarea ) ;
 	$form->addElement( $tarea_tray ) ;
 
 	// Parent Category
@@ -56,13 +60,13 @@ function display_edit_form( $cat , $form_title , $action )
 // ツリー順になるように、weightを再計算し、ツリーの深さも測っておく
 function rebuild_cat_tree( $cat_table )
 {
-	global $conn ;
+	global $xoopsDB ;
 
-	$rs = mysql_query( "SELECT cid,pid FROM $cat_table ORDER BY pid ASC,weight DESC" , $conn ) ;
+	$rs = $xoopsDB->query( "SELECT cid,pid FROM $cat_table ORDER BY pid ASC,weight DESC" ) ;
 	$cats[0] = array( 'cid' => 0 , 'pid' => -1 , 'next_key' => -1 , 'depth' => 0 ) ;
 	$key = 1 ;
-	while( $cat = mysql_fetch_object( $rs ) ) {
-		$cats[ $key ] = array( 'cid' => intval( $cat->cid ) , 'pid' => intval( $cat->pid ) , 'next_key' => $key + 1 , 'depth' => 0 ) ;
+	while( $cat = $xoopsDB->fetchArray( $rs ) ) {
+		$cats[ $key ] = array( 'cid' => intval( $cat['cid'] ) , 'pid' => intval( $cat['pid'] ) , 'next_key' => $key + 1 , 'depth' => 0 ) ;
 		$key ++ ;
 	}
 	$sizeofcats = $key ;
@@ -81,7 +85,7 @@ function rebuild_cat_tree( $cat_table )
 				$target['next_key'] = $key ;
 				break ;
 			} else if( -- $loop_check < 0 ) {
-				mysql_query( "UPDATE $cat_table SET pid='0' WHERE cid={$cat['cid']}" , $conn ) ;
+				$xoopsDB->query( "UPDATE $cat_table SET pid='0' WHERE cid={$cat['cid']}" ) ;
 				$cat['depth'] = 1 ;
 				$cat['next_key'] = $target['next_key'] ;
 				$target['next_key'] = $key ;
@@ -100,7 +104,7 @@ function rebuild_cat_tree( $cat_table )
 	$cat =& $cats[ 0 ]  ;
 	for( $weight = 1 ; $weight < $sizeofcats ; $weight ++ ) {
 		$cat =& $cats[ $cat['next_key'] ] ;
-		mysql_query( "UPDATE $cat_table SET weight=".($weight*10).",cat_depth={$cat['depth']} WHERE cid={$cat['cid']}" , $conn ) ;
+		$xoopsDB->query( "UPDATE $cat_table SET weight=".($weight*10).",cat_depth={$cat['depth']} WHERE cid={$cat['cid']}" ) ;
 	}
 }
 
@@ -147,7 +151,7 @@ $cal->images_path = "$mod_path/images/$skin_folder" ;
 
 
 // XOOPS関連の初期化
-$myts =& MyTextSanitizer::getInstance();
+(method_exists('MyTextSanitizer', 'sGetInstance') and $myts =& MyTextSanitizer::sGetInstance()) || $myts =& MyTextSanitizer::getInstance();
 $cattree = new XoopsTree( $cal->cat_table , "cid" , "pid" ) ;
 $gperm_handler =& xoops_gethandler('groupperm');
 
@@ -164,7 +168,7 @@ if( $action == "insert" ) {
 	$sql = "INSERT INTO $cal->cat_table SET " ;
 	$cols = array( "weight" => "I:N:0" ,"ismenuitem" => "I:N:0" ,"cat_title" => "255:J:1" , "cat_desc" => "A:J:0" , "pid" => "I:N:0" ) ;
 	$sql .= $cal->get_sql_set( $cols ) ;
-	if( ! mysql_query( $sql , $conn ) ) die( mysql_error() ) ;
+	if( ! $xoopsDB->query( $sql ) ) die( $xoopsDB->error() ) ;
 	rebuild_cat_tree( $cal->cat_table ) ;
 	$mes = urlencode( _AM_MB_CAT_INSERTED ) ;
 	$cal->redirect( "done=inserted&mes=$mes" ) ;
@@ -182,7 +186,7 @@ if( $action == "insert" ) {
 	$sql = "UPDATE $cal->cat_table SET " ;
 	$cols = array( "weight" => "I:N:0" ,"ismenuitem" => "I:N:0" ,"cat_title" => "255:J:1" , "cat_desc" => "A:J:0" , "pid" => "I:N:0" ) ;
 	$sql .= $cal->get_sql_set( $cols ) . "WHERE cid='$cid'" ;
-	if( ! mysql_query( $sql , $conn ) ) die( mysql_error() ) ;
+	if( ! $xoopsDB->query( $sql ) ) die( $xoopsDB->error() ) ;
 	rebuild_cat_tree( $cal->cat_table ) ;
 	$mes = urlencode( _AM_MB_CAT_UPDATED ) ;
 	$cal->redirect( "done=updated&mes=$mes" ) ;
@@ -224,9 +228,9 @@ if( $action == "insert" ) {
 	$whr .= "$cid)" ;
 
 	// catテーブルからの削除
-	if( ! mysql_query( "DELETE FROM $cal->cat_table WHERE $whr" , $conn ) ) die( mysql_error() ) ;
+	if( ! $xoopsDB->query( "DELETE FROM $cal->cat_table WHERE $whr" ) ) die( $xoopsDB->error() ) ;
 	rebuild_cat_tree( $cal->cat_table ) ;
-	$mes = urlencode( sprintf( _AM_FMT_CAT_DELETED , mysql_affected_rows() ) ) ;
+	$mes = urlencode( sprintf( _AM_FMT_CAT_DELETED , $xoopsDB->getAffectedRows() ) ) ;
 	$cal->redirect( "done=deleted&mes=$mes" ) ;
 	exit ;
 
@@ -243,8 +247,8 @@ if( $action == "insert" ) {
 		$weight = intval( $weight ) ;
 		$cid = intval( $cid ) ;
 		$enabled = ! empty( $_POST['enabled'][$cid] ) ? 1 : 0 ;
-		if( ! mysql_query( "UPDATE $cal->cat_table SET weight='$weight', enabled='$enabled' WHERE cid=$cid" , $conn ) ) die( mysql_error() ) ;
-		$affected += mysql_affected_rows() ;
+		if( ! $xoopsDB->query( "UPDATE $cal->cat_table SET weight='$weight', enabled='$enabled' WHERE cid=$cid" ) ) die( $xoopsDB->error() ) ;
+		$affected += $xoopsDB->getAffectedRows() ;
 	}
 	if( $affected > 0 ) rebuild_cat_tree( $cal->cat_table ) ;
 	$mes = urlencode( sprintf( _AM_FMT_CAT_BATCHUPDATED , $affected ) ) ;
@@ -264,8 +268,9 @@ if( $disp == "edit" && $cid > 0 ) {
 
 	// 操作対象カテゴリーデータの取得
 	$sql = "SELECT *,UNIX_TIMESTAMP(dtstamp) AS udtstamp FROM $cal->cat_table WHERE cid='$cid'" ;
-	$crs = mysql_query( $sql , $conn ) ;
-	$cat = mysql_fetch_object( $crs ) ;
+	$crs = $xoopsDB->query( $sql ) ;
+	$cat = $xoopsDB->fetchArray( $crs ) ;
+	$cat = (object)$cat;
 	display_edit_form( $cat , _AM_MENU_CAT_EDIT , 'update' ) ;
 
 } else if( $disp == "new" ) {

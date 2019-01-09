@@ -1,7 +1,560 @@
-/* Style sheet for piCal (you can add embed css's here) */
+@charset "UTF-8";
+
+/* Style sheet for piCal (default design) */
 
 tr.pical-monthly td { width: 90px; margin: 0; word-wrap:break-word; }
 tr.pical-monthly td.pical-weekmark { width: 10px; margin: 0; }
 
 table.pical-categoryform { table-layout:fixed; }
 td.pical-categoryform { margin: 4px 0; }
+
+.bottom_controller {
+	text-align: center;
+}
+.bottom_controller select#pical_year {
+	width:8em;
+	margin-top: 2px;
+	vertical-align:middle;
+}
+.bottom_controller input#pical_jumpcaldate {
+	margin-top:-7px;
+	vertical-align:middle;	
+}
+
+.calframe {
+	width:100%;
+	font-size: 12pt;
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+         -o-box-sizing: border-box;
+        -ms-box-sizing: border-box;
+            box-sizing: border-box;
+}
+.calframe a {
+	text-decoration:none;
+}
+.calframe .selector tr{
+	height: 30px;
+}
+
+
+.calframe div.calhead {
+	background-color: #eeeeee;
+	color: #444444;
+	font-family: Georgia,"Times New Roman",Times,serif;
+	margin: 15px 0 0 0;
+	padding: 5px 0;
+	text-align: center;
+	min-height: 24px;
+}
+
+span.calhead {
+	background-color: transparent;
+	font-family: Georgia,"Times New Roman",Times,serif;
+	font-size: 1.6em;
+}
+
+.calhead form {
+	display: inline;
+	margin: 0;
+	float: left;
+	font-size: 1em;
+}
+
+.calhead_monthly_block form {
+	float: none;
+}
+
+.calhead_monthly_block form input {
+	width: auto;
+}
+
+.calhead .calmode {
+	float: right;
+}
+
+.calhead .calmode img.current {
+	opacity: 0.4;
+}
+
+.calhead .catdesc {
+	font-size: 12pt;
+	background-color: rgba(255, 255, 255, 0.7);
+	padding: 0.5em;
+	margin: 10px 30px;
+	border-radius: 20px;
+}
+
+.calhead .catdesc p {
+	margin: 0;
+}
+
+.calhead .catdesc div {
+	background-color: transparent;
+	line-height: 100%;
+}
+
+.calhead img {
+	vertical-align: middle;
+}
+
+.long_event img {
+	margin: 0;
+	padding: 0;
+	width: 12px;
+	height: 12px;
+}
+
+.long_event li {
+	list-style-type: none;
+	display: inline-block;
+	margin: 0.5em 1em 0.5em 0em;
+}
+
+.calframe table{
+	width:100%;
+    border-spacing: 0;
+}
+table.data_table table td {
+}
+.data_weekly td {
+	border:1px solid #696969;
+}
+.data_week {
+	width: 7em;
+	border:1px solid #696969;
+}
+.data_week_data {
+	border:1px solid #696969;
+}
+.data_time {
+	width:12em;
+	background:#fff799;
+}
+h3.data_h3 {
+	font-family:'ヒラギノ角ゴ Pro W3','Hiragino Kaku Gothic Pro',メイリオ,Meiryo,'ＭＳ Ｐゴシック',sans-serif, 'Droid Serif','Helvetica Neue', Helvetica;
+	font-size:14px;
+	font-weight: normal;
+	margin:0;
+	background: #CCFF99;
+}
+h3.data_h3 a {
+	display:block;
+	color:#000;
+}
+h3.data_h3 a:hover {
+	background: lightgreen;
+}
+
+table#calbody {
+    background-color: #fff;
+    width: 100%;
+}	
+table#calbody th {
+	background-color: #EEE;
+    border: solid 1px #DDD;
+	font-style: normal;
+    text-align: center;
+    width: 10%;
+}
+table#calbody tr.week_header {
+    height: 10px;
+}
+table#calbody tr {
+    height: 100px;
+}
+table#calbody tr.active {
+    height: 1em;
+}
+table#calbody tr.inactive {
+    height: auto;
+}
+table#calbody th.sunday {
+	color: #dc143c;
+}
+table#calbody th.saturday {
+	color: #3333cd;
+}
+table#calbody th.calweekname {
+	color: #555;
+}
+table#calbody a {
+    color: #444444;
+}
+
+table#calbody td{
+	position: relative;
+    color: #444444;
+    font-family: Georgia,"Times New Roman",Times,serif;
+    font-size: 1em;
+    width:14.28571%;
+    padding: 3px;
+    text-align: left;
+    vertical-align: top;
+    border: solid 1px #dddddd;
+}
+table#calbody td.event {
+	background-color: LightCyan;
+    border: solid 2px DodgerBlue;
+}
+table#calbody a {
+	position:relative;
+	float:left;
+}
+
+table#calbody p.holiday,
+td.data_week p.holiday {
+	color: red;
+    font-style: italic;
+	margin: 0;
+	padding: 0;
+}
+table#calbody p.holiday {
+    font-size: .75em;
+}
+td.data_week p.holiday {
+    font-size: .9em;
+}
+td.data_week p.specialday {
+	font-size: .9em;
+}
+
+table#calbody p.whatday,
+td.data_week p.whatday {
+	color: #191970;
+	margin: 0;
+	font-family: 'ヒラギノ角ゴ Pro W3','Hiragino Kaku Gothic Pro',メイリオ,Meiryo,'ＭＳ Ｐゴシック',sans-serif,'Droid Serif','Helvetica Neue',Helvetica;
+	padding: 0;
+}
+table#calbody p.whatday {
+	font-size: .75em;
+}
+td.data_week p.whatday {
+	font-size: .9em;
+}
+
+table#calbody p.kyureki {
+	text-align: right;
+	margin-left: 0.2em;
+	color: #444;
+}
+
+table#calbody p.taian,
+td.data_week p.taian {
+	color: red;
+}
+
+table#calbody ul.event_info{
+	clear: both;
+	text-align:left;
+	margin: 0;
+	list-style:none;
+}
+table#calbody ul.event_info li {
+	width:100%;
+}
+
+table#calbody ul.event_info li a {
+	font-family:'ヒラギノ角ゴ Pro W3','Hiragino Kaku Gothic Pro',メイリオ,Meiryo,'ＭＳ Ｐゴシック',sans-serif, 'Droid Serif','Helvetica Neue', Helvetica;
+	font-size:11px;
+	font-weight:normal;
+	color:#004d25;
+	line-height:11px;
+	text-decoration:none;
+	padding:2px 2px 2px 10px;
+	margin:2px 0 2px 0;
+	background: url("./pointer.gif")  no-repeat 0px 3px;
+	text-shadow: -1px -1px #FFF, 1px -1px #FFF, -1px 1px #FFF, 1px 1px #FFF;
+}
+table#calbody ul.event_info li a:hover   {
+	background:lightgreen url("./pointer.gif")  no-repeat 0px 3px;
+}
+
+table#calbody a.calday {
+	font-size: 1.8em;
+	margin-right: 5px;
+	margin-top: -3px;
+}
+table#calbody a.calday_holyday {
+    color: #dc143c;
+}
+table#calbody a.calday_sunday {
+	color: #dc143c;
+}
+table#calbody a.calday_saturday {
+    color: #0000cd;
+}
+table#calbody a.calday_weekday {
+    color: #444444;
+}
+table#calbody .week_index {
+	position : relative;
+	top: -5px;
+	left: -5px;
+}
+table#calbody a.week_index {
+	position : absolute;
+	top: 0px;
+	left: 0px;
+}
+table#calbody a.stencil {
+	position: absolute;
+	right: -5px;
+	top: -2px;
+}
+table#calbody a.week_index img,
+table#calbody a.stencil img {
+	vertical-align: top;
+}
+table#calbody a.event {
+    font-size: 1em;
+    font-style: normal;
+}
+/*
+** for mini calender
+*/
+.cal_selector {
+	color: #444444;
+	font-family: Georgia,"Times New Roman",Times,serif;
+	font-size: 1em;
+	margin: 20px auto 15px;
+	padding: 5px 0;
+	width: auto;
+	text-align: center;
+	display: inline-block;
+}
+.cal_selector form {
+	display: inline;
+}
+.minical_left {
+	float:left;
+}
+.minical_right {
+	float:right;
+}
+.cal_footer {
+	clear: both;
+	text-align: right;
+}
+
+div.minicalframe {
+	width: 180px;
+}
+div.minicalframe_block {
+	width: 100%;
+}
+table.minical {
+	width:100%;
+	background-color: rgba(255, 255, 255, 0.5);
+	color: #333333;
+	font-family: Georgia,"Times New Roman",Times,serif;
+	border-collapse: collapse;
+	margin: 0;
+}
+table.minical a {
+	display:block;
+	text-decoration:none;
+}
+table.minical a:hover {
+	background:lightgreen;
+}
+table.minical th {
+	height: 2em;
+	text-align: center;
+	vertical-align: middle;
+	font-size: 12px;
+}
+table.minical th a {
+	display: inline;
+}
+table.minical td {
+	text-align: center;
+	height: 20px;
+}
+
+table.piCal_input {
+	width:100%;
+}
+table.piCal_input td.head {
+	width:20%;
+	background:#ccc;
+}
+table.piCal_input input {
+}
+table.piCal_input select {
+	width:8em;
+}
+table#details {
+	width:100%;
+	border-collapse: collapse; /* 枠線の表示方法 */ 
+	border: 1px #808080 solid; /* テーブル全体の枠線（太さ・色・スタイル） */ 
+}
+table#details td {
+	border-bottom: 1px #808080 solid; /* セルの枠線（太さ・色・スタイル） */ 
+	padding: 5px; /* セル内の余白 */ 
+}
+table#details td.head {
+	width:20%;
+	background:#ccc;
+}
+table#details td.none {
+	border:none;
+}
+
+.m_right {
+	text-align:right;
+}
+.m_left {
+	text-align:left;
+}
+.m_center {
+	text-align:center;
+}
+.s80 {
+	font-size:80%;
+}
+
+ul.data_detail {
+	margin:0;
+	padding:0;
+	list-style:none;
+}
+ul.data_detail li {
+	margin:0;
+	padding:3px;
+	border-bottom:1px dotted #a9a9a9;
+}
+ul.data_detail dl  {
+	margin:0;
+	padding:0;
+}
+ul.data_detail dl dt {
+  clear: left;
+  float: left;
+  width: 12em;
+  font-weight:normal;
+  padding-left: 5px;
+  color: #696969;
+}
+ul.data_detail dl  dd {
+  margin-left: 12em;
+}
+
+ul.data_detail dl  dd a ,
+ul.data_detail dl  dd a:visited {
+	display:block;
+	color:#0000ff;
+	padding:2px 0;
+	margin:0;
+}
+ul.data_detail dl  dd a:hover {
+	color:navy;
+	background:lightgreen;
+}
+
+.no_border ,
+.no_border dt,
+.no_border dd {
+	border:none;
+}
+
+.ymdo_selects {
+	width: auto;
+	margin-left: auto;
+	margin-right: auto;
+}
+.ymdo_selects form {
+	float: none;
+}
+.ymdo_selects select {
+	max-width:12em;
+	margin:2px 4px 0 0;
+}
+.m_sel {
+	width: 100%;
+	text-align: center;
+	margin-top: 20px;
+}
+.m_sel img {
+	vertical-align: middle;
+	margin: 0 2px;
+}
+.piCal_input {
+	border-collapse: separate;
+	border-spacing: 2px;
+}
+.piCal_input select {
+	height: 26px;
+	line-height: 26px;
+}
+.piCal_input tr {
+	border-bottom: 1px solid #ccc;
+}
+.piCal_input .head {
+}
+.piCal_input .even {
+	border-collapse: separate;
+	border-spacing: 2px;
+	border-bottom: 1px solid #ddd;
+}
+.piCal_input .pi_contact input ,
+.piCal_input .pi_location input,
+.piCal_input .pi_text input {
+	width: 90%;
+	height: 26px;
+}
+.piCal_input .pi_st #StartDate ,
+.piCal_input .pi_et #EndDate {
+	width:7em;
+	height: 26px;
+}
+.piCal_input .pi_st select ,
+.piCal_input .pi_et select {
+	width:5em;
+}
+legend {
+	font-size: 1em;
+	margin:0;
+	padding: 0;
+	line-height: 1em;
+	border: none;
+}
+fieldset {
+	padding:3px;
+}
+fieldset input {
+	width: 2em;
+}
+fieldset table ,
+fieldset table tr ,
+fieldset table td {
+	border:none;
+}
+fieldset table td {
+	width:4em;
+}
+.piCal_input .pi_op {
+	line-height: 20px;
+}
+select#rrule_yearly_byday {
+	width: 12em;
+}
+.piCal_input #rrule_until {
+	width: 7em;
+}
+#xoopsHiddenText {
+	margin:2px 10px;
+	font-size: 16px;
+}
+input#description_textAddtext {
+	height: 26px;
+}
+textarea#description_text {
+	width: 90%;
+}
+element.style {
+	vertical-align: middle;
+}
+@media print{
+	.no-print{display:none;}
+}
