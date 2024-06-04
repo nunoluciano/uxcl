@@ -1,143 +1,125 @@
 <?php
+/**
+ * Altsys library (UI-Components) for D3 modules
+ *
+ * @package    Altsys
+ * @version    XCL 2.4.0
+ * @author     Nobuhiro YASUTOMI, PHP8
+ * @author     Other authors gigamaster, 2020 XCL/PHP7
+ * @author     Gijoe (Peak)
+ * @copyright  (c) 2005-2024 Authors
+ * @license    GPL v2.0
+ */
 
-altsys_set_module_config() ;
+altsys_set_module_config();
 
-function altsys_set_module_config()
-{
-	global $altsysModuleConfig , $altsysModuleId ;
+function altsys_set_module_config() {
+	global $altsysModuleConfig, $altsysModuleId;
 
-	$module_handler =& xoops_gethandler( 'module' ) ;
-	$module =& $module_handler->getByDirname( 'altsys' ) ;
-	if( is_object( $module ) ) {
-		$config_handler =& xoops_gethandler( 'config' ) ;
-		$altsysModuleConfig = $config_handler->getConfigList( $module->getVar('mid') ) ;
-		$altsysModuleId = $module->getVar('mid') ;
+	$module_handler =& xoops_gethandler( 'module' );
+	$module =& $module_handler->getByDirname( 'altsys' );
+
+	if ( is_object( $module ) ) {
+		$config_handler     =& xoops_gethandler( 'config' );
+		$altsysModuleConfig = $config_handler->getConfigList( $module->getVar( 'mid' ) );
+		$altsysModuleId     = $module->getVar( 'mid' );
 	} else {
-		$altsysModuleConfig = array() ;
-		$altsysModuleId = 0 ;
+		$altsysModuleConfig = [];
+		$altsysModuleId     = 0;
 	}
 
 	// for RTL users
-	@define( '_GLOBAL_LEFT' , @_ADM_USE_RTL == 1 ? 'right' : 'left' ) ;
-	@define( '_GLOBAL_RIGHT' , @_ADM_USE_RTL == 1 ? 'left' : 'right' ) ;
+	if (!defined("_ADM_USE_RTL")) define("_ADM_USE_RTL", 0);
+	@define( '_GLOBAL_LEFT', 1 == @_ADM_USE_RTL ? 'right' : 'left' );
+	@define( '_GLOBAL_RIGHT', 1 == @_ADM_USE_RTL ? 'left' : 'right' );
 }
 
 
-function altsys_include_mymenu()
-{
-	global $xoopsModule , $xoopsConfig , $mydirname , $mydirpath , $mytrustdirname , $mytrustdirpath , $mymenu_fake_uri ;
+function altsys_include_mymenu() {
+	global $xoopsModule, $xoopsConfig, $mydirname, $mydirpath, $mytrustdirname, $mytrustdirpath, $mymenu_fake_uri;
 
-	$mymenu_find_paths = array(
-		$mydirpath.'/admin/mymenu.php' ,
-		$mydirpath.'/mymenu.php' ,
-		$mytrustdirpath.'/admin/mymenu.php' ,
-		$mytrustdirpath.'/mymenu.php' ,
-	) ;
+	$mymenu_find_paths = [
+		$mydirpath . '/admin/mymenu.php',
+		$mydirpath . '/mymenu.php',
+		$mytrustdirpath . '/admin/mymenu.php',
+		$mytrustdirpath . '/mymenu.php',
+	];
 
-	foreach( $mymenu_find_paths as $mymenu_find_path ) {
-		if( file_exists( $mymenu_find_path ) ) {
-			include $mymenu_find_path ;
-			include_once dirname(__FILE__).'/adminmenu_functions.php' ;
-			altsys_adminmenu_insert_mymenu( $xoopsModule ) ;
-			altsys_adminmenu_hack_ft() ;
-			break ;
+	foreach ( $mymenu_find_paths as $mymenu_find_path ) {
+		if ( is_file( $mymenu_find_path ) ) {
+			include $mymenu_find_path;
+			break;
 		}
 	}
 }
 
 
-function altsys_include_language_file( $type )
-{
-	$mylang = $GLOBALS['xoopsConfig']['language'] ;
+/**
+ * @param $type
+ */
+function altsys_include_language_file( $type ) {
+	$mylang = $GLOBALS['xoopsConfig']['language'];
 
-	if( file_exists( XOOPS_ROOT_PATH.'/modules/altsys/language/'.$mylang.'/'.$type.'.php' ) ) {
-		include_once XOOPS_ROOT_PATH.'/modules/altsys/language/'.$mylang.'/'.$type.'.php' ;
-	} else if( file_exists( XOOPS_TRUST_PATH.'/libs/altsys/language/'.$mylang.'/'.$type.'.php' ) ) {
-		include_once XOOPS_TRUST_PATH.'/libs/altsys/language/'.$mylang.'/'.$type.'.php' ;
-	} else if( file_exists( XOOPS_ROOT_PATH.'/modules/altsys/language/english/'.$type.'.php' ) ) {
-		include_once XOOPS_ROOT_PATH.'/modules/altsys/language/english/'.$type.'.php' ;
-	} else if( file_exists( XOOPS_TRUST_PATH.'/libs/altsys/language/english/'.$type.'.php' ) ) {
-		include_once XOOPS_TRUST_PATH.'/libs/altsys/language/english/'.$type.'.php' ;
+	if ( is_file( XOOPS_ROOT_PATH . '/modules/altsys/language/' . $mylang . '/' . $type . '.php' ) ) {
+		include_once XOOPS_ROOT_PATH . '/modules/altsys/language/' . $mylang . '/' . $type . '.php';
+	} elseif ( is_file( XOOPS_TRUST_PATH . '/libs/altsys/language/' . $mylang . '/' . $type . '.php' ) ) {
+		include_once XOOPS_TRUST_PATH . '/libs/altsys/language/' . $mylang . '/' . $type . '.php';
+	} elseif ( is_file( XOOPS_ROOT_PATH . '/modules/altsys/language/english/' . $type . '.php' ) ) {
+		include_once XOOPS_ROOT_PATH . '/modules/altsys/language/english/' . $type . '.php';
+	} elseif ( is_file( XOOPS_TRUST_PATH . '/libs/altsys/language/english/' . $type . '.php' ) ) {
+		include_once XOOPS_TRUST_PATH . '/libs/altsys/language/english/' . $type . '.php';
 	}
 }
 
+const ALTSYS_CORE_TYPE_XCL21 = 16; // XOOPSCube 2.1 Legacy
 
-define( 'ALTSYS_CORE_TYPE_X20' , 1 ) ; // 2.0.0-2.0.13 and 2.0.x-JP
-define( 'ALTSYS_CORE_TYPE_X20S' , 2 ) ; // 2.0.14- from xoops.org (Skalpa's S)
-define( 'ALTSYS_CORE_TYPE_ORE' , 4 ) ; // ORETEKI by marijuana
-define( 'ALTSYS_CORE_TYPE_X22' , 8 ) ; // 2.2 from xoops.org
-define( 'ALTSYS_CORE_TYPE_X23P' , 10 ) ; // 2.3 from xoops.org (phppp's P)
-define( 'ALTSYS_CORE_TYPE_X25' , 11 ) ; // 2.5 from xoops.org
-define( 'ALTSYS_CORE_TYPE_ICMS' , 12 ) ; // ImpressCMS
-define( 'ALTSYS_CORE_TYPE_XCL21' , 16 ) ; // XOOPS Cube 2.1 Legacy
+/**
+ * @return int|null
+ */
+function altsys_get_core_type() {
 
-function altsys_get_core_type()
-{
-	static $result = null ;
+	static $result = null;
 
-	if( empty( $result ) ) {
-		if( defined( 'XOOPS_ORETEKI' ) ) $result = ALTSYS_CORE_TYPE_ORE ;
-		else if( defined( 'XOOPS_CUBE_LEGACY' ) ) $result = ALTSYS_CORE_TYPE_XCL21 ;
-		else if( defined( 'ICMS_VERSION_NAME' ) ) $result = ALTSYS_CORE_TYPE_ICMS ;
-		else if( strstr( XOOPS_VERSION , 'JP' ) ) $result = ALTSYS_CORE_TYPE_X20 ;
-		else {
-			$versions = array_map( 'intval' , explode( '.' , preg_replace( '/[^0-9.]/' , '' , XOOPS_VERSION ) ) ) ;
-			if( $versions[0] == 2 && $versions[1] == 2 ) {
-				$result = ALTSYS_CORE_TYPE_X22 ;
-			} else if( $versions[0] == 2 && $versions[1] == 0 && $versions[2] > 13 ) {
-				$result = ALTSYS_CORE_TYPE_X20S ;
-			} else if( $versions[0] == 2 && $versions[1] >= 5 ) {
-				$result = ALTSYS_CORE_TYPE_X25 ;
-			} else if( $versions[0] == 2 && $versions[1] > 2 ) {
-				$result = ALTSYS_CORE_TYPE_X23P ;
-			} else {
-				$result = ALTSYS_CORE_TYPE_X20 ;
-			}
+	if ( empty( $result ) && defined( 'XOOPS_CUBE_LEGACY' ) ) {
+		$result = ALTSYS_CORE_TYPE_XCL21;
+	}
+
+	return $result;
+}
+
+/**
+ * Use system legacy for preferences
+ * @param $mid
+ *
+ * @return string
+ */
+
+function altsys_get_link2modpreferences( $mid ) {
+	return XOOPS_URL . '/modules/legacy/admin/index.php?action=PreferenceEdit&confmod_id=' . $mid;
+}
+
+/**
+ * @param $tpl_id
+ */
+
+function altsys_template_touch( $tpl_id ) {
+	// just touch the template
+	xoops_template_touch( $tpl_id );
+}
+
+
+function altsys_clear_templates_c() {
+	$dh = opendir( XOOPS_COMPILE_PATH );
+	while ( $file = readdir( $dh ) ) {
+
+		if ( '.' == substr( $file, 0, 1 ) ) {
+			continue;
 		}
+
+		if ( '.php' != substr( $file, - 4 ) ) {
+			continue;
+		}
+		@unlink( XOOPS_COMPILE_PATH . '/' . $file );
 	}
-	return $result ;
+	closedir( $dh );
 }
-
-
-function altsys_get_link2modpreferences( $mid , $coretype )
-{
-	switch( $coretype ) {
-		case ALTSYS_CORE_TYPE_X20 :
-		case ALTSYS_CORE_TYPE_X20S :
-		case ALTSYS_CORE_TYPE_ORE :
-		case ALTSYS_CORE_TYPE_X22 :
-		case ALTSYS_CORE_TYPE_X23P :
-		case ALTSYS_CORE_TYPE_ICMS :
-		default :
-			return XOOPS_URL.'/modules/system/admin.php?fct=preferences&op=showmod&mod='.$mid ;
-		case ALTSYS_CORE_TYPE_XCL21 :
-			return XOOPS_URL.'/modules/legacy/admin/index.php?action=PreferenceEdit&confmod_id='.$mid ;
-	}
-}
-
-
-function altsys_template_touch( $tpl_id )
-{
-	if( in_array( altsys_get_core_type() , array( ALTSYS_CORE_TYPE_X20S , ALTSYS_CORE_TYPE_X23P, ALTSYS_CORE_TYPE_X25 ) ) ) {
-		// need to delete all files under templates_c/
-		altsys_clear_templates_c() ;
-	} else {
-		// just touch the template
-		xoops_template_touch( $tpl_id ) ;
-	}
-}
-
-
-function altsys_clear_templates_c()
-{
-	$dh = opendir( XOOPS_COMPILE_PATH ) ;
-	while( $file = readdir( $dh ) ) {
-		if( substr( $file , 0 , 1 ) == '.' ) continue ;
-		if( substr( $file , -4 ) != '.php' ) continue ;
-		@unlink( XOOPS_COMPILE_PATH.'/'.$file ) ;
-	}
-	closedir( $dh ) ;
-}
-
-
-?>

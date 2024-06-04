@@ -1,0 +1,63 @@
+<div class="ui-dev-mode"><{$smarty.template}></div>
+
+<nav class="ui-breadcrumbs" aria-label="breadcrumb">
+    <a href="<{$xoops_url}>/admin.php"><{$smarty.const._CPHOME}></a>
+    &raquo;&raquo; <a href="./index.php"><{$smarty.const._MI_USER_NAME}></a>
+    &raquo;&raquo; <a href="./index.php?action=RanksList"><{$smarty.const._AD_USER_LANG_RANK_LIST}></a>
+    &raquo;&raquo; <span class="page-title" aria-current="page"><{$smarty.const._AD_USER_LANG_DELETE_RANK}></span>
+</nav>
+
+
+<h2><{$smarty.const._AD_USER_LANG_DELETE_RANK}> (<{$object->getShow('rank_title')}>)</h2>
+
+
+
+<div class="error"><{$smarty.const._AD_USER_MESSAGE_CONFIRM_DELETE_RANK}></div>
+
+<form method="post" action="./index.php?action=RanksDelete">
+    <{xoops_token form=$actionForm}>
+    <{xoops_input type=hidden name=rank_id value=$actionForm->get('rank_id')}>
+    <table class="outer">
+        <thead>
+        <tr>
+            <th colspan="2"><{$smarty.const._AD_USER_LANG_DELETE_RANK}> (<{$object->getShow('rank_title')}>)</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><{$smarty.const._MD_USER_LANG_RANK_ID}></td>
+            <td><{$object->getShow('rank_id')}></td>
+        </tr>
+        <tr>
+            <td><{$smarty.const._AD_USER_LANG_RANK_TITLE}></td>
+            <td><{$object->getShow('rank_title')}></td>
+        </tr>
+        <tr>
+            <td><{$smarty.const._AD_USER_LANG_RANK_MIN}></td>
+            <td><{$object->getShow('rank_min')}></td>
+        </tr>
+        <tr>
+            <td><{$smarty.const._AD_USER_LANG_RANK_MAX}></td>
+            <td><{$object->getShow('rank_max')}></td>
+        </tr>
+        <tr>
+            <td><{$smarty.const._AD_USER_LANG_RANK_SPECIAL}></td>
+            <td><{$object->getShow('rank_special')}></td>
+        </tr>
+        <tr>
+            <td><{$smarty.const._AD_USER_LANG_RANK_IMAGE}></td>
+            <td>
+                <img src="<{$smarty.const.XOOPS_UPLOAD_URL}>/<{$object->getShow('rank_image')}>" alt="<{$object->getShow('rank_title')}>" aria-label="<{$object->getShow('rank_title')}>">
+            </td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+            <td colspan="2">
+                <input class="button cancel" type="submit" value="<{$smarty.const._BACK}>" name="_form_control_cancel">
+                <input class="button delete" type="submit" value="<{$smarty.const._DELETE}>">
+            </td>
+        </tr>
+        </tfoot>
+    </table>
+</form>

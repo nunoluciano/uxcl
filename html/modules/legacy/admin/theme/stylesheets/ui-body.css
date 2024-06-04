@@ -1,0 +1,397 @@
+/*
+	XOOPSCube Theme : XCL Admin Flex Grid
+	Distribution : XOOPSCube XCL 2.4.0
+	Version : 2.4.0
+	Author : Nuno Luciano aka Gigamaster
+	Date : 2023-01-27
+	URL : https://github.com/xoopscube/
+
+	- HTML BODY
+	- BROWSER SPECS ( Text Selection, Scrollbar )
+	- HTML Elements
+	- LAYOUT GRID
+	- LAYOUT HEADER
+	- HEADER NAV
+	- LAYOUT Main
+	- LAYOUT Footer
+	- PAGINATION ( breadcrumbs )
+	- SCROLL TOP
+
+*/
+/* -------------------- -------------------- HTML BODY */
+
+html,
+body {
+    margin          : var(  --space-0    );
+    padding         : var(  --space-0    );
+
+}
+body {
+    background      : var( --body-bg     );
+    color           : var( --body-color  );
+    font-family     : var( --font-family );
+    font-size       : var( --font-size   );
+    font-weight     : var( --font-weight );
+    scrollbar-gutter: stable both-edges; /* reserve space for the scrollbar */
+    /* Removed Background white Flash transition */
+    /*transition      : background 500ms ease-in-out, color 200ms ease;*/
+    /* Keyword values */
+    -webkit-font-smoothing: antialiased;
+    /*text-rendering: auto;*/
+    /*text-rendering: optimizeSpeed;*/
+    /*text-rendering: optimizeLegibility;*/
+    text-rendering: geometricPrecision;
+}
+
+/*	-------------------- --------------------  BROWSER SPECS */
+/* Text Selection */
+::selection {
+    background-color: var( --op5 );
+    color           : var(  --secondary	 );
+}
+/* Webkit Scrollbar */
+::-webkit-scrollbar {
+    width           : 9px;
+    height          : 9px;
+}
+::-webkit-scrollbar-thumb {
+    background      : var( --thumbBG );
+}
+::-webkit-scrollbar-thumb:hover {
+    background      : var(--theme-color, rgb(14, 20, 24));
+}
+::-webkit-scrollbar-track {
+    background-color: var( --trackBG );
+}
+textarea::-webkit-resizer {
+    background-color: var( --layer-2 );
+}
+
+/* -------------------- -------------------- HTML Elements */
+
+a:active, a:focus {
+    color           : var(  --link-active  );
+}
+
+a:hover, a:visited:hover {
+    color           : var(  --link-hover   );
+}
+a:link, a:visited {
+    color           : var(  --theme-link, var(--link) );
+    cursor          : pointer;
+    display         : inline-block;
+    text-decoration : none;
+}
+
+/* ----- ANCHOR LINK SCROLL MARGIN
+   scroll-margin-top : value equal to header height */
+a[name|=help] {
+    scroll-margin-top: 5em;
+}
+a[id|=avatar-active],
+a[id|=block-permission],
+a[id|=close-site],
+a[id|=cool-uri],
+a[id|=ip-ban],
+a[id|=debug-mode] {
+    scroll-margin-top: 120px;
+}
+/* Altsys (components) menu+submenu */
+h3[id|=normalize] {
+    scroll-margin-top: 200px;
+}
+
+blockquote {
+    border-left     : 3px solid var(--layer-4);
+    font-style      : italic;
+    padding         : var(--space-5) var(--space-7);
+}
+
+code,kbd,pre,samp {
+    padding         : var(--space-4);
+    overflow-wrap   : anywhere; /* normal | break-word | anywhere */
+    white-space     : pre-wrap!important;/* <pre> tag doesn't support wrapping, by default. */
+}
+fieldset {
+    border: var(--border);
+}
+legend {
+    color : var(--secondary);
+}
+kbd {
+    background      : var(--layer-4);
+    border          : var(--border);
+    border-radius   : var(--border-radius);
+    box-shadow      : var(--shadow-3);
+    font-size       : 13px;
+    padding         : var(--space-1) var(--space-2);
+}
+pre {
+    border-left     : 3px solid var(--layer-4);
+    padding         : var(--space-3) ;
+}
+
+h1, h2, h3, h4, h5 {
+    font-weight     : 300;
+}
+h1 {
+    margin          : 0 0 var(--space-3);
+}
+h2 {
+    font-size       : 32px;
+    margin          : 1em 0;
+}
+h3 {
+    font-size       : 24px;
+    font-weight     : 400;
+    margin          : 1.25em 0 .5em;
+}
+h4 {
+    font-size       : 20px;
+    font-weight     : 400;
+    margin          : 1.5em 0 1em;
+}
+h5 {
+    font-size       : 16px;
+    letter-spacing  : 1px;
+    text-transform  : uppercase;
+    margin          : 1.5em 0 1em;
+}
+h6 {
+    font-size       : 14px;
+    letter-spacing  : 1px;
+    text-transform  : uppercase;
+    margin          : var(--space-6) 0;
+}
+
+hr {
+    border          : 0;
+    border-top      : 1px solid var(--layer-3);
+    margin          : 2.5em 0;
+    height          : 5px;
+    background-image: linear-gradient(90deg, transparent, var(--layer-3), transparent);
+}
+
+p {
+    margin          : var(--space-5) 0;
+    line-height     : 1.5;
+    text-align: justify;
+}
+/*  -------------------- --------------------  LAYOUT GRID */
+
+.layout-grid {
+    /* ui-media.css */
+}
+
+/* -------------------- --------------------  LAYOUT HEADER */
+
+header.nav-top {
+    background      : var( --header-bg     );
+    border          : var( --header-border );
+    border-radius   : var( --header-radius );
+    box-shadow      : var( --header-shadow );
+    grid-area       : header;
+    position        : var( --header-position);
+    min-width       : 0;
+    height          : 50px;
+    width           : 100%;
+    z-index         : var(--z-overlay);
+}
+/* -------------------- --------------------  HEADER NAV */
+
+header.nav-top > nav {
+    margin          : 0;
+    min-width       : 0;
+    padding         : 0;
+}
+header.nav-top ul {
+    display         : flex;
+    place-items     : center;
+    padding         : 0;
+    margin          : 0;
+}
+header.nav-top ul li {
+    display         : inline-block;
+    font-size       : var(--icon-size);
+    padding         : 0;
+}
+header.nav-top svg.site-name{
+    color: var(--theme-hover, var(--primary) )
+}
+header.nav-top ul li.ui-color-mode {
+    display         : inline-block;
+    margin-left     : auto;
+}
+
+nav ul {
+    display         : flex;
+    margin          : 0;
+    padding         : 0;
+}
+
+nav ul li {
+    list-style      : none;
+    transition      : all 0.2s;
+}
+
+/* -------------------- --------------------  LAYOUT Main */
+
+.main {
+    background      : var( --main-background);
+    grid-area       : main;
+    margin          : 0 auto;
+    padding-top     : 2rem;
+}
+
+/* -------------------- --------------------  LAYOUT Footer */
+
+.layout-grid footer {
+    background      : var( --footer-bg     );
+    border-top      : var( --footer-border );
+    border-radius   : var( --footer-radius );
+    box-shadow      : var( --footer-shadow );
+    color           : var( --footer-color  );
+    display         : inline-block;
+    font-size       : var(--footer-font);
+    padding         : var( --footer-padding);
+    width           : 100%;
+    text-align      : center;
+}
+
+footer.credits a:link {
+    color           : var(--footer-link);
+}
+footer.credits a:hover {
+    color           : var(--link-hover);
+}
+/* -------------------- --------------------  PAGINATION */
+nav.ui-breadcrumbs,
+.adminnavi {
+    background      : var( --breadcrumbs-bg     );
+    border          : var( --breadcrumbs-border );
+    border-radius   : var( --breadcrumbs-radius );
+    box-shadow      : var( --breadcrumbs-shadow );
+    padding         : var( --breadcrumbs-padding);
+    margin          : var( --breadcrumbs-margin );
+    position        : sticky;
+    top             : 50px;
+    z-index         : var(--z-sticky);
+}
+
+nav.pagination {
+    display         : flex;
+    justify-content : center;
+}
+.pagenavi {
+    list-style:none;
+}
+
+.adminnavi a,
+.pagenavi a,
+.pagenavi [aria-current] {
+    background      : var( --breadcrumbs-bg-link );
+    border-color    : var( --breadcrumbs-border  );
+    border-radius   : var( --breadcrumbs-radius  );
+    box-shadow      : var( --breadcrumbs-shadow  );
+    padding         : var( --breadcrumbs-padding );
+    margin          : var( --breadcrumbs-margin  );
+    transition      : all 0.3s ease;
+}
+
+/* ---------- ---------- ------- SCROLL TOP */
+.scroll-top {
+    position        : absolute;
+    top             : 12rem;
+    right           : 2rem;
+    bottom          : 0;
+    pointer-events  : none;
+    z-index         : 90;
+}
+.scroll-top #ntop-bg {fill: var( --layer-4 )}
+.scroll-top #ntop-arrow {fill: var( --theme-color, var( --link ));}
+.scroll-top a:hover #ntop-bg {fill: var( --theme-color, var(--link) )}
+.scroll-top a:hover #ntop-arrow {fill: var( --color-white );}
+.scroll-top a {
+    position        : fixed;
+    top             : -5rem;
+    right           : 1rem;
+    width           : 3rem;
+    height          : 3rem;
+    margin-bottom   : -5rem;
+    transform       : translateY(100vh);transition: all 0.3s ease-out;
+    backface-visibility: hidden;
+    display         : inline-block;
+    text-decoration : none;
+    user-select     : none;
+    pointer-events  : all;
+    outline         : none;
+    overflow        : hidden;
+}
+.scroll-top a:hover {
+    border-color    : var(--border);
+    box-shadow      : 0 12px 24px -12px var(--op5), 0 4px 20px 0 var(--op5), 0 8px 8px -5px var(--op5);
+}
+.scroll-top a svg {
+    display         : block;
+    border-radius   : var(--border-radius);
+    width           : 100%;
+    height          : 100%;
+}
+.scroll-top a svg path {
+    transition      : all 0.1s;
+}
+.scroll-top a #ntop-arrow {
+    transform       : scale(0.66);
+    transform-origin: center;
+}
+@media print {
+    .scroll-top { display: none !important; }
+}
+
+/* tooltip custom style */
+.ui-tooltip, .arrow:after {
+    background: black !important;
+    border: 2px solid white;
+}
+.ui-tooltip {
+    --ui-widget-font-size:13px;
+    border-radius: 20px;
+    box-shadow: var(--shadow-6) !important;
+    color: white !important;
+    font-size: var(--ui-widget-font-size);
+    padding: 10px 20px;
+    text-transform: uppercase;
+}
+.arrow {
+    width: 40px;
+    height: 14px;
+    overflow: hidden;
+    position: absolute;
+    left: 50%;
+    margin-left: -50%;
+    bottom: -14px;
+}
+.arrow.top {
+    top: -14px;
+    bottom: auto;
+}
+.arrow.left {
+    left: 25%;
+}
+.arrow:after {
+    content: "";
+    position: absolute;
+    left: 25%;
+    top: -20px;
+    width: 20px;
+    height: 20px;
+    box-shadow: var(--shadow-6);
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+.arrow.top:after {
+    bottom: -20px;
+    top: auto;
+}
+

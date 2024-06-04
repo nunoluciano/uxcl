@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html class="no-js" lang="<{$xoops_langcode}>" data-theme="dark">
+<!-- ===========================
+	XOOPSCube Theme : XCL Admin Flex Grid
+	Distribution : XOOPSCube XCL 2.4.0
+	Version : 2.4.0
+	Author : Nuno Luciano aka Gigamaster
+	Date : 2023-03-27
+	URL : https://github.com/xoopscube/
+=========================== -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="dark light">
+    <title>Admin : <{$legacy_sitename|xoops_escape}> : <{$smarty.const._CPHOME}> : <{$legacy_pagetitle|xoops_escape}></title>
+
+<{* ---------- ---------- PRELOAD *}>
+    <link rel="preload" href="<{$xoops_url}>/modules/legacy/admin/theme/style.css" as="style">
+    <link rel="preload" href="<{$xoops_url}>/common/css/x-layout.css" as="style">
+    <link rel="preload" href="<{$xoops_url}>/common/js/x-utils.js" as="script">
+    <link rel="preload" href="<{'js/wap.js'|theme}>" as="script">
+
+<{* ---------- ---------- PRERENDER *}>
+    <link rel="prerender" href="<{$xoops_url}>/admin.php">
+    <link rel="prerender" href="<{$xoops_url}>/modules/legacy/admin/index.php?action=BlockList">
+    <link rel="prerender" href="<{$xoops_url}>/modules/legacy/admin/index.php?action=ModuleList">
+    <link rel="prerender" href="<{$xoops_url}>/modules/altsys/admin/index.php?mode=admin&lib=altsys&page=myblocksadmin">
+    <link rel="prerender" href="<{$xoops_url}>/modules/altsys/admin/index.php?mode=admin&lib=altsys&page=mytplsadmin">
+    <link rel="prerender" href="<{$xoops_url}>/modules/altsys/admin/index.php?mode=admin&lib=altsys&page=mylangadmin">
+
+<{* ---------- ---------- META TAGS *}>
+    <meta http-equiv="content-type" content="text/html; charset=<{$xoops_charset}>">
+    <meta http-equiv="content-language" content="<{$xoops_langcode}>">
+    <meta name="description" content="Admin Dashboard">
+    <meta name="author" content="Nuno Luciano aka Gigamaster">
+    <meta name="generator" content="XOOPSCube">
+
+<{* ---------- ---------- GOOGLEBOT *}>
+    <meta name="robots" content="noindex">
+    <meta name="googlebot" content="noindex">
+<{* ---------- ---------- FAVICON *}>
+    <link rel="icon" href="<{$favicon}>" type="image/svg+xml">
+    <link rel="shortcut icon" href="<{$xoops_url}>/images/favicon/favicon.ico">
+<{* ---------- ---------- Admin Style *}>
+    <!-- XCL Layout -->
+    <link type="text/css" rel="stylesheet" href="<{$xoops_url}>/common/css/x-layout.css">
+    <!-- ADMIN THEME STYLE -->
+    <link type="text/css" rel="stylesheet" href="<{$xoops_url}>/modules/legacy/admin/theme/style.css">
+    <!-- PRISMJS -->
+    <link type="text/css" rel="stylesheet" href="<{$xoops_url}>/common/prismjs/prism.css">
+    <{* prism.js included before closing /body }>
+
+<{* ---------- ---------- Module Header *}>
+    <!-- Modules scripts and styles -->
+    <{if $xoops_module_header}>
+        <{$xoops_module_header}>
+    <{/if}>
+    <{* if $xoops_block_header}>
+        <{$xoops_block_header}>
+    <{/if *}>
+
+	<{* ---------- ---------- Override CSS Styles [jQuery, Notify Plugin] *}>
+    <link type="text/css" rel="stylesheet" href="<{'stylesheets/ui-notification.css'|theme}>">
+    <link type="text/css" rel="stylesheet" href="<{$xoops_url}>/common/js/jquery-ui-custom-var.css">
+</head>
+
+<body>
+
+
+<{* ---------- ---------- Grid Admin Dashboard *}>
+
+<div class="layout-grid" id="container">
+
+    <{* ---------- ---------- Header *}>
+
+    <header class="nav-top">
+
+        <{include file="../templates/components/admin-nav-header.html"}>
+
+    </header>
+
+
+    <{* ---------- ---------- Nav Mobile *}>
+
+    <div class="nav-mobile">
+        <svg role="img" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="icon-menu">
+            <path d="M21 15.61L19.59 17l-5.01-5l5.01-5L21 8.39L17.44 12L21 15.61M3 6h13v2H3V6m0 7v-2h10v2H3m0 5v-2h13v2H3z" fill="currentColor"></path>
+        </svg>
+    </div>
+
+
+    <{* ---------- ---------- Nav Aside Menu *}>
+
+    <aside class="nav-aside">
+        <{* ---------- Nav Side Menu *}>
+        <ul class="nav-side-menu">
+
+        <{* ----------Block LogInfo Menu *}>
+            <div id="admin-block-loginfo" class="show">
+        <{$xoops_lblocks.block_loginfo.content}>
+            </div>
+
+        <{* ---------- Block Side Menu *}>
+        <{$xoops_lblocks.sidemenu.content}>
+
+        </ul>
+
+    </aside>
+
+
+    <main class="main">
+        
+        <{* foreach name='lblock' item='block' from=$xoops_lblocks *}>
+        <{* if $block.name !='action_search' && $block.name !='dashboardmenu' && $block.name !='onlineinfo' && $block.name !='sidemenu' *}>
+        <{* $block.content *}>
+        <{* /if *}>
+        <{* /foreach * }>
+
+    <{* ---------- ---------- Admin Dashboard Info *}>
+    <{if $smarty.server.SCRIPT_FILENAME|basename == "admin.php"}>
+
+        <nav class="ui-breadcrumbs" aria-label="breadcrumb">
+            <a href="<{$xoops_url}>/admin.php"><{$smarty.const._CPHOME}></a>
+        </nav>
+
+        <{* Edit Admin Blocks from file: /legacy/admin/preload/AdminDashboard.php
+            Disable (0) or Enable (1) block render *}>
+
+        <div id="admin-block-online" class="hide">
+        <{$xoops_lblocks.block_online.content}>
+        </div>
+
+        <div data-layout="row sm-column" data-self="sm-full">
+
+            <div data-layout="column mt-7 px-3" data-self="size-x1">
+
+                <div id="admin-block-menu" class="show">
+                <{$xoops_lblocks.block_menu.content}>
+                </div>
+
+                <div id="admin-block-server" class="show">
+                <h3><{$xoops_lblocks.block_server.title}></h3>
+                <{$xoops_lblocks.block_server.content}>
+                </div>
+
+                <div id="admin-block-php" class="show">
+                <h3><{$xoops_lblocks.block_php.title}></h3>
+                <{$xoops_lblocks.block_php.content}>
+                </div>
+
+            </div>
+
+            <div data-layout="column px-3" data-self="size-xsmall sm-full">
+                <div id="admin-block-overview">
+                <{$xoops_lblocks.block_overview.content}>
+                </div>
+            </div>
+
+        </div>
+
+    <{/if}>
+
+    <{* ---------- ---------- Module Content *}>
+
+        <{$xoops_contents}>
+
+    <hr>
+
+    <{* ---------- ---------- Footer*}>
+    <footer class="credits">
+        <p><span>Powered by&nbsp;<{$smarty.const.XOOPS_VERSION}> &copy;</span> 2005-2024 <a href="https://github.com/xoopscube/" target="_blank" rel="external">The XOOPSCube Project</a></p>
+    </footer>
+
+    <{* ---------- ---------- Admin Panel and Help *}>
+    <{include file="../templates/components/admin-panel.html"}>
+    <{include file="../templates/components/admin-help.html"}>
+
+    <{* ---------- ---------- Scroll to top *}>
+    <div class="scroll-top">
+        <a href="#">
+            <svg width="42px" height="42px" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                <path id="ntop-bg" d="M0 0h48v48h-48z"></path>
+                <path id="ntop-arrow" d="M14.83 30.83l9.17-9.17 9.17 9.17 2.83-2.83-12-12-12 12z"></path>
+            </svg>
+        </a>
+    </div>
+
+    </main>
+
+</div><{* /Layout Grid *}>
+
+<{* ---------- ---------- Javascript plugin *}>
+<script type="module">
+    import {ThemeManager} from '<{$xoops_url}>/common/js/x-theme-manager.js';
+    new ThemeManager(document.getElementById('themeToggle'));
+</script>
+
+<script src='<{$xoops_url}>/common/js/x-utils.js'></script>
+<script src='<{$xoops_url}>/common/prismjs/prism.js' defer></script>
+<script src="<{'js/wap.js'|theme}>"></script>
+
+</body>
+
+</html>
+<{$stdout_buffer}>

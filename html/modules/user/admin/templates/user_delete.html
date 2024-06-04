@@ -1,0 +1,78 @@
+<div class="ui-dev-mode"><{$smarty.template}></div>
+
+<nav class="ui-breadcrumbs" aria-label="breadcrumb">
+    <a href="<{$xoops_url}>/admin.php"><{$smarty.const._CPHOME}></a>
+    &raquo;&raquo; <a href="./index.php"><{$smarty.const._MI_USER_NAME}></a>
+    &raquo;&raquo; <a href="./index.php?action=UserList"><{$smarty.const._AD_USER_LANG_USER_LIST}></a>
+    &raquo;&raquo; <span class="page-title"><{$smarty.const._AD_USER_LANG_USER_DELETE}></span>
+</nav>
+
+
+<h2>
+    <{$smarty.const._AD_USER_LANG_USER_DELETE}> &raquo; <{$object->getShow('uname')}>
+</h2>
+
+
+<div class="error"><{$smarty.const._AD_USER_LANG_USER_DELETE_ADVICE}></div>
+
+
+<{if $actionForm->hasError()}>
+<div class="error">
+    <ul>
+        <{foreach item=message from=$actionForm->getErrorMessages()}>
+        <li><{$message|xoops_escape}></li>
+        <{/foreach}>
+    </ul>
+</div>
+<{/if}>
+
+
+<form action="?action=UserDelete" method="post">
+    <{xoops_token form=$actionForm}>
+    <{xoops_input type=hidden name=uid value=$object->get('uid')}>
+    <table class="outer">
+        <thead>
+        <tr>
+            <th colspan="2"><{$smarty.const._AD_USER_LANG_USER_DELETE}> (<{$object->getShow('uname')}>)</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><{$smarty.const._MD_USER_LANG_UID}></td>
+            <td><{$object->getShow('uid')}></td>
+        </tr>
+        <tr>
+            <td><{$smarty.const._MD_USER_LANG_UNAME}></td>
+            <td><{$object->getShow('uname')}></td>
+        </tr>
+        <tr>
+            <td><{$smarty.const._MD_USER_LANG_NAME}></td>
+            <td><{$object->getShow('name')}></td>
+        </tr>
+        <tr>
+            <td><{$smarty.const._AD_USER_LANG_REGDATE}></td>
+            <td><{$object->get('user_regdate')|xoops_formattimestamp}></td>
+        </tr>
+        <tr>
+            <td><{$smarty.const._AD_USER_LANG_LASTLOGIN}></td>
+            <td><{$object->get('last_login')|xoops_formattimestamp:l}></td>
+        </tr>
+        <tr>
+            <td><{$smarty.const._MD_USER_LANG_POSTS}></td>
+            <td><{$object->getShow('posts')}></td>
+        </tr>
+        <tr>
+            <td><{$smarty.const._MD_USER_LANG_LEVEL}></td>
+            <td><{$object->getShow('level')}></td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+            <td colspan="2">
+                <input class="button cancel" type="submit" value="<{$smarty.const._BACK}>" name="_form_control_cancel">
+                <input class="button delete" type="submit" value="<{$smarty.const._DELETE}>">
+            </td>
+        </tr>
+        </tfoot>
+    </table>
+</form>

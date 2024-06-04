@@ -1,0 +1,141 @@
+<div class="ui-dev-mode"><{$smarty.template}></div>
+
+<nav class="ui-breadcrumbs" aria-label="breadcrumb">
+    <a href="<{$xoops_url}>/admin.php"><{$smarty.const._CPHOME}></a>
+    &raquo;&raquo; <a href="./index.php"><{$smarty.const._MI_USER_NAME}></a>
+    &raquo;&raquo; <span class="page-title" aria-current="page"><a href="./index.php?action=MailjobList"><{$smarty.const._AD_USER_LANG_MAILJOB_LIST}></a></span>
+</nav>
+
+
+<h2><{$smarty.const._AD_USER_LANG_MAILJOB_LIST}></h2>
+
+
+<div class="help-tips">
+    <{$smarty.const._AD_USER_TIPS_MAILJOB_LIST}>
+</div>
+
+
+<{* ////— ACTION-CONTROL —\\\\ *}>
+<section data-layout="row center-justify" class="action-control">
+
+    <a class="button" href="index.php?action=UserSearch"><i class="i-add"></i> <{$smarty.const._AD_USER_LANG_CREATE_NEW}></a>
+
+    <div class="control-view">
+
+        <{* ////— DROPDOWN FILTER-SORT —\\\\ *}>
+        <div class="dropdown button-icon" id="drop-filter">
+            <a href="#" class="dropdown-toggle button" aria-label="filter sort">
+                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" class="filter" role="img"><path d="M18 21l-4-4h3V7h-3l4-4l4 4h-3v10h3M2 19v-2h10v2M2 13v-2h7v2M2 7V5h4v2H2z" fill="currentColor"></path></svg>            </a>
+            <div class="dropdown-content drop-top">
+        <div data-layout="row center-justify inline">
+            <h6><{$smarty.const._AD_USER_LANG_MAILJOB_ID}></h6>
+            <div>
+                <a class="btn" href="<{$pageNavi->renderUrlForSort()}>&amp;sort=<{$smarty.const.MAILJOB_SORT_KEY_MAILJOB_ID}>" aria-label="<{$smarty.const._ASCENDING}>">&uarr;</a>
+                <a class="btn" href="<{$pageNavi->renderUrlForSort()}>&amp;sort=-<{$smarty.const.MAILJOB_SORT_KEY_MAILJOB_ID}>" aria-label="<{$smarty.const._DESCENDING}>">&darr;</a>
+            </div>
+        </div>
+        <div data-layout="row center-justify inline">
+            <h6><{$smarty.const._AD_USER_LANG_TITLE}></h6>
+            <div>
+                <a class="btn" href="<{$pageNavi->renderUrlForSort()}>&amp;sort=<{$smarty.const.MAILJOB_SORT_KEY_TITLE}>" aria-label="<{$smarty.const._ASCENDING}>">&uarr;</a>
+                <a class="btn" href="<{$pageNavi->renderUrlForSort()}>&amp;sort=-<{$smarty.const.MAILJOB_SORT_KEY_TITLE}>" aria-label="<{$smarty.const._DESCENDING}>">&darr;</a>
+            </div>
+        </div>
+        <div data-layout="row center-justify inline">
+            <h6><{$smarty.const._AD_USER_LANG_IS_PM}></h6>
+            <div>
+                <a class="btn" href="<{$pageNavi->renderUrlForSort()}>&amp;sort=<{$smarty.const.MAILJOB_SORT_KEY_IS_PM}>" aria-label="<{$smarty.const._ASCENDING}>">&uarr;</a>
+                <a class="btn" href="<{$pageNavi->renderUrlForSort()}>&amp;sort=-<{$smarty.const.MAILJOB_SORT_KEY_IS_PM}>" aria-label="<{$smarty.const._DESCENDING}>">&darr;</a>
+            </div>
+        </div>
+        <div data-layout="row center-justify inline">
+            <h6><{$smarty.const._AD_USER_LANG_IS_MAIL}></h6>
+            <div>
+                <a class="btn" href="<{$pageNavi->renderUrlForSort()}>&amp;sort=<{$smarty.const.MAILJOB_SORT_KEY_IS_MAIL}>" aria-label="<{$smarty.const._ASCENDING}>">&uarr;</a>
+                <a class="btn" href="<{$pageNavi->renderUrlForSort()}>&amp;sort=-<{$smarty.const.MAILJOB_SORT_KEY_IS_MAIL}>" aria-label="<{$smarty.const._DESCENDING}>">&darr;</a>
+            </div>
+        </div>
+        <div data-layout="row center-justify inline">
+            <h6><{$smarty.const._AD_USER_LANG_CREATE_UNIXTIME}></h6>
+            <div>
+                <a class="btn" href="<{$pageNavi->renderUrlForSort()}>&amp;sort=<{$smarty.const.MAILJOB_SORT_KEY_CREATE_UNIXTIME}>" aria-label="<{$smarty.const._ASCENDING}>">&uarr;</a>
+                <a class="btn" href="<{$pageNavi->renderUrlForSort()}>&amp;sort=-<{$smarty.const.MAILJOB_SORT_KEY_CREATE_UNIXTIME}>" aria-label="<{$smarty.const._DESCENDING}>">&darr;</a>
+            </div>
+        </div>
+    </div><{* ----- /Dropdown-content *}>
+    </div><{* ----- /Dropdown *}>
+
+        <button class="help-admin button-icon" type='button' data-id='4' data-module='user' data-help-article='#help-mailjob' aria-label="<{$smarty.const._HELP}>"><b>?</b></button>
+    </div>
+
+</section>
+
+
+<table class="outer">
+    <thead>
+    <tr>
+        <th><{$smarty.const._AD_USER_LANG_MAILJOB_ID}></th>
+        <th><{$smarty.const._AD_USER_LANG_TITLE}></th>
+        <th><{$smarty.const._AD_USER_LANG_IS_PM}></th>
+        <th><{$smarty.const._AD_USER_LANG_IS_MAIL}></th>
+        <th><{$smarty.const._AD_USER_LANG_CREATE_UNIXTIME}></th>
+        <th><{$smarty.const._AD_USER_LANG_LEFT_TARGET_USER}></th>
+        <th class="list_control"><{$smarty.const._AD_USER_LANG_CONTROL}></th>
+    </tr>
+    </thead>
+    <tbody>
+    <{foreach item=obj from=$objects}>
+    <tr>
+        <td class="list_id list_center"><{$obj->getShow('mailjob_id')}></td>
+        <td class="list_title">
+            <{if $obj->getUserCount() > 0}>
+            <a href="./index.php?action=MailjobSend&amp;mailjob_id=<{$obj->getShow('mailjob_id')}>"><{$obj->getShow('title')}></a>
+            <{else}>
+            <a href="./index.php?action=MailjobView&amp;mailjob_id=<{$obj->getShow('mailjob_id')}>"><{$obj->getShow('title')}></a>
+            <{/if}>
+        </td>
+        <td class="list_order">
+            <{if $obj->getShow('is_pm') == 1}>
+            <{$smarty.const._YES}>
+            <{else}>
+            <{$smarty.const._NO}>
+            <{/if}>
+        </td>
+        <td class="list_order">
+            <{if $obj->getShow('is_mail') == 1}>
+            <{$smarty.const._YES}>
+            <{else}>
+            <{$smarty.const._NO}>
+            <{/if}>
+        </td>
+        <td class="list_date"><{$obj->get('create_unixtime')|date_format:"%Y/%m/%d %H:%M"}></td>
+        <td class="list_number list_center">
+            <{if $obj->getUserCount() > 0}>
+            <span class="user_mailjob_count"><{$obj->mUserCount|xoops_escape}></span>
+            <{else}>
+            <{$smarty.const._AD_USER_LANG_COMPLETED}>
+            <{/if}>
+        </td>
+        <td class="list_control">
+            <{if $obj->getUserCount() > 0}>
+            <a class="action-view" href="./index.php?action=Mailjob_linkList&amp;mailjob_id=<{$obj->getShow('mailjob_id')}>" aria-label="<{$smarty.const._AD_USER_LANG_MAILJOB_LINK_LIST}>">
+                <img class="svg" src="<{'icons/icon-user-edit.svg'|theme}>" width="1em" height="1em" alt="<{$smarty.const._VIEW}>"></a>
+            <a class="action-send" href="./index.php?action=MailjobSend&amp;mailjob_id=<{$obj->getShow('mailjob_id')}>" aria-label="<{$smarty.const._SEND}>">
+                <img class="svg" src="<{'icons/icon-mail-send.svg'|theme}>" width="1em" height="1em" alt="<{$smarty.const._SEND}>"></a>
+            <a class="action-edit" href="./index.php?action=MailjobEdit&amp;mailjob_id=<{$obj->getShow('mailjob_id')}>" aria-label="<{$smarty.const._EDIT}>">
+                <img class="svg" src="<{'icons/icon-edit.svg'|theme}>" width="1em" height="1em" alt="<{$smarty.const._EDIT}>"></a>
+            <{/if}>
+            <a class="action-view" href="./index.php?action=MailjobView&amp;mailjob_id=<{$obj->getShow('mailjob_id')}>" aria-label="<{$smarty.const._VIEW}>">
+                <img class="svg" src="<{'icons/icon-view.svg'|theme}>" width="1em" height="1em" alt="<{$smarty.const._VIEW}>"></a>
+            <a class="action-delete" href="./index.php?action=MailjobDelete&amp;mailjob_id=<{$obj->getShow('mailjob_id')}>" aria-label="<{$smarty.const._DELETE}>">
+                <img class="svg" src="<{'icons/icon-delete.svg'|theme}>" width="1em" height="1em" alt="<{$smarty.const._DELETE}>"></a>
+        </td>
+    </tr>
+    <{/foreach}>
+    </tbody>
+    <tfoot>
+    <tr><td colspan="7">
+        <{include file="./components/pagenavi.html"}>
+    </td></tr>
+    </tfoot>
+</table>

@@ -25,9 +25,9 @@
 * brackets), and named reference (where the URL is enclosed in square
 * brackets and has a name included inside the brackets).  E.g.:
 *
-* inline    -- http://example.com
-* numbered  -- [http://example.com]
-* described -- [http://example.com Example Description]
+* inline    -- https://example.com
+* numbered  -- [https://example.com]
+* described -- [https://example.com Example Description]
 *
 * When rendering a URL token, this will convert URLs pointing to a .gif,
 * .jpg, or .png image into an inline <img /> tag (for the 'xhtml'
@@ -77,7 +77,7 @@ class Text_Wiki_Parse_Url extends Text_Wiki_Parse {
     
     var $conf = array(
         'schemes' => array(
-            'http://',
+            'https://',
             'https://',
             'ftp://',
             'gopher://',

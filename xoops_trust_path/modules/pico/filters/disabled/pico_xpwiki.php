@@ -1,18 +1,22 @@
 <?php
 
-define('_MD_PICO_FILTERS_XPWIKIINITWEIGHT',15);
+define( '_MD_PICO_FILTERS_XPWIKIINITWEIGHT', 15 );
 
-function pico_xpwiki( $mydirname , $text , $content4assign )
-{
-	@ include_once XOOPS_TRUST_PATH."/modules/xpwiki/include.php";
+define( '_MD_PICO_FILTERS_XPWIKIEDITOR', 'bbcode' );
+define( '_MD_PICO_FILTERS_XPWIKICSSCLASS', '' );
+define( '_MD_PICO_FILTERS_XPWIKIUSEHTMLATNEW', false );
+define( '_MD_PICO_FILTERS_XPWIKIDISABLEONHTML', true );
 
-	if( ! class_exists( 'XpWiki' ) ) die( 'xpWiki is not installed correctly' ) ;
+function pico_xpwiki( $mydirname, $text, $content4assign ) {
+	@include_once XOOPS_TRUST_PATH . '/modules/xpwiki/include.php';
 
-	// 引数は、xpWikiをインストールしたディレクトリ名です。
-	$wiki = new XpWiki('xpwiki'); // create instance. option is xpWiki module's directory name.
+	if ( ! class_exists( 'XpWiki' ) ) {
+		die( 'xpWiki is not installed correctly' );
+	}
 
-	// 第二引数は、xpWikiのCSSを適用するためのDIVクラス名です。
-	return $wiki->transform($text, 'pico_body');
+	// xpWiki
+	$wiki = new XpWiki( 'xpwiki' ); // create instance. option is xpWiki module's directory name.
+
+	// xpWiki CSS
+	return $wiki->transform( $text, 'pico_body' );
 }
-
-?>

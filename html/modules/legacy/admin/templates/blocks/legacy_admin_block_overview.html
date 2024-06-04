@@ -1,0 +1,137 @@
+<{* Modules Overview *}>
+
+<style id="dynamicss">
+	:is(.overview-stats) .ui-card-full {margin:0 auto 1em; }
+	div[chart-type="bar-compare"] .linebox-title-bar {
+		margin-top: 5px;
+		margin-bottom: 5px;
+		position: relative;
+	}
+	div[chart-type="bar-compare"] .linebox-title-bar span {
+		/*font-family: "Open Sans";
+		color: #616161;*/
+	}
+	div[chart-type="bar-compare"] .linebox-title-bar span.compare-num {
+		font-weight: bold;
+		font-size: 16px;
+		margin-left: 10px;
+	}
+	div[chart-type="bar-compare"] .linebox-title-bar span.compare-num-chart-title {
+		font-size: 13px;
+		position: absolute;
+		left: 50px;
+		top: 2px;
+	}
+	div[chart-type="bar-compare"] .line {
+		height: 8px;
+		width: 100%;
+		background: var(--card-small-bg);
+		border-color: var(--card-small-border);
+		border-radius: var(--card-small-radius);
+		box-shadow: var(--card-small-shadow);
+	}
+	div[chart-type="bar-compare"] .line div {
+		height: 98%;
+		border-radius: var(--card-small-radius);
+		color: #e72747;
+	}
+
+</style>
+
+<div class="overview-stats" data-layout="column">
+
+	<{* ---------- ---------- Modules Overview *}>
+	<div class="ui-card-full" data-layout="column">
+		<div data-layout="row">
+			<div class="ui-card-small-icon ui-icon-blue">
+				<img class="svg" src="<{'icons/icon-module.svg'|theme}>" width="1em" height="1em" alt="modules">
+			</div>
+			<div class="ui-card-small-info">
+				<h5 class="ui-card-small-title"><{$smarty.const._AD_LEGACY_LANG_ALL_MODULES}></h5>
+			</div>
+		</div>
+		<div id="status-module"
+			 style="width: 100%"
+			 chart-type="bar-compare"
+			 data-chart-max="<{$ModuleTotal}>"
+			 data-segments="[
+	 [&quot;<{$ModuleTotal}>&quot;,&quot;&lt;b&gt;<{$smarty.const._AD_LEGACY_LANG_MOD_TOTAL}>&lt;/b&gt;&quot;],
+	 [&quot;<{$activeModuleTotal}>&quot;,&quot;<{$smarty.const._AD_LEGACY_LANG_ACTIVE}>&quot;],
+	 [&quot;<{$inactiveModuleTotal}>&quot;,&quot;<{$smarty.const._AD_LEGACY_LANG_DEACTIVATE}>&quot;]
+	 ]" data-colors="[&quot;var(--color-blue)&quot;,&quot;var(--color-green)&quot;,&quot;var(--color-red)&quot;]">
+		</div>
+	</div>
+
+	<{* ---------- ---------- Blocks Overview *}>
+	<div class="ui-card-full" data-layout="column">
+		<div data-layout="row">
+			<div class="ui-card-small-icon ui-icon-green">
+				<img class="svg" src="<{'icons/icon-blocks.svg'|theme}>" width="1em" height="1em" alt="blocks">
+			</div>
+			<div class="ui-card-small-info">
+				<h5 class="ui-card-small-title"><{$smarty.const._MI_LEGACY_MENU_BLOCKLIST}></h5>
+			</div>
+		</div>
+		<div id="status-block"
+			 style="width: 100%"
+			 chart-type="bar-compare"
+			 data-chart-max="<{$BlockTotal}>"
+			 data-segments="[
+		 [&quot;<{$BlockTotal}>&quot;,&quot;&lt;b&gt;<{$smarty.const._AD_LEGACY_LANG_BLOCK_TOTAL}>&lt;/b&gt;&quot;],
+		 [&quot;<{$ActiveBlockTotal}>&quot;,&quot;<{$smarty.const._AD_LEGACY_LANG_BLOCK_ACTIVETOTAL}>&quot;],
+		 [&quot;<{$ActiveInstalledBlockTotal}>&quot;,&quot;<{$smarty.const._AD_LEGACY_LANG_BLOCK_INSTALLEDTOTAL}>&quot;],
+		 [&quot;<{$ActiveUninstalledBlockTotal}>&quot;,&quot;<{$smarty.const._AD_LEGACY_LANG_BLOCK_UNINSTALLEDTOTAL}>&quot;],
+		 [&quot;<{$InactiveBlockTotal}>&quot;,&quot;<{$smarty.const._AD_LEGACY_LANG_BLOCK_INACTIVETOTAL}>&quot;]
+		 ]" data-colors="[&quot;var(--color-blue)&quot;,&quot;var(--color-green)&quot;,&quot;var(--color-green)&quot;,&quot;var(--color-red)&quot;,&quot;var(--color-red-op)&quot;]">
+		</div>
+	</div>
+
+	<{* ---------- ---------- Users Overview *}>
+	<div class="ui-card-full" data-layout="column">
+		<div data-layout="row">
+			<div class="ui-card-small-icon ui-icon-blue">
+				<img class="svg" src="<{'icons/icon-user-group.svg'|theme}>" width="1em" height="1em" alt="user-groups">
+			</div>
+			<div class="ui-card-small-info">
+				<h5 class="ui-card-small-title"><{$smarty.const._AD_USER_LANG_ALL_OF_USERS}></h5>
+			</div>
+		</div>
+		<div id="status-user"
+				 style="width: 100%"
+				 chart-type="bar-compare"
+				 data-chart-max="<{$UserTotal}>"
+				 data-segments="[
+	 [&quot;<{$UserTotal}>&quot;,&quot;&lt;b&gt;<{$smarty.const._AD_USER_LANG_USER_TOTAL}>&lt;/b&gt;&quot;],
+	 [&quot;<{$activeUserTotal}>&quot;,&quot;<{$smarty.const._AD_USER_LANG_LEVEL_ACTIVE}>&quot;],
+	 [&quot;<{$inactiveUserTotal}>&quot;,&quot;<{$smarty.const._AD_USER_LANG_LEVEL_PENDING}>&quot;]
+	 ]" data-colors="[&quot;var(--color-blue)&quot;,&quot;var(--color-green)&quot;,&quot;var(--color-red)&quot;]">
+			</div>
+	</div>
+
+</div>
+
+<script>
+$('div[chart-type="bar-compare"]').each(function(){
+	var chartbox = $(this);
+	var max = chartbox.data('chart-max');
+	var segments = chartbox.data('segments');
+	var colors = chartbox.data('colors');
+	var id = chartbox.attr('id');
+	var j = 0;
+	for(var i=0; i < segments.length; i++){
+		var linebox = $("<div class='linebox'></div>");
+		chartbox.append(linebox);
+		var s = segments[i];
+		var v = s[0];
+		var t = s[1];
+		var p = (v * 100 / max) + '%';
+		linebox.append("<div class='linebox-title-bar'><span class='compare-num'>" + v + "</span> <span class='compare-num-chart-title'>" + t + "</span></div>");
+		var line = $("<div class='line'></div>");
+		linebox.append(line);
+		var mainline = $("<div class='mainline' style='background-color:" + colors[j] + "; width:" + p + ";'></div>" );
+		j++;
+		if(j === colors.length) j = 0;
+		line.append(mainline);
+	}
+});
+</script>

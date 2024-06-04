@@ -10,7 +10,7 @@
 * 
 * @package Text_Wiki
 * 
-* @todo [http://google.com] becomes 1 with a LaTeX footnote in subscript.
+* @todo [https://google.com] becomes 1 with a LaTeX footnote in subscript.
 *       This should be a normal LaTeX footnote associated with the
 *       previous word?
 * 

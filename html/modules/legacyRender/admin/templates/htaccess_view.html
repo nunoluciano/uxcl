@@ -1,0 +1,38 @@
+<div class="ui-dev-mode"><{$smarty.template}></div>
+
+<nav class="ui-breadcrumbs" aria-label="breadcrumb">
+    <a href="<{$xoops_url}>/admin.php"><{$smarty.const._CPHOME}></a>
+    &raquo;&raquo; <a href="./index.php"><{$smarty.const._MI_LEGACYRENDER_NAME}></a>
+    &raquo;&raquo; <span class="page-title" aria-current="page"><{$smarty.const._AD_LEGACYRENDER_LANG_HTACCESS}></span>
+</nav>
+
+<{* ////— ACTION-CONTROL —\\\\ *}>
+<section data-layout="row center-justify" class="action-control">
+    <h2><{$smarty.const._AD_LEGACYRENDER_LANG_HTACCESS}></h2>
+    <div class="control-view">
+        <button class="help-admin button-icon" type='button' data-module='legacyRender' data-help-article='#help-htaccess' aria-label="<{$smarty.const._HELP}>"><b>?</b></button>
+    </div>
+</section>
+<{* ----- / CONTROL-ACTION *}>
+
+<div class="help-tips">
+    <{$smarty.const._AD_LEGACYRENDER_DESC_HTACCESS}>
+</div>
+<span class="alert-notify"></span>
+<div class="ui-card-full">
+<div class="textarea-wrap">
+<textarea id="output-source" rows="12" readonly>
+RewriteEngine On
+RewriteBase <{$rewrite_base}>
+RewriteRule ^modules/(\w+)/(\w+\.php)(/.*)$ <{$xoops_module_path}>/$1/$2 [L,QSA,E=PATH_INFO:$3]
+RewriteRule ^modules/(.*)$ <{$xoops_module_path}>/$1 [L,QSA]
+RewriteRule ^(\w+)$ <{$xoops_module_path}>/$1/index.php [L,QSA]
+RewriteRule ^(\w+)/(\d+)$ <{$xoops_module_path}>/$1/index.php?<{$data_id}>=$2 [L,QSA]
+RewriteRule ^(\w+)/(\w+)$ <{$xoops_module_path}>/$1/index.php?<{$data_name}>=$2 [L,QSA]
+RewriteRule ^(\w+)/(\w+)/(\d+)$ <{$xoops_module_path}>/$1/index.php?<{$data_name}>=$2&<{$data_id}>=$3 [L,QSA]
+RewriteRule ^(\w+)/(\w+)/(\w+)$ <{$xoops_module_path}>/$1/index.php?<{$data_name}>=$2&<{$action_name}>=$3 [L,QSA]
+RewriteRule ^(\w+)/(\w+)/(\d+)/(.+)$ <{$xoops_module_path}>/$1/index.php?<{$data_name}>=$2&<{$action_name}>=$4&<{$data_id}>=$3 [L,QSA]
+RewriteRule ^(\w+)\?(\w+=\w+)$ <{$xoops_module_path}>/$1/index.php?$2 [L,QSA]</textarea>
+<div id="copyToClipboard" class="clipboard icon" title="Copy To Clipboard"></div>
+</div><{* textarea wrapper *}>
+</div>

@@ -1,0 +1,9 @@
+User-agent: * #Applies to all robots
+User-agent: *
+Allow: /
+Disallow: /admin.php
+Disallow: /userinfo.php
+
+# Reference the absolute URL to your XML sitemap
+# You can reference multiple XML sitemaps
+# Sitemap: https://www.example.com/xml_google.php

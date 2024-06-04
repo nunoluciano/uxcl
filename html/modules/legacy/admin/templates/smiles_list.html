@@ -1,0 +1,156 @@
+<div class="ui-dev-mode"><{$smarty.template}></div>
+
+<nav class="ui-breadcrumbs" aria-label="breadcrumb">
+    <a href="<{$xoops_url}>/admin.php"><{$smarty.const._CPHOME}></a>
+    &raquo;&raquo; <a href="./index.php"><{$smarty.const._MI_LEGACY_NAME}></a>
+    &raquo;&raquo; <span class="page-title" aria-current="page"><a href="./index.php?action=SmilesList"><{$smarty.const._MI_LEGACY_MENU_SMILES_MANAGE}></a></span>
+</nav>
+
+<{include file="./components/smilies-overview.html"}>
+
+<h3><{$smarty.const._MI_LEGACY_MENU_SMILES_MANAGE}></h3>
+
+
+<div class="tips">
+    <{$smarty.const._AD_LEGACY_TIPS_SMILES}>
+</div>
+
+
+<{if $actionForm->hasError()}>
+<div class="error">
+    <ul>
+        <{foreach item=message from=$actionForm->getErrorMessages()}>
+        <li><{$message|xoops_escape}></li>
+        <{/foreach}>
+    </ul>
+</div>
+<{/if}>
+
+
+<{* ////— ACTION-CONTROL —\\\\ *}>
+<section data-layout="rows center-justify md-column" class="action-control">
+    <div>
+        <a class="button" href="index.php?action=SmilesEdit"><i class="i-add"></i><{$smarty.const._AD_LEGACY_LANG_SMILES_NEW}></a>
+        <a class="button" href="index.php?action=SmilesUpload">
+            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M3 21V5.8L5.3 3h13.4L21 5.8V21ZM5.4 6h13.2l-.85-1H6.25ZM11 17h2v-4.2l1.6 1.6L16 13l-4-4l-4 4l1.4 1.4l1.6-1.6Z"/></svg>
+            <{$smarty.const._AD_LEGACY_LANG_SMILES_UPLOAD}></a>
+    </div>
+    <div class="control-view">
+
+        <{* ////— DROPDOWN SORT —\\\\ *}>
+        <div class="dropdown button-icon" id="filter-sort">
+            <a href="#" class="dropdown-toggle button" aria-label="filter sort">
+                <img class="svg" src="<{'icons/icon-list-order.svg'|theme}>" width="1em" height="1em" alt="options">
+            </a>
+            <div class="dropdown-content drop-top">
+                <div data-layout="row center-justify inline">
+                    <h6><{$smarty.const._AD_LEGACY_LANG_ID}></h6>
+                    <div>
+                        <a class="btn" href="<{$pageNavi->renderUrlForSort()}>&amp;sort=<{$smarty.const.SMILES_SORT_KEY_ID}>" aria-label="<{$smarty.const._ASCENDING}>">&uarr;</a>
+                        <a class="btn" href="<{$pageNavi->renderUrlForSort()}>&amp;sort=-<{$smarty.const.SMILES_SORT_KEY_ID}>" aria-label="<{$smarty.const._DESCENDING}>">&darr;</a>
+                    </div>
+                </div>
+                <div data-layout="row center-justify inline">
+                    <h6><{$smarty.const._MD_LEGACY_LANG_CODE}></h6>
+                    <div>
+                        <a class="btn" href="<{$pageNavi->renderUrlForSort()}>&amp;sort=<{$smarty.const.SMILES_SORT_KEY_CODE}>" aria-label="<{$smarty.const._ASCENDING}>">&uarr;</a>
+                        <a class="btn" href="<{$pageNavi->renderUrlForSort()}>&amp;sort=-<{$smarty.const.SMILES_SORT_KEY_CODE}>" aria-label="<{$smarty.const._DESCENDING}>">&darr;
+                        </a>
+                    </div>
+                </div>
+                <div data-layout="row center-justify">
+                    <h6><{$smarty.const._MD_LEGACY_LANG_EMOTION}></h6>
+                    <div>
+                        <a class="btn" href="<{$pageNavi->renderUrlForSort()}>&amp;sort=<{$smarty.const.SMILES_SORT_KEY_EMOTION}>" aria-label="<{$smarty.const._ASCENDING}>">&uarr;</a>
+                        <a class="btn" href="<{$pageNavi->renderUrlForSort()}>&amp;sort=-<{$smarty.const.SMILES_SORT_KEY_EMOTION}>" aria-label="<{$smarty.const._DESCENDING}>">&darr;</a>
+                    </div>
+                </div>
+                <div data-layout="row center-justify">
+                    <h6><{$smarty.const._AD_LEGACY_LANG_DISPLAY}></h6>
+                    <div>
+                        <a class="btn" href="<{$pageNavi->renderUrlForSort()}>&amp;sort=<{$smarty.const.SMILES_SORT_KEY_DISPLAY}>" aria-label="<{$smarty.const._ASCENDING}>">&uarr;</a>
+                        <a class="btn" href="<{$pageNavi->renderUrlForSort()}>&amp;sort=-<{$smarty.const.SMILES_SORT_KEY_DISPLAY}>" aria-label="<{$smarty.const._DESCENDING}>">&darr;</a>
+                    </div>
+                </div>
+            </div><{* ----- /Dropdown-content *}>
+        </div><{* ----- /Dropdown *}>
+
+        <{* ////— DROPDOWN BLOCK SEARCH —\\\\ *}>
+        <div class="dropdown button-icon" id="drop-search">
+            <a href="#" class="dropdown-toggle button" aria-label="search">
+                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path d="M19.31 18.9l3.08 3.1L21 23.39l-3.12-3.07c-.69.43-1.51.68-2.38.68c-2.5 0-4.5-2-4.5-4.5s2-4.5 4.5-4.5s4.5 2 4.5 4.5c0 .88-.25 1.71-.69 2.4m-3.81.1a2.5 2.5 0 0 0 0-5a2.5 2.5 0 0 0 0 5M21 4v2H3V4h18M3 16v-2h6v2H3m0-5V9h18v2h-2.03c-1.01-.63-2.2-1-3.47-1s-2.46.37-3.47 1H3z" fill="currentColor"/></svg>
+            </a>
+            <div class="dropdown-content drop-top">
+                <{include file="./components/smilies-search.html"}>
+            </div><{* ----- /Dropdown-content *}>
+        </div><{* ----- /Dropdown *}>
+        <button class="help-admin button-icon" type='button' data-module='legacy' data-help-article='#help-smilies' aria-label="<{$smarty.const._HELP}>"><b>?</b></button>
+    </div>
+
+</section>
+<{* -----/ CONTROL-ACTION *}>
+
+
+<form name="smilesform" method="post" action="./index.php?action=SmilesList">
+    <{xoops_token form=$actionForm}>
+
+<table class="outer">
+   <thead>
+    <tr>
+        <th><{$smarty.const._AD_LEGACY_LANG_ID}></th>
+        <th><{$smarty.const._MD_LEGACY_LANG_CODE}></th>
+        <th><{$smarty.const._AD_LEGACY_LANG_SMILE_URL}></th>
+        <th><{$smarty.const._MD_LEGACY_LANG_EMOTION}></th>
+        <th style="text-align: center"><{$smarty.const._AD_LEGACY_LANG_DISPLAY}></th>
+        <th style="text-align: center"><{$smarty.const._DELETE}><br>
+            <input name="allbox" id="allbox"
+                   onclick="with(document.smilesform){for(i=0;i<length;i++){if(elements[i].type=='checkbox'&&elements[i].disabled==false&&elements[i].name.indexOf('delete')>=0){elements[i].checked=this.checked;}}}"
+                   type="checkbox" value="Check All">
+        </th>
+        <th style="text-align: center"><{$smarty.const._AD_LEGACY_LANG_CONTROL}></th>
+    </tr>
+    </thead>
+    <tbody>
+    <{foreach item=obj from=$objects}>
+        <{if $obj->get('display') == 1}>
+        <tr class="active">
+            <{else}>
+        <tr class="inactive">
+        <{/if}>
+            <td class="list_id"><{$obj->getShow('id')}></td>
+            <td class="list_name">
+                <input type="text" size="6" name="code[<{$obj->getShow('id')}>]" value="<{$obj->getShow('code')}>">
+            </td>
+            <td class="list-image">
+                <img src="<{$smarty.const.XOOPS_UPLOAD_URL}>/<{$obj->getShow('smile_url')}>" alt="<{$obj->getShow('emotion')}>" aria-label="<{$obj->getShow('emotion')}>">
+            </td>
+            <td class="list_text">
+                <input type="text" size="20" name="emotion[<{$obj->getShow('id')}>]" value="<{$obj->getShow('emotion')}>">
+            </td>
+            <td class="list_select">
+                <input type="checkbox" name="display[<{$obj->getShow('id')}>]" value="1" <{if $obj->getShow('display')}>checked="checked"<{/if}>>
+            </td>
+            <td class="list_select">
+                <input type="checkbox" name="delete[<{$obj->getShow('id')}>]" value="1">
+            </td>
+            <td class="list_control">
+                <a class="action-edit" href="./index.php?action=SmilesEdit&amp;id=<{$obj->getShow('id')}>" aria-label="<{$smarty.const._EDIT}>">
+                    <img class="svg" src="<{'icons/icon-edit.svg'|theme}>" width="1em" height="1em" role="img" alt="<{$smarty.const._EDIT}>">
+                </a>
+                <a class="action-delete" href="./index.php?action=SmilesDelete&amp;id=<{$obj->getShow('id')}>" aria-label="<{$smarty.const._DELETE}>">
+                    <img class="svg" src="<{'icons/icon-delete.svg'|theme}>" width="1em" height="1em" role="img" alt="<{$smarty.const._DELETE}>">
+                </a>
+            </td>
+        </tr>
+   <{/foreach}>
+   </tbody>
+   <tfoot>
+    <tr>
+        <td colspan="6">
+            <input class="button action-submit"  type="submit" value="<{$smarty.const._SUBMIT}>">
+        </td>
+        <td><{include file="./components/pagenavi.html"}></td>
+    </tr>
+    </tfoot>
+</table>
+</form>

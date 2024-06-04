@@ -12,7 +12,7 @@
  * Type:     modifier<br>
  * Name:     count_words<br>
  * Purpose:  count the number of words in a text
- * @link http://smarty.php.net/manual/en/language.modifier.count.words.php
+ * @link https://smarty.php.net/manual/en/language.modifier.count.words.php
  *          count_words (Smarty online manual)
  * @author   Monte Ohrt <monte at ohrt dot com>
  * @param string
@@ -25,7 +25,7 @@ function smarty_modifier_count_words($string)
     // count matches that contain alphanumerics
     $word_count = preg_grep('/[a-zA-Z0-9\\x80-\\xff]/', $split_array);
 
-    return count($word_count);
+    return is_countable($word_count) ? count($word_count) : 0;
 }
 
 /* vim: set expandtab: */

@@ -1,0 +1,14 @@
+<div class="ui-dev-mode"><{$smarty.template}></div>
+
+<nav class="ui-breadcrumbs" aria-label="breadcrumb">
+    <a href="<{$xoops_url}>/admin.php"><{$smarty.const._CPHOME}></a>
+    &raquo;&raquo; <a href="<{$module->getAdminIndex()|xoops_escape:link}>"><{$module->mXoopsModule->getShow('name')}></a>
+    &raquo;&raquo; <span class="page-title" aria-current="page">
+        <a href="index.php?action=Help&dirname=<{$module->mXoopsModule->getShow('dirname')}>"><{$smarty.const._HELP}></a></span>
+</nav>
+
+<h2><a href="index.php?action=Help&dirname=<{$module->mXoopsModule->getShow('dirname')}>"><{$module->mXoopsModule->getShow('name')}></a> »
+    <{$smarty.const._HELP}>
+</h2>
+
+<div class="help"><{$contents}></div>

@@ -1,342 +1,562 @@
-<div class="pico_container" id="<{$mydirname}>_container">
+<{* Dev-Mode Toggle *}>
+<{if $xoops_isadmin}><div class="ui-dev-mode"><{$smarty.template}></div><{/if}>
 
 <{include file="db:`$mydirname`_inc_breadcrumbs.html"}>
 
-<h1 class="pico_title"><{$formtitle}>: <{$content.subject}></h1>
+<form name="contentform"
+      id="contentform"
+      action="<{$mod_url}>/index.php?page=<{$page}>&amp;content_id=<{$content.id}>&amp;ret=<{$smarty.get.ret|default:''|escape:'url'}>"
+      method="post"
+      enctype="multipart/form-data">
 
-<{if $preview}>
-	<{foreach from=$preview.errors item="error_message"}><p onmouseover="document.contentform.vpath.focus();document.contentform.vpath.style.backgroundColor='#FFFFCC';"><em class="pico_notice"><{$error_message}></em></p><{/foreach}>
-	<h2 class="pico_title"><{$smarty.const._PREVIEW}></h2>
-	<div class="pico_body pico_preview" id="<{$mydirname}>_body">
-	<{$preview.body}>
-	</div>
-<{/if}>
+    <{$gticket_hidden}>
 
-<form name="contentform" id="contentform" action="<{$mod_url}>/index.php?page=<{$page}>&amp;content_id=<{$content.id}>&amp;ret=<{$smarty.get.ret|escape:"url"}>" method="post" onsubmit="return xoopsFormValidate_contentform();" enctype="multipart/form-data">
-	<{$gticket_hidden}>
-	<input type="hidden" name="content_id" value="<{$content.id}>" />
-	<input type="hidden" name="body_editor" id="body_editor" value="" />
+    <input type="hidden" name="content_id" value="<{$content.id}>">
+    <input type="hidden" name="body_editor" id="body_editor" value="">
 
-	<table class="outer pico_form_table">
+<article class="pico_container" id="<{$mydirname}>_container">
 
-		<!-- category -->
-		<tr valign="top" align="left">
-			<th class="head"><label for="cat_id"><{$smarty.const._MD_PICO_CATEGORY}></label></th>
-			<td class="even">
-				<select name="cat_id" id="cat_id">
-					<{html_options options=$categories_can_post selected=$category.id}>
-				</select>
-			</td>
-		</tr>
+	<header>
+        <h2><{$formtitle}> <{$content.subject}></h2>
 
-		<!-- vpath -->
-		<{if $mod_config.use_wraps_mode || strstr($content.filters,"wraps")}>
-		<tr valign="top" align="left">
-			<th class="head"><label for="vpath"><{$smarty.const._MD_PICO_TH_VIRTUALPATH}></label></th>
-			<td class="even">
-				<input type="text" name="vpath" id="vpath" size="70" maxlength="255" value="<{$content.vpath}>" class="pico_ascii_only" />
-				<{if $xoops_isadmin}>
-					<br />
-					<select name="wraps_target" onchange="xoopsGetElementById('vpath').value=this.value;">
-						<{html_options options=$content.wraps_files selected=$content.vpath}>
-					</select>
-				<{/if}>
-			</td>
-		</tr>
-		<{/if}>
-
-		<!-- subject -->
-		<tr valign="top" align="left">
-			<th class="head"><label for="subject"><{$smarty.const._MD_PICO_TH_SUBJECT}></label></th>
-			<td class="even">
-				<input type="text" name="subject" id="subject" size="80" maxlength="255" value="<{$content.subject}>" />
-			</td>
-		</tr>
-
-<{*
-		<!-- extra fields sample (TEXTBOX) -->
-		<tr valign="top" align="left">
-			<th class="head"><label for="pronunciation">pronunciation</label></th>
-			<td class="even">
-				<input type="text" name="ef_pronunciation" id="pronunciation" size="80" maxlength="255" value="<{$content.ef.pronunciation|escape}>" />
-			</td>
-		</tr>
-
-		<!-- extra fields sample (RADIO) -->
-		<tr valign="top" align="left">
-			<th class="head">gender</th>
-			<td class="even">
-				<input type="radio" name="ef_gender" id="gender_male" value="1"<{if $content.ef.gender == 1}> checked="checked"<{/if}> /> <label for="gender_male">male</label>
-				<input type="radio" name="ef_gender" id="gender_female" value="2"<{if $content.ef.gender == 2}> checked="checked"<{/if}> /> <label for="gender_female">female</label>
-			</td>
-		</tr>
-
-		<!-- extra fields sample (SELECT) -->
-		<{assign var="countries" value=","|explode:"---,USA,UK,France,Japan"}>
-		<tr valign="top" align="left">
-			<th class="head">country</th>
-			<td class="even">
-				<select id="address1" name="ef_address1">
-					<{html_options values=$countries output=$countries selected=$content.ef.address1}>
-				</select>
-			</td>
-		</tr>
-
-		<!-- extra images sample -->
-		<tr valign="top" align="left">
-			<th class="head">myphoto</th>
-			<td class="even">
-				<input type="file" name="ei_myphoto" />
-				<input type="hidden" name="ef_myphoto" value="<{$content.ef.myphoto|escape}>" />
-				<{if $content.ef.myphoto}>
-					<a href="<{$xoops_url}>/<{$mod_config.extra_images_dir}>/myphoto_0_<{$content.ef.myphoto|escape}>"><img src="<{$xoops_url}>/<{$mod_config.extra_images_dir}>/myphoto_1_<{$content.ef.myphoto|escape}>" /></a>
-				<{/if}>
-			</td>
-		</tr>
-*}>
-
-		<!-- subject reference for a waiting content -->
-		<{if $content.subject_waiting && $page != 'makecontent'}>
-		<tr valign="top" align="left">
-			<th class="head pico_waiting"><{$smarty.const._MD_PICO_TH_SUBJECT_WAITING}></th>
-			<td class="even pico_waiting"><{$content.subject_waiting}></td>
-		</tr>
-		<{/if}>
-
-		<{if $mod_config.allow_each_htmlheader || $content.htmlheader}>
-			<!-- html header -->
-			<tr valign="top" align="left">
-				<th class="head"><label for="htmlheader"><{$smarty.const._MD_PICO_TH_HTMLHEADER}></label></th>
-				<td class="even">
-					<input type="checkbox" id="htmlheader_onoff" onclick="if(this.checked){xoopsGetElementById('htmlheader').style.display='block';}else{xoopsGetElementById('htmlheader').style.display='none';};"  <{if $content.htmlheader}>checked="checked"<{/if}> /><label for="htmlheader_onoff"><{$smarty.const._MD_PICO_LABEL_HTMLHEADERONOFF}></label>
-					<{if ! $mod_config.allow_each_htmlheader}>
-						<{$smarty.const._MD_PICO_LABEL_HTMLHEADERCONFIGALERT}>
-					<{/if}>
-					<br />
-					<textarea name="htmlheader" id="htmlheader" style="display:<{if $content.htmlheader}>block<{else}>none<{/if}>;width:480px;height:120px;"><{$content.htmlheader}></textarea>
-				</td>
-			</tr>
-	
-			<!-- html header reference for a waiting content -->
-			<{if $content.htmlheader_waiting && $page != 'makecontent'}>
-			<tr valign="top" align="left">
-				<th class="head pico_waiting"><{$smarty.const._MD_PICO_TH_HTMLHEADER_WAITING}></th>
-				<td class="even pico_waiting"><{$content.htmlheader_waiting|nl2br}></td>
-			</tr>
-			<{/if}>
-		<{/if}>
-
-<!-- body -->
-<tr valign="top" align="<{$smarty.const._ALIGN_START}>">
-    <th class="head"><label for="body"><{$smarty.const._MD_PICO_TH_BODY}></label><{if $mod_config.body_editor !=
-        "common_fckeditor"}><input type="submit" class="formButton" name="contentman_preview"
-                                   id="contentman_swith_to_fckeditor" value="fckeditor"
-                                   onclick="xoopsGetElementById('body_editor').value='common_fckeditor'"/><{/if}>
-    </th>
-    <td class="even">
-        <{if $mod_config.body_editor=="xoopsdhtml"}>
-        <input type="checkbox" id="body_bbcode_onoff" onclick="if(this.checked){xoopsGetElementById('body_bbcode_buttons_pre').style.display='block';xoopsGetElementById('body_bbcode_buttons_post').style.display='block'}else{xoopsGetElementById('body_bbcode_buttons_pre').style.display='none';xoopsGetElementById('body_bbcode_buttons_post').style.display='none'};" /><label for="body_bbcode_onoff"><{$smarty.const._MD_PICO_LABEL_INPUTHELPER}></label>
-        <br />
-        <{xoopsdhtmltarea name="body" cols="60" rows="15" value=$content.body pre_style="display:none;" post_style="display:none;"}>
-        <{else}>
-        <{xoops_dhtmltarea cols=74 rows=15 type=text name="body" id="body" value=$body_wysiwyg editor="html"}><br/>
+        <{if !$content.approval}>
+        <strong class="badge warning">
+            <{$smarty.const._MD_PICO_WAITINGAPPROVAL}>
+        </strong>
         <{/if}>
-    </td>
-</tr>
 
-		<!-- body reference for a waiting content -->
-		<{if $content.body_waiting && $page != 'makecontent'}>
-		<tr valign="top" align="left">
-			<th class="head pico_waiting"><{$smarty.const._MD_PICO_TH_BODY_WAITING}></th>
-			<td class="even pico_waiting"><{$content.body_waiting|nl2br}></td>
-		</tr>
+        <{if !$content.visible}>
+        <strong class="badge warning">
+            <img class="svg view-hide" src="<{$xoops_url}>/images/icons/view-hide.svg" width="1em" height="1em" alt="invisible">
+            <{$smarty.const._MD_PICO_INVISIBLE}>
+        </strong>
+        <{/if}>
+
+        <{if $content.created_time >= time()}>
+        <strong class="badge warning">
+            <{$smarty.const._MD_PICO_WAITINGRELEASE}>
+        </strong>
+        <{/if}>
+
+        <{if $content.expiring_time < time()}>
+        <strong class="badge warning">
+            <{$smarty.const._MD_PICO_EXPIRED}>
+        </strong>
+        <{/if}>
+
+	</header>
+
+	<{* -------Article subject of waiting content *}>
+		<{if $content.subject_waiting && $page !='makecontent'}>
+		<p>
+			<span class="badge warning"><{$smarty.const._MD_PICO_TH_SUBJECT_WAITING}></span>
+		</p>
+		<div class="waiting-content">
+			<div><{$content.subject_waiting|htmlspecialchars_decode}></div>
+		</div>
+		<{/if}>
+	<{* ------- Article body of waiting content *}>
+		<{if $content.body_waiting && $page !='makecontent'}>
+		<p>
+			<span class="badge warning"><{$smarty.const._MD_PICO_TH_BODY_WAITING}></span>
+		</p>
+		<div class="waiting-content">
+			<div class="pico_waiting"><{$content.body_waiting|htmlspecialchars_decode|nl2br}></div>
+		</div>
 		<{/if}>
 
-		<!-- filters -->
-		<tr valign="top" align="left">
-			<th class="head"><label for="filters"><{$smarty.const._MD_PICO_TH_FILTERS}></label></th>
-			<td class="even">
-				<ul>
-				<{foreach from=$content.filter_infos key="filter_name" item="filter"}>
-					<li title="<{$filter.desc}>"><input type="checkbox" name="filter_enabled_<{$filter_name}>" id="filter_enabled_<{$filter_name}>" value="1" <{if $filter.enabled}>checked="checked"<{/if}> <{if $filter.fixed}>disabled="disabled"<{/if}> /><input type="text" name="filter_weight_<{$filter_name}>" id="filter_weight_<{$filter_name}>" value="<{$filter.weight}>" size="3" class="pico_number_only"  /> <{$filter.title}></li>
-				<{/foreach}>
-				</ul>
-			</td>
-		</tr>
+	<{* ------- subject *}>
+	<label for="subject">
+		<{$smarty.const._MD_PICO_TH_SUBJECT}>
+		<input type="text" name="subject" id="subject" maxlength="191" value="<{$content.subject}>" required>
+	</label>
 
-		<!-- tags -->
-		<tr valign="top" align="left">
-			<th class="head"><label for="tags"><{$smarty.const._MD_PICO_TH_TAGS}></label></th>
-			<td class="even">
-				<input type="text" name="tags" id="tags" size="60" maxlength="255" value="<{$content.tags}>" />
-				<{$smarty.const._MD_PICO_TH_TAGSDSC}>
-			</td>
-		</tr>
+	<{* ------- category *}>
 
-		<!-- weight -->
-		<tr valign="top" align="left">
-			<th class="head"><label for="weight"><{$smarty.const._MD_PICO_TH_WEIGHT}></label></th>
-			<td class="even">
-				<input type="text" name="weight" id="weight" size="5" maxlength="10" value="<{$content.weight}>" class="pico_number_only" />
-			</td>
-		</tr>
+	<label for="cat_id">
+		<{$smarty.const._MD_PICO_CATEGORY}>
+		<select name="cat_id" id="cat_id">
+			<{html_options options=$categories_can_post selected=$category.id}>
+		</select>
+	</label>
 
-		<tr valign="top" align="left">
-			<th class="head">
-				<{$smarty.const._MD_PICO_TH_CONTENTOPTIONS}>
-			</th>
-			
-			<td class="even">
 
-				<!-- visible -->
-				<input type="checkbox" name="visible" id="visible" value="1" <{if $content.visible}>checked="checked"<{/if}> />
-				<label for="visible"><{$smarty.const._MD_PICO_LABEL_VISIBLE}></label>
-				<br />
+	<{* ------- vpath *}>
 
-				<!-- show in navi -->
-				<input type="checkbox" name="show_in_navi" id="show_in_navi" value="1" <{if $content.show_in_navi}>checked="checked"<{/if}> />
-				<label for="show_in_navi"><{$smarty.const._MD_PICO_LABEL_SHOWINNAVI}></label>
-				<br />
+	<{if $mod_config.use_wraps_mode || strstr($content.filters,"wraps")}>
+		<label for="vpath">
+			<{$smarty.const._MD_PICO_TH_VIRTUALPATH}>
+			<input type="text" name="vpath" id="vpath" maxlength="191" value="<{$content.vpath}>" class="pico_ascii_only">
+		</label>
 
-				<!-- show in menu -->
-				<input type="checkbox" name="show_in_menu" id="show_in_menu" value="1" <{if $content.show_in_menu}>checked="checked"<{/if}> />
-				<label for="show_in_menu"><{$smarty.const._MD_PICO_LABEL_SHOWINMENU}></label>
-				<br />
-
-				<!-- allow comment -->
-				<input type="checkbox" name="allow_comment" id="allow_comment" value="1" <{if $content.allow_comment}>checked="checked"<{/if}> />
-				<label for="allow_comment"><{$smarty.const._MD_PICO_LABEL_ALLOWCOMMENT}></label>
-				<br />
-
-				<!-- use body cache -->
-				<input type="checkbox" name="use_cache" id="use_cache" value="1" <{if $content.use_cache}>checked="checked"<{/if}> />
-				<label for="use_cache"><{$smarty.const._MD_PICO_LABEL_USECACHE}></label>
-				<br />
-				<{$smarty.const._MD_PICO_NOTE_USECACHEDSC}>
-				<br />
-
-				<{if $category.isadminormod}>
-				<!-- locked -->
-				<input type="checkbox" name="locked" id="locked" value="1" <{if $content.locked}>checked="checked"<{/if}> />
-				<label for="locked"><{$smarty.const._MD_PICO_LABEL_LOCKED}></label>
-				<br />
-				<{/if}>
-
-			</td>
-		</tr>
-
-		<tr valign="top" align="left">
-			<th class="head"><{$smarty.const._MD_PICO_CREATED}></th>
-			<td class="even">
-				<{$content_base.poster_uname}>(<{$content_base.poster_uid}>)
-				<{if $category.isadminormod && $page == 'contentmanager'}>
-					<input type="text" name="poster_uid" id="poster_uid" size="4" value="<{$content.poster_uid}>" />
-				<{/if}>
-				<{$content_base.created_time_formatted}>
-				<{if $category.isadminormod}>
-					<{if $content.specify_created_time}>
-						<{assign var="specify_created_time_checked" value="checked='checked'"}>
-					<{else}>
-						<{assign var="created_time_style" value="display:none;"}>
-					<{/if}>
-					<input type="checkbox" name="specify_created_time" id="specify_created_time" value="1" onclick="if(this.checked){xoopsGetElementById('created_time').style.display='inline';}else{xoopsGetElementById('created_time').style.display='none'}" <{$specify_created_time_checked}> /><label for="specify_created_time" ><{$smarty.const._MD_PICO_LABEL_SPECIFY_DATETIME}></label>
-					<input type="text" name="created_time" id="created_time" size="24" value="<{$content.created_time_formatted|escape}>" style="<{$created_time_style}>" />
-				<{/if}>
-			</td>
-		</tr>
-
-		<tr valign="top" align="left">
-			<th class="head"><{$smarty.const._MD_PICO_MODIFIED}></th>
-			<td class="even">
-				<{$content_base.modifier_uname}>(<{$content_base.modifier_uid}>)
-				<{if $category.isadminormod && $page == 'contentmanager'}>
-					<input type="text" name="modifier_uid" id="modifier_uid" size="4" value="<{$content.modifier_uid}>" />
-				<{/if}>
-				<{$content_base.modified_time_formatted}>
-				<{if $category.isadminormod}>
-					<{if $content.specify_modified_time}>
-						<{assign var="specify_modified_time_checked" value="checked='checked'"}>
-					<{else}>
-						<{assign var="modified_time_style" value="display:none;"}>
-					<{/if}>
-					<input type="checkbox" name="specify_modified_time" id="specify_modified_time" value="1" onclick="if(this.checked){xoopsGetElementById('modified_time').style.display='inline';}else{xoopsGetElementById('modified_time').style.display='none'}" <{$specify_modified_time_checked}> /><label for="specify_modified_time" ><{$smarty.const._MD_PICO_LABEL_SPECIFY_DATETIME}></label>
-					<input type="text" name="modified_time" id="modified_time" size="24" value="<{$content.modified_time_formatted|escape}>" style="<{$modified_time_style}> " />
-				<{/if}>
-			</td>
-		</tr>
-
-		<{if $category.isadminormod}>
-		<tr valign="top" align="left">
-			<th class="head"><{$smarty.const._MD_PICO_EXPIRING}></th>
-			<td class="even">
-				<{$content_base.expiring_time_formatted}>
-					<{if $content.specify_expiring_time}>
-						<{assign var="specify_expiring_time_checked" value="checked='checked'"}>
-					<{else}>
-						<{assign var="expiring_time_style" value="display:none;"}>
-					<{/if}>
-					<input type="checkbox" name="specify_expiring_time" id="specify_expiring_time" value="1" onclick="if(this.checked){xoopsGetElementById('expiring_time').style.display='inline';}else{xoopsGetElementById('expiring_time').style.display='none'}" <{$specify_expiring_time_checked}> /><label for="specify_expiring_time" ><{$smarty.const._MD_PICO_LABEL_SPECIFY_DATETIME}></label>
-					<input type="text" name="expiring_time" id="expiring_time" size="24" value="<{$content.expiring_time_formatted|escape}>" style="<{$expiring_time_style}> " />
-			</td>
-		</tr>
+		<{if $xoops_isadmin}>
+        <label for="wraps_target">
+			<select id="wraps_target" onchange="document.getElementById('vpath').value=this.value;">
+				<{html_options options=$content.wraps_files selected=$content.vpath}>
+			</select>
+		</label>
 		<{/if}>
+	<{/if}>
 
-	</table>
+	<{* ------- image upload *}>
+	<label for="ei_image">
+		Image 
+		<input type="file" id="ei_image" name="ei_image" accept="image/gif, image/jpg, image/jpeg, image/png" />
+		<input type="hidden" name="ef_image" value="<{$content.ef.image|default:''|escape}>">
+		<{if (empty($content.ef.image))}>
+		<small id="email-helper"><b class="badge">.gif</b> <b class="badge">.jpg</b> <b class="badge">.jpeg</b> <b class="badge">.jfif</b> <b class="badge">.pjpeg</b> <b class="badge">.pjp</b> <b class="badge">.png</b></small>
+		<{else}>
+		<a href="<{$xoops_url}>/<{$mod_config.extra_images_dir}>/image_0_<{$content.ef.image|escape}>">
+			<img src="<{$xoops_url}>/<{$mod_config.extra_images_dir}>/image_1_<{$content.ef.image|escape|default:''}>" 
+			width="50%" 
+			height="auto" 
+			style="aspect-ratio: 1/0.5;"
+			title="aspect-ratio: 1/0.5">
+		</a>
+		<{/if}>
+	</label>
 
-	<p class="pico_submit">
-		<input type="submit" class="formButton" name="contentman_preview"  id="contentman_preview" value="<{$smarty.const._PREVIEW}>" />
-		<input type="submit" class="formButton" name="contentman_post"  id="contentman_post" value="<{$smarty.const._MD_PICO_BTN_SUBMITEDITING}>" />
-		<{if ! $content.approval && $category.isadminormod && $page != 'makecontent'}>
-			<input type="submit" name="contentman_copyfromwaiting" value="<{$smarty.const._MD_PICO_BTN_COPYFROMWAITING}>" onclick="return confirm('<{$smarty.const._MD_PICO_MSG_CONFIRMCOPYFROMWAITING}>')" />
-		<{elseif $page == 'contentmanager'}>
-			<input type="submit" class="formButton" name="contentman_post"  id="contentman_saveas" value="<{$smarty.const._MD_PICO_BTN_SUBMITSAVEAS}>" onclick="document.contentform.action='<{$mod_url}>/index.php?page=makecontent&amp;content_id=0';return confirm('<{$smarty.const._MD_PICO_MSG_CONFIRMSAVEASCONTENT}>');" />
-		<{/if}>
-		<{if $page == 'contentmanager' && $category.can_delete}>
-			<input type="submit" name="contentman_delete" value="<{$smarty.const._DELETE}>" onclick="return confirm('<{$smarty.const._MD_PICO_MSG_CONFIRMDELETECONTENT}>')" />
-		<{/if}>
+
+<{* ------- extra fields sample (TEXTBOX) -------
+<div>
+
+	<label for="pronunciation">
+        Pronunciation
+	    <input type="text" name="ef_pronunciation" id="pronunciation" size="80" maxlength="191" value="<{$content.ef.pronunciation|escape}>">
+    </label>
+	<!-- extra fields sample (RADIO) -->
+	<p>gender</p>
+	<p>
+		<input type="radio" name="ef_gender" id="gender_male" value="1" <{if $content.ef.gender == 1}>checked="checked"<{/if}>>
+		<label for="gender_male">male</label>
+		<input type="radio" name="ef_gender" id="gender_female" value="2" <{if $content.ef.gender == 2}>checked="checked"<{/if}>>
+		<label for="gender_female">female</label>
 	</p>
-</form>
 
-<!-- Start Form Vaidation JavaScript //-->
-<script type="text/javascript">
-    <!--//
-    function xoopsFormValidate_contentform() {
-        myform = window.document.contentform;
-        if (myform.subject.value == "") {
-            window.alert("<{$smarty.const._MD_PICO_TH_SUBJECT|string_format:$smarty.const._FORM_ENTER}>");
-            myform.subject.focus();
-            myform.subject.style.backgroundColor = '#FFFFCC';
-            return false;
-        }
-        return true;
-    }
-    //-->
-</script>
-<!-- End Form Vaidation JavaScript //-->
+	<!-- extra fields sample (SELECT) -->
+	<{assign var="countries" value=","|explode:"---,USA,UK,France,Japan"}>
 
-<{if $page != 'makecontent'}>
+	<label for="address1">
+        country
+		<select id="address1" name="ef_address1">
+			<{html_options values=$countries output=$countries selected=$content.ef.address1}>
+		</select>
+	</label>
 
-<h2 class="pico_title"><{$smarty.const._MD_PICO_HISTORY}></h2>
-<ul class="pico_content_history_list">
-    <{foreach from=$content_histories item="history"}>
-    <li>
-        <{$history.modified_time_formatted}>
-        -
-        <{$history.modifier_uname}>
-        (<{$history.body_size|number_format}><{$smarty.const._MD_PICO_BYTE}>)
-        <a href="<{$mod_url}>/index.php?page=viewhistory&amp;content_history_id=<{$history.id}>"><{$smarty.const._MD_PICO_REFERIT}></a>
-        -
-        <a href="<{$mod_url}>/index.php?page=downloadhistory&amp;content_history_id=<{$history.id}>"><{$smarty.const._MD_PICO_DOWNLOADIT}></a>
-        -
-        <a href="<{$mod_url}>/index.php?page=diffhistory&amp;older_history_id=<{$history.id}>&amp;newer_history_id=0"><{$smarty.const._MD_PICO_DIFF2NOW}></a>
-        <{if $history.prev_id}>
-        -
-        <a href="<{$mod_url}>/index.php?page=diffhistory&amp;older_history_id=<{$history.prev_id}>&amp;newer_history_id=<{$history.id}>"><{$smarty.const._MD_PICO_DIFFFROMPREV}></a>
-        <{/if}>
-    </li>
-    <{/foreach}>
-</ul>
-
-<{/if}>
+	<!-- extra images sample -->
+	<label for="ei_myphoto">
+        My photo
+		<input type="file" id="ei_myphoto" name="ei_myphoto">
+		<input type="hidden" name="ef_myphoto" value="<{$content.ef.myphoto|escape}>">
+		<{if isset($content.ef.myphoto)}>
+			<a href="<{$xoops_url}>/<{$mod_config.extra_images_dir}>/myphoto_0_<{$content.ef.myphoto|escape}>">
+				<img src="<{$xoops_url}>/<{$mod_config.extra_images_dir}>/myphoto_1_<{$content.ef.myphoto|escape}>"></a>
+		<{/if}>
+    </label>
 
 </div>
+------- extra fields ------- *}>
+
+
+	<{* ------- html header *}>
+	<{if $mod_config.allow_each_htmlheader || $content.htmlheader}>
+
+		<label for="htmlheader">
+			<{$smarty.const._MD_PICO_TH_HTMLHEADER}>
+		</label>
+
+		<label for="htmlheader_onoff">
+			<input type="checkbox" id="htmlheader_onoff" onclick="if(this.checked){
+					document.getElementById('htmlheader').style.display='block';
+				   }else{
+					document.getElementById('htmlheader').style.display='none';};"  <{if $content.htmlheader}>checked="checked"<{/if}>>
+			<{$smarty.const._MD_PICO_LABEL_HTMLHEADERONOFF}></label>
+
+			<{if ! $mod_config.allow_each_htmlheader}>
+				<{$smarty.const._MD_PICO_LABEL_HTMLHEADERCONFIGALERT}>
+			<{/if}>
+		<br>
+		<textarea name="htmlheader" id="htmlheader" style="display:<{if $content.htmlheader}>block<{else}>none<{/if}>;width:100%;height:120px;"><{$content.htmlheader}></textarea>
+
+		<{* ------- html header reference for waiting content *}>
+		<{if $content.htmlheader_waiting && $page !='makecontent'}>
+		<p class="head pico_waiting"><{$smarty.const._MD_PICO_TH_HTMLHEADER_WAITING}></p>
+		<div class="even pico_waiting"><{$content.htmlheader_waiting|nl2br}></div>
+		<{/if}>
+
+	<{/if}>
+
+
+	<{* ------- BODY WYSIWYG *}>
+	<{if $smarty.const.LEGACY_BASE_VERSION|version_compare:'2.2':'>='}>
+		<{assign var=xcl22 value=1}>
+	<{/if}>
+
+	<label for="htmlheader"><{$smarty.const._MD_PICO_TH_BODY}></label>
+
+	<{if $body_wysiwyg && !$content.filter_infos.eval.enabled}>
+		<{$body_wysiwyg}>
+	<{else}>
+
+		<{if $xcl22}>
+
+			<{assign var=cssClass value=""}>
+
+			<{if $content.filter_infos._editor_info.editor}>
+				<{if !$content.subject && $content.filter_infos._editor_info.useHtmlAtNew}>
+					<{assign var=editor value=html}>
+				<{else}>
+					<{assign var=editor value=$content.filter_infos._editor_info.editor}>
+				<{/if}>
+				<{if $content.filter_infos._editor_info.cssClass}>
+					<{assign var=cssClass value=" "|cat:$content.filter_infos._editor_info.cssClass}>
+				<{/if}>
+			<{else}>
+				<{if $content.filter_infos.eval.enabled}>
+					<{assign var=editor value=none}>
+				<{elseif !$content.subject || !$content.filter_infos.xcode.enabled}>
+					<{assign var=editor value=html}>
+				<{else}>
+					<{assign var=editor value=bbcode}>
+				<{/if}>
+			<{/if}>
+
+			<{* ---------- CONTENT WAITING else NEW CONTENT *}>
+			<{if $content.body_waiting && $page !='makecontent'}>
+				<{xoops_dhtmltarea class="$editor$cssClass" name=body cols=60 rows=15 value=$content.body_waiting|htmlspecialchars_decode:$smarty.const.ENT_QUOTES editor=$editor}>
+			<{else}>
+				<{xoops_dhtmltarea class="$editor$cssClass" name=body cols=60 rows=15 value=$content.body|htmlspecialchars_decode:$smarty.const.ENT_QUOTES editor=$editor}>
+			<{/if}>
+
+			<{if $legacy_module == 'legacy'}>
+				<{assign var=editor value=bbcode}>
+			<{/if}>
+
+		<{else}>
+		<label for="body_bbcode_onoff">
+				<input type="checkbox" id="body_bbcode_onoff" onclick="if(this.checked){
+						   document.getElementById('body_bbcode_buttons_pre').style.display='block';
+						   document.getElementById('body_bbcode_buttons_post').style.display='block'
+					   }else{
+						document.getElementById('body_bbcode_buttons_pre').style.display='none';
+						document.getElementById('body_bbcode_buttons_post').style.display='none'}">
+			<{$smarty.const._MD_PICO_LABEL_INPUTHELPER}></label>
+
+			<{xoopsdhtmltarea name="body" cols="60" rows="15" value=$content.body pre_style="display:none;" post_style="display:none;"}>
+		<{/if}>
+
+	<{/if}>
+
+	<{* ------- ORDER / WEIGHT *}>
+	<label for="weight">
+		<{$smarty.const._MD_PICO_TH_WEIGHT}>
+		<{* Input number Max100 *}>
+		<input type="number" min="0" max="100" step="1" name="weight" id="weight" value="<{$content.weight}>" class="pico_number_only" title="Max 100">
+	</label>
+
+	<{* ------- TAGS *}>
+	<label for="tags">
+		<{$smarty.const._MD_PICO_TH_TAGS}> <span style="font-size:small;line-height:2;"><{$smarty.const._MD_PICO_TH_TAGSDSC}></span>
+		<input type="text" name="tags" id="tags" size="60" maxlength="191" value="<{$content.tags}>">
+	</label>
+
+	<{* ------- CONTENT OPTIONS *}>
+	<h5>
+		<label for='options'>
+			<input class='switch' role="switch" type='checkbox' id='options' onclick="slideToggle('.content-options', this)" value='0'>
+			<img class="svg tree" src="<{$xoops_url}>/images/icons/view.svg" width="1em" alt="options">
+			<{$smarty.const._MD_PICO_TH_CONTENTOPTIONS}>
+		</label>
+	</h5>
+
+	<div class="content-options" style="display:none;">
+
+		<fieldset>
+			<{* ------- visible *}>
+			<label for="visible">
+				<input type="checkbox" name="visible" id="visible" value="1" <{if $content.visible}>checked="checked"<{/if}>>
+				<{$smarty.const._MD_PICO_LABEL_VISIBLE}>
+			</label>
+
+
+			<{* ------- show in nav *}>
+			<label for="show_in_navi">
+				<input type="checkbox" name="show_in_navi" id="show_in_navi" value="1" <{if $content.show_in_navi}>checked="checked"<{/if}>>
+				<{$smarty.const._MD_PICO_LABEL_SHOWINNAVI}>
+			</label>
+
+
+			<{* ------- show in menu *}>
+			<label for="show_in_menu">
+				<input type="checkbox" name="show_in_menu" id="show_in_menu" value="1" <{if $content.show_in_menu}>checked="checked"<{/if}>>
+				<{$smarty.const._MD_PICO_LABEL_SHOWINMENU}>
+			</label>
+
+
+			<{* ------- allow comment *}>
+			<label for="allow_comment">
+				<input type="checkbox" name="allow_comment" id="allow_comment" value="1" <{if $content.allow_comment}>checked="checked"<{/if}>>
+				<{$smarty.const._MD_PICO_LABEL_ALLOWCOMMENT}>
+			</label>
+
+
+			<{* ------- use body cache *}>
+			<label for="use_cache">
+				<input type="checkbox" name="use_cache" id="use_cache" value="1" <{if $content.use_cache}>checked="checked"<{/if}>>
+				<span><{$smarty.const._MD_PICO_LABEL_USECACHE}> <small><{$smarty.const._MD_PICO_NOTE_USECACHEDSC}></small></span>
+			</label>
+
+			<{* ------- locked *}>
+			<{if $category.isadminormod}>
+			<label for="locked">
+				<input type="checkbox" name="locked" id="locked" value="1" <{if $content.locked}>checked="checked"<{/if}>>
+				<{$smarty.const._MD_PICO_LABEL_LOCKED}>
+			</label>
+			<{/if}>
+
+		</fieldset>
+	</div>
+
+	<{* ------- CONTENT FILTERS - CODE SYNTAX *}>
+    <h5>
+	<label for='filters_onoff'>
+		<input class='switch' role="switch" type='checkbox' id='filters_onoff' onclick="slideToggle('.content-filters', this)" value='0'>
+		<img class="svg tree" src="<{$xoops_url}>/images/icons/code.svg" width="1em" alt="filters">
+		 <{$smarty.const._MD_PICO_TH_FILTERS}></label>
+    </h5>
+
+	<div class="content-filters" style="display:none;">
+		<div class="filter">
+			<label>
+				<span>Code Syntax</span>
+				<span>Order</span>
+			</label>
+			<{foreach from=$content.filter_infos key="filter_name" item="filter"}>
+			<{if isset($filter.title)}>
+			<{if $editor == "html" && !$content.body && $content.filter_infos[$filter_name].disableOnHtml}>
+				<{assign var=check value=0}>
+			<{else}>
+				<{assign var=check value=1}>
+			<{/if}>
+
+			<label title="filter_enabled_<{$filter_name}>">
+				<span>
+					<input type="checkbox" name="filter_enabled_<{$filter_name}>" id="filter_enabled_<{$filter_name}>" value="1" <{if $filter.enabled && $check}>checked="checked"<{/if}> <{if isset($filter.fixed)}>disabled="disabled"<{/if}>>
+					<{$filter.title}> <br><small><{$filter.desc}></small>
+				</span>
+				<span>
+					<input type="number" size="3" min="0" max="100" step="1" name="filter_weight_<{$filter_name}>" id="filter_weight_<{$filter_name}>" value="<{$filter.weight}>" class="pico_number_only" title="Max 100">
+				</span>
+			</label>
+			<{/if}>
+			<{/foreach}>
+		</div>
+	</div>
+
+	<{* ------- CONTENT TIME *}>
+
+	<h5>
+        <label for='time'>
+		<input class='switch' role="switch" type='checkbox' id='time' onclick="slideToggle('.content-time', this)" value='0'>
+		<img class="svg tree" src="<{$xoops_url}>/images/icons/datetime.svg" width="1em" alt="date-time">
+		<{$smarty.const._MD_PICO_LABEL_SPECIFY_DATETIME}>
+	    </label>
+    </h5>
+
+	<div class="content-time" style="display:none;">
+		<{if $category.isadminormod && $page == 'contentmanager'}>
+			<label for="poster_uid">
+				<span><{$smarty.const._MD_PICO_CREATED}>
+				<img src="<{$content_base.poster_uname|xoops_user_avatarize}>" width="16px" style="vertical-align:middle">
+				<{$content_base.poster_uname|@ucfirst}> <span class="badge">uid : <{$content_base.poster_uid}></span>
+				</span>
+				<input type="text" name="poster_uid" id="poster_uid" size="3" value="<{$content.poster_uid}>">
+			</label>
+		<{/if}>
+
+		<{* ------- CONTENT TIME ADMIN *}>
+
+		<{if $category.isadminormod}>
+			<{if isset($content.specify_created_time)}>
+				<{assign var="specify_created_time_checked" value="checked='checked'"}>
+			<{else}>
+				<{assign var="created_time_style" value="display:none;"}>
+			<{/if}>
+			<fieldset>
+			<label for="specify_created_time">
+				<input type="checkbox"
+					   name="specify_created_time"
+					   id="specify_created_time"
+					   value="1"
+					   onclick="if(this.checked){document.getElementById('created_time').style.display='inline';}else{document.getElementById('created_time').style.display='none'}" <{$specify_created_time_checked|default:''}>>
+				<span><{$smarty.const._MD_PICO_LABEL_SPECIFY_DATETIME}> <small><{$content_base.created_time_formatted}></small></span>
+
+			</label>
+			<input type="text"
+				   name="created_time"
+				   id="created_time"
+				   size="24"
+				   value="<{$content.created_time_formatted|escape}>"
+				   style="<{$created_time_style|default:''}>">
+			</fieldset>
+		<{/if}>
+
+		<{* ------- CONTENT TIME MODIFY *}>
+
+		<{if $category.isadminormod && $page == 'contentmanager'}>
+			<label for="modifier_uid">
+				<span><{$smarty.const._MD_PICO_MODIFIED}>
+				<img src="<{$content_base.modifier_uname|xoops_user_avatarize}>" width="16px" data-self="radius-circle" style="vertical-align:middle">
+					<{$content_base.modifier_uname|@ucfirst}> <span class="badge">uid :<{$content_base.modifier_uid}></span></span>
+				<input type="text" name="modifier_uid" id="modifier_uid" size="3" value="<{$content.modifier_uid}>">
+			</label>
+		<{/if}>
+
+		<{if $category.isadminormod}>
+			<{if isset($content.specify_modified_time)}>
+				<{assign var="specify_modified_time_checked" value="checked='checked'"}>
+			<{else}>
+				<{assign var="modified_time_style" value="display:none;"}>
+			<{/if}>
+			<fieldset>
+			<label for="specify_modified_time">
+				<input type="checkbox"
+					   name="specify_modified_time"
+					   id="specify_modified_time"
+					   value="1"
+					   onclick="if(this.checked){document.getElementById('modified_time').style.display='inline';}else{document.getElementById('modified_time').style.display='none'}" <{$specify_modified_time_checked|default:''}>>
+
+				<span><{$smarty.const._MD_PICO_LABEL_SPECIFY_DATETIME}> <small><{$content_base.modified_time_formatted}></small></span>
+            </label>
+			<input type="datetime-local"
+				   name="modified_time"
+				   id="modified_time"
+				   size="24"
+				   value="<{$content.modified_time_formatted|escape}>"
+				   style="<{$modified_time_style|default:''}>">
+			</fieldset>
+		<{/if}>
+
+		<{if $category.isadminormod}>
+		<h5><{$smarty.const._MD_PICO_EXPIRING}></h5>
+			<{if isset($content.specify_expiring_time)}>
+				<{assign var="specify_expiring_time_checked" value="checked='checked'"}>
+			<{else}>
+				<{assign var="expiring_time_style" value="display:none;"}>
+			<{/if}>
+		<label for="specify_expiring_time">
+			<input type="checkbox"
+				   name="specify_expiring_time"
+				   id="specify_expiring_time"
+				   value="1"
+				   onclick="if(this.checked){document.getElementById('expiring_time').style.display='inline';}else{document.getElementById('expiring_time').style.display='none'}" <{$specify_expiring_time_checked|default:''}>>
+
+			 <span><{$smarty.const._MD_PICO_LABEL_SPECIFY_DATETIME}> <small><{$content_base.expiring_time_formatted}></small></span>
+		</label>
+
+			<input type="text"
+			   name="expiring_time"
+			   id="expiring_time" size="24"
+			   value="<{$content.expiring_time_formatted|escape}>"
+			   style="<{$expiring_time_style|default:''}>">
+
+		<{/if}>
+	</div>
+
+
+	<{* ------- CONTENT HISTORY *}>
+	<{if $page !='makecontent'}>
+	<h5>
+		<label for='history'>
+		<input class='switch' role="switch" type='checkbox' id='history' onclick="slideToggle('.content-history', this)" value='0'>
+		<img class="svg tree" src="<{$xoops_url}>/images/icons/history.svg" width="1em" alt="history">
+		<{$smarty.const._MD_PICO_HISTORY}></label>
+	</h5>
+
+	<div class="content-history" data-layout="column" style="display:none;">
+
+		<ul class="content-history-list">
+			<{foreach from=$content_histories item="history"}>
+			<li>
+				<{$history.modified_time_formatted}>
+				-
+				<{$history.modifier_uname}>
+				(<{$history.body_size|number_format}><{$smarty.const._MD_PICO_BYTE}>)
+				<a href="<{$mod_url}>/index.php?page=viewhistory&amp;content_history_id=<{$history.id}>"><{$smarty.const._MD_PICO_REFERIT}></a>
+				-
+				<a href="<{$mod_url}>/index.php?page=downloadhistory&amp;content_history_id=<{$history.id}>"><{$smarty.const._MD_PICO_DOWNLOADIT}></a>
+				-
+				<a href="<{$mod_url}>/index.php?page=diffhistory&amp;older_history_id=<{$history.id}>&amp;newer_history_id=0"><{$smarty.const._MD_PICO_DIFF2NOW}></a>
+				<{if $history.prev_id}>
+				-
+				<a href="<{$mod_url}>/index.php?page=diffhistory&amp;older_history_id=<{$history.prev_id}>&amp;newer_history_id=<{$history.id}>"><{$smarty.const._MD_PICO_DIFFFROMPREV}></a>
+				<{/if}>
+			</li>
+			<{/foreach}>
+		</ul>
+
+	</div>
+
+	<{/if}>
+
+
+<footer>
+	<div class="grid">
+		<{if $page == 'contentmanager' && $category.can_delete}>
+		<button type="submit" aria-busy="false" class="outline delete" name="contentman_delete" value="<{$smarty.const._DELETE}>" onclick="return confirm('<{$smarty.const._MD_PICO_MSG_CONFIRMDELETECONTENT}>')">
+			<img class="svg" src="<{$xoops_url}>/images/icons/delete.svg" width="1em" height="1em" alt="delete"> 
+			<{$smarty.const._DELETE}>
+		</button>
+		<{/if}>
+
+		<button type="submit" aria-busy="false" class="outline" name="contentman_preview" id="contentman_preview" value="<{$smarty.const._PREVIEW}>">
+			<img class="svg" src="<{$xoops_url}>/images/icons/view.svg" width="1em" height="1em" alt="preview"> 
+			<{$smarty.const._PREVIEW}>
+		</button>
+
+		<button type="submit" class="primary" name="contentman_post" id="contentman_post" value="<{$smarty.const._MD_PICO_BTN_SUBMITEDITING}>">
+			<img class="svg" src="<{$xoops_url}>/images/icons/check.svg" width="1em" height="1em" alt="check"> <{$smarty.const._MD_PICO_BTN_SUBMITEDITING}>
+		</button>
+
+		<{if !$content.approval && $category.isadminormod && $page !='makecontent'}>
+			<button type="submit" aria-busy="false" class="primary" name="contentman_copyfromwaiting" value="<{$smarty.const._MD_PICO_BTN_COPYFROMWAITING}>" onclick="return confirm('<{$smarty.const._MD_PICO_MSG_CONFIRMCOPYFROMWAITING}>')">
+			<{$smarty.const._MD_PICO_BTN_COPYFROMWAITING}></button>
+		<{elseif $page == 'contentmanager'}>
+			<button type="submit" aria-busy="false" class="outline save-copy" name="contentman_post" id="contentman_saveas" value="<{$smarty.const._MD_PICO_BTN_SUBMITSAVEAS}>" onclick="document.contentform.action='<{$mod_url}>/index.php?page=makecontent&amp;content_id=0';return confirm('<{$smarty.const._MD_PICO_MSG_CONFIRMSAVEASCONTENT}>');">
+			<{$smarty.const._MD_PICO_BTN_SUBMITSAVEAS}></button>
+		<{/if}>
+	</div>
+</footer>
+</article>
+
+
+<{if isset($preview)}>
+
+<dialog id="preview-content" open>
+    <article>
+        <header>
+            <a title="Cancel" class="close secondary" onclick="javascript:history.go(-1);" title="<{$smarty.const._MD_PICO_LINK_EDITCONTENT}>"></a>
+            <h4><{$smarty.const._PREVIEW}> : <{$preview.subject}></h4>
+        </header>
+        <div>
+			<{foreach from=$preview.errors item="error_message"}>
+			<p onmouseover="document.contentform.vpath.focus();document.contentform.vpath.style.border='#FFFFCC';">
+				<em class="pico_notice"><{$error_message}></em>
+			</p>
+			<{/foreach}>
+		
+            <{$preview.body}>
+        </div>
+        <footer>
+            <div>
+                <a href="#" aria-busy="false" role="button" class="secondary" onclick="javascript:history.go(-1);"><{$smarty.const._MD_PICO_LINK_EDITCONTENT}></a>
+			<{if trim($smarty.capture.controllers)}>
+				<{$smarty.capture.controllers}>
+			<{/if}>
+            </div>
+        </footer>
+    </article>
+</dialog>
+<{/if}>
+
+</form>

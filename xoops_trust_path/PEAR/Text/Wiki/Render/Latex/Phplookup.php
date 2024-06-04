@@ -28,7 +28,7 @@ class Text_Wiki_Render_Latex_Phplookup extends Text_Wiki_Render {
             $target = " target=\"$target\"";
         }
         
-        return "<a$target href=\"http://php.net/$text\">$text</a>";
+        return "<a$target href=\"https://php.net/$text\">$text</a>";
     }
 }
 ?>

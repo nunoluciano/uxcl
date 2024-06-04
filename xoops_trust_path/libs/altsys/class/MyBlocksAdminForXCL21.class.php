@@ -1,52 +1,57 @@
 <?php
-// $Id: MyBlocksAdminForXCL21.class.php ,ver 0.0.7.1 2011/01/27 16:10:00 domifara Exp $
+/**
+ * Altsys library (UI-Components) for D3 modules
+ * Class MyBlocksAdminForXCL21
+ * @package    Altsys
+ * @version    XCL 2.4.0
+ * @author     Other authors Gigamaster, 2020 XCL PHP7
+ * @author     Gijoe (Peak)
+ * @copyright  (c) 2005-2024 Authors
+ * @license    GPL v2.0
+ */
 
-require_once dirname(__FILE__).'/MyBlocksAdmin.class.php' ;
+require_once __DIR__ . '/MyBlocksAdmin.class.php';
 
 class MyBlocksAdminForXCL21 extends MyBlocksAdmin {
 
-
-function MyBlocksAadminForXCL21()
-{
-}
-
-//HACK by domifara for php5.3+
-//function &getInstance()
-public static function &getInstance()
-{
-	static $instance;
-	if (!isset($instance)) {
-		$instance = new MyBlocksAdminForXCL21();
-		$instance->construct() ;
-	}
-	return $instance;
-}
-
-
-// virtual
-// options
-function renderCell4BlockOptions( $block_data )
-{
-	if( $this->target_dirname && substr( $this->target_dirname , 0 , 1 ) != '_' ) {
-		$langman =& D3LanguageManager::getInstance() ;
-		$langman->read( 'admin.php' , $this->target_dirname ) ;
+	public function MyBlocksAadminForXCL21() {
 	}
 
-	$bid = intval( $block_data['bid'] ) ;
+	public static function &getInstance() {
+		static $instance;
+		if ( ! isset( $instance ) ) {
 
-//HACK by domifara
-//	$block = new XoopsBlock( $bid ) ;
-	$handler =& xoops_gethandler('block');
-	$block =& $handler->create(false) ;
-	$block->load($bid) ;
+			$instance = new self();
 
-	$legacy_block =& Legacy_Utils::createBlockProcedure( $block ) ;
-	return $legacy_block->getOptionForm() ;
+			$instance->construct();
+		}
+
+		return $instance;
+	}
+
+	/**
+	 * Virtual options
+	 *
+	 * @param $block_data
+	 *
+	 * @return false|mixed|string|null
+	 */
+	public function renderCell4BlockOptions( $block_data ) {
+		// if ($this->target_dirname && '_' !== substr($this->target_dirname, 0, 1)) {
+		if ( $this->target_dirname && '_' !== $this->target_dirname[0] ) {
+			$langman = D3LanguageManager::getInstance();
+			$langman->read( 'admin.php', $this->target_dirname );
+		}
+
+		$bid = (int) $block_data['bid'];
+
+		$handler =& xoops_gethandler( 'block' );
+		$block   =& $handler->create( false );
+		$block->load( $bid );
+
+		$legacy_block =& Legacy_Utils::createBlockProcedure( $block );
+
+		return $legacy_block->getOptionForm();
+	}
+
 }
-
-
-
-
-}
-
-?>

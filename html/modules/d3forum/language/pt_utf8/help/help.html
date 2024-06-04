@@ -1,0 +1,497 @@
+<div data-layout="row sm-column">
+    <div data-self="size-xxsmall">
+        <nav id="help-menu">
+            <ul data-layout="rows">
+                <li><a href ="#help-forum-overview" class="button">Overview</a>
+                <li><a href ="#help-forum-usage" class="button">Usage</a>
+                <li><a href ="#help-forum-integration" class="button">Comments integration</a>
+                <li><a href ="#help-forum-blocks" class="button">Blocks</a>
+                <li><a href ="#help-forum-permissions" class="button">Permissions</a>
+                <li><a href ="#help-forum-advanced" class="button">Advanced</a>
+                <li><a href ="#help-forum-history" class="button">Edit History</a>
+                <li><a href ="#help-forum-customize" class="button">Customization</a>
+                <li><a href ="#help-forum-preferences" class="button">Preferences</a>
+                <li><a href ="#help-forum-development" class="button">Development</a>
+            </ul>
+        </nav>
+    </div>
+
+<article id="help-module">
+
+
+    <section id="help-forum-overview">
+
+        <h3>D3 Forum</h3>
+
+        <p>D3 Forum is a duplicable module used to create and manage forums, or message boards discussions.
+            This module provides features comparable to popular community forum software.
+            It also provides the comments-integration functionality for D3 modules e.g. Pico.
+
+        <p>Creating discussion forum categories helps managers and users to quickly access the required information.
+            Generally, the structure of a forum covers particular categories. See more about this in documentation section structure.
+
+        <p>Administrators can assign user groups and individual permissions into various categories.
+        Users with appropriate access rights can discuss one specific topic with other members of the platform.
+
+    </section>
+    <section id="help-forum-usage">
+
+        <h3>Usage</h3>
+
+        <p>D3 modules are designed to let you create categories and content on the front-end, while user permissions, customization and module preferences are managed on the back-end.
+
+        <p>First, create a category to organize your forums and help users to quickly join discussions.
+        Next, create a forum Example for structuring forum categories
+
+
+        <h4><i class="i-task"></i> Create a New Category</h4>
+
+        <p>Click "New Category" and fill in the details in the form page.
+
+        <ol>
+            <li>Category title
+            <li>Category description (allows format text with BBCode)
+            <li>Parent category (default top-level category)
+            <li>Category order (weight position, default sorting by category ID)
+            <li>Category options (more about this below in section "Overridable options").
+        </ol>
+
+        <p>When you’ve included all these details, you can simply click "Submit" at the bottom of the form, and your Category will be created.
+
+        <h4><i class="i-task"></i> Create A New Forum</h4>
+
+        <p>Select a category and click "Admin" (or "Action", depending on your theme) and "New Forum"
+
+        <p>Fill in the details for the new forum.
+
+        <ol>
+            <li>Forum title
+            <li>Forum description (allows format text with BBCode)
+            <li>Parent category (default top-level category)
+            <li>Forum order (weight position, default sorting by category ID)
+            <li>Format for comment-integration. Leave blank for a default forum. Modules with comment-integration will set this field automatically.
+            <li>Forum options (more about this below in section "Overridable options").
+            <li>Click "Submit"
+        </ol>
+
+        <div class="tips">Category, subcategories and forums inherit permissions from the nearest parent category, in the absence of individual permissions, from the Top-level category, by default.</div>
+
+        <h4><i class="i-task"></i> Moderation</h4>
+
+        <p>Only administrators can create categories and forums.
+            However, modules based on D3 architecture design you can assign users and roles to moderate and create forums (either individually, or for all categories on your module instance).
+            For example, you may grant users a specific role "moderator" with the ability to create forums.
+
+        <ol>
+            <li>Click the button, or icon "Edit category"</li>
+            <li>Click "Category permissions" to manage users permissions</li>
+        </ol>
+
+        <h4><i class="i-task"></i> Overridable options</h4>
+
+        <p>Categories, subcategories and forums inherit their options from the Top-level category, by default.
+            However, you can customize the default options when creating or editing a category or forum.
+
+        <p>Override preferences by writing a new line for each option.<br>
+            <code>(option name):(option value)</code>
+        <p>Example to show breadcrumbs (1=on, 0=off):<br>
+            <code>show_breadcrumbs:1</code>
+
+        <h4>Overridable options current values</h4>
+
+        <p><b>default_options:smiley,xcode,br,number_entity</b>
+        <p>Default filters for content. Specify filter names separated by comma ","<br>
+            Available options: smiley,xcode,br,number_entity,special_entity,html attachsig,u2t_marked
+        <p><b>allow_html:0</b>
+        <p>Enable HTML (0 = off, 1 = on). Beware of the risks of Script injection attack by malicious users. Allow trusted user groups only.
+        <p><b>allow_textimg:0</b>
+        <p>Enable external images in comments and posts. These images, sometimes called Web Beacons, can be used to track IPs or User-Agents of registered users. External images are not a security threat. However, it is recommended to turn off external images.
+        <p><b>allow_sig:1</b>
+        <p>Enable Signature. Users can add their profile signature in the comments.
+        <p><b>allow_sigimg:0</b>
+        <p>Enable external images in signature. You can turn off automatic loading of external images as an additional privacy protection.
+        <p><b>posts_per_topic:20</b>
+        <p>Set the maximum posts per topic.
+        <p><b>hot_threshold:10</b>
+        <p>Enable Hot Topic Threshold. Set the number of replies that a topic must receive for it to be considered a "hot topic".
+        <p><b>topics_per_page:10</b>
+        <p>Set the maximum topics per page.
+        <p><b>use_vote:1</b>
+        <p>Enable Voting
+        <p><b>use_solved:1</b>
+        <p>Enable Solved
+        <p><b>allow_mark:1</b>
+        <p>Enable Marking
+        <p><b>allow_hideuid:0</b>
+        <p>Allow Users to Post Anonymously. Registered users can check the anonymous option when they write topics and posts.
+        <p><b>viewallbreak:10</b>
+        <p>Topics per page in the view forum.
+        <p><b>selfeditlimit:240</b>
+        <p>Time limit to edit posts. Disable with value set to 0. Default in seconds (4min): 240
+        <p><b>selfdellimit:0</b>
+        <p>Time limit to delete posts. Set the value in seconds. Disable delete with value set to 0.
+        <p><b>css_uri:{mod_url}/index.php?page=main_css</b>
+        <p>CSS file for this module 'main.css'
+        <p><b>images_dir:images</b>
+        <p>Directory for image files. Relative path to module in the public directory e.g. dirname/images. Default value : images
+        <p><b>body_editor:xoopsdhtml</b>
+        <p>WYSIWYG editor will be enabled only for forums allowing HTML.
+        <p><b>anonymous_name:guest</b>
+        <p>Anonymous Name. A pseudonym or alias is a fictitious name that a person or group assumes for a particular purpose, which differs from their original or true name. Default value: guest
+        <p><b>icon_meanings:none|normal|unhappy|happy|lower it|raise it|report|question</b>
+        <p>The alt attribute provides alternative information explaining the meaning of forum icons. Specify each alt separated by pipe "|".
+        <p><b>guest_vote_interval:86400</b>
+        <p>Enable Voting from guests. Allow votes from the same IP with required delay in seconds. Disable with value set to 0. Default value: 86400.
+
+    </section>
+
+    <section id="help-forum-integration">
+
+        <h3>Comments Integration</h3>
+
+        <p>The comments-integration feature of the d3forum module is particularly valuable for involving users in discussion forums.
+            In addition to increasing usability, the integration makes commenting quick and easy.
+
+        <p>This feature allows you to include a quick form and recent comments in any page and any blog.
+        You can customize the design using the Components module or Template Management.
+
+        <p>Before integrating into a module, for example Pico, create a category and a forum to manage module comments.<br>
+        You can then modify the module preferences.
+
+        <h3>Example of forum category structure</h3>
+
+        <div data-layout="row p-6 m-auto">
+            <table class="list_center" style="border-collapse: separate;border-spacing: 4px;padding:8px;">
+                <tbody>
+                <tr>
+                    <th style="width:33%">D3Forum Categories</th><th>Forum</th><th>Module</th>
+                </tr>
+                <tr>
+                    <td rowspan="2" class="bg-indigo">General</td><td class="bg-indigo">Announcements</td><td></td>
+                </tr>
+                <tr>
+                    <td class="bg-indigo">Ideas and suggestions</td><td></td>
+                </tr>
+                <tr class="bg-blue">
+                    <td rowspan="2">Comments</td><td title="Comment-Integration Module's Comments">Pico's Comments</td><td>Pico</td>
+                </tr>
+                <tr class="bg-blue">
+                    <td>Other Module's Comments</td><td>Other Module</td>
+                </tr>
+                <tr>
+                    <td></td><td class="bg-green">Public Forum</td><td></td>
+                </tr>
+                <tr>
+                    <td></td><td class="bg-red">Private Forum</td><td></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h4><i class="i-task"></i> Create a category for "Comments"</h4>
+
+        <ol>
+            <li>Browse to D3forum in your site's front end
+            <li>Click the action "New category"
+            <li>Enter a name e.g. "Comments"
+            <li>Enter a category description
+            <li>Click the button "Submit"
+        </ol>
+
+        <h4><i class="i-task"></i> Create a forum for comment integration</h4>
+        <ol>
+            <li>Browse to your category "Comments"
+            <li>Enter a name< e.g. "Pico's comments"
+            <li>Enter a forum description</li>
+            <li>Select the category : "Comments"</li>
+            <li>Forum weight : you can leave the default value "0"</li>
+            <li>Format for comment-integration : <br>
+                Leave blank, the module's feature comment-integration will set this field automatically.
+            <li>Click the button "Submit"
+        </ol>
+
+        <h4><i class="i-task"></i> Get the Forum ID for comment integration</h4>
+
+        <p>The forum ID's can be found by browsing to the new forum "Pico's comments" URL.
+
+        <p><code>.../modules/d3forum/index.php?forum_id=<b>1</b></code>
+
+        <p>The ID is what comes after forum_id=, so in this case, it is <b>1</b>.
+
+        <h4><i class="i-task"></i> Set the Forum ID in Module's preferences</h4>
+
+        <p>Although this example uses the Pico module preferences, the steps in the comment integration process are the same for all modules.
+
+        <p>Browse to Control Panel »» Pico »» Preferences
+
+        <p>You can enter the directory name of d3forum and the forum ID at the bottom of the page.
+
+        <p>The d3forum directory and forum_id values are stored in the database configuration table when you submit your preferences.
+
+        <div data-layout="row p-6 m-auto">
+            <table class="outer">
+                <tbody>
+                <tr>
+                    <td><div class="list_title">Comment-integration: dirname of d3forum</div></td>
+                    <td><input type="text" size="50" maxlength="191" value="d3forum"></td>
+                </tr>
+                <tr>
+                    <td><div class="list_title">Comment-integration: forum ID</div></td>
+                    <td><input type="text" size="50" maxlength="191" value="1"></td>
+                </tr>
+                <tr>
+                    <td><div class="list_title">Comment-integration : Order</div></td>
+                    <td>
+                        <select name="comment_order">
+                            <option value="asc">Oldest First</option>
+                            <option value="desc" selected="selected">Newest First</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><div class="list_title">Comment-integration : View</div></td>
+                    <td>
+                        <select name="comment_view">
+                            <option value="listposts_flat" selected="selected">Flat</option>
+                            <option value="listtopics">Threaded</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><div class="list_title">Comment-integration : Maximum number of comments per page</div></td>
+                    <td><input type="text" size="50" maxlength="191" value="5"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="tips">The comments-integration feature includes a quick reply comment form, a link to read more comments and pagination -
+            an automated process of adding consecutive numbers to identify the sequential order of comments.</div>
+
+
+    </section>
+
+
+
+    <section id="help-forum-blocks">
+
+        <h3>Module Blocks</h3>
+
+        <p>The module allows you to add blocks with forums, topics and posts in the different modules and pages of your site.
+        <p>Each block has its own options and template, permissions and cache settings.
+
+        <h3>Block Forums</h3>
+        <ul>
+        <li>Specify categories. Set category's id separated by a comma. Note this specification is not applied recursively. Leave the fill blank for all categories, or `auto` for the current category.
+        <li>Cache Time
+        </ul>
+
+        <h3>Block Topics</h3>
+        <ul>
+        <li>Display items. Default value : 10
+        <li>Display sie, sorted, marked
+        <li>Set category's id separated by a comma. Note this specification is not applied recursively. Leave the fill blank for all categories, or `auto` for the current category.
+        <li>Specify forums. Same as category specification.
+        <li>Cache Time
+        </ul>
+
+        <h3>Block Posts</h3>
+        <ul>
+            <li>Display items. Default value : 10
+            <li>Display sie, sorted, marked
+            <li>Set category's id separated by a comma. Note this specification is not applied recursively. Leave the fill blank for all categories, or `auto` for the current category.
+            <li>Specify forums. Same as category specification.
+            <li>Cache Time
+        </ul>
+
+        <h4 class="help-rel"><i class="i-help"></i> Related content</h4>
+        <ul>
+            <li><a href="<{$help}>=altsys#help-module-block">Components Block Management ⭢</a>
+            <li><a href="<{$help}>=legacy#help-blocks">System Block Management ⭢</a>
+        </ul>
+
+    </section>
+
+    <section id="help-forum-permissions">
+
+        <h3>Permissions</h3>
+
+        <p>Provide permissions to groups and users.
+        <p>Category and Forum permissions are a combination of a category, forum and users permissions.
+        <p>Assign permissions individually within a specific category and forum.</p>
+
+        <table class="outer">
+            <thead>
+            <tr>
+                <th>groupname</th>
+                <th>View<input type="checkbox"></th>
+                <th>Post<input type="checkbox"></th>
+                <th>Edit <input type="checkbox"></th>
+                <th>Delete	<input type="checkbox"></th>
+                <th>AutoApproval	<input type="checkbox"></th>
+                <th>Moderator <input type="checkbox"></th>
+                <th>Making forums <input type="checkbox"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Webmasters</td>
+                <td><input type="checkbox" name="can_reads[1]" id="gcol_1_1" value="1" checked="checked"></td>
+                <td><input type="checkbox" name="can_posts[1]" id="gcol_2_1" value="1" checked="checked"></td>
+                <td><input type="checkbox" name="can_edits[1]" id="gcol_3_1" value="1" checked="checked"></td>
+                <td><input type="checkbox" name="can_deletes[1]" id="gcol_4_1" value="1" checked="checked"></td>
+                <td><input type="checkbox" name="post_auto_approveds[1]" id="gcol_5_1" value="1" checked="checked"></td>
+                <td><input type="checkbox" name="is_moderators[1]" id="gcol_6_1" value="1" checked="checked"></td>
+                <td><input type="checkbox" name="can_makeforums[1]" id="gcol_7_1" value="1" checked="checked"></td>
+            </tr>
+            <tr>
+                <td>Registered Users</td>
+                <td><input type="checkbox" name="can_reads[2]" id="gcol_1_2" value="1" checked="checked"></td>
+                <td><input type="checkbox" name="can_posts[2]" id="gcol_2_2" value="1" checked="checked"></td>
+                <td><input type="checkbox" name="can_edits[2]" id="gcol_3_2" value="1" checked="checked"></td>
+                <td><input type="checkbox" name="can_deletes[2]" id="gcol_4_2" value="1" checked="checked"></td>
+                <td><input type="checkbox" name="post_auto_approveds[2]" id="gcol_5_2" value="1" checked="checked"></td>
+                <td><input type="checkbox" name="is_moderators[2]" id="gcol_6_2" value="1"></td>
+                <td><input type="checkbox" name="can_makeforums[2]" id="gcol_7_2" value="1"></td>
+            </tr>
+            <tr>
+                <td>Anonymous Users</td>
+                <td><input type="checkbox" name="can_reads[3]" id="gcol_1_3" value="1"></td>
+                <td><input type="checkbox" name="can_posts[3]" id="gcol_2_3" value="1"></td>
+                <td><input type="checkbox" name="can_edits[3]" id="gcol_3_3" value="1"></td>
+                <td><input type="checkbox" name="can_deletes[3]" id="gcol_4_3" value="1"></td>
+                <td><input type="checkbox" name="post_auto_approveds[3]" id="gcol_5_3" value="1"></td>
+                <td><input type="checkbox" name="is_moderators[3]" id="gcol_6_3" value="1"></td>
+                <td><input type="checkbox" name="can_makeforums[3]" id="gcol_7_3" value="1"></td>
+            </tr>
+            <tr>
+                <td>Translators</td>
+                <td><input type="checkbox" name="can_reads[4]" id="gcol_1_4" value="1"></td>
+                <td><input type="checkbox" name="can_posts[4]" id="gcol_2_4" value="1"></td>
+                <td><input type="checkbox" name="can_edits[4]" id="gcol_3_4" value="1"></td>
+                <td><input type="checkbox" name="can_deletes[4]" id="gcol_4_4" value="1"></td>
+                <td><input type="checkbox" name="post_auto_approveds[4]" id="gcol_5_4" value="1"></td>
+                <td><input type="checkbox" name="is_moderators[4]" id="gcol_6_4" value="1"></td>
+                <td><input type="checkbox" name="can_makeforums[4]" id="gcol_7_4" value="1"></td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="100"><input type="submit" name="group_update" value="Submit"></td>
+            </tr>
+            </tfoot>
+        </table>
+
+        <h4 class="help-rel"><i class="i-help"></i> Related content</h4>
+        <ul>
+            <li><a href="<{$help}>=user">User Groups Management ⭢</a>
+        </ul>
+
+    </section>
+
+
+    <section id="help-forum-advanced">
+
+        <h3>Advanced</h3>
+
+        <p>Features tools to synchronize and import comments
+
+    </section>
+
+
+    <section id="help-forum-history">
+
+        <h3>Edit History</h3>
+
+        <p>Find a comment or post history, also called revision history or edit history.
+        <p>You can view Edit's history by clicking the "View history" menu. See the theme's documentation.
+
+    </section>
+
+
+    <section id="help-forum-customize">
+
+        <h3>Customization</h3>
+
+        <p>You can customize the module templates and language localisation.
+
+        <h4 class="help-rel"><i class="i-help"></i> Related content</h4>
+        <ul>
+
+            <li><a href="<{$help}>=altsys#help-template-module">Components Modules Templates ⭢</a>
+            <li><a href="<{$help}>=altsys#help-language">Components Language Localisation ⭢</a>
+        </ul>
+
+    </section>
+
+
+    <section id="help-forum-preferences">
+
+        <h3>Preferences</h3>
+
+        <p>Module Preferences focus primarily on how the forums, forum topics, and comments are set on the site.
+        <p>The D3 Forum module comes with several options set for a new forum.
+        <p>Review the list of options and define your preferences.
+        <p>If you're familiar with themes and templates, you can duplicate the template files of the module you want to customize.
+        <p>You can install multiple instances of D3Forum using the X-Update Manager.
+
+    </section>
+
+
+    <section id="help-forum-development">
+
+        <h3>Development</h3>
+        <p>D3Forum is also tightly integrated with Trust modules, as it has been around for a long time.
+        <p>It was developed by Gijoe and Jidaikobo, improved by Naao, Nao-pon and Domifara.
+        <p>Updated to XCL23 PHP7-PHP8 by Nobuhiro Yasutomi and Nuno Luciano.
+
+        <table class="outer">
+        <tbody>
+            <tr>
+                <td>Bundle Package</td>
+                <td> XCL 2.4.0</td>
+            </tr>
+            <tr>
+                <td>Module name</td>
+                <td>D3Forum</td>
+            </tr>
+            <tr>
+                <td>Type</td>
+                <td>Trust Module</td>
+            </tr>
+            <tr>
+                <td>Level</td>
+                <td>Recommended</td>
+            </tr>
+            <tr>
+                <td>Author</td>
+                <td>Update by Nobuhiro Yasutomi @nbuy, Nuno Luciano @gigamaster XCL23</td>
+            </tr>
+            <tr>
+                <td>Author</td>
+                <td>Update by Naoki Sawada aks @nao-pon, Lead developer,  Naoki Okino @naao and Domifara @domifara</td>
+            </tr>
+            <tr>
+                <td>Author</td>
+                <td>Original by Gijoe @peak.ne.jp and Jidaikbo</td>
+            </tr>
+            <tr>
+                <td>Copyright </td>
+                <td>2007-2024 Peak.ne.jp, Authors</td>
+            </tr>
+            <tr>
+                <td>license</td>
+                <td>GPL 2.0</td>
+            </tr>
+            <tr>
+                <td>🌐 Repository URL</td>
+                <td><a href="https://github.com/xoopscube/d3forum" target="_blank">https://github.com/xoopscube/d3forum ⭧</a></td>
+            </tr>
+            </tbody>
+        </table>
+
+    </section>
+
+
+</article>
+</div>

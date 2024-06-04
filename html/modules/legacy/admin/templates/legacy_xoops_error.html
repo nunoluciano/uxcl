@@ -1,0 +1,12 @@
+<div class="error">
+    <{if $title}>
+    <h4><{$title}></h4>
+    <{/if}>
+    <{if is_array($message)}>
+    <{foreach item=msg from=$message}>
+        <{$msg|xoops_escape}>
+    <{/foreach}>
+    <{else}>
+        <{$message|xoops_escape}>
+    <{/if}>
+</div>

@@ -1,55 +1,86 @@
-# Build and Release Folders
-bin-debug/
-bin-release/
+# ## XCL 
+# Folders cache, temp and upload
+# Temporary files, cache, templates
+xoops_trust_path/cache/*
+xoops_trust_path/libs/elfinder/php/.tmp/*
+xoops_trust_path/modules/protector/configs/*
+xoops_trust_path/templates_c/*
+xoops_trust_path/uploads/xelfinder/*
+xoops_trust_path/uploads/xupdate/*
 
-# Project property files
-.actionScriptProperties
-.flexProperties
-.settings/
-
-## Misc for Mac OS Windows
-.project
+# Files by IDE/VS
+.hintrc
+*_i.c
+*_p.c
+*_i.h
+*.ilk
+*.meta
+*.obj
+*.iobj
+*.pch
+*.pdb
+*.ipdb
+*.pgc
+*.pgd
+*.rsp
+*.sbr
+*.tlb
+*.tli
+*.tlh
+*.tmp
+*.tmp_proj
+*.log
+*.vspscc
+*.vssscc
+.builds
+*.pidb
+*.svclog
+*.scc
+*.bak
+## Linux
+*~
+# temporary files which can be created if a process still has a handle open of a deleted file
+.fuse_hidden*
+# KDE directory preferences
+.directory
+# Linux trash folder which might appear on any partition or disk
+.Trash-*
+# .nfs files are created when an open file is removed but is still being accessed
+.nfs*
+## Mac 
+# ignore general files
 .DS_Store
-dwsync.xml
-_notes
-/_notes/#
+.AppleDouble
+.LSOverride
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+# Thumbnails
+._*
+# Folder config file
+[Dd]esktop.ini
+## Windows 
+# ignore thumbnail cache files
 Thumbs.db
-/._*
-._
-
-## for Win
-# Build and Release Folders
-bin-debug/
-bin-release/
-
-# Project property files
-.actionScriptProperties
-.flexProperties
-.settings/
-
-## for PhpStorm
-/.idea
-
-## AdelieDebug
-/html/preload/AdelieDebug*
-
-## XOOPS Cube
-# /public_html/mainfile.php
-# /public_html/cache/*
-# /public_html/templates_c/*
-# /public_html/uploads/*
-# /xoops_trust_path/cache/*
-# /xoops_trust_path/templates_c/*
-# /xoops_trust_path/uploads/*
-
-## AdelieDebug
-/html/preload/AdelieDebug*
-
-## XOOPS Cube
-# /public_html/mainfile.php
-# /public_html/cache/*
-# /public_html/templates_c/*
-# /public_html/uploads/*
-# /xoops_trust_path/cache/*
-# /xoops_trust_path/templates_c/*
-# /xoops_trust_path/uploads/*
+ehthumbs.db
+ehthumbs_vista.db
+# Windows shortcuts
+*.lnk
+# DW files
+_notes
+_compareTemp
+configs/
+dwsync.xml
+dw_php_codehinting.config
+*.mno
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.project

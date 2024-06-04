@@ -52,7 +52,7 @@ class Text_Wiki_Render_Xhtml_Phplookup extends Text_Wiki_Render {
         $text = htmlspecialchars($text);
         
         // finish and return
-        $output .= " href=\"http://php.net/$q\">$text</a>";
+        $output .= " href=\"https://php.net/$q\">$text</a>";
         return $output;
     }
 }

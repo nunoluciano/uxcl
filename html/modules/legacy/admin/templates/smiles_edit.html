@@ -1,0 +1,100 @@
+<div class="ui-dev-mode"><{$smarty.template}></div>
+
+<nav class="ui-breadcrumbs" aria-label="breadcrumb">
+    <a href="<{$xoops_url}>/admin.php"><{$smarty.const._CPHOME}></a>
+    &raquo;&raquo; <a href="./index.php"><{$smarty.const._MI_LEGACY_NAME}></a>
+    &raquo;&raquo; <a href="./index.php?action=SmilesList"><{$smarty.const._MI_LEGACY_MENU_SMILES_MANAGE}></a>
+    <{if $actionForm->get('id')}>
+    &raquo;&raquo; <span class="page-title" aria-current="page"><{$smarty.const._AD_LEGACY_LANG_SMILES_EDIT}></span>
+    <{else}>
+    &raquo;&raquo; <span class="page-title" aria-current="page"><{$smarty.const._AD_LEGACY_LANG_SMILES_NEW}></span>
+    <{/if}>
+</nav>
+
+
+<{if $actionForm->get('id')}>
+<h2><{$smarty.const._AD_LEGACY_LANG_SMILES_EDIT}></h2>
+<{else}>
+<h2><{$smarty.const._AD_LEGACY_LANG_SMILES_NEW}></h2>
+<{/if}>
+
+
+<{if $actionForm->hasError()}>
+<div class="error">
+    <ul>
+        <{foreach item=message from=$actionForm->getErrorMessages()}>
+        <li><{$message|xoops_escape}></li>
+        <{/foreach}>
+    </ul>
+</div>
+<{/if}>
+
+
+<form action="index.php?action=SmilesEdit" method="post" enctype="multipart/form-data">
+    <{xoops_token form=$actionForm}>
+    <{xoops_input type=hidden name=id value=$actionForm->get('id')}>
+    <table class="outer">
+        <thead>
+        <tr>
+            <th colspan="2">
+                <{if $actionForm->get('id')}>
+                    <{$smarty.const._AD_LEGACY_LANG_SMILES_EDIT}>
+                <{else}>
+                    <{$smarty.const._AD_LEGACY_LANG_SMILES_NEW}>
+                <{/if}>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <{if $actionForm->get('id')}>
+        <tr>
+            <td><{$smarty.const._AD_LEGACY_LANG_ID}></td>
+            <td><{$actionForm->get('id')}></td>
+        </tr>
+        <{/if}>
+        <tr>
+            <td><{$smarty.const._MD_LEGACY_LANG_CODE}></td>
+            <td>
+            <{xoops_input type=text name=code value=$actionForm->get('code') size=15 maxlength=50}>
+            </td>
+        </tr>
+        <tr>
+            <td><{$smarty.const._AD_LEGACY_LANG_SMILE_URL}></td>
+            <td>
+            <{if $actionForm->get('id')}>
+            <img src="<{$smarty.const.XOOPS_UPLOAD_URL}>/<{$object->getShow('smile_url')}>"
+                 alt="<{$object->getShow('emotion')}>" aria-label="<{$object->getShow('emotion')}>">
+            &raquo;&raquo;
+            <{/if}>
+            <{xoops_input type=file name=smile_url size=30}>
+            </td>
+        </tr>
+        <tr>
+            <td><{$smarty.const._MD_LEGACY_LANG_EMOTION}></td>
+            <td>
+            <{xoops_input type=text name=emotion value=$actionForm->get('emotion') size=30 maxlength=75}>
+            </td>
+        </tr>
+        <tr>
+            <td><{$smarty.const._AD_LEGACY_LANG_DISPLAY}></td>
+            <td>
+            <label>
+                <{xoops_input type=radio name=display value=1 default=$actionForm->get('display')}><{$smarty.const._YES}>
+            </label>
+            <label>
+                <{xoops_input type=radio name=display value=0 default=$actionForm->get('display')}><{$smarty.const._NO}>
+            </label>
+            </td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+            <td colspan="2">
+                <input class="button-cancel" type="submit" value="<{$smarty.const._BACK}>" name="_form_control_cancel">
+                <input class="button-submit" type="submit" value="<{$smarty.const._SUBMIT}>">
+            </td>
+        </tr>
+        </tfoot>
+    </table>
+</form>
+

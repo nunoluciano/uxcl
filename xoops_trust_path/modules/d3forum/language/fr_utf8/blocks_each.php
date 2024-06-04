@@ -1,14 +1,10 @@
 <?php
+#@ gigamaster
 
 if( defined( 'FOR_XOOPS_LANG_CHECKER' ) ) $mydirname = 'd3forum' ;
 $constpref = '_MB_' . strtoupper( $mydirname ) ;
 
 if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( $constpref.'_LOADED' ) ) {
-
-
-
-
-
 
 define( $constpref.'_LOADED' , 1 ) ;
 
@@ -29,5 +25,3 @@ define($constpref.'_ALT_UNSOLVED','Sujet Non résolu');
 define($constpref.'_ALT_MARKED','Sujet Marqué');
 
 }
-
-?>

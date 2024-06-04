@@ -1,4 +1,5 @@
 <?php
+
 if( defined( 'FOR_XOOPS_LANG_CHECKER' ) ) $mydirname = 'd3forum';
 $constpref = '_MB_' . strtoupper( $mydirname );
 if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( $constpref.'_LOADED' ) ) {
@@ -22,4 +23,3 @@ define($constpref."_LINKTOLISTCATEGORIES","Categotia Principal");
 define($constpref."_LINKTOLISTFORUMS","Forum Principal");
 define($constpref."_LINKTOLISTTOPICS","Topico Principal");
 }
-?>

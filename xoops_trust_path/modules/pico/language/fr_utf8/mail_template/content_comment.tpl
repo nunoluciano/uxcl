@@ -14,7 +14,7 @@ If you wish not to receive further notifications, visit the link below:
 Please do not reply to this message.
 
 -----------
-{X_SITENAME} ({X_SITEURL}) 
+{X_SITENAME} ({X_SITEURL})
 WEBMASTER
 {X_ADMINMAIL}
 -----------

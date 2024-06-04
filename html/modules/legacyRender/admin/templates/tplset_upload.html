@@ -1,0 +1,65 @@
+<div class="ui-dev-mode"><{$smarty.template}></div>
+
+<nav class="ui-breadcrumbs" aria-label="breadcrumb">
+    <a href="<{$xoops_url}>/admin.php"><{$smarty.const._CPHOME}></a>
+    &raquo;&raquo; <a href="./index.php"><{$smarty.const._MI_LEGACYRENDER_NAME}></a>
+    &raquo;&raquo; <a href="./index.php?action=TplsetList"><{$smarty.const._AD_LEGACYRENDER_LANG_TEMPLATE_MANAGE}></a>
+    &raquo;&raquo; <span class="page-title" aria-current="page"><{$smarty.const._AD_LEGACYRENDER_LANG_TPLSET_UPLOAD}></span>
+</nav>
+
+
+<h2><{$smarty.const._AD_LEGACYRENDER_LANG_TPLSET_UPLOAD}></h2>
+
+
+
+<div class="help-tips">
+    <{$smarty.const._AD_LEGACYRENDER_TIPS_TPLSET_UPLOAD}>
+</div>
+
+<{if $actionForm->hasError()}>
+<div class="error">
+    <ul>
+        <{foreach item=message from=$actionForm->getErrorMessages()}>
+        <li><{$message|xoops_escape}></li>
+        <{/foreach}>
+    </ul>
+</div>
+<{/if}>
+
+<form action="./index.php?action=TplsetUpload" method="post" enctype="multipart/form-data">
+    <{xoops_token form=$actionForm}>
+    <{xoops_input type=hidden name=tplset_id value=$actionForm->get('tplset_id')}>
+    <table class="outer">
+        <thead>
+        <tr>
+            <th colspan="2">Template Set .tar</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><{$smarty.const._AD_LEGACYRENDER_LANG_TPLSET_NAME}></td>
+            <td>
+            <{xoops_input type=text name=tplset_name size=50 maxlength=191}>
+            </td>
+        </tr>
+        <tr>
+            <td><{$smarty.const._AD_LEGACYRENDER_LANG_TPLSET_UPLOAD_FILE}></td>
+            <td>
+                <{* TODO archive TAR.GZ *}>
+                <{* xoops_input type=file name=upload accept="tar" *}>
+                <input type="file" name="upload" id="legacy_xoopsform_upload" accept=".tar">
+            </td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+            <td colspan="2">
+                <input class="button" type="submit" value="<{$smarty.const._BACK}>" name="_form_control_cancel">
+                <button class="button upload" type="submit">
+                    <img class="svg" src="<{'icons/icon-upload.svg'|theme}>" width="1em" height="1em" alt="upload"> <{$smarty.const._AD_LEGACYRENDER_LANG_UPLOAD}>
+                </button>
+            </td>
+        </tr>
+        </tfoot>
+    </table>
+</form>

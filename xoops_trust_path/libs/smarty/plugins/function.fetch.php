@@ -12,7 +12,7 @@
  * Type:     function<br>
  * Name:     fetch<br>
  * Purpose:  fetch file, web or ftp data and display results
- * @link http://smarty.php.net/manual/en/language.function.fetch.php {fetch}
+ * @link https://smarty.php.net/manual/en/language.function.fetch.php {fetch}
  *       (Smarty online manual)
  * @author Monte Ohrt <monte at ohrt dot com>
  * @param array
@@ -29,13 +29,13 @@ function smarty_function_fetch($params, &$smarty)
 
     $content = '';
     if ($smarty->security && !preg_match('!^(http|ftp)://!i', $params['file'])) {
-        $_params = array('resource_type' => 'file', 'resource_name' => $params['file']);
+        $_params = ['resource_type' => 'file', 'resource_name' => $params['file']];
         require_once(SMARTY_CORE_DIR . 'core.is_secure.php');
         if(!smarty_core_is_secure($_params, $smarty)) {
             $smarty->_trigger_fatal_error('[plugin] (secure mode) fetch \'' . $params['file'] . '\' is not allowed');
             return;
         }
-        
+
         // fetch the file
         if($fp = @fopen($params['file'],'r')) {
             while(!feof($fp)) {
@@ -48,7 +48,7 @@ function smarty_function_fetch($params, &$smarty)
         }
     } else {
         // not a local file
-        if(preg_match('!^http://!i',$params['file'])) {
+        if(preg_match('!^https://!i',$params['file'])) {
             // http fetch
             if($uri_parts = parse_url($params['file'])) {
                 // set defaults
@@ -181,12 +181,12 @@ function smarty_function_fetch($params, &$smarty)
                         $content .= fgets($fp,4096);
                     }
                     fclose($fp);
-                    $csplit = split("\r\n\r\n",$content,2);
+                    $csplit = preg_split("!\r\n\r\n!",$content,2);
 
                     $content = $csplit[1];
 
                     if(!empty($params['assign_headers'])) {
-                        $smarty->assign($params['assign_headers'],split("\r\n",$csplit[0]));
+                        $smarty->assign($params['assign_headers'],preg_split("!\r\n!",$csplit[0]));
                     }
                 }
             } else {

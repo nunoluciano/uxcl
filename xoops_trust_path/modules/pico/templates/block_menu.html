@@ -1,14 +1,21 @@
-<{foreach item=category from=$block.categories}>
-<dl>
-	<dt style="margin:5px 0 0;padding:3px;">
-		<a href="<{$block.mod_url}>/<{$category.link}>">
-			<{$category.title}>
-		</a>
-	</dt>
-	<dd style="margin:0;"><ul>
-	<{foreach item=content from=$category.contents}>
-		<li style="margin:0;"><a href="<{$block.mod_url}>/<{$content.link}>" title="<{$block.lang_lastupdated}>:<{$content.created_time_formatted}>"><{$content.subject}></a></li>
-	<{/foreach}>
-	</ul></dd>
-</dl>
-<{/foreach}>
+<{* Dev-Mode Toggle *}>
+<{if $xoops_isadmin}><div class="ui-dev-mode"><{$smarty.template}></div><{/if}>
+
+<div class="block-menu">
+
+    <{foreach item=category from=$block.categories}>
+    <dl>
+        <dt>
+            <a href="<{$block.mod_url}>/<{$category.link}>">
+                <{$category.title}>
+            </a>
+        </dt>
+        <dd><ul>
+        <{foreach item=content from=$category.contents}>
+            <li><a href="<{$block.mod_url}>/<{$content.link}>" title="<{$block.lang_lastupdated}>:<{$content.created_time_formatted}>"><{$content.subject}></a></li>
+        <{/foreach}>
+        </ul></dd>
+    </dl>
+    <{/foreach}>
+
+</div>

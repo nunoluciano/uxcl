@@ -1,0 +1,11 @@
+<div class="ui-dev-mode"><{$smarty.template}></div>
+
+<nav class="ui-breadcrumbs">
+    <a href="<{$xoops_url}>/admin.php"><{$smarty.const._CPHOME}></a>
+    &raquo;&raquo;
+    <a href="./index.php?action=ModuleStore"><{$smarty.const._MI_XUPDATE_LANG_XUPDATE}></a>
+    &raquo;&raquo; <span class="page-title"><{$currentMenu}></span>
+    <{if isset($currentItem)}>
+    &raquo;&raquo; <span class="page-title"><{$currentItem}></span>
+    <{/if}>
+</nav>

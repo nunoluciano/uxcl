@@ -1,0 +1,15 @@
+<div class="ui-dev-mode"><{$smarty.template}></div>
+
+<h2><{$smarty.const._ERROR}></h2>
+
+<ul>
+    <{foreach item=msg from=$log}>
+    <{if $msg.type=="error"}>
+    <li class="message-warning"><{$msg.message|xoops_escape}></li>
+    <{elseif $msg.type=="warning"}>
+    <li class="message-warning"><{$msg.message|xoops_escape}></li>
+    <{else}>
+    <li class="legacy_module_message"><{$msg.message|xoops_escape}></li>
+    <{/if}>
+    <{/foreach}>
+</ul>

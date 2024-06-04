@@ -24,5 +24,3 @@ define($constpref."_ALT_UNSOLVED","未解決トピック");
 define($constpref."_ALT_MARKED","注目トピック");
 
 }
-
-?>

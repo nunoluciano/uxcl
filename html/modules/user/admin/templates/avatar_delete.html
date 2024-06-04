@@ -1,0 +1,88 @@
+<div class="ui-dev-mode"><{$smarty.template}></div>
+
+<nav class="ui-breadcrumbs" aria-label="breadcrumb">
+    <a href="<{$xoops_url}>/admin.php"><{$smarty.const._CPHOME}></a>
+    &raquo;&raquo; <a href="./index.php"><{$smarty.const._MI_USER_NAME}></a>
+    &raquo;&raquo; <a href="./index.php?action=AvatarList"><{$smarty.const._MI_USER_ADMENU_AVATAR_MANAGE}></a>
+    &raquo;&raquo; <span class="page-title" aria-current="page"><{$smarty.const._AD_USER_LANG_AVATAR_DELETE}></span>
+</nav>
+
+
+<h2><{$smarty.const._AD_USER_LANG_AVATAR_DELETE}> (<{$object->getShow('avatar_name')}>)</h2>
+
+
+<div class="help-tips">
+    <{$smarty.const._AD_USER_TIPS_DELETE_AVATAR}>
+</div>
+
+<div class="error"><{$smarty.const._AD_USER_MESSAGE_CONFIRM_DELETE}></div>
+
+
+<form method="post" action="./index.php?action=AvatarDelete">
+    <{xoops_token form=$actionForm}>
+    <{xoops_input type=hidden name=avatar_id value=$actionForm->get('avatar_id')}>
+    <table class="outer">
+        <thead>
+        <tr>
+            <th colspan="2"><{$smarty.const._AD_USER_LANG_AVATAR_DELETE}> (<{$object->getShow('avatar_name')}>)</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><{$smarty.const._MD_USER_LANG_AVATAR_ID}></td>
+            <td><{$object->getShow('avatar_id')}></td>
+        </tr>
+        <tr>
+            <td><{$smarty.const._AD_USER_LANG_AVATAR_FILE}></td>
+            <td>
+            <img src="<{$smarty.const.XOOPS_UPLOAD_URL}>/<{$object->getShow('avatar_file')}>" alt="<{$object->getShow('avatar_name')}>" aria-label="<{$object->getShow('avatar_name')}>">
+            <br><{$object->getShow('avatar_file')}>
+            </td>
+        </tr>
+        <tr>
+            <td><{$smarty.const._AD_USER_LANG_AVATAR_NAME}></td>
+            <td><{$object->getShow('avatar_name')}></td>
+        </tr>
+        <tr>
+            <td><{$smarty.const._AD_USER_LANG_AVATAR_MIMETYPE}></td>
+            <td><{$object->getShow('avatar_mimetype')}></td>
+        </tr>
+        <tr>
+            <td><{$smarty.const._AD_USER_LANG_AVATAR_CREATED}></td>
+            <td><{$object->get('avatar_created')|xoops_formattimestamp:l}></td>
+        </tr>
+        <tr>
+            <td><{$smarty.const._AD_USER_LANG_AVATAR_DISPLAY}></td>
+            <td>
+            <{if $object->get('avatar_display') == 1 }>
+            <{$smarty.const._YES}>
+            <{elseif $object->get('avatar_display') == 0 }>
+            <{$smarty.const._NO}>
+            <{/if}>
+            </td>
+        </tr>
+        <tr>
+            <td><{$smarty.const._AD_USER_LANG_AVATAR_WEIGHT}></td>
+            <td><{$object->getShow('avatar_weight')}></td>
+        </tr>
+        <tr>
+            <td><{$smarty.const._AD_USER_LANG_AVATAR_TYPE}></td>
+            <td>
+            <{if $object->getShow('avatar_type') == "C"}>
+            <{$smarty.const._AD_USER_LANG_AVATAR_TYPE_C}>
+            <{elseif $object->getShow('avatar_type') == "S"}>
+            <{$smarty.const._AD_USER_LANG_AVATAR_TYPE_S}>
+            <{/if}>
+            </td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+            <td colspan="2">
+                <input class="button cancel" type="submit" value="<{$smarty.const._BACK}>" name="_form_control_cancel">
+                <input class="button delete" type="submit" value="<{$smarty.const._DELETE}>">
+            </td>
+        </tr>
+        </tfoot>
+    </table>
+</form>

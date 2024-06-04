@@ -1,0 +1,189 @@
+<div class="ui-dev-mode"><{$smarty.template}></div>
+
+<nav class="ui-breadcrumbs" aria-label="breadcrumb">
+    <a href="<{$xoops_url}>/admin.php"><{$smarty.const._CPHOME}></a>
+    &raquo;&raquo; <a href="./index.php"><{$smarty.const._MI_LEGACY_NAME}></a>
+    &raquo;&raquo; <a href="./index.php?action=BlockList"><{$smarty.const._MI_LEGACY_MENU_BLOCKLIST}></a>
+    <{if $actionForm->get('content')}>
+    <{if $object->get('visible') == 1}>
+    &raquo;&raquo; <span class="page-title" aria-current="page"><{$smarty.const._AD_LEGACY_LANG_CUSTOMBLOCK_EDIT}></span>
+    <{else}>
+    &raquo;&raquo; <span class="page-title" aria-current="page"><{$smarty.const._AD_LEGACY_LANG_BLOCK_INSTALL}></span>
+    <{/if}>
+    <{else}>
+    &raquo;&raquo; <span class="page-title" aria-current="page"><{$smarty.const._AD_LEGACY_LANG_ADD_CUSTOM_BLOCK}></span>
+    <{/if}>
+</nav>
+
+
+<h2>
+    <{if $actionForm->get('content')}>
+    <{if $object->get('visible') == 1}>
+    <{$smarty.const._AD_LEGACY_LANG_CUSTOMBLOCK_EDIT}>
+    <{else}>
+    <{$smarty.const._AD_LEGACY_LANG_BLOCK_INSTALL}>
+    <{/if}>
+    <{else}>
+    <{$smarty.const._AD_LEGACY_LANG_ADD_CUSTOM_BLOCK}>
+    <{/if}>
+</h2>
+
+
+<{if $actionForm->hasError()}>
+<div class="error">
+    <ul>
+        <{foreach item=message from=$actionForm->getErrorMessages()}>
+        <li><{$message|xoops_escape}></li>
+        <{/foreach}>
+    </ul>
+</div>
+<{/if}>
+
+<{if isset($content_preview)}>
+<div class="ui-block-admin-preview"><{$content_preview}></div>
+<{/if}>
+
+<form action="index.php?action=CustomBlockEdit" method="post">
+    <{xoops_token form=$actionForm}>
+    <{xoops_input type=hidden name=bid value=$actionForm->get('bid')}>
+
+    <table class="outer">
+        <thead>
+        <tr>
+            <th colspan="2">
+                <{if $actionForm->get('content')}>
+                <{if $object->get('visible') == 1}>
+                <{$smarty.const._AD_LEGACY_LANG_CUSTOMBLOCK_EDIT}>
+                <{else}>
+                <{$smarty.const._AD_LEGACY_LANG_BLOCK_INSTALL}>
+                <{/if}>
+                <{else}>
+                <{$smarty.const._AD_LEGACY_LANG_ADD_CUSTOM_BLOCK}>
+                <{/if}>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><{$smarty.const._AD_LEGACY_LANG_TITLE}></td>
+            <td>
+            <{xoops_input type=text name=title value=$actionForm->get('title') size=50 maxlength=191}>
+            </td>
+        </tr>
+        <tr>
+            <td><{$smarty.const._AD_LEGACY_LANG_SIDE}></td>
+            <td>
+            <select name="side">
+                <{xoops_optionsArray id=side from=$columnSideArr label=name value=id default=$actionForm->get('side')}>
+            </select>
+            </td>
+        </tr>
+        <tr>
+            <td><{$smarty.const._AD_LEGACY_LANG_WEIGHT}></td>
+            <td>
+            <{xoops_input type=text name=weight value=$actionForm->get('weight') size=5 class=list_number}>
+            </td>
+        </tr>
+        <tr>
+            <td><{$smarty.const._AD_LEGACY_LANG_CONTENT}></td>
+            <td>
+            <{if !$actionForm->get('content') || $actionForm->get('c_type') == 'H'}>
+            <{assign var=editor value=html}>
+            <{elseif $actionForm->get('c_type') == 'P'}>
+            <{assign var=editor value=none}>
+            <{else}>
+            <{assign var=editor value=bbcode}>
+            <{/if}>
+            <{xoops_dhtmltarea type=text name=content value=$actionForm->get('content') rows=20 cols=60 class=$editor editor=$editor}>
+            <{* fck_htmlarea name=content width=100% hight=400px skin=silver value=$actionForm->get('content') *}>
+            <{if $actionForm->get('c_type') == 'P'}>
+            <script type="text/javascript" src="<{$xoops_url}>/modules/ckeditor4/ckeditor/ckeditor.js"></script>
+            <style>
+                .cke_chrome {
+                    border: none!important;
+                }
+                .cke_top {
+                    border-bottom: 1px solid #000000!important;
+                    background: hsl(220deg 30% 5%)!important;
+                    padding: 6px 8px 2px;
+                    white-space: normal;
+                }
+                a.cke_button{
+                    background: #363d49;
+                    border-color: hsl(220deg 30% 5%);
+                    margin-right: 0.25rem;
+                }
+                a.cke_button_off:hover, a.cke_button_off:focus, a.cke_button_off:active {
+                    background-color: var(--button-active)!important;
+                    border-color: var(--link-hover)!important;
+                }
+                .cke_button_on {
+                    background-color: transparent!important;
+                    border-color: var(--link-hover)!important;
+                }
+                .cke_button_icon {
+                    background: #363d49;
+                }
+            </style>
+            <script type="text/javascript">
+                CKEDITOR.replace( 'content', {
+                    customConfig: '<{$xoops_url}>/modules/ckeditor4/ckeditor/config_php.js',
+                });
+            </script>
+            <{/if}>
+            </td>
+        </tr>
+        <tr>
+            <td><{$smarty.const._AD_LEGACY_LANG_C_TYPE}></td>
+            <td>
+            <select name='c_type'>
+                <{xoops_optionsArray id=c_type from=$ctypeArr value=type label=label default=$actionForm->get('c_type')}>
+            </select>
+            </td>
+        </tr>
+        <tr>
+            <td><{$smarty.const._AD_LEGACY_LANG_BCACHETIME}></td>
+            <td>
+            <select name='bcachetime'>
+                <{xoops_optionsArray id=bcachetime from=$cachetimeArr value=cachetime label=label default=$actionForm->get('bcachetime')}>
+            </select>
+            </td>
+        </tr>
+        <tr>
+            <td><{$smarty.const._AD_LEGACY_LANG_TARGET_MODULES}></td>
+            <td>
+            <select  size='5' name='bmodule[]' multiple='multiple'>
+                <{if $actionForm->get('bmodule')}>
+                <{xoops_optionsArray id=bmodule[] from=$moduleArr value=mid label=name default=$actionForm->get('bmodule')}>
+                <{else}>
+                <{xoops_optionsArray id=bmodule[] from=$moduleArr value=mid label=name default=-1}>
+                <{/if}>
+            </select>
+            </td>
+        </tr>
+        <tr>
+            <td><{$smarty.const._AD_LEGACY_LANG_TARGET_GROUPS}></td>
+            <td>
+            <select  size='5' name='groupid[]' multiple='multiple'>
+                <{if $actionForm->get('groupid')}>
+                <{xoops_optionsArray id=groupid[] from=$groupArr value=groupid label=name default=$actionForm->get('groupid')}>
+                <{else}>
+                <{xoops_optionsArray id=groupid[] from=$groupArr value=groupid label=name default=1}>
+                <{/if}>
+            </select>
+            </td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+            <td colspan="2">
+                <input class="button-cancel" type="submit" value="<{$smarty.const._BACK}>" name="_form_control_cancel">
+                <input class="formButton" type="submit" value="<{$smarty.const._PREVIEW}>" name="_form_control_preview">
+                <input class="formButton" type="submit" value="<{$smarty.const._SAVE}>" name="_form_control_save_edit">
+                <input class="button-submit" type="submit" value="<{$smarty.const._SUBMIT}>">
+            </td>
+        </tr>
+        </tfoot>
+    </table>
+
+</form>

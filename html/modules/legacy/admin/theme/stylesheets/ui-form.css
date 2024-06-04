@@ -1,0 +1,376 @@
+/*
+	XOOPSCube Theme : XCL Admin Flex Grid
+	Distribution : XOOPSCube XCL 2.4.0
+	Version : 2.4.0
+	Author : Nuno Luciano aka Gigamaster
+	Date : 2023-01-27
+	URL : https://github.com/xoopscube/
+*/
+
+
+/* -------------------- --------------------  Form elements  */
+/* TODO
+test overwrite default templates
+*/
+input.lang-custom,
+input.textarea {
+    border          : 1px solid var(--op5);
+    box-shadow      : 0 0 0 5px hsla(216, 98%, 52%, 0.25);
+    width           : 240px;
+    outline         : none;
+    transition      : all .5s;
+}
+
+input:not([type=button],[type=color],[type=submit],[type=reset]),
+textarea {
+    background      : var( --input-bg );
+    border          : var( --input-border );
+    border-radius   : var( --input-radius);
+    color           : var(  --input-color );
+    font-size       : 16px;
+    line-height     : 1.5;
+    padding         : var(--input-padding);
+    margin          : var(--input-margin);
+}
+
+/* FIREFOX SCROLLBAR*/
+textarea, select {
+    scrollbar-color         : var(--thumbBG) var( --trackBG ); /* thumb-color track-color */
+    scrollbar-width         : thin;
+}
+[type="number"] {
+    max-width: 8ch;
+}
+[type="color"] {
+    border          : var(--border);
+    border-radius   : 3px;
+    height          : 28px;
+    width           : 32px;
+    vertical-align  : -0.25em;
+}
+
+input:hover:not([type=button],[type=submit]),
+textarea:hover {
+    border          : var(  --input-border-hover );
+    box-shadow      : var(  --input-shadow       );
+}
+input:focus:not([type=button],[type=submit]),
+textarea:focus {
+    border          : var(  --input-border-focus );
+    box-shadow      : var(  --input-shadow       );
+    outline         : none;
+}
+
+/* Note: Only text controls can be made read-only
+ * https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/readonly
+ */
+input[type="text"]:disabled,
+    :where(input:read-only):not([type=color]) {
+    background      : inherit;
+    color           : var(--link-visited);
+    cursor          : not-allowed;
+}
+/* ALL FOCUS-VISIBLE */
+*:focus-visible {
+    outline         : var(  --input-border-hover );
+}
+
+/* 	-------------------- -------------------- INPUT BUTTON  */
+
+input[type="image"] svg path {
+    color           : var( --link )
+}
+button,
+[type="button"],
+[type="submit"],
+[type="submit"].button-cancel {
+    background-color: var( --button-bg     );
+    border          : var( --button-border );
+    border-radius   : var( --button-radius );
+    box-shadow      : var( --button-shadow );
+    color           : var( --button-color  );
+    cursor          : pointer;
+    display         : inline-block;
+    font-family     : var(--font-family);
+    font-size       : var(--font-size);
+    padding         : var(--button-padding);
+    position        : relative;
+    margin          : var(--input-margin);
+    text-align      : center;
+    /*text-decoration : none;*/
+    touch-action    : manipulation;
+    transition      : all 0.3s ease 0s;
+    user-select     : none;
+    white-space     : nowrap;
+    /*width: min-content;*/
+}
+button:hover,
+input[type="button"]:hover,
+input[type="submit"]:hover,
+input[type="submit"].button-cancel:hover {
+    background          : var( --button-bg-on );
+    color               : var( --button-color-on )!important;
+}
+
+input[type="submit"].button-delete:hover,
+input.button-delete:hover,
+input.button-unassign:hover,
+input.buttom-uninstall:hover,
+input[type="reset"]:hover {
+    background      : #ff5722;
+    border-color    : #ff5722;
+    box-shadow      : 0 14px 26px -12px hsla(14, 80%, 45%, 0.42), 0 4px 23px 0 hsla(14, 100%, 49%, 0.42), 0 8px 10px -5px hsla(14, 100%, 49%, 0.42);
+    color           : #ffffff;
+}
+
+input:focus,
+input[type=text]:focus,
+input[type=search]:focus,
+input[type=password]:focus,
+select:focus,
+textarea:focus {
+    background      : var(--input-bg-on );
+    border          : var(--input-border-on );
+    box-shadow      : var(--input-shadow-on );
+    color           : var(--input-color-on );
+    transition      : 0.2s ease-in;
+}
+
+select:focus-visible,
+:focus-visible {
+    border          : var(--input-border-on );
+    background      : var(--input-bg-on );
+    box-shadow      : var(--input-shadow-on );
+    outline         : none;
+}
+
+/* 	-------------------- --------------------  SELECT  */
+
+select {
+    background      : var( --input-bg );
+    color           : var( --secondary ) !important;
+    border          : var( --input-border );
+    border-radius   : var( --input-radius );
+    font-size       : var( --font-size );
+    line-height     : 1.5;
+    padding         : var(--input-padding);
+    margin          : var(--input-margin);
+}
+
+select option {
+    font-size       : 14px;
+    display         : block;
+    padding         : 5px 2px;
+    margin-bottom   : 1px;
+    width           : 100%
+}
+
+select option:hover,
+select option:focus,
+select option:active,
+select option:checked {
+    background      : var( --theme-color, var( --color-blue ));
+    color           : var( --color-white );
+}
+
+/*
+Select Multiple
+JavaScript required to avoid keyboard [ctrl]
+*/
+select[multiple] option::before {
+    content         : "\2610";
+    width           : 1.3em;
+    text-align      : center;
+    display         : inline-block;
+}
+select[multiple] option:checked::before {
+    content         : "\2611";
+}
+
+textarea::-webkit-resizer {
+    background		: transparent;
+    border-width    : 8px;
+    border-style    : solid;
+    border-color    : transparent hsl(215, 15%, 25%) hsl(216, 17%, 17%) transparent;
+}
+
+/* Autofill color */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    transition      : background-color 5000s ease-in-out 0s;
+}
+/* Autofill text */
+input:-webkit-autofill{
+    -webkit-text-fill-color: var(--link-active) !important;
+}
+/* Autofill background */
+input:-webkit-autofill,
+input:focus:-webkit-autofill {
+    -webkit-box-shadow  : 0 0 0 100px var(--input-bg) inset;
+}
+
+
+/* 	-------------------- --------------------  CHECKBOX & RADIO  */
+
+@supports (appearance: none) or (-webkit-appearance: none) or (-moz-appearance: none) {
+
+    input[type='checkbox']:not(.ui-checkboxradio),
+    input[type='radio']:not(.ui-checkboxradio) {
+    -webkit-appearance  : none;
+    -moz-appearance     : none;
+        appearance      : none;
+        background      : var(  --input-check-bg );
+        border          : var(  --input-check-border );
+        box-shadow      : var(  --input-check-shadow-in );
+        cursor          : pointer;
+        height          : 20px;
+        margin          : 0;
+        outline         : none;
+        padding         : 0;
+        position        : relative;
+        transition      : background .3s ease, border-color .3s ease;
+    }
+
+    /* Block Side None / Uninstall */
+    input[type='radio'].blockposition.ui-input-red {
+        border          : 1px solid red;
+    }
+    input[type='radio'].blockposition.ui-input-red:after {
+        border          : 1px solid red;
+        background      : orangered;
+    }
+
+    input[type='checkbox']:after,
+    input[type='radio']:after {
+        content         : '';
+        display         : block;
+        left            : 0;
+        position        : absolute;
+        top             : 0;
+        transition      : transform .3s ease, opacity .2s ease, filter .3s ease;
+    }
+
+    input[type='checkbox']:checked,
+    input[type='radio']:checked {
+        animation       : pulse 1s;
+        background      : var( --input-check-active );
+        border          : var( --input-check-border );
+        box-shadow      : 0 0 0 8px rgba(52, 152, 219, 0);
+    }
+
+    input[type='checkbox']:checked:after,
+    input[type='radio']:checked:after {
+        transition      : opacity 0.3s ease, filter 0.3s ease, transform 0.6s cubic-bezier(0.175, 0.88, 0.32, 1.2);
+    }
+
+    input[type='checkbox']:disabled,
+    input[type='radio']:disabled {
+        background      : var( --input-check-disabled );
+        cursor          : not-allowed;
+        opacity         : .9;
+    }
+
+    input[type='checkbox']:disabled:checked,
+    input[type='radio']:disabled:checked {
+        background      : var( --input-check-disabled );
+        border          : var( --input-check-border );
+    }
+
+    input[type='checkbox']:hover:not(:checked):not(:disabled),
+    input[type='radio']:hover:not(:checked):not(:disabled) {
+        border          : var( --input-check-border-on );
+    }
+
+    input[type='checkbox']:focus-visible,
+    input[type='radio']:focus-visible {
+        outline         : var(  --input-border-hover );
+    }
+
+    input[type='checkbox']:not(.switch),
+    input[type='radio']:not(.switch) {
+        margin          : 0 var( --space-3 );
+        vertical-align  : bottom;
+        width           : 20px;
+    }
+
+    input[type='checkbox']:not(.switch):after,
+    input[type='radio']:not(.switch):after {
+        opacity         : 0;
+    }
+
+    input[type='checkbox']:not(.switch):checked:after,
+    input[type='radio']:not(.switch):checked:after {
+        opacity         : 1;
+    }
+
+    input[type='checkbox']:not(.switch) {
+        border-radius   : 6px;
+    }
+
+    input[type='checkbox']:not(.switch):after {
+        border          : 2px solid var( --input-check-active-in );
+        border-left     : 0;
+        border-top      : 0;
+        height          : 9px;
+        left            : 7px;
+        top             : 4px;
+        transform       : rotate(20deg);
+        width           : 5px;
+    }
+
+    input[type='checkbox']:not(.switch):checked:after {
+        transform       : rotate(43deg);
+    }
+
+    /* Input checkbox switch */
+    input[type='checkbox'].switch {
+        border-radius   : 11px;
+        vertical-align  : middle;
+        width           : 38px;
+    }
+
+    input[type='checkbox'].switch:after {
+        background      : var( --input-check-disabled-in );
+        border-radius   : 50%;
+        height          : 18px;
+        left            : 1px;
+        top             : 0;
+        width           : 18px;
+    }
+
+    input[type='checkbox'].switch:checked:after {
+        background      : var( --input-check-active-in );
+        transform       : translateX(17px);
+    }
+
+    input[type='checkbox'].switch:disabled:not(:checked):after {
+        opacity         : .6;
+    }
+
+    input[type='radio'] {
+        border-radius   : 50%;
+    }
+
+    input[type='radio']:after {
+        background      : var( --input-check-active-in );
+        border-radius   : 50%;
+        height          : 17px;
+        opacity         : 0;
+        transform       : scale(0.7);
+        width           : 17px;
+    }
+
+    input[type='radio']:checked:after {
+        background      : var( --input-check-active-in );
+        transform       : scale(0.5);
+    }
+
+    @keyframes pulse {
+        from {
+            box-shadow  : 0 0 0 0 var( --input-check-animation );
+        }
+    }
+
+}

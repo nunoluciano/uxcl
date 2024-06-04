@@ -1,0 +1,577 @@
+<div data-layout="row sm-column">
+
+    <div data-self="size-xxsmall">
+        <nav id="help-menu">
+            <ul data-layout="column">
+                <li><a href="#help-overview" class="button">概要</a>
+                <li><a href="#help-getstart" class="button">スタートガイド</a>
+                <li><a href="#help-gethelp" class="button">ヘルプを見る</a>
+                <li><a href="#help-control-panel" class="button">Control Panel</a>
+                <li><a href="#help-blocks" class="button">Blocks</a>
+                <li><a href="#help-modules" class="button">Modules</a>
+                <li><a href="#help-comments" class="button">Comments</a>
+                <li><a href="#help-images" class="button">Images</a>
+                <li><a href="#help-language" class="button">Language</a>
+                <li><a href="#help-themes" class="button">Themes</a>
+                <li><a href="#help-smilies" class="button">Smilies</a>
+                <li><a href="#help-word-censor" class="button">Word Censor</a>
+                <li><a href="#help-development" class="button">Development</a>
+            </ul>
+        </nav>
+    </div>
+
+<article id="help-module">
+
+    <section id="help-overview">
+        <h2>概要</h2>
+        <p>システム設定では、サイト名やスローガンなど、プラットフォームの一般設定をカスタマイズできます。
+            言語とテーマ、組み込みのグローバル検索を有効にする、メンテナンスのためにサイトを閉じる、ホームページのモジュールを指定する、などなど。</p>
+        <code class="badge">コントロール パネル »» システム »» 設定</code>
+        <p>構成設定は、信頼性、稼働時間、および Web アプリケーションのスケーリング機能を確保するために、いくつかのコア モジュールに集約および編成されます。
+            コア モジュールは、入力、処理、出力、保存、更新、および制御アクティビティを実行するために必要です。
+            構成および管理のための主要な機能、モジュール ユーティリティまたはサービスへのアクセスは、コントロール パネルのサイド メニューのアイコンによって表されます。
+        <p>詳細については、各モジュールのサブメニューにある組み込みのヘルプにアクセスし、コンテキスト ヘルプ (管理パネル) をアクティブにします。
+    </section>
+
+    <section id="help-getstart">
+
+        <h2>スタートガイド</h2>
+
+        <p>このセクションでは、コントロール パネル、ダッシュボード、<b>インストール後のチェックリスト</b>の概要をまとめたクイック スタート ガイドを提供します。</p>
+
+        <h3>クイックスタートガイド</h3>
+
+        <p>インストール ウィザードが完了すると、Web サイトはデフォルトの構成設定で事前構成されます。
+            これらの設定は、Web アプリケーション プラットフォームに割り当てられたユーザー構成可能な設定の既存の値を参照します。
+            したがって、新しい Web サイトを立ち上げる前に、インストール後のタスクをいくつか実行する必要があります。
+            これらには、サイト名とスローガンの設定、メタ タグ (SEO) のカスタマイズ、訪問者の登録の許可、およびユーザー グループのアクセス許可が含まれます。
+            より詳細なドキュメントが利用可能であり、このガイド全体で強調表示されます。</p>
+
+        <h3>コントロール パネルとカスタム ダッシュボード</h3>
+        <p>管理領域とも呼ばれるコントロール パネルでは、Web アプリケーション プラットフォームで実行できるすべてのアクションにアクセスできます。
+            また、「管理パネル」からカスタマイズできるダッシュボードも含まれています。 管理ブロック、モジュールのヒント、およびアクションのツールヒントを有効または無効にすることができます。
+            設定はブラウザの localStorage に保存されます。</p>
+
+
+        <div class="guide-layout">
+            <div data-layout="row center-justify sm-column p-4">
+                <div data-self="size-x1 center p-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M4 8h4V4H4v4zm6 12h4v-4h-4v4zm-6 0h4v-4H4v4zm0-6h4v-4H4v4zm6 0h4v-4h-4v4zm6-10v4h4V4h-4zm-6 4h4V4h-4v4zm6 6h4v-4h-4v4zm0 6h4v-4h-4v4z"></path></svg>
+                    主な機能にアクセスするためのクイック リンク
+                </div>
+                <div data-self="center p-4">ホーム | テーマ | ログアウト</div>
+            </div>
+
+            <div data-layout="row top-justify sm-column p-4">
+                <div data-self="size-1of5 sm-full p-4" style="background: var(--aside-bg );">
+                    <h6>サイドメニュー</h6>
+                    <p>メイン メニューは、アクティブなモジュールから自動的に生成されます。 各サブメニューから、実行可能なモジュール アクションとユーザー ガイドにアクセスできます。</p>
+                </div>
+                <div data-self="size-x1 sm-full px-6 py-4">
+                    <h6>メインコンテンツ</h6>
+                    <p>XCL でカスタマイズ可能なダッシュボードを持つ主なアイデアは、クリックするだけでさまざまなセクションに簡単にアクセスできるようにすることです。
+                        これを実現するために、管理者が日常的に最も頻繁に使用する XCL の主な機能を選び出しました。
+                        ダッシュボードにはデフォルトの「管理者ブロック」が事前に入力されており、環境に関する洞察が得られます。</p>
+                    <p>さまざまな目的で独自のウィジェットをダッシュボードに追加できます。たとえば、サードパーティの API またはモニタリング ウィジェットを埋め込むことができます。
+                        つまり、ウィジェットは迅速で非技術的なソリューションですが、API は特定の技術知識を必要とするより複雑なプロセスです。</p>
+                </div>
+                <div data-self="size-1of5 sm-full p-4" style="background: var(--aside-panel-bg);">
+                    <h6>管理パネル</h6>
+                    <p>右側の x キューブは、アクションを検索したり、アクティブなモジュールからヘルプを表示したりできる管理サイド パネルを開きます。
+                        ダッシュボードのオプションをカスタマイズします。</p>
+                </div>
+            </div>
+        </div>
+
+        <h3>インストール後のチェックリスト</h3>
+        <p>インストール ウィザードの完了後、必要に応じて次のタスクを実行します。インストール後のチェックリスト:</p>
+
+        <div data-layout="row center-justify sm-column">
+            <div data-self="size-1of3 start sm-full">
+                <h3 class="list_center"><svg class="todo" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48"><circle cx="8.32" cy="36.81" r="3.82" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="m4.75 23.34l2.57 2.57l5.07-5.07M4.71 9.87l2.58 2.57l5.07-5.07m4.22 2.57H43.5M16.58 23.38H43.5M16.58 36.81H43.5"/></svg>
+                <br>設定の構成</h3>
+                <p>
+                    サイト名とスローガンを編集<br>
+                    管理者の電子メール アドレス<br>
+                    メンテナンス カスタム メッセージ<br>
+                    「開始ページ」またはモジュールを選択します<br>
+                    モジュール全体のキャッシュを設定する (プロダクション)
+                </p>
+            </div>
+            <div data-self="size-1of3 start sm-full">
+                <h3 class="list_center"><svg class="security" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M43.5 25.27V10.4a2 2 0 0 0-2-2h-35a2 2 0 0 0-2 2v27.2a2 2 0 0 0 2 2h27.265M4.5 15.636h39"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M37.488 41.6a11.308 11.308 0 0 0 7.913-9.394a38.052 38.052 0 0 0-.034-5.768a1.219 1.219 0 0 0-1.184-1.134a8.506 8.506 0 0 1-6.004-2.123a.984.984 0 0 0-1.381 0a8.506 8.506 0 0 1-6.004 2.123a1.219 1.219 0 0 0-1.184 1.134a38.052 38.052 0 0 0-.034 5.768a11.308 11.308 0 0 0 7.912 9.394Zm0 0V22.897"/></svg>
+                <br>ユーザー アクセス</h3>
+                <p>
+                    訪問者がアカウントを作成できるようにする<br>
+                    カスタム アバターのアップロードを許可する<br>
+                    ユーザー プロファイルに新しいフィールドを追加する<br>
+                    ユーザー グループに権限を割り当てる<br>
+                    モジュールを設定してアクセスをブロックする
+                </p>
+            </div>
+            <div data-self="size-1of3 start sm-full">
+                <h3 class="list_center"><svg class="design" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48"><rect width="43.39" height="11.24" x="2.3" y="18.38" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" rx="2" transform="rotate(45 23.999 24)"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="m27.97 20.03l-3.69 3.69M14.9 6.95l-3.69 3.69m8.05.67l-2.05 2.05m6.41 2.31l-2.06 2.05M41.05 33.1l-3.69 3.69m-5.03-12.41l-2.05 2.06m6.41 2.3l-2.05 2.05M24 16.05l3.63-3.63a3.89 3.89 0 0 1 1.47-.92l9-3.11a1.22 1.22 0 0 1 1.55 1.55l-3.11 9a3.89 3.89 0 0 1-.92 1.47L32 24m-8 8L14 42a1.94 1.94 0 0 1-2.75 0l-5.2-5.2a1.94 1.94 0 0 1 0-2.75l10-10m-7.68 7.63l7.95 7.95M27.2 12.85l7.95 7.95"/></svg>
+                <br>レンダリング設定</h3>
+                <p>
+                    ビジュアル アイデンティティを追加<br>
+                    新しいメタ キーワードと説明を追加<br>
+                    ビジネス要件に応じて<br>
+                    メタの著作権とフッターを編集<br>
+                    ウェブマスター ツールの設定 ( SEO )
+                </p>
+            </div>
+        </div>
+
+        <div class="tips">内蔵ヘルプは、管理者がウェブアプリケーションとモジュールを管理するのに役立つドキュメントを提供します。
+            各モジュールのサブメニューに「ヘルプ」リンクがあります。ご自由にご覧ください。</div>
+
+        <h4 class="help-rel"><i class="i-help"></i> Related content</h4>
+        <ul>
+            <li><a href="<{'#help-control-panel'|helpurl}>">Control Panel and Custom Dashboard</a>
+            <li><a href="<{$help}>=legacyRender">Render Engine Preferences (SEO) ⭢</a>
+            <li><a href="<{$help}>=user">User Groups Permissions  ⭢</a>
+        </ul>
+
+    </section>
+
+    <section id="help-gethelp">
+
+        <h3>How to get help</h3>
+        <p>There are a few different ways to find help for your Web Application Platform.
+            You can use the Action Search to assist you in searching modules Help files and preferences.
+            You can learn more about a module from the contextual Help dialog and the built-in User Guide.</p>
+
+        <h4><i class="i-task"></i> Using Action Search</h4>
+
+        <p>Click the x-cube on the right to open the <b>admin panel</b>.
+            Enter different keywords in the action search field to find what you are looking for in the modules User Guide files and modules Preferences.</p>
+
+        <h4><i class="i-task"></i> >Using Built-in Help</h4>
+
+        <p>All modules installed on your Web Application Platform have a built-in User Guide.
+            On the left sidebar, for each module, there is a help link, so you can easily get the User Guide for the modules you are using.
+            A module's User Guide can provide easy access to other sections, topics, and examples.
+
+        <h4><i class="i-task"></i> Using Contextual Help Dialog</h4>
+
+        <p><button class="help-admin button-icon" type="button" data-module="legacy" data-help-article="#help-modules" title="Get Help for module management"><b>?</b></button>
+            The Help button is available in the administration of most modules. This option displays a modal dialog box to get the corresponding help section.
+            For example, this button displays the contextual help for module managent.</p>
+    </section>
+
+    <section id="help-control-panel">
+
+        <h3>Control Panel and Custom Dashboard</h3>
+
+        <p>The default admin theme provides several options to customize the dashboard with blocks of information and save your preferences to localstorage.</p>
+
+        <h3>Quick Links</h3>
+
+        <p><a href="#!" class="dropdown-toggle button" title="Admin Quick Links">
+            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M4 8h4V4H4v4zm6 12h4v-4h-4v4zm-6 0h4v-4H4v4zm0-6h4v-4H4v4zm6 0h4v-4h-4v4zm6-10v4h4V4h-4zm-6 4h4V4h-4v4zm6 6h4v-4h-4v4zm0 6h4v-4h-4v4z"></path></svg>
+        </a> The Quick Links navbar menu is pre-populated for easier and faster access to key features.
+
+        <h4><i class="i-task"></i> Custom Quick Links</h4>
+        <p>You can customize the Quick Link menu and other navigation elements with the features you use most often on a daily basis.
+
+        <p>Single file component: <code>/admin/templates/components/admin-quick-links.html</code></p>
+
+        <h3>Dashboard</h3>
+
+        <p>The dashboard is fully customizable out of the box, dashboards can be a useful tool for administration.
+
+        <p>The default dashboard comes with the following placeholders :</p>
+
+        <div class="guide-layout">
+            <div data-layout="row center-justify sm-column p-4">
+                <div data-self="size-x1 start sm-full p-4">
+                    <div class="block"><{$smarty.const._AD_BLOCK_ONLINE}></div>
+                    <div class="block"><{$smarty.const._AD_BLOCK_MENU}></div>
+                    <div class="block"><{$smarty.const._AD_BLOCK_SERVER}></div>
+                </div>
+                <div data-self="size-1of4 start sm-full p-4">
+                    <div class="block"><{$smarty.const._AD_BLOCK_OVERVIEW}></div>
+                    <div class="block">Custom Block</div>
+                </div>
+                <div data-self="size-1of4 stretch sm-hide p-4" style="background: var(--aside-panel-bg);">
+                    <h6><svg xmlns="http://www.w3.org/2000/svg" role="img" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M6 18h5.5v-4H6v4Zm0-5h5.5V6H6v7Zm6.5 5H18v-7h-5.5v7Zm0-8H18V6h-5.5v4ZM5 21q-.825 0-1.413-.588T3 19V5q0-.825.588-1.413T5 3h14q.825 0 1.413.588T21 5v2h2v2h-2v2h2v2h-2v2h2v2h-2v2q0 .825-.588 1.413T19 21H5Zm0-2h14V5H5v14ZM5 5v14V5Z"></path>
+                    </svg> Admin Control Panel</h6>
+                    <p>Action Search</p>
+                    <p>Help : current module</p>
+                    <p>Select Theme color</p>
+                    <p>Admin Theme Options</p>
+                </div>
+            </div>
+        </div>
+
+        <h4><i class="i-task"></i> Custom Dashboard Options</h4>
+
+        <ol>
+            <li>Click the x-cube to open the admin panel</li>
+            <li>Select a Theme color palette</li>
+            <li>Enable or disable blocks and tips</li>
+        </ol>
+
+        <h6>Admin Account</h6>
+        <p>Show/hide the administrator account on the vertical sidebar on the left, also known as admin side-menu.</p>
+        <h6>Users Online</h6>
+        <p>Show/hide the block of Users Online at the top of dashboard. The link "more" opens a modal dialog box.</p>
+        <h6>Modules Menu</h6>
+        <p>Show/hide the menu with the module icons. The icon opens a modal with the module links.</p>
+        <h6>Modules Help Tips</h6>
+        <p>Show/hide the Help-Tips on module administration pages with brief information about the module's functionality.</p>
+        <h6>Overview Stats</h6>
+        <p>Show-hide block with total of modules, blocks and Users.</p>
+        <h6>Server Environment</h6>
+        <p>Show-hide block with server information.</p>
+        <h6>PHP Settings</h6>
+        <p>Show-hide block with PHP settings.</p>
+        <h6>Disable action tooltip</h6>
+        <p>Show-hide tooltip hover action buttons (HTML title attribute).</p>
+
+        <h4><i class="i-task"></i> Custom Dashboard Template</h4>
+
+        <p>A custom dashboard can be created to fit your organization’s practices or your own workflow. For example,
+            it can contain widgets to perform common activities and include third-party widgets and APIs.
+
+        <p>Template : <code>/admin/templates/dashboard.html</code>
+
+        <h4 class="help-rel"><i class="i-help"></i> Related content</h4>
+        <ul>
+            <li><a href="<{$help}>=altsys#help-template-custom">Components Custom Templates ⭢</a>
+        </ul>
+
+    </section>
+
+    <section id="help-configuration">
+        <h3>Configuration</h3>
+    </section>
+
+    <section id="help-blocks">
+
+        <h3>Block Management</h3>
+        <p>Block Management allows you to administer and maintain blocks of installed modules and custom blocks that you create.
+            Simply put, there are two types of blocks: modules blocks and custom blocks.
+
+        <h6>Modules Blocks</h6>
+
+        <p>Modules blocks are pre-built blocks such as "User Login", "User Menu" or "Main Menu".
+            Each module block provides specific functionality and has its own settings and template.</p>
+
+        <h6>Custom Blocks</h6>
+
+        <p>Custom blocks are a quick and easy way to extend and customize your content with images, text or third party services: maps, videos, etc. By default,
+            Custom blocks are rendered with a dummy template. However, it is possible to create reusable components with their own custom template.
+            See more details in the section custom and reusable components.
+
+        <h6>Block Default Settings</h6>
+
+        <table class="outer">
+            <tbody>
+            <tr><td>Title</td><td>The current active Theme can display or hide the Block Title.</td></tr>
+            <tr><td>Side</td><td>Placeholders for the blocks are defined by the theme layout.</td></tr>
+            <tr><td>Order</td><td>The vertical order of the block in a theme placeholder.</td></tr>
+            <tr><td>Content</td><td>( custom blocks only )</td></tr>
+            <tr><td>Type</td><td>( custom blocks only : HTML, BBCode, PHP )</td></tr>
+            <tr><td>Cache time</td><td>The time it should take for the cache to expire.</td></tr>
+            <tr><td style="white-space: nowrap;">Target modules</td><td>Select the modules in which you want to display the block.</td></tr>
+            <tr><td>Target groups</td><td>Select the user groups allowed to see the block.</td></tr>
+            <tr><td>Template</td><td>Custom template for modules blocks (see section custom templates).</td></tr>
+            </tbody>
+        </table>
+
+
+        <div class="confirm"><b>Uninstall</b> : <i>Custom Blocks</i> are completely removed from Block Management and the database !<br>
+            <i>Modules Blocks</i> keep their settings, so you can re-install the block and recover its last settings.</div>
+
+        <h6>Block Actions</h6>
+        <p>Frontend themes usually include a component with block actions. Webmasters can access the menu next to the Block Title to manage a block.</p>
+
+        <div class="tips">It is worth noting that all blocks can also be managed in the “Components” module, although the user interface is slightly different.</div>
+
+        <h4 class="help-rel"><i class="i-help"></i> Related content</h4>
+        <ul>
+            <li><a href="<{$help}>=altsys#help-module-block">Components Modules Blocks ⭢</a>
+            <li><a href="<{$help}>=altsys#help-custom-block">Components Custom Blocks ⭢</a>
+        </ul>
+
+    </section>
+
+    <section id="help-comments">
+
+        <h3>Comment Management</h3>
+
+        <p>The Comment management is a built-in feature.
+            It provides a comment box where users can generate their own comments on a specific piece of content.
+           You can follow the latest comments on your articles from the Dashboard.
+        In addition to having a quick overview, you can also reply to the comment as well as moderate its status as public, pending or delete it as spam.</p>
+
+        <div class="tips">D3 modules comments are easily integrated (module preferences) and managed through D3Forum.</div>
+
+        <h4 class="help-rel"><i class="i-help"></i> Related content</h4>
+        <ul>
+            <li><a href="<{$help}>=d3forum#help-forum-integration">D3Forum Comments Integration ⭢</a>
+        </ul>
+
+    </section>
+
+    <section id="help-images">
+
+        <h3>Image Management</h3>
+
+        <p>Here you can create and edit categories, set the maximum file size, maximum image width and height, display and hide categories and images.</p>
+        <p>The following options are available when creating a category:</p>
+
+        <div class="tips">X-elFinder overrides the Image management, and it is integrated and extended to manage local and cloud storage services such as Google Drive, OneDrive or Dropbox.</div>
+
+        <h4 class="help-rel"><i class="i-help"></i> Related content</h4>
+        <ul>
+            <li><a href="<{$help}>=xelfinder">X-elFinder File Manager ⭢</a>
+        </ul>
+
+    </section>
+
+    <section id="help-language">
+
+        <h3>Language</h3>
+
+        <p>The built-in language manager aims to facilitate the localization process and branding customization.
+            It leverages the adaptability of modular architecture to align UI elements with a brand's tone and voice.
+
+            <h3>Character set</h3>
+
+        <p>UTF-8 Unicode is the common character encoding method and the default character set for distributed languages, including english, fr_utf8, ja_utf8, pt_utf8, ru_utf8.
+
+        <p>Edit language translation</p>
+        <p>You can override a specific language string without modifying any language files.</p>
+
+        <h4 class="help-rel"><i class="i-help"></i> Related content</h4>
+        <ul>
+            <li><a href="<{$help}>=altsys#help-language">Components Language Localisation ⭢</a>
+        </ul>
+
+    </section>
+
+    <section id="help-modules">
+
+        <h3>Module Management</h3>
+
+        <p>The functions necessary for the configuration and management of your Web Application are grouped into eight required modules :
+            Components, System, Render, User Groups, Profile, Cache, Message and Protector.
+
+        <p>The recommended modules are not mandatory, but they extend the application's functionality and content editing features :
+            CKEditor, D3Forum, Pico and X-Update Manager.
+
+        <p>Active modules are represented by the icons in the vertical <b>sidebar</b> of the Control Panel.</p>
+
+        <p>Modules mostly work independently of one another.
+            However, in a number of cases the functionality of certain modules depends on the capabilities of other modules.
+            For example, the module <b>Pico</b> relies on the following dependencies : Components (altsys library) to manage blocks, templates and language, and D3Forum for comments-integration.</p>
+
+        <h4><i class="i-task"></i> Module Installation</h4>
+
+        <p>You can easily get and deploy compatible modules with X-Update manager. Otherwise, you can install modules manually:
+        <ul>
+            <li>Download a compressed archive, extract and upload to your server using FTP<br>
+            <li>Upload a compressed archive and extract files with your hosting file manager
+        </ul>
+        <div class="confirm">The files and folders of the compressed archive are based on the directory structure of the current version.</div>
+        <p>Click "install module" to get a list of available modules.</p>
+        <ol>
+            <li>Click the "Install" button of the module card.
+            <li>Follow the steps in the installation wizard.
+            <li>Configure the module's preferences
+            <li>Edit module order, cache and User Groups permissions
+        </ol>
+        <p>Usually the module instructions are available in the contextual help of each page, and you can access the documentation at any time from the admin sidebar.
+            Otherwise, refer to the module's readme.txt file for specifications.</p>
+
+        <h4><i class="i-task"></i> Module Active</h4>
+        <p>You can activate or deactivate a module or several modules in bulk by using the switch on the card of each module.</p>
+
+        <h4><i class="i-task"></i> Module Uninstall</h4>
+        <p>Uninstalling a module removes the module from Module Management, and all related blocks, templates, notifications and settings from database.</p>
+        <p>It is recommended to delete unused module files on the server.</p>
+
+        <h4><i class="i-task"></i> Module Edit</h4>
+        <table class="outer">
+            <tbody>
+            <tr><td>Name</td><td>You can rename a module to provide a more meaningful name according to your needs.</td></tr>
+            <tr><td>Module directory</td><td>The module directory specifies where the source files are located. It is used for source referencing and as a URL segment for the resources that belong to the module.</td></tr>
+            <tr><td>Module description</td><td>Brief summary of the module and its features or supported components.</td></tr>
+            <tr><td>Version</td><td>Module versioning system used for upgrades and to indicate backward compatibility.</td></tr>
+            <tr><td>MID</td><td>Module identifier used to identify the current module by the system.</td></tr>
+            <tr><td>Last update</td><td>Indicates last changes made to an instance; used to upgrade to the most recent released version.</td></tr>
+            <tr><td>Order</td><td>Changes the order displayed in the frontend "Main Menu" and Control Panel.</td></tr>
+            <tr><td>Target Group (Admin Rights)</td><td>User groups that can administer the module.</td></tr>
+            <tr><td>Target Group (Read Rights)</td><td>User groups that can access the content as reader.</td></tr>
+            <tr><td>Module-wide Cache</td><td>Specify the cache duration to improve app performance. See section cache time-to-live (TTL).</td></tr>
+            </tbody>
+        </table>
+
+        <h4 class="help-rel"><i class="i-help"></i> Related content</h4>
+        <ul>
+            <li><a href="<{$help}>=stdCache">Standard Cache Management ⭢</a>
+            <li><a href="<{$help}>=user">User Groups Permissions ⭢</a>
+        </ul>
+
+    </section>
+
+    <section id="help-themes">
+
+        <h3>Themes management</h3>
+
+        <h4>Default Theme</h4>
+
+        <p>Theme Management allows you to simple click the "Select" button next to the theme
+            that you want to use as the default theme or main theme of your site.
+
+        <h4><i class="i-task"></i> Allow Users to select Theme</h4>
+
+        <p>Any theme that is "checked" in the "Control" column, will be available to users in the block "Themes".
+
+        <p>If you install the "Themes" block and grant users permission, they can then select their favorite theme and customize the look and feel of the website.</p>
+
+        <h4 class="help-rel"><i class="i-help"></i> Related content</h4>
+        <ul>
+            <li><a href="<{$help}>=legacyRender">Render Smarty Engine ⭢</a>
+        </ul>
+
+    </section>
+
+    <section id="help-smilies">
+
+        <h3>Smilies Management</h3>
+
+        <p>An emoticon is a short sequence of keyboard letters and symbols, usually emulating a facial expression,
+            that complements a text message. However, you can use this feature to replace any keywords with an image,
+            for example, logotype or math formula.</p>
+
+        <p>Checked items are available in the insert smilies popup of the WYSIWYG HTML editor.</p>
+
+        <h4><i class="i-task"></i> Smilies Actions</h4>
+        <ul>
+            <li>Add, Edit, Delete, Display</li>
+            <li>Code, Image and description</li>
+            <li>Smiles Batch-Upload (tar.gz or zip)</li>
+        </ul>
+
+        <h4><i class="i-task"></i> Disable Emojis</h4>
+        <p>Uncheck the option [Display] if you don't want your :) to turn into an image (smilie).</p>
+
+        <div class="tips">
+            <p>XOOPSCube file type(s) property allows you to specify the file types that the user can upload using the File field.</p>
+            <p>For example, if you set the values for this property as "gif, jpg, png" the user will only be able to upload GIF, JPG and PNG graphic images.</p>
+        </div>
+
+    </section>
+
+    <section id="help-word-censor">
+
+        <h3>Word Censor</h3>
+
+        <p>Control Panel > Preferences > Word Censorship</p>
+
+        <p>This section of the Control Panel allows you to enable word censoring.
+            It is also where you define the list of censored words.</p>
+        <p>The profanity filter, sometimes referred to as just "filter" or "censor", is a feature typically used on
+            forums and comments that automatically scans users' posts as they are submitted and automatically changes
+            or censors particular words.</p>
+
+        <h4><i class="i-task"></i> Enable censorship?</h4>
+        <p>You may enable or disable word censoring. If you select “Yes”, the system will replace any specified words
+            in channel entries, comments, forum posts, etc. according to your preference below.</p>
+
+        <h4><i class="i-task"></i> Replacement characters</h4>
+        <p>You may optionally specify a word or phrase to be used when replacing censored words.
+            For example, if you set “#OOPS#” as your replacement word, and “shucks” is in your censored list,
+            then anytime “shucks” is used it will be replaced with “#OOPS#”.
+            If you do not set this preference, default "#OOPS#" will be used for each word that is censored.</p>
+
+        <h4><i class="i-task"></i> Words to censor</h4>
+
+        <p>Enter the censored words in the textarea using a common delimiter character "|" (pipe) to separate the values.</p>
+        <p>Set the characters replacing all the censored words in the input field "censor-replace".</p>
+
+        <div class="tips">Check the GitHub repository of Shutterstock list of bad words used for filtering<br>
+            <a href="https://github.com/shutterstock/List-of-Dirty-Naughty-Obscene-and-Otherwise-Bad-Words" target="_blank">List of Dirty, Naughty, Obscene, and Otherwise Bad Words ⭧</a>
+        </div>
+
+    </section>
+
+    <section id="help-development">
+
+        <h3>Development</h3>
+
+        <ul>
+            <li>The XCL version 2.3.x ensures compatibility with Legacy modules, OOP or Object Oriented Programming, class abstraction and interfaces.
+            <li>In 2017 major PHP projects started bug fixing and code refactoring to PHP 7.
+            <li>In computer programming and software design, code refactoring is the process of restructuring existing computer code—changing the factoring—without
+                changing its external behavior.
+            <li>Refactoring is intended to improve the design, structure, and implementation of the software, while preserving its functionality.
+            <li>Moreover, the design and code refactoring of XCL primarily provides backward compatibility and updates modules based on Duplicatable V3 (D3) architecture.
+            <li>Content creation, filemanager with cloud storage management, WYSIWYG editor and X-Update to get and deploy from a simple user interface.
+            <li>You can find out more information in <b>Help</b> menu link about features like wizard to install modules, related menus, localization, permissions and
+                the theme engine.</li>
+        </ul>
+
+        <h3>Migration guide XOOPSCube Legacy</h3>
+
+        <ul>
+            <li>Please refer to the <a href="<{'xoops2.html'|helpurl}>">documentation. ⭢</a></li>
+        </ul>
+
+        <h4>ToDo of XCL 2.3.x for the next version</h4>
+
+        <ul>
+            <li>Preview feature in theme and template management.</li>
+            <li>Users privacy and personal data download.</li>
+            <li>IIS may not install modules that have a SQL file.
+            <li>If you find such issues, please report to project's <a href="https://github.com/xoopscube/legacy/issues">bug tracker  ⭧</a>.
+        </ul>
+
+        <table class="outer">
+            <tbody>
+            <tr>
+                <td>Bundle Package</td>
+                <td> XCL 2.4.0</td>
+            </tr>
+            <tr>
+                <td>Module name</td>
+                <td>Legacy [ core system ]</td>
+            </tr>
+            <tr>
+                <td>Type</td>
+                <td>XCube module - X2 compatible</td>
+            </tr>
+            <tr>
+                <td>Level</td>
+                <td>Required</td>
+            </tr>
+            <tr>
+                <td>Author</td>
+                <td>Update Nuno Luciano aka gigamaster, XCL23</td>
+            </tr>
+            <tr>
+                <td>Author</td>
+                <td>Kazuhisa Minato, Core developer</td>
+            </tr>
+            <tr>
+                <td>Copyright </td>
+                <td>(c) 2007-2024 The XOOPSCube Project, Kazuhisa Minato, Authors</td>
+            </tr>
+            <tr>
+                <td>license</td>
+                <td>GPL 2.0</td>
+            </tr>
+            <tr>
+                <td>🌐 Repository URL</td>
+                <td><a href="https://github.com/xoopscube/legacy" target="_blank">https://github.com/xoopscube/legacy ⭧</a></td>
+            </tr>
+            </tbody>
+        </table>
+
+    </section>
+
+</article>
+</div>

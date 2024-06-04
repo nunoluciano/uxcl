@@ -1,96 +1,108 @@
-<!-- start module contents -->
-<{if $mod_config.show_breadcrumbs}>
-<div class="d3f_breadcrumbs">
-	<a href="<{$mod_url}>/index.php"><{$smarty.const._MD_D3FORUM_TOP}></a>&nbsp;&gt;&nbsp;
-	<{$smarty.const._MD_D3FORUM_TITLE_SEARCH}>
-</div>
-<{/if}>
+<{* Dev-Mode Toggle *}>
+<{if $xoops_isadmin}><div class="ui-dev-mode"><{$smarty.template}></div><{/if}>
 
-<h1 class="d3f_title"><{$smarty.const._MD_D3FORUM_TITLE_SEARCH}></h1>
+<{if $mod_config.show_breadcrumbs}>
+<nav aria-label="breadcrumb">
+    <ul>
+        <li><a href="<{$xoops_url}>/"><img class="svg home" src="<{$xoops_url}>/images/icons/home.svg" alt=""></a>
+        <li><a href="<{$mod_url}>/index.php"><img class="svg forum" src="<{$xoops_url}>/images/icons/forum_1.svg" alt=""> <{$smarty.const._MD_D3FORUM_TOP}></a>
+        <li class="active" aria-current="page"><{$smarty.const._MD_D3FORUM_TITLE_SEARCH}></li>
+    </ul>
+</nav>
+<{/if}>
 
 
 <form name="search" action="<{$mod_url}>/index.php" method="get">
+    <input type="hidden" name="page" value="search">
 
-<p style="display:none;"><input type="hidden" name="page" value="search" /></p>
+<article id="search-advanced">
+    <header>
+    <h2><{$smarty.const._MD_D3FORUM_TITLE_SEARCH}></h2>
+    </header>
 
-<table class="outer search d3f_form_table">
-	<tr>
-		<td class="head"><label for="keywords"><{$smarty.const._MD_D3FORUM_LABEL_KEYWORDS}></label></th>
-		<td class="even">
-			<input type="text" name="keyword" id="keywords" size="48" value="<{$keyword}>" />
-			<fieldset>
-				<legend><{$smarty.const._MD_D3FORUM_LEGEND_WORDSMEANING}></legend>
-				<{html_radios name="andor" options=$andor_options selected=$andor_selected}>
-			</fieldset>
+    <div id="search-results">
+        <{if $show_results}>
 
-			<fieldset>
-				<legend><{$smarty.const._MD_D3FORUM_LEGEND_SEARCHIN}></legend>
-				<{html_radios name="target" options=$target_options selected=$target_selected}>
-			</fieldset>
+        <h3><{$smarty.const._MD_D3FORUM_TITLE_SEARCHRESULTS}></h3>
 
-		</td>
-	</tr>
-	<tr>
-		<td class="head"><{$smarty.const._MD_D3FORUM_FORUM}></th>
-		<td class="even">
-			<select name="forum_id">
-				<option value="">-<{$smarty.const._MD_D3FORUM_WHOLE}>-</option>
-				<{$forum_jumpbox_options}>
-			</select>
-		</td>
-	</tr>
-	<tr>
-		<td class="head"><label for="searchin_poster"><{$smarty.const._MD_D3FORUM_POSTER}></label></th>
-		<td class="even"><input type="text" name="search_username" id="searchin_poster" value="<{$uname}>" /></td>
-	</tr>
-	<tr>
-		<td class="head"><{$smarty.const._MD_D3FORUM_LABEL_SORTBY}></th>
-		<td class="even"><{html_radios name="sortby" options=$sortby_options selected=$sortby_selected}></td>
-	</tr>
-</table>
-<p class="d3f_submit"><input type="submit" name="submit" value="<{$smarty.const._MD_D3FORUM_BTN_SEARCH}>" /></p>
+        <{if $results}>
+
+        <div class="tips"><{$hits_count|string_format:$smarty.const._MD_D3FORUM_FMT_SEARCHHITS}></div>
+
+        <table class="outer searchresult">
+            <thead>
+            <tr>
+                <th abbr="<{$smarty.const._MD_D3FORUM_FORUM}>"><{$smarty.const._MD_D3FORUM_FORUM}></th>
+                <th abbr="<{$smarty.const._MD_D3FORUM_SUBJECT}>"><{$smarty.const._MD_D3FORUM_SUBJECT}></th>
+                <th abbr="<{$smarty.const._MD_D3FORUM_POSTER}>"><{$smarty.const._MD_D3FORUM_POSTER}></th>
+                <th abbr="<{$smarty.const._MD_D3FORUM_VIEWS}>"><{if $mod_config.use_vote}><{$smarty.const._MD_D3FORUM_VOTEPOINTAVG}><{else}><{$smarty.const._MD_D3FORUM_VIEWS}><{/if}></th>
+                <th abbr="<{$smarty.const._MD_D3FORUM_ON}>"><{$smarty.const._MD_D3FORUM_ON}></th>
+            </tr>
+            </thead>
+            <{* ----- start search results *}>
+            <{foreach from=$results item=post}>
+            <tr>
+                <td><a href="<{$mod_url}>/index.php?forum_id=<{$post.forum_id}>"><{$post.forum_title}></a></td>
+                <td>
+                    <a href="<{$mod_url}>/index.php?post_id=<{$post.post_id}>" data-tooltip="<{$post.subject}> - <{$post.body_length|string_format:$smarty.const._MD_D3FORUM_FMT_BYTE}>">
+                        <img class="svg posticon" src="<{$xoops_url}>/images/icons/posticon<{$post.icon}>.svg"><{$post.subject|truncate:28}></a>
+                    <{* <span class="badge"><{$post.body_length|string_format:$smarty.const._MD_D3FORUM_FMT_BYTE}></span> *}>
+                </td>
+                <td><a href="<{$xoops_url}>/userinfo.php?uid=<{$post.poster_uid}>"><{$post.poster_uname}></a></td>
+                <td><span class="badge"><{if $mod_config.use_vote}><{$post.votes_avg|string_format:"%.2f"}>/<{$post.votes_count}><{else}><{$post.topic_views}><{/if}></span></td>
+                <td><span class="badge"><{$post.post_time_formatted}></span></td>
+            </tr>
+            <{/foreach}>
+            <{* ----- end search results *}>
+        </table>
+        <hr>
+        <{else}>
+
+        <{* no hit *}>
+        <div class="alert warning">
+            <p><{$smarty.const._MD_D3FORUM_MSG_NOMATCH}></p>
+        </div>
+
+        <{/if}>
+
+        <{/if}>
+    </div>
+
+    <h4><label for="keywords"><img class="svg search-adv" src="<{$xoops_url}>/images/icons/search-adv.svg"> <{$smarty.const._MD_D3FORUM_LABEL_KEYWORDS}></label></h4>
+    <input type="text" name="keyword" id="keywords" size="44" value="<{$keyword}>">
+
+    <fieldset>
+        <legend><{$smarty.const._MD_D3FORUM_LEGEND_WORDSMEANING}></legend>
+        <{* Available option : separator='<br>' *}>
+        <{html_radios class="form-check-input position-static" name="andor" options=$andor_options selected=$andor_selected separator=''}>
+    </fieldset>
+
+    <fieldset>
+        <legend><{$smarty.const._MD_D3FORUM_LEGEND_SEARCHIN}></legend>
+        <{html_radios class="form-check-input position-static" name="target" options=$target_options selected=$target_selected separator=''}>
+    </fieldset>
+
+    <h4><label for="forum_id"><img class="svg forum" src="<{$xoops_url}>/images/icons/forum_0.svg"> <{$smarty.const._MD_D3FORUM_FORUM}></label></h4>
+    <select id="forum_id">
+        <option value="">-<{$smarty.const._MD_D3FORUM_WHOLE}>-</option>
+        <{$forum_jumpbox_options}>
+    </select>
+
+    <h4><label for="searchin_poster"><img class="svg user" src="<{$xoops_url}>/images/icons/user.svg"> <{$smarty.const._MD_D3FORUM_POSTER}></label></h4>
+    <input type="text" name="search_username" id="searchin_poster" placeholder="uname" value="<{$uname}>">
+
+    <fieldset>
+        <legend><{$smarty.const._MD_D3FORUM_LABEL_SORTBY}></legend>
+        <{html_radios class="form-check-input" name="sortby" options=$sortby_options selected=$sortby_selected separator=''}>
+    </fieldset>
+
+    <footer>
+        <button type="submit" role="button" class="submit" name="submit" value="<{$smarty.const._MD_D3FORUM_BTN_SEARCH}>">
+            <img class="svg search" src="<{$xoops_url}>/images/icons/search.svg"> <{$smarty.const._MD_D3FORUM_BTN_SEARCH}>
+        </button>
+    </footer>
+
+</article>
 
 </form>
 
-
-<{if $show_results}>
-
-<h2 class="itemHead"><{$smarty.const._MD_D3FORUM_TITLE_SEARCHRESULTS}></h2>
-
-<{if $results}>
-
-<p><{$hits_count|string_format:$smarty.const._MD_D3FORUM_FMT_SEARCHHITS}></p>
-
-<table class="outer searchresult d3f_table">
-<thead>
-<tr>
-	<td class="head" abbr="<{$smarty.const._MD_D3FORUM_FORUM}>"><{$smarty.const._MD_D3FORUM_FORUM}></th>
-	<td class="head" abbr="<{$smarty.const._MD_D3FORUM_SUBJECT}>"><{$smarty.const._MD_D3FORUM_SUBJECT}></th>
-	<td class="head" abbr="<{$smarty.const._MD_D3FORUM_POSTER}>"><{$smarty.const._MD_D3FORUM_POSTER}></th>
-	<td class="head" abbr="<{$smarty.const._MD_D3FORUM_VIEWS}>"><{if $mod_config.use_vote}><{$smarty.const._MD_D3FORUM_VOTEPOINTAVG}><{else}><{$smarty.const._MD_D3FORUM_VIEWS}><{/if}></th>
-	<td class="head" abbr="<{$smarty.const._MD_D3FORUM_ON}>"><{$smarty.const._MD_D3FORUM_ON}></th>
-</tr>
-</thead>
-<!-- start search results -->
-<{foreach from=$results item=post}>
-<tr>
-	<td class="even d3f_topictitle"><a href="<{$mod_url}>/index.php?forum_id=<{$post.forum_id}>"><{$post.forum_title}></a></td>
-	<td class="odd d3f_topictitle"><a href="<{$mod_url}>/index.php?post_id=<{$post.post_id}>"><img src="<{$mod_imageurl}>/posticon<{$post.icon}>.gif" /><{$post.subject}></a> <{$post.body_length|string_format:$smarty.const._MD_D3FORUM_FMT_BYTE}></td>
-	<td class="even"><a href="<{$xoops_url}>/userinfo.php?uid=<{$post.poster_uid}>"><{$post.poster_uname}></a></td>
-	<td class="odd"><{if $mod_config.use_vote}><{$post.votes_avg|string_format:"%.2f"}>/<{$post.votes_count}><{else}><{$post.topic_views}><{/if}></td>
-	<td class="even"><{$post.post_time_formatted}></td>
-</tr>
-<{/foreach}>
-<!-- end search results -->
-</table>
-
-<{else}>
-
-<{* no hit *}>
-<p><{$smarty.const._MD_D3FORUM_MSG_NOMATCH}></p>
-
-<{/if}>
-
-<{/if}>
-
-<!-- end module contents -->

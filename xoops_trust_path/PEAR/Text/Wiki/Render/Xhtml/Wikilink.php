@@ -4,8 +4,8 @@ class Text_Wiki_Render_Xhtml_Wikilink extends Text_Wiki_Render {
     
     var $conf = array(
         'pages' => array(), // set to null or false to turn off page checks
-        'view_url' => 'http://example.com/index.php?page=%s',
-        'new_url'  => 'http://example.com/new.php?page=%s',
+        'view_url' => 'https://example.com/index.php?page=%s',
+        'new_url'  => 'https://example.com/new.php?page=%s',
         'new_text' => '?',
         'new_text_pos' => 'after', // 'before', 'after', or null/false
         'css' => null,

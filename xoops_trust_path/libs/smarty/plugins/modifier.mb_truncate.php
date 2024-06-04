@@ -14,7 +14,7 @@
  * Purpose:  Truncate a string to a certain length if necessary,
  *			 optionally splitting in the middle of a word, and
  *			 appending the $etc string or inserting $etc into the middle.
- * @link http://smarty.php.net/manual/en/language.modifier.truncate.php
+ * @link https://smarty.php.net/manual/en/language.modifier.truncate.php
  *			truncate (Smarty online manual)
  * @param string
  * @param integer
@@ -28,11 +28,11 @@ function smarty_modifier_mb_truncate($string, $length = 80, $etc = '...', $break
 	if ($length == 0){
 		return '';
 	}
-	$encode = 'EUC-JP';
-	
+	$encode = defined('_CHARSET')? _CHARSET : 'UTF-8';
+
 	// decode
-	$string = preg_replace(array("/&gt;/i", "/&lt;/i", "/&quot;/i", "/&#039;/i"), array(">", "<", "\"", "'"), $string);
-	
+	$string = preg_replace(["/&gt;/i", "/&lt;/i", "/&quot;/i", "/&#039;/i"], [">", "<", "\"", "'"], $string);
+
 	if (mb_strlen($string, $encode) > $length) {
 		$length -= mb_strlen($etc, $encode);
 		if (!$break_words && !$middle) {

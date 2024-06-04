@@ -1,13 +1,22 @@
 <?php
+
 if( defined( 'FOR_XOOPS_LANG_CHECKER' ) ) $mydirname = 'd3forum';
 $constpref = '_MI_' . strtoupper( $mydirname );
 if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( $constpref.'_LOADED' ) ) {
 
-
+// Appended by Xoops Language Checker -GIJOE- in 2015-04-24 14:09:40
+define($constpref.'_USENAME','display name');
+define($constpref.'_USENAMEDESC','which name to use display name \'uname\'(user ID) or \'name\'(Real name). <br /> xoops default is \'uname\'(user ID)');
+define($constpref.'_USENAME_UNAME','use\'uname\'(user ID)');
+define($constpref.'_USENAME_NAME','use\'name\'(Real name)');
+define($constpref.'_RSS_SHOW_HIDDEN','RSS Show hidden topics');
+define($constpref.'_RSS_SHOW_HIDDENDSC','Show hidden (comment integrated) topic title.');
+define($constpref.'_RSS_HIDDEN_TITLE','RSS Title of hidden topic');
+define($constpref.'_RSS_HIDDEN_TITLEDSC','Own title uses when empty value.');
 
 // Appended by Xoops Language Checker -GIJOE- in 2007-09-28 15:55:33
 define($constpref.'_DEFAULT_OPTIONS','Default checked in post form');
-define($constpref.'_DEFAULT_OPTIONSDSC','List checked options separated by comma(,).<br />eg) smiley,xcode,br,number_entity<br />You can add these options: special_entity html attachsig u2t_marked');
+define($constpref.'_DEFAULT_OPTIONSDSC','List checked options separated by comma(,).<br>eg) smiley,xcode,br,number_entity<br>You can add these options: special_entity html attachsig u2t_marked');
 
 // Appended by Xoops Language Checker -GIJOE- in 2007-09-27 16:50:42
 define($constpref.'_BODY_EDITOR','Body Editor');
@@ -16,6 +25,7 @@ define($constpref.'_BODY_EDITORDSC','WYSIWYG editor will be enabled under only f
 // Appended by Xoops Language Checker -GIJOE- in 2007-09-26 17:55:48
 define($constpref.'_ADMENU_POSTHISTORIES','Histories');
 define($constpref.'_SHOW_BREADCRUMBS','Display breadcrumbs');
+define($constpref.'_SHOW_RSS','Display link RSS');
 define($constpref.'_ANTISPAM_GROUPS','Groups should be checked anti-SPAM');
 define($constpref.'_ANTISPAM_GROUPSDSC','Usually set all blank.');
 define($constpref.'_ANTISPAM_CLASS','Class name of anti-SPAM');
@@ -41,7 +51,7 @@ define($constpref.'_ADMENU_MYTPLSADMIN','Modelos');
 
 // configurations
 define($constpref.'_TOP_MESSAGE','Mensagem no inicio do forum'); //
-define($constpref.'_TOP_MESSAGEDEFAULT','<h1 class="d3f_title">Inicio do Forum</h1><p class="d3f_welcome">Para começar a visualizar as mensagens, selecionar uma categoria ou o forum de que você queira visitar na seleção abaixo.</p>'); //
+define($constpref.'_TOP_MESSAGEDEFAULT','<h2 class="d3f_title">Inicio do Forum</h2><p class="d3f_welcome">Para começar a visualizar as mensagens, selecionar uma categoria ou o forum de que você queira visitar na seleção abaixo.</p>'); //
 define($constpref.'_ALLOW_HTML','Permitir HTML'); //
 define($constpref.'_ALLOW_HTMLDSC','Não coloque SIM, ocasionalmente. Pois isto pode conter uma vunerabilidade e que um usuario coloque um script malicioso.'); //
 define($constpref.'_ALLOW_TEXTIMG','Permitir visualzar as imagens externas na mensagem'); //
@@ -121,4 +131,3 @@ define($constpref.'_NOTIFY_GLOBAL_WAITING', 'Requerendo aprovação');
 define($constpref.'_NOTIFY_GLOBAL_WAITINGCAP', 'Notificar-me de novas mensagens que requerem a aprovação. Somente para administrador.'); //
 define($constpref.'_NOTIFY_GLOBAL_WAITINGSBJ', '[{X_SITENAME}] {X_MODULE}: Requerendo aprovação');
 }
-?>

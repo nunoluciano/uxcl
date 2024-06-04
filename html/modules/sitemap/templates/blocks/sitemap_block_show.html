@@ -1,0 +1,16 @@
+<{if $xoops_isadmin}><div class="ui-dev-mode"><{$smarty.template}></div><{/if}>
+
+<div id="sitemap_block">
+    <p>
+    <a href="<{$xoops_url}>"><span class="icon"><img class="svg" src="<{$xoops_url}>/images/icons/home.svg" width="1em" height="1em" alt="home"></span> 
+    <{$smarty.const._MB_SITEMAP_HOME}></a>
+    </p>
+
+    <{foreach name=i item=module from=$block.sitemap.modules}>
+    <{if $block.cols > 0}>
+    <{include file="db:sitemap_inc_eachmodule.html" class="grid grid-`$block.div_width`;"}>
+    <{else}>
+    <{include file="db:sitemap_inc_eachmodule.html" default_style="margin:10px;"}>
+    <{/if}>
+    <{/foreach}>
+</div>

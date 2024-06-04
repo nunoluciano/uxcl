@@ -11,7 +11,7 @@ CREATE TABLE category_permissions (
   KEY (cat_id),
   KEY (uid),
   KEY (groupid)
-) ENGINE=MyISAM;
+) ENGINE=InnoDB;
 
 INSERT INTO category_permissions (cat_id,uid,groupid,permissions) VALUES (0,NULL,1,'a:8:{s:8:"can_read";i:1;s:12:"can_readfull";i:1;s:8:"can_post";i:1;s:8:"can_edit";i:1;s:10:"can_delete";i:1;s:18:"post_auto_approved";i:1;s:12:"is_moderator";i:1;s:19:"can_makesubcategory";i:1;}');
 INSERT INTO category_permissions (cat_id,uid,groupid,permissions) VALUES (0,NULL,2,'a:8:{s:8:"can_read";i:1;s:12:"can_readfull";i:1;s:8:"can_post";i:0;s:8:"can_edit";i:0;s:10:"can_delete";i:0;s:18:"post_auto_approved";i:0;s:12:"is_moderator";i:0;s:19:"can_makesubcategory";i:0;}');
@@ -20,9 +20,9 @@ INSERT INTO category_permissions (cat_id,uid,groupid,permissions) VALUES (0,NULL
 CREATE TABLE categories (
   cat_id smallint(5) unsigned NOT NULL,
   cat_permission_id int(10) unsigned NOT NULL default 0,
-  cat_vpath varchar(255),
+  cat_vpath varchar(191),
   pid smallint(5) unsigned NOT NULL default 0,
-  cat_title varchar(255) NOT NULL default '',
+  cat_title varchar(191) NOT NULL default '',
   cat_desc mediumtext,
   cat_depth_in_tree smallint(5) NOT NULL default 0,
   cat_order_in_tree smallint(5) NOT NULL default 0,
@@ -39,14 +39,14 @@ CREATE TABLE categories (
   KEY (cat_permission_id),
   KEY (cat_weight),
   KEY (pid)
-) ENGINE=MyISAM;
+) ENGINE=InnoDB;
 
 INSERT INTO categories (cat_id,pid,cat_title) VALUES (0,0xffff,'TOP');
 
 CREATE TABLE contents (
   content_id int(10) unsigned NOT NULL auto_increment,
   permission_id int(10) unsigned NOT NULL default 0,
-  vpath varchar(255),
+  vpath varchar(191),
   cat_id smallint(5) unsigned NOT NULL default 0,
   weight smallint(5) NOT NULL default 0,
   created_time int(10) NOT NULL default 0,
@@ -57,8 +57,8 @@ CREATE TABLE contents (
   poster_ip varchar(15) NOT NULL default '',
   modifier_uid mediumint(8) unsigned NOT NULL default 0,
   modifier_ip varchar(15) NOT NULL default '',
-  subject varchar(255) NOT NULL default '',
-  subject_waiting varchar(255) NOT NULL default '',
+  subject varchar(191) NOT NULL default '',
+  subject_waiting varchar(191) NOT NULL default '',
   locked tinyint(1) NOT NULL default 0,
   visible tinyint(1) NOT NULL default 1,
   approval tinyint(1) NOT NULL default 1,
@@ -92,7 +92,7 @@ CREATE TABLE contents (
   KEY (visible),
   KEY (votes_sum),
   KEY (votes_count)
-) ENGINE=MyISAM;
+) ENGINE=InnoDB;
 
 CREATE TABLE content_votes (
   vote_id int(10) unsigned NOT NULL auto_increment,
@@ -104,12 +104,12 @@ CREATE TABLE content_votes (
   PRIMARY KEY (vote_id),
   KEY (content_id),
   KEY (vote_ip)
-) ENGINE=MyISAM;
+) ENGINE=InnoDB;
 
 CREATE TABLE content_histories (
   content_history_id int(10) unsigned NOT NULL auto_increment,
   content_id int(10) unsigned NOT NULL default 0,
-  vpath varchar(255),
+  vpath varchar(191),
   cat_id smallint(5) unsigned NOT NULL default 0,
   created_time int(10) NOT NULL default 0,
   modified_time int(10) NOT NULL default 0,
@@ -117,7 +117,7 @@ CREATE TABLE content_histories (
   poster_ip varchar(15) NOT NULL default '',
   modifier_uid mediumint(8) unsigned NOT NULL default 0,
   modifier_ip varchar(15) NOT NULL default '',
-  subject varchar(255) NOT NULL default '',
+  subject varchar(191) NOT NULL default '',
   htmlheader mediumtext,
   body mediumtext,
   filters text,
@@ -128,12 +128,12 @@ CREATE TABLE content_histories (
   KEY (created_time),
   KEY (modified_time),
   KEY (modifier_uid)
-) ENGINE=MyISAM;
+) ENGINE=InnoDB;
 
 CREATE TABLE content_extras (
   content_extra_id int(10) unsigned NOT NULL auto_increment,
   content_id int(10) unsigned NOT NULL default 0,
-  extra_type varchar(255) NOT NULL default '',
+  extra_type varchar(191) NOT NULL default '',
   created_time int(10) NOT NULL default 0,
   modified_time int(10) NOT NULL default 0,
   data mediumtext,
@@ -141,10 +141,10 @@ CREATE TABLE content_extras (
   KEY (content_id),
   KEY (extra_type),
   KEY (created_time)
-) ENGINE=MyISAM;
+) ENGINE=InnoDB;
 
 CREATE TABLE tags (
-  label varchar(255) NOT NULL default '',
+  label varchar(191) NOT NULL default '',
   weight int(10) unsigned NOT NULL default 0,
   count int(10) unsigned NOT NULL default 0,
   content_ids mediumtext,
@@ -154,6 +154,6 @@ CREATE TABLE tags (
   KEY (count),
   KEY (weight),
   KEY (created_time)
-) ENGINE=MyISAM;
+) ENGINE=InnoDB;
 
 

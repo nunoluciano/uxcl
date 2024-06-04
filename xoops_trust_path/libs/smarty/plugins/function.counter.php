@@ -13,7 +13,7 @@
  * Name:     counter<br>
  * Purpose:  print out a counter value
  * @author Monte Ohrt <monte at ohrt dot com>
- * @link http://smarty.php.net/manual/en/language.function.counter.php {counter}
+ * @link https://smarty.php.net/manual/en/language.function.counter.php {counter}
  *       (Smarty online manual)
  * @param array parameters
  * @param Smarty
@@ -21,16 +21,11 @@
  */
 function smarty_function_counter($params, &$smarty)
 {
-    static $counters = array();
+    static $counters = [];
 
-    $name = (isset($params['name'])) ? $params['name'] : 'default';
+    $name = $params['name'] ?? 'default';
     if (!isset($counters[$name])) {
-        $counters[$name] = array(
-            'start'=>1,
-            'skip'=>1,
-            'direction'=>'up',
-            'count'=>1
-            );
+        $counters[$name] = ['start'=>1, 'skip'=>1, 'direction'=>'up', 'count'=>1];
     }
     $counter =& $counters[$name];
 
@@ -45,7 +40,7 @@ function smarty_function_counter($params, &$smarty)
     if (isset($counter['assign'])) {
         $smarty->assign($counter['assign'], $counter['count']);
     }
-    
+
     if (isset($params['print'])) {
         $print = (bool)$params['print'];
     } else {
@@ -61,20 +56,18 @@ function smarty_function_counter($params, &$smarty)
     if (isset($params['skip'])) {
         $counter['skip'] = $params['skip'];
     }
-    
+
     if (isset($params['direction'])) {
         $counter['direction'] = $params['direction'];
     }
 
-    if ($counter['direction'] == "down")
+    if ($counter['direction'] == "down") {
         $counter['count'] -= $counter['skip'];
-    else
+    }
+    else {
         $counter['count'] += $counter['skip'];
-    
+    }
+
     return $retval;
-    
+
 }
-
-/* vim: set expandtab: */
-
-?>

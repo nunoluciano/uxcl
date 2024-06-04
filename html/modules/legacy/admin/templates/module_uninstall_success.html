@@ -1,0 +1,41 @@
+<div class="ui-dev-mode"><{$smarty.template}></div>
+
+<nav class="ui-breadcrumbs" aria-label="breadcrumb">
+    <a href="<{$xoops_url}>/admin.php"><{$smarty.const._CPHOME}></a>
+    &raquo;&raquo; <a href="./index.php"><{$smarty.const._MI_LEGACY_NAME}></a>
+    &raquo;&raquo; <a href="./index.php?action=ModuleList"><{$smarty.const._MI_LEGACY_MENU_MODULELIST}></a>
+    &raquo;&raquo; <span class="page-title" aria-current="page"><{$smarty.const._AD_LEGACY_LANG_MODUNINSTALL_SUCCESS}></span>
+</nav>
+
+
+<h2><{$smarty.const._AD_LEGACY_LANG_MODUNINSTALL_SUCCESS}></h2>
+
+
+
+<h4><{$smarty.const._AD_LEGACY_LANG_MODUNINSTALL_LOG}></h4>
+
+<div class="ui-card-full">
+    <div class="sqlDelete">
+        <ul>
+            <{foreach item=msg from=$log}>
+            <{if $msg.type == "error"}>
+            <li class="message-warning"><{$msg.message|xoops_escape}></li>
+            <{elseif $msg.type == "warning"}>
+            <li class="message-warning"><{$msg.message|xoops_escape}></li>
+            <{else}>
+            <li class="legacy_module_message"><{$msg.message|xoops_escape}></li>
+            <{/if}>
+            <{/foreach}>
+        </ul>
+    </div>
+</div>
+
+<p>
+	<a href="index.php?action=ModuleList" class="button">
+		<img class="svg" src="<{'icons/icon-module-open.svg'|theme}>" width="1em" height="1em" alt="module-list">	<{$smarty.const._AD_LEGACY_LANG_MODLIST}>
+	</a>
+
+	<a href="index.php?action=InstallList" class="button">
+		<img class="svg" src="<{'icons/icon-module.svg'|theme}>" width="1em" height="1em" alt="install"> <{$smarty.const._AD_LEGACY_LANG_MODINSTALL}>
+	</a>
+</p>

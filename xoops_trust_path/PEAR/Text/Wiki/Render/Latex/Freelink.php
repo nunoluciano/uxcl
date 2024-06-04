@@ -4,8 +4,8 @@ class Text_Wiki_Render_Latex_Freelink extends Text_Wiki_Render {
     
     var $conf = array(
         'pages' => array(),
-        'view_url' => 'http://example.com/index.php?page=%s',
-        'new_url'  => 'http://example.com/new.php?page=%s',
+        'view_url' => 'https://example.com/index.php?page=%s',
+        'new_url'  => 'https://example.com/new.php?page=%s',
         'new_text' => '?'
     );
     

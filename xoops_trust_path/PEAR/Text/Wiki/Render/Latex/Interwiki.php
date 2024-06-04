@@ -4,9 +4,9 @@ class Text_Wiki_Render_Latex_Interwiki extends Text_Wiki_Render {
     
     var $conf = array(
         'sites' => array(
-            'MeatBall' => 'http://www.usemod.com/cgi-bin/mb.pl?%s',
-            'Advogato' => 'http://advogato.org/%s',
-            'Wiki'       => 'http://c2.com/cgi/wiki?%s'
+            'MeatBall' => 'https://www.usemod.com/cgi-bin/mb.pl?%s',
+            'Advogato' => 'https://advogato.org/%s',
+            'Wiki'       => 'https://c2.com/cgi/wiki?%s'
         ),
         'target' => '_blank'
     );

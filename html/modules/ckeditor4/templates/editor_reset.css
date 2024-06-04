@@ -1,0 +1,11 @@
+html {background: transparent;}
+/* html, */
+body {
+	background : #111;
+	color: #fff;
+	height: 100%;
+}
+textarea.cke_source {
+	background : #111;
+	color: #fff;
+}

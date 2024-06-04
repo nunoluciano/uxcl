@@ -5,6 +5,17 @@ $constpref = '_MI_' . strtoupper( $mydirname ) ;
 
 if( defined( 'FOR_XOOPS_LANG_CHECKER' ) || ! defined( $constpref.'_LOADED' ) ) {
 
+
+// Appended by Xoops Language Checker -GIJOE- in 2015-04-24 14:09:43
+define($constpref.'_USENAME','display name');
+define($constpref.'_USENAMEDESC','which name to use display name \'uname\'(user ID) or \'name\'(Real name). <br /> xoops default is \'uname\'(user ID)');
+define($constpref.'_USENAME_UNAME','use\'uname\'(user ID)');
+define($constpref.'_USENAME_NAME','use\'name\'(Real name)');
+define($constpref.'_RSS_SHOW_HIDDEN','RSS Show hidden topics');
+define($constpref.'_RSS_SHOW_HIDDENDSC','Show hidden (comment integrated) topic title.');
+define($constpref.'_RSS_HIDDEN_TITLE','RSS Title of hidden topic');
+define($constpref.'_RSS_HIDDEN_TITLEDSC','Own title uses when empty value.');
+
 define( $constpref.'_LOADED' , 1 ) ;
 
 // The name of this module
@@ -20,23 +31,24 @@ define($constpref."_BNAME_LIST_POSTS","Posts");
 define($constpref."_BNAME_LIST_FORUMS","Forums");
 
 // admin menu
-define($constpref.'_ADMENU_CATEGORYACCESS','Permissions des Catégories');
-define($constpref.'_ADMENU_FORUMACCESS','Permissions des Forums');
+define($constpref.'_ADMENU_CATEGORYACCESS','Catégories');
+define($constpref.'_ADMENU_FORUMACCESS','Forums');
 define($constpref.'_ADMENU_ADVANCEDADMIN','Avancé');
-define($constpref.'_ADMENU_POSTHISTORIES','Histories');
-define($constpref.'_ADMENU_MYLANGADMIN','Langages');
+define($constpref.'_ADMENU_POSTHISTORIES','Historique');
+define($constpref.'_ADMENU_MYLANGADMIN','Langues');
 define($constpref.'_ADMENU_MYTPLSADMIN','Templates');
-define($constpref.'_ADMENU_MYBLOCKSADMIN','Blocs/Permissions');
+define($constpref.'_ADMENU_MYBLOCKSADMIN','Blocs Permissions');
 define($constpref.'_ADMENU_MYPREFERENCES','Préférences');
 
 // configurations
 define($constpref.'_TOP_MESSAGE','Message en-tête du forum');
-define($constpref.'_TOP_MESSAGEDEFAULT','<h1 class="d3f_title">Forum Top</h1><p class="d3f_welcome">Pour consulter les messages, choisissez la catégorie et le forum que vous voulez visiter ci-dessous. </p>');
+define($constpref.'_TOP_MESSAGEDEFAULT','<h2 class="d3f_title">Forum Top</h2><p class="d3f_welcome">Pour consulter les messages, choisissez la catégorie et le forum que vous voulez visiter ci-dessous. </p>');
 define($constpref.'_SHOW_BREADCRUMBS','Afficher la navigation (breadcrumbs)');
+define($constpref.'_SHOW_RSS','Afficher le lien RSS');
 define($constpref.'_DEFAULT_OPTIONS','Options cochées par défault dans le formulaire pour poster');
-define($constpref.'_DEFAULT_OPTIONSDSC','Lister les options a cocher  séparées par  une virgule (,).<br />eg) smiley,xcode,br,number_entity<br />Vous pouvez ajouter ces options: special_entity html attachsig u2t_marked');
+define($constpref.'_DEFAULT_OPTIONSDSC','Lister les options a cocher séparées par une virgule (,).<br>eg) smiley,xcode,br,number_entity<br>Vous pouvez ajouter ces options: special_entity html attachsig u2t_marked');
 define($constpref.'_ALLOW_HTML','Autoriser HTML');
-define($constpref.'_ALLOW_HTMLDSC','N\'activez pas cette option au hazard. Ceci peut rendre votre site vulnérable et permettre à un utilisateur malveillant \'insérer d\'un script.');
+define($constpref.'_ALLOW_HTMLDSC','N\'activez pas cette option au hazard. Ceci peut rendre votre site vulnérable et permettre à un utilisateur malveillant \'insérer un script.');
 define($constpref.'_ALLOW_TEXTIMG','Autoriser l\'affichage d\'images externes dans les messages');
 define($constpref.'_ALLOW_TEXTIMGDSC','Si un utilisateur malveillant poste une image externe utilisant [img], il peut connaitre les adresses IP ou navigateurs des utilisateurs de votre site.');
 define($constpref.'_ALLOW_SIG','Autoriser la signature');
@@ -133,5 +145,3 @@ define($constpref.'_NOTIFY_GLOBAL_WAITINGCAP', 'Informez-moi de nouveaux message
 define($constpref.'_NOTIFY_GLOBAL_WAITINGSBJ', '[{X_SITENAME}] {X_MODULE}: Nouveau message en attente');
 
 }
-
-?>

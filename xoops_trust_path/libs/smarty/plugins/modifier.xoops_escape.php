@@ -3,8 +3,8 @@
  *
  * @package Legacy
  * @version $Id: modifier.xoops_escape.php,v 1.3 2008/09/25 15:12:37 kilica Exp $
- * @copyright Copyright 2005-2007 XOOPS Cube Project  <http://xoopscube.sourceforge.net/> 
- * @license http://xoopscube.sourceforge.net/license/GPL_V2.txt GNU GENERAL PUBLIC LICENSE Version 2
+ * @copyright (c) 2005-2024 The XOOPSCube Project
+ * @license GPL v2.0
  *
  */
 
@@ -18,14 +18,14 @@
  * @param string
  * @param show|edit|plain|link
  * @return string
- * 
- * Examples: {$msg|xoops_excape}
+ *
+ * Examples: {$msg|xoops_escape}
  * -------------------------------------------------------------
  */
 
 function smarty_modifier_xoops_escape($string, $esc_type = 'show')
 {
-	static $textFilter;
+    static $textFilter;
     if (!isset($textFilter)) {
         $root =& XCube_Root::getSingleton();
         $textFilter = $root->getTextFilter();
@@ -45,4 +45,3 @@ function smarty_modifier_xoops_escape($string, $esc_type = 'show')
             return $string;
     }
 }
-?>

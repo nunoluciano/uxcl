@@ -54,12 +54,12 @@ class Text_Wiki_Render_Xhtml_Code extends Text_Wiki_Render {
             $text = substr( $text , 0 , -50 ) . str_replace( '?&gt;' , '' , substr( $text , -50 ) ) ;
             // end of GIJ
             
-            // replace <br /> tags with simple newlines.
+            // replace <br> tags with simple newlines.
             // replace non-breaking space with simple spaces.
             // translate HTML <font> and color to XHTML <span> and style.
             // courtesy of research by A. Kalin :-).
             $map = array(
-                '<br />'  => "\n",
+                '<br>'  => "\n",
                 '&nbsp;'  => ' ',
                 '<font'   => '<span',
                 '</font>' => '</span>',

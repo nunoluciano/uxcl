@@ -14,7 +14,7 @@ CREATE TABLE category_access (
   KEY (uid),
   KEY (groupid),
   KEY (can_post)
-) ENGINE=MyISAM;
+) ENGINE=InnoDB;
 
 
 CREATE TABLE forum_access (
@@ -32,13 +32,13 @@ CREATE TABLE forum_access (
   KEY (uid),
   KEY (groupid),
   KEY (can_post)
-) ENGINE=MyISAM;
+) ENGINE=InnoDB;
 
 
 CREATE TABLE categories (
   cat_id smallint(5) unsigned NOT NULL auto_increment,
   pid smallint(5) unsigned NOT NULL default 0,
-  cat_title varchar(255) NOT NULL default '',
+  cat_title varchar(191) NOT NULL default '',
   cat_desc text,
   cat_topics_count int(8) NOT NULL default 0,
   cat_posts_count int(10) NOT NULL default 0,
@@ -57,14 +57,14 @@ CREATE TABLE categories (
   PRIMARY KEY (cat_id),
   KEY (cat_weight),
   KEY (pid)
-) ENGINE=MyISAM;
+) ENGINE=InnoDB;
 
 
 CREATE TABLE forums (
   forum_id int(6) unsigned NOT NULL auto_increment,
   cat_id smallint(5) unsigned NOT NULL default 0,
-  forum_external_link_format varchar(255) NOT NULL default '',
-  forum_title varchar(255) NOT NULL default '',
+  forum_external_link_format varchar(191) NOT NULL default '',
+  forum_title varchar(191) NOT NULL default '',
   forum_desc text,
   forum_topics_count int(8) NOT NULL default 0,
   forum_posts_count int(10) NOT NULL default 0,
@@ -77,14 +77,14 @@ CREATE TABLE forums (
   KEY (forum_last_post_time),
   KEY (forum_weight),
   KEY (cat_id)
-) ENGINE=MyISAM;
+) ENGINE=InnoDB;
 
 
 CREATE TABLE topics (
   topic_id int(8) unsigned NOT NULL auto_increment,
   forum_id int(6) unsigned NOT NULL default 0,
-  topic_external_link_id varchar(255) NOT NULL default '',
-  topic_title varchar(255) default NULL,
+  topic_external_link_id varchar(191) NOT NULL default '',
+  topic_title varchar(191) default NULL,
   topic_first_uid mediumint(8) NOT NULL default 0,
   topic_first_post_id int(10) unsigned NOT NULL default 0,
   topic_first_post_time int(10) NOT NULL default 0,
@@ -110,7 +110,7 @@ CREATE TABLE topics (
   KEY (topic_invisible),
   KEY (topic_votes_sum),
   KEY (topic_votes_count)
-) ENGINE=MyISAM;
+) ENGINE=InnoDB;
 
 
 CREATE TABLE posts (
@@ -123,8 +123,8 @@ CREATE TABLE posts (
   uid_hidden mediumint(8) unsigned NOT NULL default 0,
   poster_ip varchar(15) NOT NULL default '',
   modifier_ip varchar(15) NOT NULL default '',
-  subject varchar(255) NOT NULL default '',
-  subject_waiting varchar(255) NOT NULL default '',
+  subject varchar(191) NOT NULL default '',
+  subject_waiting varchar(191) NOT NULL default '',
   html tinyint(1) NOT NULL default 0,
   smiley tinyint(1) NOT NULL default 1,
   xcode tinyint(1) NOT NULL default 1,
@@ -157,7 +157,7 @@ CREATE TABLE posts (
   KEY (invisible),
   KEY (votes_sum),
   KEY (votes_count)
-) ENGINE=MyISAM;
+) ENGINE=InnoDB;
 
 
 CREATE TABLE users2topics (
@@ -172,7 +172,7 @@ CREATE TABLE users2topics (
   KEY (u2t_time),
   KEY (u2t_marked),
   KEY (u2t_rsv)
-) ENGINE=MyISAM;
+) ENGINE=InnoDB;
 
 
 CREATE TABLE post_votes (
@@ -185,7 +185,7 @@ CREATE TABLE post_votes (
   PRIMARY KEY (vote_id),
   KEY (post_id),
   KEY (vote_ip)
-) ENGINE=MyISAM;
+) ENGINE=InnoDB;
 
 
 CREATE TABLE post_histories (
@@ -195,4 +195,4 @@ CREATE TABLE post_histories (
   data text,
   PRIMARY KEY (history_id),
   KEY (post_id)
-) ENGINE=MyISAM;
+) ENGINE=InnoDB;

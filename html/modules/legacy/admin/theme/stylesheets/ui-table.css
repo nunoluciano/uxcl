@@ -1,0 +1,246 @@
+/*
+	XOOPSCube Theme : XCL Admin Flex Grid
+	Distribution : XOOPSCube XCL 2.4.0
+	Version : 2.4.0
+	Author : Nuno Luciano aka Gigamaster
+	Date : 2023-01-27
+	URL : https://github.com/xoopscube/
+*/
+/* -------------------- -------------------- Table */
+
+.admin-revision-list,
+.action-search-records,
+.admin-theme-list {
+    list-style      : none;
+    margin          : 0;
+    padding         : 0
+}
+.admin-revision-list li,
+.action-search-records li,
+.admin-theme-list li,
+.action-search-records-desc {
+    background      : var( --card-full-bg );
+    border          : var( --card-full-border);
+    border-radius   : var( --card-full-radius);
+    box-shadow      : var( --card-full-shadow);
+    margin          : var( --space-2 );
+    padding         : var( --space-4 );
+    scroll-padding-top: 70px;
+}
+.admin-revision-list li,
+.admin-theme-list li {
+    font-size       : 13px;
+    margin          : var( --space-1 );
+    padding         : var( --space-2 ) var( --space-4 );
+}
+/* TODO
+Clean up D3 templates
+Responsive tables and tabs
+Alternative data display
+*/
+.action-control {
+    margin        	: 0 0 1em 0;
+    min-width: 0;
+}
+
+.control-view {
+    display : flex
+}
+
+:where(table, table.outer, table:not([class^="cke_"])) {
+    background      : var(  --table-background );
+    border-collapse : collapse;
+    box-shadow    	: var( --shadow-1 );
+    font-size       : 14px;
+    margin        	: 0;
+    padding       	: var( --space-4 );
+    width           : 100%;
+}
+
+:is(table[class^="cke_"]) * {
+    box-shadow    	: none;
+}
+
+:where(table:not([class^="cke_"])) thead {
+    background      : var( --table-thead );
+}
+
+:where(table:not([class^="cke_"])) tbody {
+    background      : var(--table-tbody);
+}
+
+:where(table:not([class^="cke_"])) tfoot {
+    background      : var(--table-tfoot);
+    text-align      : center;
+}
+
+/* Apply button to table prefix start with lis_control */
+:where(td[class^="list_control"]) input[type="file"] {
+    display         : none;
+}
+:where(td[class^="list_control"]) input[type="file"] + label {
+    font-size       : 1.25em;
+    font-weight     : 700;
+    color           : white;
+    background      : black;
+    display         : inline-block;
+}
+
+:where(td[class^="list_control"]) input[type="file"]:focus + label,
+:where(td[class^="list_control"]) input[type="file"] + label:hover {
+    background      : red;
+}
+:where(td[class^="list_control"]) a {
+    background      : var( --button-bg );
+    border          : none;
+    border-radius   : var( --border-radius );
+    box-shadow      : var( --button-shadow );
+    color           : var( --primary);
+    display         : inline-block;
+    margin          : var( --space-1 );
+    min-width       : 4ch; /* width for UTF8 icons */
+    padding         : var( --space-2 );
+    text-align      : center;
+    transition      : all ease-in-out 0.2s;
+    vertical-align  : baseline;
+    white-space     : nowrap;
+}
+
+tr, th, td {
+    padding         : var( --table-padding );
+}
+
+:where(table.outer) tbody tr:nth-child(even) {
+    background      : var( --table-even );
+}
+:where(table.outer) tbody tr:nth-child(odd) {
+    background      : var( --table-odd );
+}
+
+div.foot,
+table td.foot,
+.list_id,
+.list_image,
+.list_order,
+.list_date,
+.list_name,
+.list_select,
+.list_control,
+.list_install,
+.list_batch {
+    text-align      : center;
+}
+.list_control {white-space: nowrap;}
+.list_center { text-align : center;}
+.list_left { text-align : left;}
+.list_right { text-align : right;}
+
+table.altsys_mytplsadmin .dbtplset_active {
+    background      : var( --color-green );
+}
+
+table.altsys_mytplsadmin .fingerprint1 {
+    background      : var( --color-green );
+}
+
+table.altsys_mytplsadmin .fingerprint2 {
+    background      : var( --color-green );
+}
+
+table.altsys_mytplsadmin .fingerprint3 {
+    background      : var( --color-amber );
+}
+
+table.altsys_mytplsadmin .fingerprint4 {
+    background      : var( --color-blue );
+}
+
+table.altsys_mytplsadmin .fingerprint5 {
+    background      : var( --color-orange );
+}
+
+table.altsys_mytplsadmin .fingerprint6 {
+    background      : var( --color-indigo );
+}
+
+table.altsys_mytplsadmin .fingerprint7 {
+    background      : var( --color-indigo );
+}
+
+/*table:not([class^="cke"]) * table * table,*/
+table.outer .altsys_mytplsadmin tbody tr:hover,
+table.outer tbody tr:hover,
+.table-striped tbody tr:hover {
+    background      : var(  --table-hover        );
+    color           : var(  --table-hover-text   );
+}
+
+div.disabled {
+    background      : var( --color-red );
+}
+
+/* ---------- RESPONSIVE TABLE */
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin:0;
+    padding:0;
+    width: 100%;
+}
+
+table tr {
+    border-bottom: var(--table-border-bottom);
+    padding: var(--space-3) 0;
+}
+
+table th, table td {
+    padding: var(--space-4);
+}
+
+table th {
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight:var(--font-weight );
+}
+
+@media screen and (max-width: 600px) {
+    table {
+        border: 0;
+    }
+    table thead {
+        display: none;
+    }
+    table tr {
+        margin-bottom: 10px;
+        display: block;
+    }
+    table tr:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+    table tr:before {
+        display: block;
+        border-bottom: var(--border);
+    }
+
+    table td {
+        box-sizing: border-box;
+        display: block;
+        float: left;
+        clear: left;
+        width: 100%;
+        border-bottom: var(--border);
+    }
+
+    table td:last-child {
+        border-bottom: 0;
+    }
+
+    table td:before {
+        content: attr(data-label);
+        float: left;
+        text-transform: uppercase;
+    }
+}

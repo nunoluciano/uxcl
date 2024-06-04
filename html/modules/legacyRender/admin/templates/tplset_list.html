@@ -1,0 +1,241 @@
+<div class="ui-dev-mode"><{$smarty.template}></div>
+
+<nav class="ui-breadcrumbs" aria-label="breadcrumb">
+    <a href="<{$xoops_url}>/admin.php"><{$smarty.const._CPHOME}></a>
+    &raquo;&raquo; <a href="./index.php"><{$smarty.const._MI_LEGACYRENDER_NAME}></a>
+    &raquo;&raquo; <a href="./index.php?action=TplsetList"><{$smarty.const._AD_LEGACYRENDER_LANG_TEMPLATE_MANAGE}></a>
+    &raquo;&raquo; <span class="page-title" aria-current="page"><{$smarty.const._AD_LEGACYRENDER_LANG_TEMPLATE_SET_LIST}></span>
+</nav>
+
+
+<h2><{$smarty.const._AD_LEGACYRENDER_LANG_TEMPLATE_SET_LIST}></h2>
+
+
+<{if count($objects) == 1 }>
+<div class="help-tips"><{$smarty.const._AD_LEGACYRENDER_TIPS_TEMPLATE_MANAGE_1}></div>
+<{else}>
+<div class="help-tips"><{$smarty.const._AD_LEGACYRENDER_TIPS_TEMPLATE_MANAGE_2}></div>
+<{/if}>
+
+
+<{* ////— ACTION-CONTROL —\\\\ *}>
+<section data-layout="rows center-justify sm-column" class="action-control">
+    <form method="get" action="index.php">
+        <{$smarty.const._AD_LEGACYRENDER_LANG_SEARCH_TEMPLATE}> :
+        <input type="hidden" name="action" value="TplfileList">
+        <input type="text" name="tpl_file">
+        <input class="button" type="submit" value="<{$smarty.const._SEARCH}>">
+    </form>
+
+    <div class="control-view" data-self="sm-full center right mr-0">
+
+        <{* ////— DROPDOWN FILTER-SORT —\\\\ *}>
+        <div class="dropdown button-icon" id="filter-sort">
+            <a href="#" class="dropdown-toggle button" aria-label="sort filter"><img class="svg" src="<{'icons/icon-list-order.svg'|theme}>" width="1em" height="1em" alt="options"></a>
+            <div class="dropdown-content drop-top">
+                <div data-layout="row center-justify inline">
+                    <h6><{$smarty.const._AD_LEGACYRENDER_LANG_TPLSET_ID}></h6>
+                    <div>
+                        <a class="btn" href="<{$pageNavi->renderUrlForSort()}>&amp;sort=<{$smarty.const.TPLSET_SORT_KEY_TPLSET_ID}>" aria-label="<{$smarty.const._ASCENDING}>">&uarr;</a>
+                        <a class="btn" href="<{$pageNavi->renderUrlForSort()}>&amp;sort=-<{$smarty.const.TPLSET_SORT_KEY_TPLSET_ID}>" aria-label="<{$smarty.const._DESCENDING}>">&darr;</a>
+                    </div>
+                </div>
+                <div data-layout="row center-justify inline">
+                    <h6><{$smarty.const._AD_LEGACYRENDER_LANG_TPLSET_NAME}></h6>
+                    <div>
+                        <a class="btn" href="<{$pageNavi->renderUrlForSort()}>&amp;sort=<{$smarty.const.TPLSET_SORT_KEY_TPLSET_NAME}>" aria-label="<{$smarty.const._ASCENDING}>">&uarr;</a>
+                        <a class="btn" href="<{$pageNavi->renderUrlForSort()}>&amp;sort=-<{$smarty.const.TPLSET_SORT_KEY_TPLSET_NAME}>" aria-label="<{$smarty.const._DESCENDING}>">&darr;</a>
+                    </div>
+                </div>
+                <div data-layout="row center-justify inline">
+                    <h6><{$smarty.const._AD_LEGACYRENDER_LANG_TPLSET_CREDITS}></h6>
+                    <div>
+                        <a class="btn" href="<{$pageNavi->renderUrlForSort()}>&amp;sort=<{$smarty.const.TPLSET_SORT_KEY_TPLSET_CREDITS}>" aria-label="<{$smarty.const._ASCENDING}>">&uarr;</a>
+                        <a class="btn" href="<{$pageNavi->renderUrlForSort()}>&amp;sort=-<{$smarty.const.TPLSET_SORT_KEY_TPLSET_CREDITS}>" aria-label="<{$smarty.const._DESCENDING}>">&darr;</a>
+                    </div>
+                </div>
+                <div data-layout="row center-justify inline">
+                    <h6><{$smarty.const._AD_LEGACYRENDER_LANG_TPLSET_CREATED}></h6>
+                    <div>
+                        <a class="btn" href="<{$pageNavi->renderUrlForSort()}>&amp;sort=<{$smarty.const.TPLSET_SORT_KEY_TPLSET_CREATED}>" aria-label="<{$smarty.const._ASCENDING}>">&uarr;</a>
+                        <a class="btn" href="<{$pageNavi->renderUrlForSort()}>&amp;sort=-<{$smarty.const.TPLSET_SORT_KEY_TPLSET_CREATED}>" aria-label="<{$smarty.const._DESCENDING}>">&darr;</a>
+                    </div>
+                </div>
+            </div><{* ----- /Dropdown-content *}>
+        </div><{* ----- /Dropdown *}>
+
+        <{* ////— DROPDOWN MENU —\\\\ *}>
+        <div class="dropdown button-icon" id="action-contents">
+            <a href="#" class="dropdown-toggle action-menu button" aria-label="action" style="font-size: var(--d-toggle-font);">
+                <{$smarty.const._ACTION}><svg class="icon-dropmenu" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="m7 10l5 5l5-5z"/></svg>
+            </a>
+            <div class="dropdown-content" style="min-width: 240px; padding:.5em;">
+                <div data-layout="row justify-center mb-4">
+                    <h6 data-self="center size-x1"><{$smarty.const._MI_LEGACYRENDER_NAME}> <{$smarty.const._ACTION}></h6>
+                    <button class="help-admin button" type="button" data-module="legacyRender" data-help-article="#help-template" aria-label="<{$smarty.const._HELP}>"><b>?</b></button>
+                </div>
+                <a class="button" href="./index.php?action=TplfileList"><i class="i-view"></i><{$smarty.const._MI_LEGACYRENDER_ADMENU_TPLFILE_MANAGE}></a>
+                <a class="button" href="../../altsys/admin/index.php?mode=admin&lib=altsys&page=mytplsadmin"><i class="i-edit"></i>Components</a>
+                <a class="button" href="./index.php?action=TplsetUpload"><i class="i-upload"></i><{$smarty.const._AD_LEGACYRENDER_LANG_TPLSET_UPLOAD}></a>
+                <a class="button" href="<{$xoops_url}>/modules/legacy/admin/index.php?action=ThemeList"><i class="i-layout"></i><{$smarty.const._MI_LEGACYRENDER_ADMENU_THEME_MANAGE}></a>
+            </div>
+        </div>
+    </div>
+</section>
+<{* ----- / CONTROL-ACTION *}>
+
+
+<{if $actionForm->hasError()}>
+<div class="error">
+    <ul>
+        <{foreach item=message from=$actionForm->getErrorMessages()}>
+        <li><{$message|xoops_escape}></li>
+        <{/foreach}>
+    </ul>
+</div>
+<{/if}>
+
+<{assign var=tokenName value=$actionForm->getTokenName()}>
+<{assign var=token value=$actionForm->getToken()}>
+
+<table class="outer">
+    <thead>
+    <tr>
+        <th><{$smarty.const._AD_LEGACYRENDER_LANG_TPLSET_ID}></th>
+        <th><{$smarty.const._AD_LEGACYRENDER_LANG_TPLSET_NAME}> <{$smarty.const._AD_LEGACYRENDER_LANG_TPLSET_DESC}></th>
+        <th><{$smarty.const._AD_LEGACYRENDER_LANG_TPLSET_CREDITS}></th>
+        <th class="list_center"><{$smarty.const._AD_LEGACYRENDER_LANG_TPLSET_CREATED}></th>
+        <th><{$smarty.const._AD_LEGACYRENDER_LANG_TEMPLATE}></th>
+        <th><{$smarty.const._AD_LEGACYRENDER_LANG_CONTROL}></th>
+    </tr>
+    </thead>
+    <tbody>
+    <{foreach item=obj from=$objects}>
+    <{if $activeTemplateSet == $obj->get('tplset_name')}>
+    <tr class="active">
+        <{else}>
+    <tr class="inactive">
+        <{/if}>
+        <td class="list_id"><{$obj->getShow('tplset_id')}></td>
+        <td class="list_title"><{$obj->getShow('tplset_name')}>
+            <{if $obj->getShow('tplset_desc')}>
+            <p class="list_description"><{$obj->getShow('tplset_desc')}></p>
+            <{/if}>
+        </td>
+        <td class="list_text"><{$obj->get('tplset_credits')|xoops_escape|nl2br}></td>
+        <td class="list_date"><{$obj->get('tplset_created')|xoops_formattimestamp:l}></td>
+        <td class="list_text">
+            <ul class="ui-card-2-col">
+                <{foreach item=moduletpl from=$obj->mModuleTemplates}>
+                <li><span class="badge-count"><{$moduletpl->getShow('count')}></span> <a href="./index.php?action=TplfileList&amp;tpl_tplset=<{$obj->get('tplset_name')|xoops_escape:link}>&amp;tpl_module=<{$moduletpl->get('dirname')|xoops_escape}>"><{$moduletpl->getShow('name')}></a></li>
+                <{/foreach}>
+            </ul>
+        </td>
+        <td class="list_control">
+            <{if $activeTemplateSet == $obj->get('tplset_name')}>
+            <button class="button action-active bg-green" aria-label="<{$smarty.const._AD_LEGACYRENDER_LANG_ACTIVE}>"><{$smarty.const._AD_LEGACYRENDER_LANG_ACTIVE}></button>
+            <br>
+            <{else}>
+            <form method="post" action="./index.php?action=TplsetList">
+                <{xoops_token name=$actionForm->getTokenName() value=$actionForm->getToken()}>
+                <input type="hidden" name="tplset_name" value="<{$obj->getShow('tplset_name')}>" id="legacy_xoopsform_tplset_name_<{$obj->getShow('tplset_name')}>">
+                <input type="submit" value="<{$smarty.const._SELECT}>" class="button">
+            </form>
+            <{/if}>
+
+            <a class="action-download" href="index.php?action=TplsetDownload&amp;tplset_id=<{$obj->get('tplset_id')}>&amp;method=tar" aria-label="<{$smarty.const._AD_LEGACYRENDER_LANG_TPLSET_DOWNLOAD}>">
+                <img class="svg" src="<{'icons/icon-download.svg'|theme}>" width="1em" height="1em" alt="download">
+            </a>
+            <a class="action-copy" href="index.php?action=TplsetClone&amp;tplset_id=<{$obj->get('tplset_id')}>" aria-label="<{$smarty.const._CLONE}>">
+                <img class="svg" src="<{'icons/icon-copy.svg'|theme}>" width="1em" height="1em" alt="copy">
+            </a>
+            <br>
+
+            <{if $obj->get('tplset_name') !="default"}>
+            <a class="action-edit" href="index.php?action=TplsetEdit&amp;tplset_id=<{$obj->get('tplset_id')}>" aria-label="<{$smarty.const._EDIT}>">
+                <img class="svg" src="<{'icons/icon-edit.svg'|theme}>" width="1em" height="1em" alt="edit">
+            </a>
+                <{if $activeTemplateSet !=$obj->get('tplset_name')}>
+                <a class="action-delete" href="index.php?action=TplsetDelete&amp;tplset_id=<{$obj->get('tplset_id')}>" aria-label="<{$smarty.const._DELETE}>">
+                    <img class="svg" src="<{'icons/icon-delete.svg'|theme}>" width="1em" height="1em" alt="delete">
+                </a>
+                <{/if}>
+            <{/if}>
+
+        </td>
+    </tr>
+    <{/foreach}>
+    </tbody>
+    <tfoot>
+    <tr>
+        <td colspan="6"><nav class="pagination"><{xoops_pagenavi pagenavi=$pageNavi}></nav></td>
+    </tr>
+    </tfoot>
+</table>
+
+<hr>
+
+<h3><{$smarty.const._AD_LEGACYRENDER_LANG_RECENT_MODIFY_FILES}></h3>
+
+<table class="outer">
+    <thead>
+    <tr>
+        <th><{$smarty.const._AD_LEGACYRENDER_LANG_TPL_ID}></th>
+        <th><{$smarty.const._AD_LEGACYRENDER_LANG_TPL_MODULE}></th>
+        <th><{$smarty.const._AD_LEGACYRENDER_LANG_TPL_TPLSET}></th>
+        <th><{$smarty.const._AD_LEGACYRENDER_LANG_TPL_FILE}></th>
+        <th class="list_center"><{$smarty.const._AD_LEGACYRENDER_LANG_TPL_LASTMODIFIED}></th>
+        <th class="list_center"><{$smarty.const._AD_LEGACYRENDER_LANG_TPL_LASTIMPORTED}></th>
+        <th><{$smarty.const._AD_LEGACYRENDER_LANG_TPL_TYPE}></th>
+        <th><{$smarty.const._AD_LEGACYRENDER_LANG_CONTROL}></th>
+    </tr>
+    </thead>
+    <tbody>
+    <{foreach item=obj from=$recentObjects}>
+    <{if $activeTemplateSet == $obj->getShow('tpl_tplset') }>
+    <{if $obj->get('tpl_type') == "block"}>
+    <tr class="active legacyRender_TemplateFile_block">
+        <{else}>
+    <tr class="active">
+        <{/if}>
+        <{else}>
+        <{if $obj->get('tpl_type') == "block"}>
+    <tr class="inactive legacyRender_TemplateFile_block">
+        <{else}>
+    <tr class="inactive">
+        <{/if}>
+        <{/if}>
+        <td class="list_id"><{$obj->getShow('tpl_id')}></td>
+        <td class="list_text"><{$obj->getShow('tpl_module')}></td>
+        <td class="list_text"><{$obj->getShow('tpl_tplset')}></td>
+        <td class="list_title"><{$obj->getShow('tpl_file')}>
+            <{if $obj->getShow('tpl_desc')}>
+            <div class="list_description"><{$obj->getShow('tpl_desc')}></div>
+            <{/if}>
+        </td>
+        <td class="list_date"><{$obj->get('tpl_lastmodified')|xoops_formattimestamp:l}></td>
+        <td class="list_date"><{$obj->get('tpl_lastimported')|xoops_formattimestamp:l}></td>
+        <td class="list_type"><{$obj->getShow('tpl_type')}></td>
+        <td class="list_control">
+            <{if $obj->get('tpl_tplset') == "default"}>
+            <a class="action-view" href="index.php?action=TplfileView&amp;tpl_id=<{$obj->get('tpl_id')}>" title="<{$smarty.const._AD_LEGACYRENDER_LANG_VIEW}>">
+                <img class="svg" src="<{'icons/icon-view.svg'|theme}>" width="1em" height="1em" alt="View">
+            </a>
+            <{else}>
+            <a class="action-edit" href="index.php?action=TplfileEdit&amp;tpl_id=<{$obj->get('tpl_id')}>" title="<{$smarty.const._EDIT}>">
+                <img class="svg" src="<{'icons/icon-edit.svg'|theme}>" width="1em" height="1em" alt="Edit">
+            </a>
+            <{/if}>
+        </td>
+    </tr>
+    <{/foreach}>
+    </tbody>
+    <tfoot>
+    <tr>
+        <td colspan="6">
+            <a class="button" href="index.php?action=TplfileList&amp;sort=-7"><{$smarty.const._MORE}></a>
+        </td>
+        <td colspan="2"><nav class="pagination"><{xoops_pagenavi pagenavi=$pageNavi}></nav></td>
+    </tr>
+    </tfoot>
+</table>

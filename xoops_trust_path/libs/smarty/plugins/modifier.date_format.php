@@ -19,7 +19,7 @@ require_once $smarty->_get_plugin_filepath('shared', 'make_timestamp');
  *         - string: input date string
  *         - format: strftime format for output
  *         - default_date: default date if $string is empty
- * @link http://smarty.php.net/manual/en/language.modifier.date.format.php
+ * @link https://smarty.php.net/manual/en/language.modifier.date.format.php
  *          date_format (Smarty online manual)
  * @author   Monte Ohrt <monte at ohrt dot com>
  * @param string
@@ -38,8 +38,8 @@ function smarty_modifier_date_format($string, $format = '%b %e, %Y', $default_da
         return;
     }
     if (DIRECTORY_SEPARATOR == '\\') {
-        $_win_from = array('%D',       '%h', '%n', '%r',          '%R',    '%t', '%T');
-        $_win_to   = array('%m/%d/%y', '%b', "\n", '%I:%M:%S %p', '%H:%M', "\t", '%H:%M:%S');
+        $_win_from = ['%D', '%h', '%n', '%r', '%R', '%t', '%T'];
+        $_win_to   = ['%m/%d/%y', '%b', "\n", '%I:%M:%S %p', '%H:%M', "\t", '%H:%M:%S'];
         if (strpos($format, '%e') !== false) {
             $_win_from[] = '%e';
             $_win_to[]   = sprintf('%\' 2d', date('j', $timestamp));

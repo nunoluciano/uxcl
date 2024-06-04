@@ -1,73 +1,76 @@
 <?php
+/**
+ * D3Forum module for XCL
+ * Sample class for d3forum comment integration
+ * @package    D3Forum
+ * @version    XCL 2.4.0
+ * @author     Nobuhiro YASUTOMI, PHP8
+ * @author     Other authors gigamaster, 2020 XCL/PHP7
+ * @author     Gijoe (Peak)
+ * @copyright  (c) 2005-2024 Authors
+ * @license    GPL v2.0
+ */
 
-// sample class for d3forum comment integration
+
 class D3commentUserinfo extends D3commentAbstract {
-
-
-// get reference description as string
-function fetchDescription( $link_id )
-{
-	$user_handler =& xoops_gethandler( 'user' ) ;
-	$user =& $user_handler->get( $link_id ) ;
-	if( is_object( $user ) ) {
-		return '
+	// get reference description as string
+	public function fetchDescription( $link_id ) {
+		$user_handler = xoops_gethandler( 'user' );
+		$user         = $user_handler->get( $link_id );
+		if ( is_object( $user ) ) {
+			return '
 			<table class="outer">
 				<tr>
-					<td style="width:20%;" class="head">'._MD_D3FORUM_LINK_COMMENTSOURCE.'
-					<td class="even"><a href="'.XOOPS_URL.'/userinfo.php?uid='.$link_id.'">'.$user->getVar('uname').'</a></td>
+					<td style="width:20%;">' . _MD_D3FORUM_LINK_COMMENTSOURCE . '
+					<td><a href="' . XOOPS_URL . '/userinfo.php?uid=' . $link_id . '">' . $user->getVar( 'uname' ) . '</a></td>
 				</tr>
 			</table>
-		' ;
-	} else {
-		return '' ;
+		';
+		} else {
+			return '';
+		}
+
+		//!Fix Todo
+		return false;
 	}
 
-	return false ;
-}
+	// get reference information as array
+	public function fetchSummary( $link_id ) {
+		$user_handler = xoops_gethandler( 'user' );
+		$user         = $user_handler->get( $link_id );
+		if ( is_object( $user ) ) {
+			return [
+				'module_name' => '',
+				'subject'     => $user->getVar( 'uname' ),
+				'uri'         => XOOPS_URL . '/userinfo.php?uid=' . $link_id,
+				'summary'     => ''
+			];
+		}
 
-// get reference information as array
-function fetchSummary( $link_id )
-{
-	$user_handler =& xoops_gethandler( 'user' ) ;
-	$user =& $user_handler->get( $link_id ) ;
-	if( is_object( $user ) ) {
-		return array( 'module_name' => '' , 'subject' => $user->getVar('uname') , 'uri' => XOOPS_URL.'/userinfo.php?uid='.$link_id , 'summary' => '' ) ;
-	} else {
-		return 'invalid uid' ;
+		return 'invalid uid';
+		// all values should be HTML escaped.
 	}
-	// all values should be HTML escaped.
-}
 
+	public function external_link_id( $params ) {
+		return (int) @$_GET[ $params['itemname'] ];
+	}
 
-function external_link_id( $params )
-{
-	return intval( @$_GET[ $params['itemname'] ] ) ;
-}
+	// check by user handler
+	public function validate_id( $link_id ) {
+		$link_id = (int) $link_id;
 
+		$user_handler = xoops_gethandler( 'user' );
+		$user         = $user_handler->get( $link_id );
+		if ( is_object( $user ) ) {
+			return $link_id;
+		}
 
-// check by user handler
-function validate_id( $link_id )
-{
-	$link_id = intval( $link_id ) ;
+		return false;
+	}
 
-	$user_handler =& xoops_gethandler( 'user' ) ;
-	$user =& $user_handler->get( $link_id ) ;
-	if( is_object( $user ) ) {
-		return $link_id ;
-	} else {
-		return false ;
+	// callback on newtopic/edit/reply/delete
+	// abstract
+	public function onUpdate( $mode, $link_id, $forum_id, $topic_id, $post_id = 0 ) {
+		return true;
 	}
 }
-
-
-// callback on newtopic/edit/reply/delete
-// abstract
-function onUpdate( $mode , $link_id , $forum_id , $topic_id , $post_id = 0 )
-{
-	return true ;
-}
-
-
-}
-
-?>

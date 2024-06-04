@@ -1,26 +1,13 @@
 <?php
-// Translation Info
-// *************************************************************** //
-// ############################################################### //
-// ## XOOPS Cube Legacy 2.1 - Tradução para o Português
-// ############################################################### //
+// ## XOOPS Cube Legacy - Tradução para o Português
 // ## Por............: Mikhail Miguel
 // ## E-mail.........: mikhail@underpop.com
 // ## Website........: http://xoopscube.com.br
-// ############################################################### //
-// *************************************************************** //
+
 if( defined("FOR_XOOPS_LANG_CHECKER") ) $mydirname = "pico";
 $constpref = "_MI_" . strtoupper( $mydirname ) ;
 
 if(defined("FOR_XOOPS_LANG_CHECKER") || ! defined($constpref."_LOADED") ) {
-
-
-
-
-
-
-
-
 
 // Appended by Xoops Language Checker -GIJOE- in 2009-01-18 18:29:25
 define($constpref.'_COM_ORDER','Order of comment-integration');
@@ -41,8 +28,10 @@ define($constpref.'_EF_CLASS','class for extra_fields');
 define($constpref.'_EF_CLASSDSC','Change it if you want to override the handler for extra_fields. default value is PicoExtraFields');
 define($constpref.'_EFIMAGES_DIR','directory for extra_fields');
 define($constpref.'_EFIMAGES_DIRDSC','set relative path from XOOPS_ROOT_PATH. Create and chmod 777 the directory first. default) uploads/(module dirname)');
-define($constpref.'_EFIMAGES_SIZE','pixels for extra images');
-define($constpref.'_EFIMAGES_SIZEDSC','(main_width)x(main_height) (small_width)x(small_height) default) 480x480 150x150');
+define($constpref.'_EFIMAGES_SIZE', 'Extra images generated from the upload file' );
+define($constpref.'_EFIMAGES_SIZEDSC', 'Used in article header and theme Open Graph. Default values in pixels, width x height : 1200x627 820x312 640x360' );
+define($constpref.'_EFIMAGES_QUALITY', 'Extra Images quality compression' );
+define($constpref.'_EFIMAGES_QUALITYDSC', 'Set the quality for generated images. Reduce the file size of your files.' );
 define($constpref.'_IMAGICK_PATH','Path for ImageMagick binaries');
 define($constpref.'_IMAGICK_PATHDSC','Leave blank normal, or set it like /usr/X11R6/bin/');
 define($constpref.'_NOTCAT_CATEGORY','category');
@@ -61,7 +50,7 @@ define($constpref.'_ALLOWEACHHEAD','specify HTML headers for each contents');
 define($constpref.'_BNAME_TAGS','Tags');
 
 // Appended by Xoops Language Checker -GIJOE- in 2007-09-22 03:55:48
-define($constpref.'_ADMENU_EXTRAS','Extra');
+define($constpref.'_ADMENU_EXTRAS','Extra forms');
 
 // Appended by Xoops Language Checker -GIJOE- in 2007-09-18 10:36:06
 define($constpref.'_HTMLPR_EXCEPT','Groups can avoid purification by HTMLPurifier');
@@ -76,6 +65,7 @@ define($constpref."_NAME","pico");
 define($constpref."_DESC","Módulo avançado para edição de conteúdo dinâmico e encapsulamento de conteúdo estático");
 
 // admin menus
+define( $constpref . '_ADMENU_ACTIVITY', 'Atividade' );
 define($constpref."_ADMENU_CONTENTSADMIN","Conteúdo");
 define($constpref."_ADMENU_CATEGORYACCESS","Categorias");
 define($constpref."_ADMENU_IMPORT","Importar/sincronizar");
@@ -86,6 +76,8 @@ define($constpref."_ADMENU_MYPREFERENCES","Preferências");
 
 // configurations
 define($constpref."_USE_WRAPSMODE","Habilitar o modo de encapsulamento");
+define($constpref.'_ERR_DOCUMENT_404','Contents path of Error:404');
+define($constpref.'_ERR_DOCUMENT_404DSC','The path to the contents file displayed when it becomes 404 errors (Page Not Found).<br/>Repalaces "xoops_root_path" to "'.XOOPS_ROOT_PATH.'" and "xoops_trust_path" to "'.XOOPS_TRUST_PATH.'" at head.');
 define($constpref."_USE_REWRITE","Habilitar a tecnologia mod_rewrite");
 define($constpref."_USE_REWRITEDSC","Depende das configurações de seu servidor. Ao habilitar esta opção, renomeie o arquivo .htaccess.rewrite_wraps (encapsulamento) ou htaccess.rewrite_normal (sem encapsulamento) como .htaccess no diretório raíz deste módulo");
 define($constpref."_WRAPSAUTOREGIST","Importar automaticamente o artigo estático dos arquivos HTML para o banco de dados.");
@@ -95,6 +87,7 @@ define($constpref."_MENUINMODULETOP","Mostrar o menu (índice) no topo deste mó
 define($constpref."_LISTASINDEX","Mostrar o índice de artigos na página inicial");
 define($constpref."_LISTASINDEXDSC","Optar por SIM fará com que a página inicial deste módulo seja um índice dos artigos; optar por NÃO fará com que o artigo de maior prioridade seja a página inicial.");
 define($constpref."_SHOW_BREADCRUMBS","Mostrar breadcrumbs");
+define($constpref."_SHOW_RSS","Mostrar RSS");
 define($constpref."_SHOW_PAGENAVI","Mostrar a página de navegação do artigo");
 define($constpref."_SHOW_PRINTICON","Mostrar o ícone de página para impressão");
 define($constpref."_SHOW_TELLAFRIEND","Mostrar o ícone de indicação de artigo por email");
@@ -148,6 +141,3 @@ define($constpref."_NOTIFY_GLOBAL_NEWCONTENTCAP","Notifique-me quando um artigo 
 define($constpref."_NOTIFY_GLOBAL_NEWCONTENTSBJ","[{X_SITENAME}] {X_MODULE} : Novo artigo");
 
 }
-
-
-?>

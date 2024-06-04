@@ -1,0 +1,20 @@
+<{include file="legacy_admin_actionsearch_form.html"}>
+
+<div class="ui-card-full">
+
+    <div class="ui-dev-mode"><{$smarty.template}></div>
+
+    <h2><{$smarty.const._AD_LEGACY_LANG_RESULT}></h2>
+
+    <ul class="action-search-records">
+        <{foreach item=record from=$records}>
+        <li>
+            <{$record->mModuleName|xoops_escape}> &raquo;&raquo; <a href="<{$record->mActionUrl}>"><{$record->mTitle|xoops_escape}></a>
+            <{if $record->mDescription}>
+            <div class="action-search-records-desc"><{$record->mDescription|xoops_escape}></div>
+            <{/if}>
+        </li>
+        <{/foreach}>
+    </ul>
+
+</div>

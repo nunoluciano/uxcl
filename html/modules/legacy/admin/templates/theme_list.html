@@ -1,0 +1,129 @@
+<div class="ui-dev-mode"><{$smarty.template}></div>
+
+<nav class="ui-breadcrumbs" aria-label="breadcrumb">
+    <a href="<{$xoops_url}>/admin.php"><{$smarty.const._CPHOME}></a>
+    &raquo;&raquo; <a href="./index.php"><{$smarty.const._MI_LEGACY_NAME}></a>
+    &raquo;&raquo; <span class="page-title" aria-current="page"><{$smarty.const._AD_LEGACY_LANG_THEME_ADMIN}></span>
+</nav>
+
+
+<h2><{$smarty.const._AD_LEGACY_LANG_THEME_ADMIN}></h2>
+
+
+<div class="tips">
+    <{$smarty.const._AD_LEGACY_TIPS_THEME_ADMIN}>
+</div>
+
+
+<{if $actionForm->hasError()}>
+<div class="error">
+    <ul>
+        <{foreach item=message from=$actionForm->getErrorMessages()}>
+        <li><{$message|xoops_escape}></li>
+        <{/foreach}>
+    </ul>
+</div>
+<{/if}>
+<style>
+    .zoomA {
+        /* SCREENSHOT DIMENSIONS (  OPTIONAL ) */
+        width: 320px;
+        height: auto;
+        /* ANIMATE ZOOM ease | ease-in | ease-out | linear */
+        transition: transform ease-in-out 0.3s;
+    }
+    /* SCREENSHOT ZOOM */
+    .zoomA:hover { transform: scale(1.25); }
+</style>
+
+<{* ////— ACTION-CONTROL —\\\\ *}>
+<section data-layout="row center-justify" class="action-control">
+
+    <div>
+    <a class="button" href="<{$xoops_url}>/modules/legacyRender/admin/index.php">
+        <svg xmlns="http://www.w3.org/2000/svg" role="img" width="1em" height="1em" viewBox="0 0 24 24" class="icon"><path fill="currentColor" d="M8 10v11H4a1 1 0 0 1-1-1V10h5zm13 0v10a1 1 0 0 1-1 1H10V10h11zm-1-7a1 1 0 0 1 1 1v4H3V4a1 1 0 0 1 1-1h16z"></path></svg>
+        Render</a>
+    <a class="button" href="<{$xoops_url}>/modules/legacyRender/admin/index.php?action=TplsetList">
+        <svg xmlns="http://www.w3.org/2000/svg" role="img" width="1em" height="1em" viewBox="0 0 24 24" class="icon"><g fill="currentColor"><path d="M20 4v12h2V2H8v2h12Z"></path><path fill-rule="evenodd" d="M2 8v14h14V8H2Zm12 2H4v10h10V10Z" clip-rule="evenodd"></path><path d="M17 7H5V5h14v14h-2V7Z"></path></g></svg>
+        Templates</a>
+    </div>
+    
+    <div class="control-view">
+        <button class="help-admin button-icon" type='button' data-module='legacy' data-help-article='#help-themes' aria-label="<{$smarty.const._HELP}>"><b>?</b></button>
+    </div>
+
+</section>
+
+
+<form action="./index.php?action=ThemeList" method="post">
+    <{xoops_token form=$actionForm}>
+    <table class="outer">
+        <thead>
+        <tr>
+            <th><{$smarty.const._AD_LEGACY_LANG_THEME}></th>
+            <th><{$smarty.const._AD_LEGACY_LANG_PACKAGE}></th>
+            <th colspan="2" class="list_center"><{$smarty.const._AD_LEGACY_LANG_CONTROL}></th>
+        </tr>
+        </thead>
+        <tbody>
+        <{foreach item=theme from=$themes}>
+        <{if $currentThemeName == $theme->get('dirname')}>
+        <tr class="active">
+        <{else}>
+        <tr class="inactive">
+        <{/if}>
+        <td class="ui-card-block-image">
+            <{if $theme->get('screenshot')}>
+            <img class="zoomA" src="<{$smarty.const.XOOPS_THEME_URL}>/<{$theme->getShow('dirname')}>/<{$theme->getShow('screenshot')}>"
+                width="320" height="auto" alt="<{$theme->getShow('name')}>">
+            <{/if}>
+        </td>
+        <td class="list_text">
+            <h5><{$theme->getShow('name')}></h5>
+            <p class="list_description"><{$theme->getShow('description') !=null}></p>
+            <ul class="admin-theme-list">
+                <{if $theme->get('themeoptions') !=null}>
+                <li><a href="<{$smarty.const.XOOPS_THEME_URL}>/<{$theme->getShow('dirname')}>/<{$theme->getShow('themeoptions')}>">
+                    Theme Options - Custom Parameters ⭧</a></li>
+                <{/if}>
+                <li><{$smarty.const._AD_LEGACY_LANG_VERSION}> : <{$theme->getShow('version')}></li>
+                <li><{$smarty.const._AD_LEGACY_LANG_RENDER}> : <{$theme->getShow('render_system')}></li>
+                <li><{$smarty.const._AD_LEGACY_LANG_FORMAT}> : <{$theme->getShow('format')}></li>
+                <li><{$smarty.const._AD_LEGACY_LANG_AUTHOR}> : <{$theme->getShow('author')}></li>
+                <{if $theme->get('license')}>
+                <li><{$smarty.const._AD_LEGACY_LANG_LICENCE}> : <{$theme->getShow('license')}></li>
+                <{/if}>
+                <{if $theme->get('url') !=null}>
+                <li><a href="<{$theme->getShow('url')}>"><{$smarty.const._AD_LEGACY_LANG_GET_THE_LATEST_VERSION}> ⭧</a>
+                </li>
+                <{/if}>
+            </ul>
+        </td>
+        <td class="list_select">
+            <span aria-label="<{$smarty.const._MD_AM_ALLOWTHEME}>">
+                <input type="checkbox" name="select[<{$theme->getShow('dirname')}>]" value="1" <{if $actionForm->get('select', $theme->get('dirname'))}>checked="checked"<{/if}>>
+            </span>
+        </td>
+        <td class="list_control">
+            <{if $currentThemeName !=$theme->get('dirname')}>
+            <input class="button select"
+                   name="choose[<{$theme->getShow('dirname')}>]"
+                   type="submit"
+                   value="<{$smarty.const._SELECT}>"
+                   aria-label="<{$smarty.const._MD_AM_DTHEME}>">
+            <{else}>
+            <button class="button action-active"><{$smarty.const._AD_LEGACY_LANG_SELECTED}></button>
+            <{/if}>
+        </td>
+        </tr>
+        <{/foreach}>
+        </tbody>
+        <tfoot>
+        <tr>
+            <td colspan="4">
+                <input class="button-submit" type="submit" name="submit" value="<{$smarty.const._SUBMIT}>">
+            </td>
+        </tr>
+        </tfoot>
+    </table>
+</form>

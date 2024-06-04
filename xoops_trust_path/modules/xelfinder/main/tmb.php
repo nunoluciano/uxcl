@@ -1,20 +1,20 @@
 <?php
 
-require_once dirname(dirname(__FILE__)) . '/class/xelFinderMisc.class.php';
-$xelFinderMisc = new xelFinderMisc();
+require_once dirname( __DIR__ ) . '/class/xelFinderMisc.class.php';
+
+$xelFinderMisc           = new xelFinderMisc( $mydirname );
 $xelFinderMisc->myConfig = $xoopsModuleConfig;
-$xelFinderMisc->db = $xoopsDB;
-$xelFinderMisc->mydirname = $mydirname;
+$xelFinderMisc->dbSetCharset( 'utf8' );
 
 $xelFinderMisc->mode = 'tmb';
 
 $file_id = 0;
 $s = 0;
 if (isset($path_info)) {
-	list(, $s, $file_id) = explode('/', $path_info);
+	[, $s, $file_id] = explode('/', $path_info);
 } elseif (isset($_GET['s']) && isset($_GET['file'])) {
 	$s = $_GET['s'];
-	list($file_id) = explode('/', $_GET['file']);
+	[$file_id] = explode('/', $_GET['file']);
 	
 }
 $file_id = (int)$file_id;
@@ -28,12 +28,13 @@ while( ob_get_level() ) {
 
 $query = 'SELECT `width`, `height`, `mime`, `size`, `mtime`, `perm`, `uid`, `local_path` FROM `' . $xoopsDB->prefix($mydirname) . '_file`' . ' WHERE file_id = ' . $file_id . ' LIMIT 1';
 if ($file_id && ($res = $xoopsDB->query($query)) && $xoopsDB->getRowsNum($res)) {
-	list($width, $height, $mime, $size, $mtime, $perm, $uid, $file) = $xoopsDB->fetchRow($res);
+	[$width, $height, $mime, $size, $mtime, $perm, $uid, $file] = $xoopsDB->fetchRow($res);
 	if ($xelFinderMisc->readAuth($perm, $uid)) {
 		
 		@include_once XOOPS_TRUST_PATH . '/class/hyp_common/hyp_common_func.php';
 		
-		$basepath = XOOPS_TRUST_PATH . '/uploads/xelfinder/'. rawurlencode(substr(XOOPS_URL, strpos(XOOPS_URL, '://') + 3)) . '_' . $mydirname . '_';
+		$prefix = defined('XELFINDER_DB_FILENAME_PREFIX')? XELFINDER_DB_FILENAME_PREFIX : substr(XOOPS_URL, strpos(XOOPS_URL, '://') + 3);
+		$basepath = XOOPS_TRUST_PATH . '/uploads/xelfinder/'. rawurlencode($prefix) . '_' . $mydirname . '_';
 		if (! $file) {
 			$tmb = $file = $basepath . $file_id;
 		} else {

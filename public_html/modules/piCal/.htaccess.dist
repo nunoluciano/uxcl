@@ -1,2 +1,0 @@
-php_flag register_globals Off
-php_flag allow_url_fopen Off

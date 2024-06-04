@@ -1,0 +1,15 @@
+** NEVER UPLOAD all archive's files to your server!! **
+
+Basically, the archive includes all files if a file has been updated.
+Therefore, if you upload all files from the archive to your server,
+your server files will be overwritten.
+
+First, remove the following directory & file from the archive.
+
+- /install
+- /mainfile.php
+
+Next, upload all files to your server.
+
+Lastly, in the module management of the admin control panel, 
+update all modules which show a red-color and , or an update icon.

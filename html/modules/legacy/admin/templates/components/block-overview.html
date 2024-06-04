@@ -1,0 +1,36 @@
+<{* ---------- ---------- Block Overview *}>
+<div class="ui-card-overview">
+
+	<div class="ui-card-small">
+		<div class="ui-card-small-icon ui-icon-blue">
+        <img class="svg blocks" src="<{'icons/icon-blocks.svg'|theme}>">
+		</div>
+		<div class="ui-card-small-info">
+			<h4 class="ui-card-small-title"><{$smarty.const._AD_LEGACY_LANG_BLOCK_TOTAL}>: <strong><{$BlockTotal}></strong></h4>
+		</div>
+	</div>
+
+	<div class="ui-card-small">
+		<div class="ui-card-small-icon ui-icon-green">
+        <img class="svg block-active" src="<{'icons/icon-block-active.svg'|theme}>">
+		</div>
+		<div class="ui-card-small-info">
+			<h4 class="ui-card-small-title"><{$smarty.const._AD_LEGACY_LANG_BLOCK_ACTIVETOTAL}>: <strong><{$ActiveBlockTotal}></strong></h4>
+			<p class="ui-card-small-subtitle"><{$smarty.const._AD_LEGACY_LANG_BLOCK_INSTALLEDTOTAL}>:
+				<strong><{$ActiveInstalledBlockTotal}></strong> &nbsp;|&nbsp;
+				<{$smarty.const._AD_LEGACY_LANG_BLOCK_UNINSTALLEDTOTAL}>: <strong><{$ActiveUninstalledBlockTotal}></strong></p>
+		</div>
+	</div>
+
+	<div class="ui-card-small">
+		<div class="ui-card-small-icon ui-icon-red">
+        <img class="svg block-inactive" src="<{'icons/icon-block-inactive.svg'|theme}>">
+		</div>
+		<div class="ui-card-small-info">
+			<h4 class="ui-card-small-title"><{$smarty.const._AD_LEGACY_LANG_BLOCK_INACTIVETOTAL}>: <strong><{$InactiveBlockTotal}></strong></h4>
+			<p class="ui-card-small-subtitle"><{$smarty.const._AD_LEGACY_LANG_BLOCK_INSTALLEDTOTAL}>: <strong><{$InactiveInstalledBlockTotal}></strong> &nbsp;|&nbsp;
+				<{$smarty.const._AD_LEGACY_LANG_BLOCK_UNINSTALLEDTOTAL}>: <strong><{$InactiveUninstalledBlockTotal}></strong></p>
+		</div>
+	</div>
+
+</div><{* Module Blocks Overview *}>
